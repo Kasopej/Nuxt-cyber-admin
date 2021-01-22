@@ -1,7 +1,12 @@
 <template>
-  <div>
-      
-  </div>
+    <div class='w-full flex'>
+        <section class="border">
+
+        </section>
+        <aside class="border">
+
+        </aside>
+    </div>
 </template>
 
 <script>
