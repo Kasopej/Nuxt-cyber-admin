@@ -1,0 +1,108 @@
+.color_pink {
+  color: #DA04F2;
+}
+.color_black {
+  color: #000;
+}
+.color_gray {
+  color: #9E9E9E;
+}
+.color_gray2 {
+  color: #E5E5E5;
+}
+.color_white {
+  color: white;
+}
+.color_gray3 {
+  color: #f9f9f9;
+}
+.color_green {
+  color: #043927;
+}
+.color_darkpink {
+  color: #C21975;
+}
+.color_lightpink {
+  color: rgba(199, 76, 77, 0.1);
+}
+.color_blue {
+  color: #4d7cfe;
+}
+.color_lightblue {
+  color: #4d7cfe77;
+}
+.color_pinkgradient {
+  color: linear-gradient(to right, #DA04F2, #7024C4);
+}
+.color_purplegradient {
+  color: linear-gradient(to right, #7922C8, #7922C8);
+}
+.bg_pink {
+  background-color: #DA04F2;
+}
+.bg_black {
+  background-color: #000;
+}
+.bg_gray {
+  background-color: #9E9E9E;
+}
+.bg_gray2 {
+  background-color: #E5E5E5;
+}
+.bg_white {
+  background-color: white;
+}
+.bg_gray3 {
+  background-color: #f9f9f9;
+}
+.bg_green {
+  background-color: #043927;
+}
+.bg_darkpink {
+  background-color: #C21975;
+}
+.bg_lightpink {
+  background-color: rgba(199, 76, 77, 0.1);
+}
+.bg_blue {
+  background-color: #4d7cfe;
+}
+.bg_lightblue {
+  background-color: #4d7cfe77;
+}
+.bg_pinkgradient {
+  background-color: linear-gradient(to right, #DA04F2, #7024C4);
+}
+.bg_purplegradient {
+  background-color: linear-gradient(to right, #7922C8, #7922C8);
+}
+.font_70 {
+  font-size: 4.375 rem;
+}
+.font_40 {
+  font-size: 2.5 rem;
+}
+.font_50 {
+  font-size: 3.125 rem;
+}
+.font_25 {
+  font-size: 1.5625 rem;
+}
+.font_19 {
+  font-size: 1.1875 rem;
+}
+.font_18 {
+  font-size: 1.125 rem;
+}
+.font_16 {
+  font-size: 1 rem;
+}
+.font_14 {
+  font-size: 0.875 rem;
+}
+.font_12 {
+  font-size: 0.75 rem;
+}
+.font_10 {
+  font-size: 0.625 rem;
+}
