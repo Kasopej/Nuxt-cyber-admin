@@ -38,43 +38,43 @@
   color: linear-gradient(to right, #7922C8, #7922C8);
 }
 .bg_pink {
-  background-color: #DA04F2;
+  background: #DA04F2;
 }
 .bg_black {
-  background-color: #000;
+  background: #000;
 }
 .bg_gray {
-  background-color: #9E9E9E;
+  background: #9E9E9E;
 }
 .bg_gray2 {
-  background-color: #E5E5E5;
+  background: #E5E5E5;
 }
 .bg_white {
-  background-color: white;
+  background: white;
 }
 .bg_gray3 {
-  background-color: #f9f9f9;
+  background: #f9f9f9;
 }
 .bg_green {
-  background-color: #043927;
+  background: #043927;
 }
 .bg_darkpink {
-  background-color: #C21975;
+  background: #C21975;
 }
 .bg_lightpink {
-  background-color: rgba(199, 76, 77, 0.1);
+  background: rgba(199, 76, 77, 0.1);
 }
 .bg_blue {
-  background-color: #4d7cfe;
+  background: #4d7cfe;
 }
 .bg_lightblue {
-  background-color: #4d7cfe77;
+  background: #4d7cfe77;
 }
 .bg_pinkgradient {
-  background-color: linear-gradient(to right, #DA04F2, #7024C4);
+  background: linear-gradient(to right, #DA04F2, #7024C4);
 }
 .bg_purplegradient {
-  background-color: linear-gradient(to right, #7922C8, #7922C8);
+  background: linear-gradient(to right, #7922C8, #7922C8);
 }
 .font_70 {
   font-size: 4.375rem;
@@ -100,6 +100,9 @@
 .font_14 {
   font-size: 0.875rem;
 }
+.font_13 {
+  font-size: 0.8125rem;
+}
 .font_12 {
   font-size: 0.75rem;
 }
@@ -116,7 +119,7 @@
   height: 6rem;
   display: flex;
   align-items: center;
-  background-color: #E5E5E5;
+  background: #E5E5E5;
   justify-content: center;
 }
 .menu-container .menu-logo .name {
