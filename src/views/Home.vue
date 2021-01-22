@@ -1,19 +1,18 @@
 <template>
-  <div class="home">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. At quas inventore
-    adipisci eius sed. Maxime, consequatur optio sequi iusto reprehenderit,
-    repellendus harum aspernatur autem voluptatibus minus praesentium. Dolorum,
-    libero quas?
+  <div>
+    <main_home></main_home>
   </div>
 </template>
 
 <script>
+import main_home from "../components/main_home/main_home.vue";
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
   components: {
+    main_home,
     // HelloWorld
   },
 };

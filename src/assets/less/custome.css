@@ -77,32 +77,55 @@
   background-color: linear-gradient(to right, #7922C8, #7922C8);
 }
 .font_70 {
-  font-size: 4.375 rem;
+  font-size: 4.375rem;
 }
 .font_40 {
-  font-size: 2.5 rem;
+  font-size: 2.5rem;
 }
 .font_50 {
-  font-size: 3.125 rem;
+  font-size: 3.125rem;
 }
 .font_25 {
-  font-size: 1.5625 rem;
+  font-size: 1.5625rem;
 }
 .font_19 {
-  font-size: 1.1875 rem;
+  font-size: 1.1875rem;
 }
 .font_18 {
-  font-size: 1.125 rem;
+  font-size: 1.125rem;
 }
 .font_16 {
-  font-size: 1 rem;
+  font-size: 1rem;
 }
 .font_14 {
-  font-size: 0.875 rem;
+  font-size: 0.875rem;
 }
 .font_12 {
-  font-size: 0.75 rem;
+  font-size: 0.75rem;
 }
 .font_10 {
-  font-size: 0.625 rem;
+  font-size: 0.625rem;
+}
+.menu-container {
+  display: flex;
+  position: sticky;
+  top: 0rem;
+}
+.menu-container .menu-logo {
+  width: 30%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  background-color: #E5E5E5;
+  justify-content: center;
+}
+.menu-container .menu-logo .name {
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+.menu-container .menu-item {
+  width: 70%;
+  height: 6rem;
+  display: flex;
+  align-items: center;
 }

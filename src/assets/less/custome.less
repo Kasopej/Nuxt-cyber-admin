@@ -118,3 +118,42 @@
 .font_10 {
     font-size: @10;
 }
+
+
+
+
+
+
+
+
+
+
+
+// /////////////////////////////////////////////
+@menuheight: 6rem;
+@font_500: 500;
+
+
+.menu-container{
+    display: flex;
+    position: sticky;
+    top: 0rem;
+    .menu-logo{
+        width: 30%;
+        height: @menuheight;
+        display: flex;
+        align-items: center;
+        background-color: @gray2;
+        justify-content: center;
+        .name{
+            font-size: @10;
+            font-weight: @font_500;
+        }
+    }
+    .menu-item{
+        width: 70%;
+        height: @menuheight;
+        display: flex;
+        align-items: center;
+    }
+}
