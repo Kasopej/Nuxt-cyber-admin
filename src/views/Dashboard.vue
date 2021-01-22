@@ -1,20 +1,12 @@
 <template>
-    <div class='w-full flex'>
-        <section class="border">
-
-        </section>
-        <aside class="border">
-
-        </aside>
-    </div>
+  <div class="w-full flex">
+    <second_section class="border"> </second_section>
+    <aside class="border"></aside>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

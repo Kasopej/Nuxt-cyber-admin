@@ -1,6 +1,26 @@
 @import "./variable.less";
 
+@font-face {
+    font-family: 'roboto';
+    src: url('../font/Rubik-Regular.ttf');
+  }
+  body {
+    font-family: 'roboto' !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1rem;
+  }
 
+  ::-webkit-scrollbar {
+	width: 5px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background   :@pink;
+	border-radius: 10px;
+	margin-right : 10px;
+}
 
 
 .color_pink{
@@ -78,10 +98,10 @@
     background-color: @lightblue;
 }
 .bg_pinkgradient{
-    background-color: @pinkgradient;
+    background: @pinkgradient;
 }
 .bg_purplegradient{
-    background-color: @purplegradient;
+    background: @purplegradient;
 }
 
 
@@ -146,8 +166,9 @@
         background-color: @gray2;
         justify-content: center;
         .name{
-            font-size: @10;
+            font-size: @16;
             font-weight: @font_500;
+            margin-right: 3rem;
         }
     }
     .menu-item{
@@ -155,5 +176,43 @@
         height: @menuheight;
         display: flex;
         align-items: center;
+        padding: 1rem;
+        justify-content: space-between;
+        .mainmenu{
+            display: flex;
+            .item{
+                margin: 0rem 2rem;
+                font-size: @16;
+                font-weight: @font_500;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                span{
+                    margin-right: 1rem;
+                }
+            }
+            .active{
+                color: @pink !important;
+            }
+        }
+        .mobilemenu{
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 1486px){
+.menu-logo{
+    width: 50%;
+}
+.menu-item{
+    width: 50%;
+    justify-content: flex-end;
+    .mainmenu{
+        display: none;
+    }
+    .mobilemenu{
+        display: block;
+        margin-left: 1rem;
+    }
+}
     }
 }
