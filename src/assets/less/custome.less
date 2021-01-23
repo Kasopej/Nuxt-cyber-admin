@@ -9,7 +9,7 @@
     box-sizing: border-box !important;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: 1rem;
+    
   }
 
   ::-webkit-scrollbar {
@@ -22,6 +22,12 @@
 	margin-right : 10px;
 }
 
+html{
+    font-size:  70%;
+    @media only screen and (min-width: 1400px){
+        font-size:90%
+    }
+}
 
 .color_pink{
     color: @pink;
@@ -204,7 +210,7 @@
             display: none;
         }
     }
-    @media only screen and (max-width: 1486px){
+    @media only screen and (max-width: 1000px){
 .menu-logo{
     width: 50%;
 }
@@ -238,4 +244,25 @@
     .sectionmenu-item {
         margin: 0rem 1rem;
       }
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .flex-2 {
+    flex: 2;
+  }
+  .flex-3 {
+    flex: 3;
+  }
+  .flex-4 {
+    flex: 4;
+  }
+  .flex-5 {
+    flex: 5;
+  }
+  .form-control {
+    text-indent: 1rem;
+    padding: 0.7rem;
+    width: 100%;
+    border: 1px solid rgb(221, 221, 221);
   }

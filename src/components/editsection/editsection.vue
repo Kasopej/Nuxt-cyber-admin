@@ -2,10 +2,12 @@
 
 <script>
 import layout from "../extra/layout";
+import customtextfield from "../extra/customtextfield";
 export default {
   name: "editsection",
   components: {
     layout,
+    customtextfield,
   },
 };
 </script>
@@ -28,7 +30,7 @@ export default {
 }
 .form-control {
   text-indent: 1rem;
-  padding: 0.9rem;
+  padding: 0.7rem;
   width: 100%;
   border: 1px solid rgb(221, 221, 221);
 }

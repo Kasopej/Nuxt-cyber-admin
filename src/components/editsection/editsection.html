@@ -88,7 +88,231 @@
                 <div>
                     <p class="font-bold font_19">HUNTING REQUIRMENT</p>
                 </div>
+                <div class="mt-10">
+                    <div class="flex justify-between">
+                        <p>Account Access</p>
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <customtextfield class="mt-5">
+                        <div slot="tab">
+                            <button type="button"
+                                class="border border-gray-200 rounded-xl font-bold bg-red-500 color_white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                                Write
+                            </button>
+                            <button type="button"
+                                class=" rounded-xl font-bold bg-white  rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                                Preview
+                            </button>
+                        </div>
+                    </customtextfield>
+                    <div class="mt-3 flex items-center">
+                        <div class="flex-2">
+                            <div class="flex justify-between">
+                                <label for="Tile" class="font_12">User Agent</label>
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="English">
+                        </div>
+                        <div class="flex-3 px-10">
+                            <p class="color_pink font-bold">Add Additional Language</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10">
+                <div>
+                    <p class="font-bold font_19">PROGRAM DESCRIPTION</p>
+                </div>
+                <div class="mt-5">
+                    <div class="flex items-end my-2">
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Scope Type</label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="Web Application">
+                        </div>
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Scope </label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="https://example.net">
+                        </div>
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Security Requirement </label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="Web Application">
+                        </div>
+                        <div class="flex-1 px-2">
+                            <button type="button"
+                                class=" rounded-xl shadow-md font-bold bg-white text-red-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-end my-2">
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Scope Type</label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="Api">
+                        </div>
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Scope </label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="https://example.net">
+                        </div>
+                        <div class="flex-4 px-2">
+                            <label for="Tile" class="font_12">Security Requirement </label>
+                            <input type="text" class="form-control rounded-md mt-3" placeholder="Web Application">
+                        </div>
+                        <div class="flex-1 px-2">
+                            <button type="button"
+                                class=" rounded-xl shadow-md font-bold bg-white text-red-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button"
+                            class="border border-gray-200 rounded-md font-bold bg_pink color_white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                            Add Scope
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="my-2">
+                    <p class="mb-2 font_12">Out-of-Scope</p>
+                    <textarea class="form-control rounded-md" cols="30" rows="5"></textarea>
+                </div>
+                <div class="my-2">
+                    <p class="mb-2 font_12">Qualifying Vulnerabilities</p>
+                    <textarea class="form-control rounded-md" cols="30" rows="5"></textarea>
+                </div>
+                <div class="my-2">
+                    <p class="mb-2 font_12">Non Qualifying Vulnerabilities</p>
+                    <textarea class="form-control rounded-md" cols="30" rows="5"></textarea>
+                </div>
 
+            </div>
+            <div class="mt-10">
+                <div class="flex">
+                    <div class="flex-3">
+                        <p class="font-bold font_19">Reward type</p>
+                        <div class="flex justify-between mt-3">
+                            <div class="flex items-center">
+                                <input class="mx-2" type="checkbox">
+                                <p>Bounty</p>
+                            </div>
+                            <div class="flex items-center">
+                                <input class="mx-2" type="checkbox">
+                                <p>Gift</p>
+                            </div>
+                            <div class="flex items-center">
+                                <input class="mx-2" type="checkbox">
+                                <p>Hall of Fame</p>
+                            </div>
+                            <div class="flex items-center">
+                                <input class="mx-2" type="checkbox">
+                                <p>Is Max Reward Visible</p>
+                            </div>
+                            <div class="flex items-center">
+                                <input class="mx-2" type="checkbox">
+                                <p>Is AVG Reward Visible</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="flex">
+                    <div class="flex-3">
+                        <p class="font-bold font_19">Minimum reward</p>
+                        <div class="flex justify-between mt-3">
+                            <div class="flex-1">
+                                <label for="Tile" class="font_12">Minimum Reward</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-3">
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="flex">
+                    <div class="flex-3">
+                        <p class="font-bold font_19">Reward Grid</p>
+                        <div class="flex justify-between mt-3">
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Low(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Medium(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">High(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Critical(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="flex">
+                    <div class="flex-3">
+                        <p class="font-bold font_19">Reward Grid</p>
+                        <div class="flex justify-between mt-3">
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Low(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Medium(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">High(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+                            <div class="flex-1 p-1">
+                                <label for="Tile" class="font_12">Critical(Max reward)</label>
+                                <input type="text" class="form-control rounded-md mt-3" placeholder="50">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="mt-10">
+                <div class="flex justify-between">
+                    <p>Program Description</p>
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <customtextfield class="mt-5">
+                    <div slot="tab">
+                        <button type="button"
+                            class="border border-gray-200 rounded-xl font-bold bg-red-500 color_white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                            Write
+                        </button>
+                        <button type="button"
+                            class=" rounded-xl font-bold bg-white  rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                            Preview
+                        </button>
+                    </div>
+                </customtextfield>
+
+            </div>
+            <div class="mt-10 p-5 flex justify-center items-center">
+                <button type="button"
+                    class="border border-gray-200 rounded-md font-bold bg_pink color_white rounded-md px-10 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                    Update
+                </button>
             </div>
         </div>
     </layout>

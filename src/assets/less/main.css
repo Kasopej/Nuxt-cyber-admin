@@ -7,7 +7,6 @@ body {
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 !important;
-  font-size: 1rem;
 }
 ::-webkit-scrollbar {
   width: 5px;
@@ -17,6 +16,14 @@ body {
   background: #DA04F2;
   border-radius: 10px;
   margin-right: 10px;
+}
+html {
+  font-size: 70%;
+}
+@media only screen and (min-width: 1400px) {
+  html {
+    font-size: 90%;
+  }
 }
 .color_pink {
   color: #DA04F2;
@@ -176,7 +183,7 @@ body {
 .menu-container .menu-item .mobilemenu {
   display: none;
 }
-@media only screen and (max-width: 1486px) {
+@media only screen and (max-width: 1000px) {
   .menu-container .menu-logo {
     width: 50%;
   }
@@ -207,4 +214,25 @@ body {
 }
 .sectionmenu .sectionmenu-item {
   margin: 0rem 1rem;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
+.flex-4 {
+  flex: 4;
+}
+.flex-5 {
+  flex: 5;
+}
+.form-control {
+  text-indent: 1rem;
+  padding: 0.7rem;
+  width: 100%;
+  border: 1px solid #dddddd;
 }

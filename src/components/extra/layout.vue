@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-8">
     <div class="col-span-6 col-start-2 bg-white contentt">
-      <div class="flex justify-between items-center px-5">
+      <div class="flex justify-between items-center px-5" v-if="title">
         <div>
           <div class="sectionmenu">
             <span class="sectionmenu-item">Home</span>
@@ -18,6 +18,12 @@
           >
             {{ title }}
           </button>
+        </div>
+      </div>
+      <div v-else>
+        <div class="search">
+          <input type="search" placeholder="Search a Program" />
+          <i class="fas fa-search"></i>
         </div>
       </div>
 
@@ -37,4 +43,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.search {
+  position: relative;
+}
+.search input {
+  width: 100%;
+  padding: 1rem 2rem;
+  /* background: rgb(255, 255, 255); */
+  text-indent: 2rem;
+}
+.search i {
+  position: absolute;
+  left: 1rem;
+  top: 35%;
+}
+</style>

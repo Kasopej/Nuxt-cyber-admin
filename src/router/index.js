@@ -20,6 +20,16 @@ const routes = [
     name: "edit",
     component: () => import("../components/editpage/editpage.vue"),
   },
+  {
+    path: "/setting",
+    name: "setting",
+    component: () => import("../components/settings/settings.vue"),
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: () => import("../components/search/search.vue"),
+  },
 ];
 
 const router = new VueRouter({
