@@ -420,11 +420,10 @@
                         </div>
                     </div>
 
-                    <div class="bg-white shadow-md rounded-sm mb-7">
+                    <!-- <div class="bg-white shadow-md rounded-sm mb-7">
                         <div class="flex justify-between py-4 px-7 border-b-2">
                             <div class="flex">
-                                <!-- <div class="flex">
-                                </div> -->
+                                
                                 <div class="flex items-center">
                                     <span class="font_12 font-bold bg_lightblue mr-3 py-2 px-7 rounded-md color_blue flex items-center">Write</span>
                                     <span class="font_12 font-bold bg-transparent mr-20">Preview</span>
@@ -439,9 +438,24 @@
                                 <p>Styling with <span class="font_12 color_pink">MarkDown is supported</span></p>
                             </div>
                         </div>
-                        <div class="h-52"></div>
-                    </div>
+                        <div class="h-52 p-3">
+                            <textarea class="form-control w-full h-full"></textarea>
+                        </div>
+                    </div> -->
 
+                    <customtextfield>
+                        <div slot="tab" class="flex">
+                            <span class="font_12 font-bold bg_lightblue mr-3 py-2 px-7 rounded-md color_blue flex items-center">Write</span>
+                            <span class="font_12 font-bold bg-transparent pl-3 py-2 mr-20">Preview</span>
+                        </div>
+                        <div slot="select" class="flex items-center">
+                            <div class="bg-white rounded-md flex items-center justify-between p-4 shadow-md cursor-pointer">
+                                <span class="font_14 mr-32">Select a template</span>
+                                <i class="fas fa-caret-down cursor-pointer"></i>
+                            </div>
+                            <img src="../assets/img/question-mark.svg" class="w-2 h-2 ml-3" alt="">
+                        </div>
+                    </customtextfield>
 
                     <p class="color_gray font_14 mb-2">Attachments (TXT or JPEG or PNG, 2MB max)</p>
                     <div class="bg-white flex shadow-md mb-6 rounded-md">
@@ -459,7 +473,13 @@
 </template>
 
 <script>
-export default {};
+import customtextfield from '../components/extra/customtextfield';
+export default {
+    name: 'dashboard',
+    components: {
+        customtextfield
+    }
+};
 </script>
 
 <style>
