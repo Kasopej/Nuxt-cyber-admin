@@ -8,19 +8,24 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue")
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import("../views/Dashboard.vue")
-  }
+    component: () => import("../views/Dashboard.vue"),
+  },
+  {
+    path: "/edit",
+    name: "edit",
+    component: () => import("../components/editpage/editpage.vue"),
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

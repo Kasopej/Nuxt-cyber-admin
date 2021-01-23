@@ -149,6 +149,7 @@ body {
 }
 .menu-container .menu-item {
   width: 70%;
+  background-color: white;
   height: 6rem;
   display: flex;
   align-items: center;
@@ -190,4 +191,20 @@ body {
     display: block;
     margin-left: 1rem;
   }
+}
+.modal {
+  display: none;
+}
+.contentt {
+  margin-top: -3rem;
+  /* padding: 2rem; */
+  border-radius: 0.5rem;
+}
+.sectionmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sectionmenu .sectionmenu-item {
+  margin: 0rem 1rem;
 }

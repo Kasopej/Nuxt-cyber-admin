@@ -1,8 +1,10 @@
-<div class="grid grid-cols-8">
-
-    <div class="col-span-4 col-start-3 bg-white">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates saepe fuga temporibus deserunt beatae est
-        labore cum molestiae velit reiciendis enim ipsam at libero in consequuntur, ut quos, aliquam nam.
-    </div>
-
+<div>
+    <layout title="Add">
+        <div slot="content">
+            <div v-for="(tab,index) in cards">
+                <tab :key="index" :status="tab.status" :title="tab.title" :message="tab.message"
+                    :subtitle="tab.subtitle" :button="tab.btn"></tab>
+            </div>
+        </div>
+    </layout>
 </div>

@@ -3,6 +3,7 @@
 <script>
 export default {
   name: "second_section",
+  props: ["title"],
 };
 </script>
 
