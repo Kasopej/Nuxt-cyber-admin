@@ -8,9 +8,23 @@
                     <i class="fas fa-angle-down"></i>
                 </div>
                 <div class="flex mb-3">
-                    <span class="bg-gray-100 p-2 font_10 rounded-md justify-between flex-1 mr-2 flex justify-between items-center">
-                        Sort by Latest Activities <i class="fas fa-angle-down"></i>
-                    </span>
+                    <div class="dropdown relative inline-block">
+                        <span @click="latest_activities = !latest_activities" class="cursor-pointer bg-gray-100 rounded-md font_10 p-2 justify-between flex-1 mr-2 flex justify-between items-center">
+                            Sort by Latest Activities <i v-if="latest_activities" class="fas fa-angle-down ml-2"></i><i v-if="!latest_activities" class="fas fa-angle-right ml-2"></i>
+                        </span>
+                        <div v-if="latest_activities" class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="p-4" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="#" role="menuitem" class="block list_item font_12 pb-4 color_pink">Latest Actvities</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Oldest Activities</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Oldest Activities</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Latest Activities</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Highest Priority</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Lowest Priority</a>
+                                <a href="#" class="block list_item font_12 text-gray-700" role="menuitem">Oldest Activities</a>
+                            </div>
+                        </div>
+                    </div>
                     <span class="bg-gray-100 p-2 font_10 rounded-md flex-1 flex justify-between items-center">
                         Advance Filters <i class="fas fa-angle-right"></i>
                     </span>
@@ -148,7 +162,7 @@
             <nav class="w-full mb-9">
                 <div class='bg-white inner-nav ml-auto px-5 pt-10 pb-5 shadow-md'>
                     <ul class="flex list-none">
-                        <li class="mr-20"><a class="font-bold color_darkpink" href=""> All</a></li>
+                        <li class="mr-20"><a class="font-bold color_darkpink" href="#" @click.prevent="$m.showmodal('modalone')"> All</a></li>
                         <li class="mr-20"><a class="font-bold mr-2 color_gray" href=""> New</a> <span class="color_pink">8</span></li>
                         <li class="mr-20"><a class="font-bold color_gray" href=""> Under Review</a></li>
                         <li class="mr-20"><a class="font-bold color_gray" href=""> Accepted</a></li>
@@ -160,18 +174,68 @@
                 <div class="flex justify-between mb-14">
                     <div>
                         <span class='mr-3 font_12'>#YHW-PGM2453-8</span>
-                        <button class="color_pink bg-white rounded-md font_12 p-2 shadow-md">
-                            NEED MORE INFO
-                        </button>
+                        
+                        <div class="dropdown relative inline-block">
+                            <button @click="popup_one = !popup_one" class="color_pink bg-white rounded-md font_12 p-2 shadow-md">
+                                NEED MORE INFO
+                            </button>
+
+                            <div v-if="popup_one" class="dropdown-menu origin-top-right absolute mt-2 w-56 rounded-md shadow-lg
+                                bg-white ring-1 ring-black ring-opacity-5 right-6">                                
+                                <popupone v-on:closeup="closeup"/>
+                            </div>
+                        </div>
                     </div>
                     <div class="flex">
-                        <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a>
-                        <a href="#" class="font_12 mr-4 color_gray">PRIORITIES
+                        <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
+                        <div class="dropdown relative inline-block">                        
+                            <a href="#" @click="members_menu = !members_menu" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a>
+                            <div v-if="members_menu" class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10">
+                                <div class="p-4" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                     <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">Undefined</a>            
+                                    <a href="#" role="menuitem" class="block list_item font_12 pb-4 color_pink">P 1</a>
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 2</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 3</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 4</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 5</a>            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown relative inline-block">                        
+                            <a href="#" @click="priorities_menu = !priorities_menu" class="font_12 mr-4 color_gray">PRIORITIES
+                                <i class="fas fa-angle-down ml-1"></i>
+                            </a>
+                            <div v-if="priorities_menu" class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10">
+                                <div class="p-4" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">Undefined</a>            
+                                    <a href="#" role="menuitem" class="block list_item font_12 pb-4 color_pink">P 1</a>
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 2</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 3</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 4</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">P 5</a>            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown relative inline-block">                        
+                            <a href="#" @click="export_menu = !export_menu" class="font_12 mr-4 color_gray">EXPORT
+                                <i class="fas fa-angle-down ml-1"></i>
+                            </a>
+                            <div v-if="export_menu" class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10">
+                                <div class="p-4" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">CSV</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">XLS</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">JSON</a>            
+                                    <a href="#" class="block list_item font_12 text-gray-700 font-bold" role="menuitem">PDF</a>            
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <a href="#" class="font_12 mr-4 color_gray">
                             <i class="fas fa-angle-down ml-1"></i>
-                        </a>
-                        <a href="#" class="font_12 mr-4 color_gray">EXPORT
-                            <i class="fas fa-angle-down ml-1"></i>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <h3 class="font-bold font_14 mb-3"><span class="color_pink">/</span> Insecure Direct Object Reference on https://api.example.net allows informations leakage.</h3>
@@ -469,15 +533,48 @@
                 </div>
             </div>
         </section>
+
+
+        <modal class="modal" id="modalone">
+            <div slot="header">
+                <div class="flex justify-end">
+                    <i class="fas fa-times cursor-pointer" @click.prevent="$m.hidemodal('modalone')"></i>
+                </div>
+            </div>
+            <div slot="content">
+                <modalone></modalone>
+            </div>
+            
+        </modal>
     </div>
 </template>
 
 <script>
 import customtextfield from '../components/extra/customtextfield';
+import modalone from '../components/dashboard/modal1';
+import popupone from '../components/dashboard/popup1';
+
 export default {
     name: 'dashboard',
     components: {
-        customtextfield
+        customtextfield,
+        modalone,
+        popupone
+    },
+    data(){
+        return {
+            popup_one: false,
+            top_sidemenu: '',
+            priorities_menu: false,
+            members_menu: false,
+            export_menu: false,
+            latest_activities: false
+        }
+    },
+    methods: {
+        closeup(){
+            this.popup_one = false
+        }
     }
 };
 </script>
@@ -565,6 +662,10 @@ button:active{
 }
 .unline_pink{
     border-bottom: 1px solid #DA04F2;
+}
+
+.list_item:not(:last-child){
+    padding-bottom: 10px;
 }
 
 .flex_1{
