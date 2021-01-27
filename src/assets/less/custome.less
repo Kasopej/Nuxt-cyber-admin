@@ -28,6 +28,16 @@ html{
         font-size:90%
     }
 }
+.dropdown{
+    .dropdown-menu{
+        display: none;
+    }
+    &:hover{
+.dropdown-menu{
+    display: block;
+}
+    }
+}
 
 .color_pink{
     color: @pink;
@@ -168,7 +178,7 @@ html{
     position: sticky;
     top: 0rem;
     .menu-logo{
-        width: 30%;
+        width: 20%;
         height: @menuheight;
         display: flex;
         align-items: center;
@@ -181,7 +191,7 @@ html{
         }
     }
     .menu-item{
-        width: 70%;
+        width: 100%;
         background-color: @white;
         height: @menuheight;
         display: flex;
@@ -192,6 +202,7 @@ html{
             display: flex;
             .item{
                 margin: 0rem 2rem;
+                cursor: pointer;
                 font-size: @16;
                 font-weight: @font_500;
                 display: flex;
@@ -201,9 +212,15 @@ html{
                 span{
                     margin-right: 1rem;
                 }
+                &:hover{
+                    color: @pink;
+                }
             }
             .active{
                 color: @pink !important;
+                background-color: @lightpink;
+                padding: 1rem 2rem;
+                border-radius: .5rem;
             }
         }
         .mobilemenu{
@@ -265,4 +282,14 @@ html{
     padding: 0.7rem;
     width: 100%;
     border: 1px solid rgb(221, 221, 221);
+  }
+
+
+  select{
+      padding: 1rem 1.5rem;
+      width: 100%;
+      border-radius: 3px;
+      appearance: none;
+      background: url(../img/double-arrow.svg) 90% center no-repeat #fff;
+      background-size: 15px 15px;
   }

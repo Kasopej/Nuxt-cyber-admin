@@ -4,9 +4,9 @@
       <div class="flex justify-between items-center px-5" v-if="title">
         <div>
           <div class="sectionmenu">
-            <span class="sectionmenu-item">Home</span>
+            <!-- <span class="sectionmenu-item">Home</span> -->
             <span class="sectionmenu-item">Dashboard</span>
-            <span class="sectionmenu-item">Members Mangemnet</span>
+            <!-- <span class="sectionmenu-item">Members Mangemnet</span> -->
             <span class="sectionmenu-item">Hunters Management</span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-<div class="menu-container shadow-md">
+<div class="grid grid-cols-5 shadow-md sticky top-0">
     <modal class="modal" id="newprogram">
         <div slot="content">
             <div class="flex">
@@ -16,46 +16,11 @@
             </div>
         </div>
     </modal>
-
-    <div class="menu-logo">
-        <span class="name">FIDELITY BANK DEMO BUG BOUNTY PROGRAM
-        </span> <i class="fas fa-angle-down"></i>
+    <div class="col-span-1 flex items-center justify-center bg-gray-200">
+        <img src="../../assets/img/teklabspcelogo.png" alt="">
     </div>
-    <div class="menu-item">
-        <div class="mainmenu">
-            <div class="item" @click.prevent="goto('dashboard')"><span>Dashboard</span> <i
-                    class="fas fa-angle-down"></i></div>
-            <div class="dropdown relative inline-block text-left">
-                <div>
-                    <div class="item"><span class="active">Program</span> <i class="fas fa-angle-down"></i></div>
-                </div>
-
-
-                <div
-                    class="dropdown-menu  origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                    <div class="p-5" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                        <a href="#" @click.prevent="$m.showmodal('newprogram')"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                            role="menuitem">Add Program</a>
-
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                            role="menuitem" @click.prevent="goto('edit')">Edit Program</a>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="item" @click.prevent="goto('setting')"><span>Settings</span></div>
-        </div>
-
-        <div>
-            <button type="button"
-                class="border border-gray-200 font-bold bg-gray-200 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
-                ASK FOR LICENCED
-            </button>
-        </div>
-        <div class="mobilemenu">
-            <i class="fas fa-2x fa-bars"></i>
-        </div>
+    <div class="col-span-4">
+        <mainmenu></mainmenu>
     </div>
+
 </div>
