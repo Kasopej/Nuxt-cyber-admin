@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-span-1 flex flex-col items-end">
-                    <button class="bg_pink font_16 px-16 py-3 rounded-md shadow-sm text-white block">
+                    <button class="bg_pink font_16 px-16 py-3 rounded-md shadow-sm text-white block mt-auto">
                         Send
                     </button>
                 </div>

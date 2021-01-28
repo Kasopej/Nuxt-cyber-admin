@@ -396,14 +396,14 @@
                     class="rating_box col-span-1 border-r border-white bg_green text-white p-5"
                   >
                     <div class="text-center">
-                      <span class="font_14 tracking-wider">CVSS SCORE</span>
-                      <h3 class="font_40 font-bold ">6.5</h3>
+                      <span class="font_10 tracking-wider">CVSS SCORE</span>
+                      <h3 class="font_15 font-bold ">6.5</h3>
                     </div>
                   </div>
                   <div class="rating_box col-span-1 bg_green text-white p-5">
                     <div class="text-center">
-                      <span class="font_14 tracking-wider">SEVERITY</span>
-                      <h3 class="font_40 font-bold">MEDIUM</h3>
+                      <span class="font_10 tracking-wider">SEVERITY</span>
+                      <h3 class="font_15 font-bold">MEDIUM</h3>
                     </div>
                   </div>
                 </div>

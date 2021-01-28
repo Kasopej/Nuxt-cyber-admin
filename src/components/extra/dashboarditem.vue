@@ -1,19 +1,19 @@
 <template>
   <div>
     <div
-      class="px-10 py-6 border-b cursor-pointer mainn"
+      class="px-3 py-6 border-b cursor-pointer mainn"
       :class="{ bg_lightpink: current }"
     >
       <div class="flex justify-between mb-2 items-center">
         <div class="flex items-center">
-          <span class="font_14 mr-4 bg_gray2 p-2 tracking-wide rounded-md "
+          <span class="font_13 mr-4 bg_gray2 p-2 tracking-wide rounded-md "
             >#YHW-PGM2453-B</span
           >
           <i class="fas fa-comments color_pink"></i>
         </div>
-        <span class="font-bold text-gray-300 font_16">2020-12-11</span>
+        <span class="font-bold text-gray-300 font_12">2020-12-11</span>
       </div>
-      <p class="font-bold my-3 font_16">
+      <p class="font-bold my-3 font_13">
         Insecure Direct Object Reference on https:...
       </p>
       <span
