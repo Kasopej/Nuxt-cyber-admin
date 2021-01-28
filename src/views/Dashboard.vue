@@ -23,14 +23,14 @@
       </div>
 
       <div class="p-5">
-        <div class="flex justify-between mb-14">
+        <div class="flex justify-between my-6">
           <div>
-            <span class="mr-3 font_12">#YHW-PGM2453-8</span>
+            <span class="mr-3 font_14">#YHW-PGM2453-8</span>
 
             <div class="dropdown relative inline-block">
               <button
                 @click="popup_one = !popup_one"
-                class="color_pink bg-white rounded-md font_12 p-2 shadow-md"
+                class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
               >
                 NEED MORE INFO
               </button>
@@ -50,7 +50,7 @@
               <a
                 href="#"
                 @click="members_menu = !members_menu"
-                class="font_12 mr-4 color_gray"
+                class="font_14 mr-4 color_gray"
                 >MEMBERS MANAGEMENT</a
               >
               <div
@@ -107,7 +107,7 @@
               <a
                 href="#"
                 @click="priorities_menu = !priorities_menu"
-                class="font_12 mr-4 color_gray"
+                class="font_14 mr-4 color_gray"
                 >PRIORITIES
                 <i class="fas fa-angle-down ml-1"></i>
               </a>
@@ -165,7 +165,7 @@
               <a
                 href="#"
                 @click="export_menu = !export_menu"
-                class="font_12 mr-4 color_gray"
+                class="font_14 mr-4 color_gray"
                 >EXPORT
                 <i class="fas fa-angle-down ml-1"></i>
               </a>
@@ -213,85 +213,85 @@
                         </a> -->
           </div>
         </div>
-        <h3 class="font-bold font_14 mb-3">
-          <span class="color_pink">/</span> Insecure Direct Object Reference on
-          https://api.example.net allows informations leakage.
+        <h3 class="font-bold font_18 mb-3">
+          Insecure Direct Object Reference on https://api.example.net allows
+          informations leakage.
         </h3>
 
         <div class="flex mb-12 items-center">
           <span class="grey_dot bg_gray rounded-sm"></span>
-          <h4 class="font_12 ml-3 mr-4">
+          <h4 class="font_14 ml-3 mr-4">
             FIDELITY BANK DEMO BUG BOUNTY PROGRAM
           </h4>
-          <img class="mr-2" src="../assets/img/chat_icon.svg" alt="" />
-          <span class="font_10 color_pink mr-1">8</span>
-          <span class="font_10">Comments</span>
+          <div class="fas fa-comments mr-2"></div>
+          <span class="font_12 color_pink mr-1">8</span>
+          <span class="font_12">Comments</span>
         </div>
 
         <div class="border-b-2 border-t-2 p-4">
-          <div class="grid grid-cols-3 gap-5">
-            <div class="col-span-2">
-              <h3 class="color_gray font_12 pt-4 pb-10">
+          <div class="grid grid-cols-4 gap-5">
+            <div class="col-span-3">
+              <h3 class="color_gray font_16 tracking-wider pt-4 pb-10">
                 SUMITTED BY
-                <span class="font_12 color_black">YESWEBOT ON 2020-12-11</span>
+                <span class="font_16 color_black">YESWEBOT ON 2020-12-11</span>
               </h3>
-              <div class="bg-white p-4 shadow-md rounded-md pt-6">
+              <div class="bg-white p-10 shadow-md rounded-md">
                 <div class="flex justify-between mb-5">
-                  <h3 class="font_14">REPORT DETAILS</h3>
+                  <h3 class="font_16 font-bold">REPORT DETAILS</h3>
                   <i class="fas fa-angle-down"></i>
                 </div>
 
                 <div class="report_details">
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">BUG TYPE</div>
                     <div class="report_value">
                       Insecure Direct Object Reference (IDOR) (CWE-639) →
                       Remediation
                     </div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">SCOPE</div>
                     <div class="report_value">https://api.example.net</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">END POINT</div>
                     <div class="report_value">
                       https://api.example.net/profile.php
                     </div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">SECURITY</div>
                     <div class="report_value">Medium</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">VULNERABLE PART</div>
                     <div class="report_value">get-parameter</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">PART NAME</div>
                     <div class="report_value">user_id</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">PAYLOAD</div>
                     <div class="report_value">1337</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">TECHNICAL ENVIRONMENT</div>
                     <div class="report_value">OSX, 10.14.6; Firefox 688.0</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">APPLICATION FINGERPRINT</div>
                     <div class="report_value">Symfony, PHP</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">IP USED</div>
                     <div class="report_value">13.37.13.37</div>
                   </div>
-                  <div class="flex font_12 mb-3">
+                  <div class="flex font_14 mb-3">
                     <div class="report_detail">SECURITY REQUIREMENT</div>
                     <div class="report_value">high</div>
                   </div>
-                  <div class="flex font_12 mb-8">
+                  <div class="flex font_14 mb-8">
                     <div class="report_detail">
                       <div class="flex">
                         <span>REWARD GRID</span>
@@ -308,41 +308,49 @@
                           class="font_10 color_gray font-bold text-center mb-1"
                           >LOW</span
                         >
-                        <span class="rounded-xl reward_price text-center"
-                          >$50</span
+                        <button
+                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
                         >
+                          $50
+                        </button>
                       </div>
                       <div class="flex flex-col col-span-1">
                         <span
                           class="font_10 color_gray font-bold text-center mb-1"
                           >MEDIUM</span
                         >
-                        <span class="rounded-xl reward_price text-center"
-                          >$505</span
+                        <button
+                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
                         >
+                          $505
+                        </button>
                       </div>
                       <div class="flex flex-col col-span-1">
                         <span
                           class="font_10 color_gray font-bold text-center mb-1"
                           >HIGH</span
                         >
-                        <span class="rounded-xl reward_price text-center"
-                          >$1,000</span
+                        <button
+                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
                         >
+                          $1,000
+                        </button>
                       </div>
                       <div class="flex flex-col col-span-1">
                         <span
                           class="font_10 color_gray font-bold text-center mb-1"
                           >CRITICAL</span
                         >
-                        <span class="rounded-xl reward_price text-center"
-                          >$2,500</span
+                        <button
+                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
                         >
+                          $2,500
+                        </button>
                       </div>
                     </div>
                   </div>
 
-                  <div class="flex font_12 mb-8">
+                  <div class="flex font_14 mb-8">
                     <div class="report_detail">
                       <div class="flex">
                         <span>PATCH STATUS</span>
@@ -361,7 +369,7 @@
                     </div>
                   </div>
 
-                  <div class="flex font_12 mb-8">
+                  <div class="flex font_14 mb-8">
                     <div class="report_detail">TRACKING STATUS</div>
                     <div class="report_value">
                       <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
@@ -373,7 +381,7 @@
 
                   <div class="mb-6">
                     <button
-                      class="color_pink font_12 py-2 px-10 rounded-sm shadow-md"
+                      class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
                     >
                       EDIT
                     </button>
@@ -385,23 +393,23 @@
               <div class="mb-3 bg-white shadow-md">
                 <div class="grid grid-cols-2">
                   <div
-                    class="rating_box col-span-1 border-r border-white bg_green text-white p-4"
+                    class="rating_box col-span-1 border-r border-white bg_green text-white p-5"
                   >
-                    <div class="rating_box_inner">
-                      <span class="font_10">CVSS SCORE</span>
-                      <h3 class="font_50 font-bold tracking-widest">6.5</h3>
+                    <div class="text-center">
+                      <span class="font_14 tracking-wider">CVSS SCORE</span>
+                      <h3 class="font_40 font-bold ">6.5</h3>
                     </div>
                   </div>
-                  <div class="rating_box col-span-1 bg_green text-white p-4">
-                    <div class="rating_box_inner">
-                      <span class="font_10">SEVERITY</span>
-                      <h3 class="font_19 font-bold">MEDIUM</h3>
+                  <div class="rating_box col-span-1 bg_green text-white p-5">
+                    <div class="text-center">
+                      <span class="font_14 tracking-wider">SEVERITY</span>
+                      <h3 class="font_40 font-bold">MEDIUM</h3>
                     </div>
                   </div>
                 </div>
                 <div class="flex p-4 flex-col text-center border-b">
-                  <span class="font_10 mb-3 font-bold">VECTOR STRING</span>
-                  <span class="font_10 color_gray"
+                  <span class="font_14 mb-3 font-bold">VECTOR STRING</span>
+                  <span class="font_12 color_gray"
                     >CVSS 3.0/AN.AV/ACL/PL.L/UI:N/S:U/CH/I:N/A:N</span
                   >
                 </div>

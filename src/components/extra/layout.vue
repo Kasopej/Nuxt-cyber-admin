@@ -5,7 +5,7 @@
         <div>
           <div class="sectionmenu">
             <!-- <span class="sectionmenu-item">Home</span> -->
-            <span class="sectionmenu-item">Dashboard</span>
+            <span class="sectionmenu-item active">Dashboard</span>
             <!-- <span class="sectionmenu-item">Members Mangemnet</span> -->
             <span class="sectionmenu-item">Hunters Management</span>
           </div>
@@ -57,5 +57,15 @@ export default {
   position: absolute;
   left: 1rem;
   top: 35%;
+}
+.sectionmenu .active {
+  padding: 1rem 0rem;
+  border-bottom: 5px solid #da04f2;
+}
+.sectionmenu .sectionmenu-item {
+  cursor: pointer;
+}
+.sectionmenu .sectionmenu-item:hover {
+  color: #da04f2;
 }
 </style>

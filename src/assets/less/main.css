@@ -252,8 +252,11 @@ html {
 select {
   padding: 1rem 1.5rem;
   width: 100%;
-  border-radius: 3px;
+  border: none;
   appearance: none;
   background: url(../img/double-arrow.svg) 90% center no-repeat #fff;
   background-size: 15px 15px;
+}
+select option {
+  border: none;
 }
