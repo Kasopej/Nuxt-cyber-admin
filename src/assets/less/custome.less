@@ -308,9 +308,25 @@ html{
    
       border: none;
       appearance: none;
-      background: url(../img/double-arrow.svg) 90% center no-repeat #fff;
+      background: url(../img/double-arrow.svg) 95% center no-repeat #fff;
       background-size: 15px 15px;
       option{
           border: none;
+      }
+  }
+
+  .toggle{
+      display:flex;
+      font-size: @16;
+      margin: 1rem 0rem;
+      .toggle-item{
+margin-right:  2rem;
+padding: 1rem 0rem;
+color: @gray;
+cursor: pointer;
+      }
+      .active{
+          border-bottom: 3px solid @pink;
+          color: #000;
       }
   }

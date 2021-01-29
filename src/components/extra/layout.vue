@@ -5,9 +5,19 @@
         <div>
           <div class="sectionmenu">
             <!-- <span class="sectionmenu-item">Home</span> -->
-            <span class="sectionmenu-item active">Dashboard</span>
+            <span
+              class="sectionmenu-item"
+              :class="{ active: content }"
+              @click.prevent="content = true"
+              >Dashboard</span
+            >
             <!-- <span class="sectionmenu-item">Members Mangemnet</span> -->
-            <span class="sectionmenu-item">Hunters Management</span>
+            <span
+              class="sectionmenu-item"
+              :class="{ active: !content }"
+              @click.prevent="content = false"
+              >Hunters Management</span
+            >
           </div>
         </div>
         <div>
@@ -30,7 +40,106 @@
       <hr class="w-100" />
 
       <div class="p-10">
-        <slot name="content"></slot>
+        <slot name="content" v-if="content"></slot>
+        <div v-else>
+          <div>
+            <div class="mb-8 flex justify-center">
+              <p class="font_19 font-bold">Report Members</p>
+            </div>
+            <div>
+              <div class="flex mb-6">
+                <a
+                  href="#"
+                  class="font_13 mr-10 font-bold"
+                  :class="{ 'pb-3': true, unline_pink: true }"
+                  >INVITE A NEW MEMBER</a
+                >
+                <a href="#" class="font_13 color_gray"
+                  >INVITE MEMBERS FROM GROUP</a
+                >
+              </div>
+
+              <div class="grid grid-cols-3 gap-16 mb-8">
+                <div class="col-span-1 flex flex-col justify-center">
+                  <label class="font_12 block"
+                    >Role <span class="color_pink">*</span></label
+                  >
+
+                  <select class="bg-gray-50 mt-1">
+                    <option value="0">Select a Role</option>
+                    <option value="">Report Auditor</option>
+                    <option value="">Report Viewer</option>
+                  </select>
+                </div>
+                <div class="col-span-1 flex flex-col justify-center">
+                  <label class="font_12 block"
+                    >Username/Email <span class="color_pink">*</span></label
+                  >
+
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    class="bg-gray-50 mt-1 form-control"
+                  />
+                </div>
+                <div class="col-span-1 flex flex-col items-end">
+                  <button
+                    class="bg_pink font_16 px-16 py-3 rounded-md shadow-sm text-white block mt-auto"
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+
+              <span class="font_12"
+                >Mandatory Field <span class="color_pink">*</span></span
+              >
+              <div class="mb-6 mt-3">
+                <div class="flex mb-7">
+                  <a href="#" class="font_13 mr-10 unline_pink pb-3 font-bold"
+                    >PENDING INVITATIONS</a
+                  >
+                  <a href="#" class="font_13 mr-10 color_gray"
+                    >ACCEPTED INVITATIONS</a
+                  >
+                  <a href="#" class="font_13 mr-10 color_gray"
+                    >REVOKED INVITATIONS</a
+                  >
+                </div>
+
+                <div v-if="invitations">
+                  <p class="font_13 mb-3">
+                    Insecure Direct Object Reference (IDOR) (CWE-639) →
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    → <span class="color_pink">Pending</span>
+                  </p>
+                  <p class="font_13 mb-3">
+                    Insecure Direct Object Reference (IDOR) (CWE-639) →
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    → <span class="color_pink">Pending</span>
+                  </p>
+                  <p class="font_13 mb-3">
+                    Insecure Direct Object Reference (IDOR) (CWE-639) →
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    → <span class="color_pink">Pending</span>
+                  </p>
+                  <p class="font_13 mb-3">
+                    Insecure Direct Object Reference (IDOR) (CWE-639) →
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    → <span class="color_pink">Pending</span>
+                  </p>
+                </div>
+                <p v-else class="font_18 my-6">No pending Invitatitons</p>
+
+                <p class="font_13 mb-3">
+                  Insecure Direct Object Reference (IDOR) (CWE-639) →
+                  RemediationInsecure Direct Object Reference (IDOR) (CWE-639) →
+                  <span class="color_blue">Revoked</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +149,11 @@
 export default {
   name: "layout",
   props: ["title"],
+  data() {
+    return {
+      content: true,
+    };
+  },
 };
 </script>
 

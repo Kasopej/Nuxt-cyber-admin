@@ -254,9 +254,24 @@ select {
   width: 100%;
   border: none;
   appearance: none;
-  background: url(../img/double-arrow.svg) 90% center no-repeat #fff;
+  background: url(../img/double-arrow.svg) 95% center no-repeat #fff;
   background-size: 15px 15px;
 }
 select option {
   border: none;
+}
+.toggle {
+  display: flex;
+  font-size: 1rem;
+  margin: 1rem 0rem;
+}
+.toggle .toggle-item {
+  margin-right: 2rem;
+  padding: 1rem 0rem;
+  color: #9E9E9E;
+  cursor: pointer;
+}
+.toggle .active {
+  border-bottom: 3px solid #DA04F2;
+  color: #000;
 }
