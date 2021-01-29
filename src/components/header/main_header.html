@@ -5,9 +5,11 @@
                 <p class="font_19 font-bold">Select a Program to lunch</p>
             </div>
             <div>
-                <programtype></programtype>
-                <programtype></programtype>
-                <!-- <programtype></programtype> -->
+                <div v-for="(i,index) in program">
+
+                    <programtype :item="i"></programtype>
+                </div>
+
             </div>
         </div>
         <div slot="header">

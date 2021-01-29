@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5">
+  <div class="my-5" @click="$router.push('/edit')">
     <div class="grid grid-cols-8">
       <div
         v-randombg

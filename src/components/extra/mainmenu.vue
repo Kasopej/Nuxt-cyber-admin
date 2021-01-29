@@ -14,7 +14,7 @@
           :class="{ active: currentRoute == 'dashboard' }"
           @click.prevent="goto('dashboard')"
         >
-          <span>Dashboard </span>
+          <span>Submission</span>
         </div>
 
         <!-- <div class="dropdown relative inline-block text-left">
@@ -62,7 +62,7 @@
           :class="{ active: currentRoute == 'setting' }"
           @click.prevent="goto('setting')"
         >
-          <span>Settings</span>
+          <span>Profile</span>
         </div>
       </div>
 

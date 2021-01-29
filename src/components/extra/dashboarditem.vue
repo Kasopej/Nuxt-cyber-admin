@@ -1,25 +1,31 @@
 <template>
   <div>
     <div
-      class="px-3 py-6 border-b cursor-pointer mainn"
-      :class="{ bg_lightpink: current }"
+      class="pt-6 border-b cursor-pointer mainn"
+      :class="{ bg_pink: current }"
     >
-      <div class="flex justify-between mb-2 items-center">
-        <div class="flex items-center">
-          <span class="font_13 mr-4 bg_gray2 p-2 tracking-wide rounded-md "
-            >#YHW-PGM2453-B</span
-          >
-          <i class="fas fa-comments color_pink"></i>
+      <div class="px-4">
+        <div class="flex justify-between">
+          <div class="flex items-center">
+            <span
+              class="font_12 text-gray-400 mr-4 bg-gray-50 p-2 tracking-wider rounded-md "
+              >#YHW-PGM2453-B</span
+            >
+            <!-- <i class="fas fa-comments color_pink"></i> -->
+          </div>
+          <!-- <span class="font-bold text-gray-300 font_12">2020-12-11</span> -->
         </div>
-        <span class="font-bold text-gray-300 font_12">2020-12-11</span>
+        <p class="font-bold my-3  font_13">
+          Insecure Direct Object Reference on https:...
+        </p>
       </div>
-      <p class="font-bold my-3 font_13">
-        Insecure Direct Object Reference on https:...
-      </p>
-      <span
-        class="font_12 font-bold bg-gray-200 tracking-widest py-2 px-3 rounded-md color_pink"
-        >YesWeBot</span
-      >
+      <!-- <div class="w-ful bg_pink px-5 py-1 font_13 color_white tracking-wider">
+        2nd, Oct, 2021 -->
+      <!-- <span
+          class="font_12 w-full font-bold bg-gray-200 tracking-widest py-2 px-3 rounded-md color_pink"
+          >YesWeBot</span
+        > -->
+      <!-- </div> -->
     </div>
   </div>
 </template>

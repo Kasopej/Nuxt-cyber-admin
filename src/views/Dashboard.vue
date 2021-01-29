@@ -2,6 +2,12 @@
   <div class="grid grid-cols-5">
     <div class="fixed bg-gray-50 h-screen " style="width: 20vw;">
       <div class="p-3 py-5">
+        <input
+          type="search"
+          placeholder="Search By ID or Title"
+          class="form-control mb-2"
+        />
+        <!-- <input type="date" class="form-control mb-2" /> -->
         <select>
           <option value="all">All</option>
           <option value="new">New</option>
@@ -409,9 +415,9 @@
                 </div>
                 <div class="flex p-4 flex-col text-center border-b">
                   <span class="font_14 mb-3 font-bold">VECTOR STRING</span>
-                  <span class="font_12 color_gray"
+                  <!-- <span class="font_12 color_gray"
                     >CVSS 3.0/AN.AV/ACL/PL.L/UI:N/S:U/CH/I:N/A:N</span
-                  >
+                  > -->
                 </div>
                 <div class="flex py-3 px-5 justify-between border-b font-bold">
                   <p class="font_12 flex-1">UPDATE</p>
@@ -460,112 +466,125 @@
         </div>
 
         <div class="p-8 border-b-2">
-          <div class="flex mb-9">
+          <div class="toggle">
+            <a
+              href="#"
+              class="toggle-item"
+              :class="{ active: toggle }"
+              @click.prevent="toggle = true"
+              >BUG DESCRIPTION</a
+            >
+            <a
+              href="#"
+              class="toggle-item"
+              :class="{ active: !toggle }"
+              @click.prevent="toggle = false"
+              >COMMENTS</a
+            >
+          </div>
+          <!-- <div class="flex mb-9">
             <a href="#" class="font_13 mr-4 unline_pink font-bold"
               >BUG DESCRIPTION</a
             >
             <a href="#" class="font_13 color_gray">COMMENTS</a>
-          </div>
+          </div> -->
 
-          <div>
-            <div class="mb-7">
-              <h1 class="color_pink mb-8">Description</h1>
-
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Insecure Direct Object
-                Reference (called IDOR from here) occurs when a application
-                exposes a reference to an internal implementation object.
+          <div v-if="toggle">
+            <div class="my-7">
+              <p class="font_13 my-4">
+                Insecure Direct Object Reference (called IDOR from here) occurs
+                when a application exposes a reference to an internal
+                implementation object.
               </p>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> IDOR do not bring a direct
-                security issue because, by itself, it reveals only the
-                format/pattern used for the object identifier. IDOR bring,
-                depending on the ...format/pattern in place, a capacity for the
-                attacker to mount a enumeration attack in order to try to probe
-                access to the associated objects.
+              <p class="font_13 mb-4">
+                IDOR do not bring a direct security issue because, by itself, it
+                reveals only the format/pattern used for the object identifier.
+                IDOR bring, depending on the ...format/pattern in place, a
+                capacity for the attacker to mount a enumeration attack in order
+                to try to probe access to the associated objects.
               </p>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Enumeration attack can be
-                described in the way in which the attacker build a collection of
-                valid identifiers using the disovered format/pattern and test
-                them ...against the application
+              <p class="font_13 mb-4">
+                Enumeration attack can be described in the way in which the
+                attacker build a collection of valid identifiers using the
+                disovered format/pattern and test them ...against the
+                application
               </p>
             </div>
 
             <div class="mb-7">
-              <h1 class="color_pink mb-8">Exploitation</h1>
+              <h1 class="color_pink font-bold font_20 mb-8">Exploitation</h1>
 
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Edit your profile on your
-                user’s page.
+              <p class="font_13 mb-4">
+                Edit your profile on your user’s page.
               </p>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Using a proxy like Burpsuite,
-                you can see a request sent to :
+              <p class="font_13 mb-4">
+                Using a proxy like Burpsuite, you can see a request sent to :
                 <b>https://api.example.net/profile.php?user_id=[ID].</b>
               </p>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Modifying this ID allows
-                arbitrary access to personal informations on all users
+              <p class="font_13 mb-4">
+                Modifying this ID allows arbitrary access to personal
+                informations on all users
               </p>
             </div>
 
             <div class="mb-7">
-              <h1 class="color_pink mb-8">PoC</h1>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Go to the URL Above.
+              <h1 class="color_pink font-bold font_20 mb-8">PoC</h1>
+              <p class="font_13 mb-4">
+                Go to the URL Above.
               </p>
 
-              <div class="shadow bg-white py-9 pl-9 rounded-md mb-7">
-                http://api.example.net/profile.php?user_id=1337
+              <div>
+                <input
+                  type="text"
+                  class="form-control mb-4"
+                  disabled
+                  value="http://api.example.net/profile.php?user_id=1337"
+                />
               </div>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> In result, you can see the
-                response of this request and you can have access to informations
-                of the user with user_id 1337.
+              <p class="font_13 mb-4">
+                In result, you can see the response of this request and you can
+                have access to informations of the user with user_id 1337.
               </p>
             </div>
 
             <div class="mb-7">
-              <h1 class="color_pink mb-8">Remediation</h1>
-              <p class="font_12 mb-4">
-                <span class="color_pink">/</span> Apply an ACL on this endpoint
-                to be sure the user_id match connected user
+              <h1 class="color_pink font-bold font_20 mb-8">Remediation</h1>
+              <p class="font_13 mb-4">
+                Apply an ACL on this endpoint to be sure the user_id match
+                connected user
               </p>
             </div>
           </div>
-        </div>
-
-        <div class="p-8">
-          <div class="flex mb-6">
-            <a href="#" class="font_13 mr-4 unline_pink font-bold">COMMENTS</a>
-            <a href="#" class="font_13 color_gray">BUG DESCRIPTION</a>
-          </div>
-
-          <div class="flex mb-8 items-center">
-            <input type="checkbox" class="mr-2" />
-            <span class="font_12">Show only private comments</span>
-          </div>
-
-          <div class="mb-8 py-4 px-10 bg_black text-white rounded-sm shadow-lg">
-            <p>POST A RESPONSE</p>
-          </div>
-
-          <div class="mb-5">
-            <p class="font_10">Action <span class="color_pink">*</span></p>
-            <div class="flex items-center">
-              <div
-                class="bg-white mr-5 rounded-md flex items-center justify-between p-4"
-              >
-                <span class="font_14 mr-32">Post Comment</span>
-                <i class="fas fa-caret-down cursor-pointer"></i>
-              </div>
-              <input type="checkbox" class="mr-3" />
-              <span class="font_13">Make it private</span>
+          <div class="" v-else>
+            <div class="flex mb-8 items-center">
+              <input type="checkbox" class="mr-2" />
+              <span class="font_12">Show only private comments</span>
             </div>
-          </div>
 
-          <!-- <div class="bg-white shadow-md rounded-sm mb-7">
+            <div
+              class="mb-8 py-4 px-10 bg_black text-white rounded-sm shadow-lg"
+            >
+              <p>POST A RESPONSE</p>
+            </div>
+
+            <div class="mb-5">
+              <p class="font_12">Action <span class="color_pink">*</span></p>
+              <div class="flex items-center">
+                <div
+                  class="bg-white flex-1 mr-5 rounded-md flex items-center justify-between py-4"
+                >
+                  <select class="bg-gray-50">
+                    <option value="">Post Comment</option>
+                    <option value="">New Commnet</option>
+                  </select>
+                  <input type="checkbox" class="mx-3" />
+                  <span class="font_13">Make it private</span>
+                </div>
+                <div class="flex-2"></div>
+              </div>
+            </div>
+
+            <!-- <div class="bg-white shadow-md rounded-sm mb-7">
                         <div class="flex justify-between py-4 px-7 border-b-2">
                             <div class="flex">
                                 
@@ -588,47 +607,70 @@
                         </div>
                     </div> -->
 
-          <customtextfield>
-            <div slot="tab" class="flex">
-              <span
-                class="font_12 font-bold bg_lightblue mr-3 py-2 px-7 rounded-md color_blue flex items-center"
-                >Write</span
-              >
-              <span class="font_12 font-bold bg-transparent pl-3 py-2 mr-20"
-                >Preview</span
-              >
-            </div>
-            <div slot="select" class="flex items-center">
-              <div
-                class="bg-white rounded-md flex items-center justify-between p-4 shadow-md cursor-pointer"
-              >
-                <span class="font_14 mr-32">Select a template</span>
-                <i class="fas fa-caret-down cursor-pointer"></i>
+            <customtextfield :item="fields">
+              <div slot="tab" class="flex">
+                <button
+                  type="button"
+                  class="border border-gray-200 font-bold bg-gray-200 color_blue rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                >
+                  Write
+                </button>
+                <button
+                  type="button"
+                  class="border border-gray-200 font-bold rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                >
+                  Preview
+                </button>
               </div>
-              <img
-                src="../assets/img/question-mark.svg"
-                class="w-2 h-2 ml-3"
-                alt=""
-              />
-            </div>
-          </customtextfield>
+              <div slot="select" class="flex items-center w-full">
+                <div class="flex-5">
+                  <select class="bg-gray-50" v-model="fields">
+                    <option value="">Select </option>
+                    <option>Accepted > Resolved</option>
+                    <option>Underreview > Duplicate</option>
+                    <option>Underreview > Thanks</option>
+                    <option>Asked for fix verify > Resolved</option>
+                    <option>Accepted > Asked for fix verify</option>
+                    <option>Under Review > Accepted</option>
+                    <option>New > Under review</option>
+                  </select>
+                </div>
 
-          <p class="color_gray font_14 mb-2">
-            Attachments (TXT or JPEG or PNG, 2MB max)
-          </p>
-          <div class="bg-white flex shadow-md mb-6 rounded-md">
-            <p class="font_14 flex_4 py-5 px-7">Choose</p>
-            <button class="flex_1 font_14 bg_gray2">Browse</button>
-          </div>
-          <p class="font_10">
-            <span class="color_pink">*</span> Mandatory fields
-          </p>
-          <div class="my-6">
-            <button
-              class="bg_pink font_13 px-4 py-3 rounded-md shadow-sm text-white ml-auto block"
-            >
-              Post a response
-            </button>
+                <i class="fas fa-question-circle mx-2"></i>
+              </div>
+            </customtextfield>
+
+            <div>
+              <p class="font_12 mt-4">
+                Program Banner (JPEG or PNG, 3MB max, 3840x2160px max)
+              </p>
+              <div class="flex mt-3">
+                <input class="w-full hidden" ref="uploadimage" type="file" />
+                <input
+                  type="text"
+                  class="form-control rounded-l-md"
+                  disabled
+                  placeholder="Choose"
+                />
+                <button
+                  type="button"
+                  @click.prevent="$refs.uploadimage.click()"
+                  class="border border-gray-200 font-bold bg-gray-300  rounded-r-md px-6 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                >
+                  Browse
+                </button>
+              </div>
+            </div>
+            <p class="font_10">
+              <span class="color_pink">*</span> Mandatory fields
+            </p>
+            <div class="my-6">
+              <button
+                class="bg_pink font_13 px-4 py-3 rounded-md shadow-sm text-white ml-auto block"
+              >
+                Post a response
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -695,6 +737,8 @@ export default {
         false,
         true,
       ],
+      toggle: true,
+      fields: "",
     };
   },
   methods: {
