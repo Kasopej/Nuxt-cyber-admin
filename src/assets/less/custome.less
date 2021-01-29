@@ -228,25 +228,42 @@ html{
         }
     }
     @media only screen and (max-width: 1000px){
-.menu-logo{
-    width: 50%;
-}
-.menu-item{
-    width: 50%;
-    justify-content: flex-end;
-    .mainmenu{
-        display: none;
-    }
-    .mobilemenu{
-        display: block;
-        margin-left: 1rem;
-    }
-}
+        .menu-logo{
+            width: 50%;
+        }
+        .menu-item{
+            width: 50%;
+            justify-content: flex-end;
+            .mainmenu{
+                display: none;
+            }
+            // .mobilemenu{
+            //     display: block;
+            //     margin-left: 1rem;
+            // }
+        }
     }
 }
 .modal{
     display: none;
     // animation: bounce-in .5s;
+}
+
+@media screen and (max-width: 81.25em){ /* 1300px/16 */
+    .dashboard_side{
+        display: none;
+    }
+
+    .dashboard_content {
+        grid-column-start: 1;
+        grid-column: span 5/span 5;
+    }
+
+    .menu-container .menu-item .mobilemenu{
+        display: block;
+        margin-left: 1rem;
+    }
+
 }
 
 .contentt {

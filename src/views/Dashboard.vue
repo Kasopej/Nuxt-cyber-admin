@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-5">
-    <div class="fixed bg-gray-50 h-screen " style="width: 20vw;">
+    <div class="fixed bg-gray-50 h-screen dashboard_side">
       <div class="p-3 py-5">
         <select>
           <option value="all">All</option>
@@ -17,7 +17,7 @@
         ></dashboarditem>
       </div>
     </div>
-    <div class="col-start-2 col-span-4">
+    <div class="col-start-2 col-span-4 dashboard_content">
       <div class="menu-container z-50 shadow-md">
         <mainmenu></mainmenu>
       </div>
@@ -413,10 +413,10 @@
                     >CVSS 3.0/AN.AV/ACL/PL.L/UI:N/S:U/CH/I:N/A:N</span
                   >
                 </div>
-                <div class="flex py-3 px-5 justify-between border-b font-bold">
-                  <p class="font_12 flex-1">UPDATE</p>
+                <div class="flex py-3 px-2 justify-between border-b font-bold">
+                  <p class="font_10 flex-1">UPDATE</p>
                   <div class="flex-1 flex items-center">
-                    <span class="font_12">GIVE 1 BONUS POINT </span>
+                    <span class="font_10">GIVE 1 BONUS POINT </span>
                     <img
                       class="ml-1 w-2 h-2"
                       src="../assets/img/question-mark.svg"
@@ -807,5 +807,25 @@ button:active {
 
 .flex_4 {
   flex: 4;
+}
+
+.dashboard_side{
+  width: 20vw;
+}   
+@media screen and (max-width: 81.25em){ /* 1300px/16 */
+  .dashboard_side{
+    display: none;
+  }
+
+  .dashboard_content {
+    grid-column-start: 1;
+    grid-column: span 5/span 5;
+  }
+
+  .mobilemenu{
+    display: block;
+    margin-left: 1rem;
+  }
+
 }
 </style>

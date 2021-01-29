@@ -207,13 +207,23 @@ html {
   .menu-container .menu-item .mainmenu {
     display: none;
   }
+}
+.modal {
+  display: none;
+}
+@media screen and (max-width: 81.25em) {
+  /* 1300px/16 */
+  .dashboard_side {
+    display: none;
+  }
+  .dashboard_content {
+    grid-column-start: 1;
+    grid-column: span 5 / span 5;
+  }
   .menu-container .menu-item .mobilemenu {
     display: block;
     margin-left: 1rem;
   }
-}
-.modal {
-  display: none;
 }
 .contentt {
   margin-top: -3rem;
