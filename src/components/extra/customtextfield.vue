@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white shadow-md rounded-sm mb-7">
-    <div class="flex justify-between py-4 px-7 border-b-2">
+    <div class="flex justify-between py-4 px-7 border-b-2 post__header">
       <div class="flex-5">
         <div class="flex  items-center">
           <slot name="tab" class="flex-1"></slot>
@@ -91,4 +91,11 @@ Regards,`,
 };
 </script>
 
-<style></style>
+<style>
+
+@media screen and (max-width: 51.25em) { /** 820px /16 */
+  .post__header{
+    flex-direction: column;
+  }
+}
+</style>

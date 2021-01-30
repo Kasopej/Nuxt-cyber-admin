@@ -25,11 +25,11 @@
     </div>
     <div class="col-start-2 col-span-4 dashboard_content">
       <div class="menu-container z-50 shadow-md">
-        <mainmenu></mainmenu>
+        <mainmenu v-on:togglemenu="togglemenu"></mainmenu>
       </div>
 
-      <div class="p-5">
-        <div class="p-8">
+      <div class="p-5 relative">
+        <div class="p-1 md:p-8 lg:p-8 xl:p-8">
           <div class="toggle">
             <a
               href="#"
@@ -141,26 +141,30 @@
             <div class="mb-5">
               <p class="font_12">Action <span class="color_pink">*</span></p>
               <div class="flex items-center">
-                <div
-                  class="bg-white flex-1 mr-5 rounded-md flex items-center justify-between py-4"
-                >
-                  <select class="bg-gray-50">
-                    <option value="">Post Comment</option>
-                    <option value="">Need More Information</option>
-                    <option value="">Accepted </option>
-                    <option value="">Resolved </option>
-                    <option value="">Under review </option>
-                    <option value="">Duplicate </option>
-                    <option value="">Thanks </option>
-                    <option value="">Asked for fix verify </option>
-                    <option value="">New </option>
+                <div style="width: 100%;" class="bg-white mr-5 rounded-md
+                    flex items-center justify-between py-4 post__comment">
+                  <div class="flex_1">
+                    <select class="bg-gray-50">
+                      <option value="">Post Comment</option>
+                      <option value="">Need More Information</option>
+                      <option value="">Accepted </option>
+                      <option value="">Resolved </option>
+                      <option value="">Under review </option>
+                      <option value="">Duplicate </option>
+                      <option value="">Thanks </option>
+                      <option value="">Asked for fix verify </option>
+                      <option value="">New </option>
 
-                    <!-- <option value="">New Commnet</option> -->
-                  </select>
-                  <input type="checkbox" class="mx-3" />
-                  <span class="font_13">Make it private</span>
+                      <!-- <option value="">New Commnet</option> -->
+                    </select>
+                  </div>
+                  <div class="flex_1 post__comment">
+                    <input type="checkbox" class="mx-3" />
+                    <span class="font_13">Make it private</span>
+                  </div>
+                  
                 </div>
-                <div class="flex-2"></div>
+                <!-- <div class="flex-2"></div> -->
               </div>
             </div>
 
@@ -253,7 +257,7 @@
             </div>
           </div>
           <div v-if="currentTab == 'summary'">
-            <div class="flex justify-between my-6">
+            <div class="flex justify-between my-6 summary__headerbox">
               <div>
                 <span class="mr-3 font_14">#YHW-PGM2453-8</span>
 
@@ -280,7 +284,7 @@
                   <a
                     href="#"
                     @click="members_menu = !members_menu"
-                    class="font_14 mr-4 color_gray"
+                    class="font_14 mr-4 color_gray summary__menulink"
                     >MEMBERS MANAGEMENT</a
                   >
                   <div
@@ -337,7 +341,7 @@
                   <a
                     href="#"
                     @click="priorities_menu = !priorities_menu"
-                    class="font_14 mr-4 color_gray"
+                    class="font_14 mr-4 color_gray summary__menulink"
                     >PRIORITIES
                     <i class="fas fa-angle-down ml-1"></i>
                   </a>
@@ -395,7 +399,7 @@
                   <a
                     href="#"
                     @click="export_menu = !export_menu"
-                    class="font_14 mr-4 color_gray"
+                    class="font_14 mr-4 color_gray summary__menulink"
                     >EXPORT
                     <i class="fas fa-angle-down ml-1"></i>
                   </a>
@@ -449,7 +453,7 @@
             </h3>
 
             <div class="flex mb-12 items-center">
-              <span class="grey_dot bg_gray rounded-sm"></span>
+              <input type="checkbox">
               <h4 class="font_14 ml-3 mr-4">
                 FIDELITY BANK DEMO BUG BOUNTY PROGRAM
               </h4>
@@ -459,8 +463,8 @@
             </div>
 
             <div class=" border-t-2 p-4">
-              <div class="grid grid-cols-4 gap-5">
-                <div class="col-span-3">
+              <div class="grid grid-cols-4 gap-5 summary__grid">
+                <div class="col-span-3 summary__gridleft">
                   <h3 class="color_gray font_16 tracking-wider pt-4 pb-10">
                     SUMITTED BY
                     <span class="font_16 color_black"
@@ -474,59 +478,59 @@
                     </div>
 
                     <div class="report_details">
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">BUG TYPE</div>
                         <div class="report_value">
                           Insecure Direct Object Reference (IDOR) (CWE-639) →
                           Remediation
                         </div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">SCOPE</div>
                         <div class="report_value">https://api.example.net</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">END POINT</div>
                         <div class="report_value">
                           https://api.example.net/profile.php
                         </div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">SECURITY</div>
                         <div class="report_value">Medium</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">VULNERABLE PART</div>
                         <div class="report_value">get-parameter</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">PART NAME</div>
                         <div class="report_value">user_id</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">PAYLOAD</div>
                         <div class="report_value">1337</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">TECHNICAL ENVIRONMENT</div>
                         <div class="report_value">
                           OSX, 10.14.6; Firefox 688.0
                         </div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">APPLICATION FINGERPRINT</div>
                         <div class="report_value">Symfony, PHP</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">IP USED</div>
                         <div class="report_value">13.37.13.37</div>
                       </div>
-                      <div class="flex font_14 mb-3">
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">SECURITY REQUIREMENT</div>
                         <div class="report_value">high</div>
                       </div>
-                      <div class="flex font_14 mb-8">
-                        <div class="report_detail">
+                      <div class="flex font_14 mb-8 report__options">
+                        <div class="report_detail report__label">
                           <div class="flex">
                             <span>REWARD GRID</span>
                             <img
@@ -536,7 +540,7 @@
                             />
                           </div>
                         </div>
-                        <div class="grid grid-cols-4 gap-8 report_value">
+                        <div class="grid grid-cols-4 gap-8 report_value reward__grid">
                           <div class="flex flex-col col-span-1">
                             <span
                               class="font_10 color_gray font-bold text-center mb-1"
@@ -584,9 +588,9 @@
                         </div>
                       </div>
 
-                      <div class="flex font_14 mb-8">
+                      <div class="flex font_14 mb-8 report__options">
                         <div class="report_detail">
-                          <div class="flex">
+                          <div class="flex report__label">
                             <span>PATCH STATUS</span>
                             <img
                               class="ml-2"
@@ -603,8 +607,8 @@
                         </div>
                       </div>
 
-                      <div class="flex font_14 mb-8">
-                        <div class="report_detail">TRACKING STATUS</div>
+                      <div class="flex font_14 mb-8 report__options">
+                        <div class="report_detail report__label">TRACKING STATUS</div>
                         <div class="report_value">
                           <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
                             >UNTRACK</span
@@ -623,7 +627,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-1 summary__gridright">
                   <div class="mb-3 bg-white shadow-md">
                     <div class="grid grid-cols-2">
                       <div
@@ -712,6 +716,29 @@
             </div>
           </div>
         </div>
+
+        <div v-if="showMoblieMenu" class="mobile__content shadow-lg bg-gray-50">
+          <!-- <span class="close" @click="showMoblieMenu = false">&times;</span> -->
+          <div class="bg-gray-50 h-screen mobile_dashboard_side">
+            <div class="p-3 py-5">
+              <input type="search" placeholder="Search By ID or Title" class="form-control mb-2"/>
+              <select>
+                <option value="all">All</option>
+                <option value="new">New</option>
+                <option value="under Review">Under Review</option>
+                <option value="Accepted">Accepted</option>
+              </select>
+            </div>
+            <div class="h-full w-full overflow-y-scroll">
+              <dashboarditem
+                :key="index"
+                :current="i"
+                v-for="(i, index) in sidebaritem"
+              ></dashboarditem>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <modal class="modal" id="modalone">
@@ -727,6 +754,15 @@
         <modalone></modalone>
       </div>
     </modal>
+
+    <!-- <div id="mobileOverlay" v-if="showMoblieMenu" class="mobile__modal">
+
+      <div class="mobile__content">
+        <span class="close" @click="showMoblieMenu = false">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+
+    </div> -->
   </div>
   <!-- <div class="w-full flex" id="dashboard">
     <aside class="dashboard_side sticky top-0">
@@ -778,6 +814,7 @@ export default {
       ],
       currentTab: "summary",
       fields: "",
+      showMoblieMenu: false
     };
   },
   methods: {
@@ -787,7 +824,10 @@ export default {
     toggleTab(type) {
       this.currentTab = type;
     },
-  },
+    togglemenu(){
+      this.showMoblieMenu = !this.showMoblieMenu;
+    },
+  }
 };
 </script>
 
@@ -919,5 +959,106 @@ button:active {
     display: block;
     margin-left: 1rem;
   }
+}
+
+@media screen and (max-width: 64.37em) { /**1030px/16 */
+  .summary__grid{
+    grid-auto-columns: auto;
+  }
+
+  .summary__gridleft {
+    grid-column: span 4 / span 4;
+  }
+
+  .summary__gridright{
+    grid-column: span 4 / span 4;
+    font-size: 14px !important;
+  }
+}
+
+@media screen and (max-width: 48.75em) { /** 780px /16 */
+  .summary__headerbox{
+    flex-direction: column;
+  }
+
+  .summary__headerbox :nth-child(2){
+    justify-content: space-between;
+  }
+
+  .mobile__content{
+    width: 50%;
+  }
+}
+
+
+
+@media screen and (max-width: 42.5em) { /** 680px /16 */
+  .toggle .toggle-item,
+  .summary__menulink {
+    font-size: 10px;
+  }
+  .report__options {
+    flex-direction: column;
+  } 
+
+  .report__label {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 32.5em) { /** 520px /16 */
+  .reward__grid {
+    grid-auto-columns: auto;
+    grid-auto-rows: auto;
+  }
+
+  .reward__grid > * {
+    grid-column: span 4 / span 4;
+  }
+
+  .post__comment{
+    flex-direction: column;
+  }
+
+  .mobile__content{
+    width: 64%;
+  }
+}
+
+@media screen and (max-width: 23.75em) { /** 380px /16 */
+  .mobile__content{
+    width: 100%;
+  }
+}
+
+
+
+
+/* Modal Content */
+.mobile__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fefefe;
+  margin: auto;
+  /* padding: 10px 12px 0 0; */
+  /* border: 1px solid #888; */
+  width: 33%;
+  height: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

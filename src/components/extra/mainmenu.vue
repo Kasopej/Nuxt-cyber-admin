@@ -74,7 +74,7 @@
           SUBSCRIBE NOW
         </button>
       </div>
-      <div class="mobilemenu">
+      <div class="mobilemenu cursor-pointer" @click="toggle">
         <i class="fas fa-2x fa-bars"></i>
       </div>
     </div>
@@ -86,6 +86,7 @@
 import { mapState } from "vuex";
 export default {
   name: "mainmenu",
+  props: ['togglemenu'],
   data() {
     return {};
   },
@@ -102,6 +103,11 @@ export default {
 
       this.$router.push(`/${param}`);
     },
+    toggle(){
+      if(this.$router.currentRoute.fullPath == "/dashboard"){
+        this.$emit('togglemenu');
+      }
+    }
   },
   computed: {
     ...mapState({
