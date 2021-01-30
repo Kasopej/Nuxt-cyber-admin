@@ -198,7 +198,7 @@ html {
 }
 @media only screen and (max-width: 1300px) {
   .menu-container .menu-logo {
-    width: 50%;
+    width: 0% !important;
   }
   .menu-container .menu-item {
     width: 100%;
@@ -225,9 +225,6 @@ html {
 }
 .modal {
   display: none;
-}
-@media screen and (max-width: 81.25em) {
-  /* 1300px/16 */
 }
 .contentt {
   margin-top: -3rem;

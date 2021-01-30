@@ -29,456 +29,27 @@
       </div>
 
       <div class="p-5">
-        <div class="flex justify-between my-6">
-          <div>
-            <span class="mr-3 font_14">#YHW-PGM2453-8</span>
-
-            <div class="dropdown relative inline-block">
-              <button
-                @click="popup_one = !popup_one"
-                class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-              >
-                NEED MORE INFO
-              </button>
-
-              <div
-                v-if="popup_one"
-                class="dropdown-menu origin-top-right absolute mt-2 w-56 rounded-md shadow-lg
-                                bg-white ring-1 ring-black ring-opacity-5 right-6"
-              >
-                <popupone v-on:closeup="closeup" />
-              </div>
-            </div>
-          </div>
-          <div class="flex">
-            <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
-            <div class="dropdown relative inline-block">
-              <a
-                href="#"
-                @click="members_menu = !members_menu"
-                class="font_14 mr-4 color_gray"
-                >MEMBERS MANAGEMENT</a
-              >
-              <div
-                v-if="members_menu"
-                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-              >
-                <div
-                  class="p-4"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
-                >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >Undefined</a
-                  >
-                  <a
-                    href="#"
-                    role="menuitem"
-                    class="block list_item font_12 pb-4 color_pink"
-                    >P 1</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 2</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 3</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 4</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 5</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="dropdown relative inline-block">
-              <a
-                href="#"
-                @click="priorities_menu = !priorities_menu"
-                class="font_14 mr-4 color_gray"
-                >PRIORITIES
-                <i class="fas fa-angle-down ml-1"></i>
-              </a>
-              <div
-                v-if="priorities_menu"
-                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-              >
-                <div
-                  class="p-4"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
-                >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >Undefined</a
-                  >
-                  <a
-                    href="#"
-                    role="menuitem"
-                    class="block list_item font_12 pb-4 color_pink"
-                    >P 1</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 2</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 3</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 4</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >P 5</a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="dropdown relative inline-block">
-              <a
-                href="#"
-                @click="export_menu = !export_menu"
-                class="font_14 mr-4 color_gray"
-                >EXPORT
-                <i class="fas fa-angle-down ml-1"></i>
-              </a>
-              <div
-                v-if="export_menu"
-                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-              >
-                <div
-                  class="p-4"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="options-menu"
-                >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >CSV</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >XLS</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >JSON</a
-                  >
-                  <a
-                    href="#"
-                    class="block list_item font_12 text-gray-700 font-bold"
-                    role="menuitem"
-                    >PDF</a
-                  >
-                </div>
-              </div>
-            </div>
-
-            <!-- <a href="#" class="font_12 mr-4 color_gray">
-                            <i class="fas fa-angle-down ml-1"></i>
-                        </a> -->
-          </div>
-        </div>
-        <h3 class="font-bold font_18 mb-3">
-          Insecure Direct Object Reference on https://api.example.net allows
-          informations leakage.
-        </h3>
-
-        <div class="flex mb-12 items-center">
-          <span class="grey_dot bg_gray rounded-sm"></span>
-          <h4 class="font_14 ml-3 mr-4">
-            FIDELITY BANK DEMO BUG BOUNTY PROGRAM
-          </h4>
-          <div class="fas fa-comments mr-2"></div>
-          <span class="font_12 color_pink mr-1">8</span>
-          <span class="font_12">Comments</span>
-        </div>
-
-        <div class="border-b-2 border-t-2 p-4">
-          <div class="grid grid-cols-4 gap-5">
-            <div class="col-span-3">
-              <h3 class="color_gray font_16 tracking-wider pt-4 pb-10">
-                SUMITTED BY
-                <span class="font_16 color_black">YESWEBOT ON 2020-12-11</span>
-              </h3>
-              <div class="bg-white p-10 shadow-md rounded-md">
-                <div class="flex justify-between mb-5">
-                  <h3 class="font_16 font-bold">REPORT DETAILS</h3>
-                  <i class="fas fa-angle-down"></i>
-                </div>
-
-                <div class="report_details">
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">BUG TYPE</div>
-                    <div class="report_value">
-                      Insecure Direct Object Reference (IDOR) (CWE-639) →
-                      Remediation
-                    </div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">SCOPE</div>
-                    <div class="report_value">https://api.example.net</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">END POINT</div>
-                    <div class="report_value">
-                      https://api.example.net/profile.php
-                    </div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">SECURITY</div>
-                    <div class="report_value">Medium</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">VULNERABLE PART</div>
-                    <div class="report_value">get-parameter</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">PART NAME</div>
-                    <div class="report_value">user_id</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">PAYLOAD</div>
-                    <div class="report_value">1337</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">TECHNICAL ENVIRONMENT</div>
-                    <div class="report_value">OSX, 10.14.6; Firefox 688.0</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">APPLICATION FINGERPRINT</div>
-                    <div class="report_value">Symfony, PHP</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">IP USED</div>
-                    <div class="report_value">13.37.13.37</div>
-                  </div>
-                  <div class="flex font_14 mb-3">
-                    <div class="report_detail">SECURITY REQUIREMENT</div>
-                    <div class="report_value">high</div>
-                  </div>
-                  <div class="flex font_14 mb-8">
-                    <div class="report_detail">
-                      <div class="flex">
-                        <span>REWARD GRID</span>
-                        <img
-                          class="ml-2"
-                          src="../assets/img/question-mark.svg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div class="grid grid-cols-4 gap-8 report_value">
-                      <div class="flex flex-col col-span-1">
-                        <span
-                          class="font_10 color_gray font-bold text-center mb-1"
-                          >LOW</span
-                        >
-                        <button
-                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                        >
-                          $50
-                        </button>
-                      </div>
-                      <div class="flex flex-col col-span-1">
-                        <span
-                          class="font_10 color_gray font-bold text-center mb-1"
-                          >MEDIUM</span
-                        >
-                        <button
-                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                        >
-                          $505
-                        </button>
-                      </div>
-                      <div class="flex flex-col col-span-1">
-                        <span
-                          class="font_10 color_gray font-bold text-center mb-1"
-                          >HIGH</span
-                        >
-                        <button
-                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                        >
-                          $1,000
-                        </button>
-                      </div>
-                      <div class="flex flex-col col-span-1">
-                        <span
-                          class="font_10 color_gray font-bold text-center mb-1"
-                          >CRITICAL</span
-                        >
-                        <button
-                          class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                        >
-                          $2,500
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="flex font_14 mb-8">
-                    <div class="report_detail">
-                      <div class="flex">
-                        <span>PATCH STATUS</span>
-                        <img
-                          class="ml-2"
-                          src="../assets/img/question-mark.svg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div class="report_value">
-                      <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
-                        >UNDEFINED</span
-                      >
-                      <span>Ask for patch</span>
-                    </div>
-                  </div>
-
-                  <div class="flex font_14 mb-8">
-                    <div class="report_detail">TRACKING STATUS</div>
-                    <div class="report_value">
-                      <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
-                        >UNTRACK</span
-                      >
-                      <span>Update</span>
-                    </div>
-                  </div>
-
-                  <div class="mb-6">
-                    <button
-                      class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                    >
-                      EDIT
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-span-1">
-              <div class="mb-3 bg-white shadow-md">
-                <div class="grid grid-cols-2">
-                  <div
-                    class="rating_box col-span-1 border-r border-white bg_green text-white p-5"
-                  >
-                    <div class="text-center">
-                      <span class="font_10 tracking-wider">CVSS SCORE</span>
-                      <h3 class="font_15 font-bold ">6.5</h3>
-                    </div>
-                  </div>
-                  <div class="rating_box col-span-1 bg_green text-white p-5">
-                    <div class="text-center">
-                      <span class="font_10 tracking-wider">SEVERITY</span>
-                      <h3 class="font_15 font-bold">MEDIUM</h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex p-4 flex-col text-center border-b">
-                  <span class="font_14 mb-3 font-bold">VECTOR STRING</span>
-                  <!-- <span class="font_12 color_gray"
-                    >CVSS 3.0/AN.AV/ACL/PL.L/UI:N/S:U/CH/I:N/A:N</span
-                  > -->
-                </div>
-                <div class="flex py-3 px-2 justify-between border-b font-bold">
-                  <p class="font_10 flex-1">UPDATE</p>
-                  <div class="flex-1 flex items-center">
-                    <span class="font_10">GIVE 1 BONUS POINT </span>
-                    <img
-                      class="ml-1 w-2 h-2"
-                      src="../assets/img/question-mark.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="border-b">
-                  <div class="py-3 flex justify-center items-center">
-                    <p class="font_13">Quality Points</p>
-                    <img
-                      class="ml-1 w-2 h-2"
-                      src="../assets/img/question-mark.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-                <div class="flex justify-center py-4 number_select">
-                  <p class="shadow-md font_13 cursor-pointer rounded-md">1</p>
-                  <p class="shadow-md font_13 cursor-pointer rounded-md">2</p>
-                  <p class="shadow-md font_13 cursor-pointer rounded-md">3</p>
-                  <p class="shadow-md font_13 cursor-pointer rounded-md">4</p>
-                  <p class="shadow-md font_13 cursor-pointer rounded-md">5</p>
-                </div>
-              </div>
-              <div class="bg-white shadow-md">
-                <div class="font-bold p-4 border-b font_14">Reward</div>
-                <div class="font-bold p-4 font_14 text-center">
-                  ADD REWARD LOCATION TAG
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button
-            class="color_pink border-none bg-transparent mt-5 mb-2 flex items-center"
-          >
-            <img src="../assets/img/plus_icon.svg" class="mr-2 inline" alt="" />
-            <span>ADD TAGS</span>
-          </button>
-        </div>
-
-        <div class="p-8 border-b-2">
+        <div class="p-8">
           <div class="toggle">
             <a
               href="#"
               class="toggle-item"
-              :class="{ active: toggle }"
-              @click.prevent="toggle = true"
+              :class="{ active: currentTab == 'summary' }"
+              @click.prevent="toggleTab('summary')"
+              >REPORT SUMMARY
+            </a>
+            <a
+              href="#"
+              class="toggle-item"
+              :class="{ active: currentTab == 'description' }"
+              @click.prevent="toggleTab('description')"
               >BUG DESCRIPTION</a
             >
             <a
               href="#"
               class="toggle-item"
-              :class="{ active: !toggle }"
-              @click.prevent="toggle = false"
+              :class="{ active: currentTab == 'comments' }"
+              @click.prevent="toggleTab('comments')"
               >COMMENTS</a
             >
           </div>
@@ -489,7 +60,7 @@
             <a href="#" class="font_13 color_gray">COMMENTS</a>
           </div> -->
 
-          <div v-if="toggle">
+          <div v-if="currentTab == 'description'">
             <div class="my-7">
               <p class="font_13 my-4">
                 Insecure Direct Object Reference (called IDOR from here) occurs
@@ -555,7 +126,7 @@
               </p>
             </div>
           </div>
-          <div class="" v-else>
+          <div class="" v-if="currentTab == 'comments'">
             <div class="flex mb-8 items-center">
               <input type="checkbox" class="mr-2" />
               <span class="font_12">Show only private comments</span>
@@ -575,7 +146,16 @@
                 >
                   <select class="bg-gray-50">
                     <option value="">Post Comment</option>
-                    <option value="">New Commnet</option>
+                    <option value="">Need More Information</option>
+                    <option value="">Accepted </option>
+                    <option value="">Resolved </option>
+                    <option value="">Under review </option>
+                    <option value="">Duplicate </option>
+                    <option value="">Thanks </option>
+                    <option value="">Asked for fix verify </option>
+                    <option value="">New </option>
+
+                    <!-- <option value="">New Commnet</option> -->
                   </select>
                   <input type="checkbox" class="mx-3" />
                   <span class="font_13">Make it private</span>
@@ -672,6 +252,465 @@
               </button>
             </div>
           </div>
+          <div v-if="currentTab == 'summary'">
+            <div class="flex justify-between my-6">
+              <div>
+                <span class="mr-3 font_14">#YHW-PGM2453-8</span>
+
+                <div class="dropdown relative inline-block">
+                  <button
+                    @click="popup_one = !popup_one"
+                    class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                  >
+                    NEED MORE INFO
+                  </button>
+
+                  <div
+                    v-if="popup_one"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-56 rounded-md shadow-lg
+                                bg-white ring-1 ring-black ring-opacity-5 right-6"
+                  >
+                    <popupone v-on:closeup="closeup" />
+                  </div>
+                </div>
+              </div>
+              <div class="flex">
+                <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="members_menu = !members_menu"
+                    class="font_14 mr-4 color_gray"
+                    >MEMBERS MANAGEMENT</a
+                  >
+                  <div
+                    v-if="members_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >Undefined</a
+                      >
+                      <a
+                        href="#"
+                        role="menuitem"
+                        class="block list_item font_12 pb-4 color_pink"
+                        >P 1</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 2</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 3</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 4</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 5</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="priorities_menu = !priorities_menu"
+                    class="font_14 mr-4 color_gray"
+                    >PRIORITIES
+                    <i class="fas fa-angle-down ml-1"></i>
+                  </a>
+                  <div
+                    v-if="priorities_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >Undefined</a
+                      >
+                      <a
+                        href="#"
+                        role="menuitem"
+                        class="block list_item font_12 pb-4 color_pink"
+                        >P 1</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 2</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 3</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 4</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 5</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="export_menu = !export_menu"
+                    class="font_14 mr-4 color_gray"
+                    >EXPORT
+                    <i class="fas fa-angle-down ml-1"></i>
+                  </a>
+                  <div
+                    v-if="export_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >CSV</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >XLS</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >JSON</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >PDF</a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <a href="#" class="font_12 mr-4 color_gray">
+                            <i class="fas fa-angle-down ml-1"></i>
+                        </a> -->
+              </div>
+            </div>
+            <h3 class="font-bold font_18 mb-3">
+              Insecure Direct Object Reference on https://api.example.net allows
+              informations leakage.
+            </h3>
+
+            <div class="flex mb-12 items-center">
+              <span class="grey_dot bg_gray rounded-sm"></span>
+              <h4 class="font_14 ml-3 mr-4">
+                FIDELITY BANK DEMO BUG BOUNTY PROGRAM
+              </h4>
+              <div class="fas fa-comments mr-2"></div>
+              <span class="font_12 color_pink mr-1">8</span>
+              <span class="font_12">Comments</span>
+            </div>
+
+            <div class=" border-t-2 p-4">
+              <div class="grid grid-cols-4 gap-5">
+                <div class="col-span-3">
+                  <h3 class="color_gray font_16 tracking-wider pt-4 pb-10">
+                    SUMITTED BY
+                    <span class="font_16 color_black"
+                      >YESWEBOT ON 2020-12-11</span
+                    >
+                  </h3>
+                  <div class="bg-white p-10 shadow-md rounded-md">
+                    <div class="flex justify-between mb-5">
+                      <h3 class="font_16 font-bold">REPORT DETAILS</h3>
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+
+                    <div class="report_details">
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">BUG TYPE</div>
+                        <div class="report_value">
+                          Insecure Direct Object Reference (IDOR) (CWE-639) →
+                          Remediation
+                        </div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">SCOPE</div>
+                        <div class="report_value">https://api.example.net</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">END POINT</div>
+                        <div class="report_value">
+                          https://api.example.net/profile.php
+                        </div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">SECURITY</div>
+                        <div class="report_value">Medium</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">VULNERABLE PART</div>
+                        <div class="report_value">get-parameter</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">PART NAME</div>
+                        <div class="report_value">user_id</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">PAYLOAD</div>
+                        <div class="report_value">1337</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">TECHNICAL ENVIRONMENT</div>
+                        <div class="report_value">
+                          OSX, 10.14.6; Firefox 688.0
+                        </div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">APPLICATION FINGERPRINT</div>
+                        <div class="report_value">Symfony, PHP</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">IP USED</div>
+                        <div class="report_value">13.37.13.37</div>
+                      </div>
+                      <div class="flex font_14 mb-3">
+                        <div class="report_detail">SECURITY REQUIREMENT</div>
+                        <div class="report_value">high</div>
+                      </div>
+                      <div class="flex font_14 mb-8">
+                        <div class="report_detail">
+                          <div class="flex">
+                            <span>REWARD GRID</span>
+                            <img
+                              class="ml-2"
+                              src="../assets/img/question-mark.svg"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-8 report_value">
+                          <div class="flex flex-col col-span-1">
+                            <span
+                              class="font_10 color_gray font-bold text-center mb-1"
+                              >LOW</span
+                            >
+                            <button
+                              class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                            >
+                              $50
+                            </button>
+                          </div>
+                          <div class="flex flex-col col-span-1">
+                            <span
+                              class="font_10 color_gray font-bold text-center mb-1"
+                              >MEDIUM</span
+                            >
+                            <button
+                              class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                            >
+                              $505
+                            </button>
+                          </div>
+                          <div class="flex flex-col col-span-1">
+                            <span
+                              class="font_10 color_gray font-bold text-center mb-1"
+                              >HIGH</span
+                            >
+                            <button
+                              class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                            >
+                              $1,000
+                            </button>
+                          </div>
+                          <div class="flex flex-col col-span-1">
+                            <span
+                              class="font_10 color_gray font-bold text-center mb-1"
+                              >CRITICAL</span
+                            >
+                            <button
+                              class="border rounded-full  border-pink-600 font-bold bg-gray-50 color_pink rounded-md px-4 py-2  transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                            >
+                              $2,500
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="flex font_14 mb-8">
+                        <div class="report_detail">
+                          <div class="flex">
+                            <span>PATCH STATUS</span>
+                            <img
+                              class="ml-2"
+                              src="../assets/img/question-mark.svg"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                        <div class="report_value">
+                          <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
+                            >UNDEFINED</span
+                          >
+                          <span>Ask for patch</span>
+                        </div>
+                      </div>
+
+                      <div class="flex font_14 mb-8">
+                        <div class="report_detail">TRACKING STATUS</div>
+                        <div class="report_value">
+                          <span class="bg_gray3 color_gray rounded-md p-2 mr-3"
+                            >UNTRACK</span
+                          >
+                          <span>Update</span>
+                        </div>
+                      </div>
+
+                      <div class="mb-6">
+                        <button
+                          class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
+                        >
+                          EDIT
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-1">
+                  <div class="mb-3 bg-white shadow-md">
+                    <div class="grid grid-cols-2">
+                      <div
+                        class="rating_box col-span-1 border-r border-white bg_green text-white p-5"
+                      >
+                        <div class="text-center">
+                          <span class="font_10 tracking-wider">CVSS SCORE</span>
+                          <h3 class="font_15 font-bold ">6.5</h3>
+                        </div>
+                      </div>
+                      <div
+                        class="rating_box col-span-1 bg_green text-white p-5"
+                      >
+                        <div class="text-center">
+                          <span class="font_10 tracking-wider">SEVERITY</span>
+                          <h3 class="font_15 font-bold">MEDIUM</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex p-4 flex-col text-center border-b">
+                      <span class="font_14 mb-3 font-bold">VECTOR STRING</span>
+                      <!-- <span class="font_12 color_gray"
+                    >CVSS 3.0/AN.AV/ACL/PL.L/UI:N/S:U/CH/I:N/A:N</span
+                  > -->
+                    </div>
+                    <div
+                      class="flex py-3 px-2 justify-between border-b font-bold"
+                    >
+                      <p class="font_10 flex-1">UPDATE</p>
+                      <div class="flex-1 flex items-center">
+                        <span class="font_10">GIVE 1 BONUS POINT </span>
+                        <img
+                          class="ml-1 w-2 h-2"
+                          src="../assets/img/question-mark.svg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div class="border-b">
+                      <div class="py-3 flex justify-center items-center">
+                        <p class="font_13">Quality Points</p>
+                        <img
+                          class="ml-1 w-2 h-2"
+                          src="../assets/img/question-mark.svg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                    <div class="flex justify-center py-4 number_select">
+                      <p class="shadow-md font_13 cursor-pointer rounded-md">
+                        1
+                      </p>
+                      <p class="shadow-md font_13 cursor-pointer rounded-md">
+                        2
+                      </p>
+                      <p class="shadow-md font_13 cursor-pointer rounded-md">
+                        3
+                      </p>
+                      <p class="shadow-md font_13 cursor-pointer rounded-md">
+                        4
+                      </p>
+                      <p class="shadow-md font_13 cursor-pointer rounded-md">
+                        5
+                      </p>
+                    </div>
+                  </div>
+                  <div class="bg-white shadow-md">
+                    <div class="font-bold p-4 border-b font_14">Reward</div>
+                    <div class="font-bold p-4 font_14 text-center">
+                      ADD REWARD LOCATION TAG
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="color_pink border-none bg-transparent mt-5 mb-2 flex items-center"
+              >
+                <img
+                  src="../assets/img/plus_icon.svg"
+                  class="mr-2 inline"
+                  alt=""
+                />
+                <span>ADD TAGS</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -737,13 +776,16 @@ export default {
         false,
         true,
       ],
-      toggle: true,
+      currentTab: "summary",
       fields: "",
     };
   },
   methods: {
     closeup() {
       this.popup_one = false;
+    },
+    toggleTab(type) {
+      this.currentTab = type;
     },
   },
 };
@@ -853,29 +895,29 @@ button:active {
   flex: 4;
 }
 
-.dashboard_side{
+.dashboard_side {
   width: 20vw;
-}   
+}
 
 .number_select p {
   padding: 3px 8px;
   margin: 0 8px;
 }
 
-@media screen and (max-width: 81.25em){ /* 1300px/16 */
-  .dashboard_side{
+@media screen and (max-width: 81.25em) {
+  /* 1300px/16 */
+  .dashboard_side {
     display: none;
   }
 
   .dashboard_content {
     grid-column-start: 1;
-    grid-column: span 5/span 5;
+    grid-column: span 5 / span 5;
   }
 
-  .mobilemenu{
+  .mobilemenu {
     display: block;
     margin-left: 1rem;
   }
-
 }
 </style>
