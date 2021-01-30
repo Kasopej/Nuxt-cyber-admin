@@ -440,12 +440,12 @@
                     />
                   </div>
                 </div>
-                <div class="flex justify-center py-4">
-                  <p class="mx-5 font_13">1</p>
-                  <p class="mx-5 font_13">2</p>
-                  <p class="mx-5 font_13">3</p>
-                  <p class="mx-5 font_13">4</p>
-                  <p class="mx-5 font_13">5</p>
+                <div class="flex justify-center py-4 number_select">
+                  <p class="shadow-md font_13 cursor-pointer rounded-md">1</p>
+                  <p class="shadow-md font_13 cursor-pointer rounded-md">2</p>
+                  <p class="shadow-md font_13 cursor-pointer rounded-md">3</p>
+                  <p class="shadow-md font_13 cursor-pointer rounded-md">4</p>
+                  <p class="shadow-md font_13 cursor-pointer rounded-md">5</p>
                 </div>
               </div>
               <div class="bg-white shadow-md">
@@ -856,6 +856,12 @@ button:active {
 .dashboard_side{
   width: 20vw;
 }   
+
+.number_select p {
+  padding: 3px 8px;
+  margin: 0 8px;
+}
+
 @media screen and (max-width: 81.25em){ /* 1300px/16 */
   .dashboard_side{
     display: none;
