@@ -33,31 +33,33 @@ export default {
 </script>
 
 <style>
-.single__tab{
-  grid-auto-rows: auto;
-}
 
-.single__tableft {
-  grid-column: span 8 / span 8;
-  padding: 15px;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 5px;
-}
+@media screen and (max-width: 48.75em) { /** 780px /16 */
 
-.single__tabright{
-  grid-column: span 8 / span 8;
-  border-top-right-radius: 0;
-}
+  .single__tableft {
+    grid-column: span 8 / span 8;
+    padding: 15px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+  }
 
-.single__tabright p{
-  font-size: 13px;
+  .single__tabright{
+    grid-column: span 8 / span 8;
+    border-top-right-radius: 0;
+  }
+
+  .single__tabright p{
+    font-size: 13px;
+  }
+  .single__tabright div{
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 31.25em) { /** 500px /16 */
-.single__tabright div{
-  flex-direction: column;
-  align-items: center;
-}
-
+  .single__tab{
+    grid-auto-rows: auto;
+  }
 }
 </style>

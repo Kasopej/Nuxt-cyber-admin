@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-8">
-    <div class="col-span-6 col-start-2 bg-white content">
+    <div class="col-span-6 col-start-2 bg-white contentt">
       <div class="flex justify-between items-center px-5 settings__tab" v-if="title">
         <div>
           <div class="sectionmenu">
