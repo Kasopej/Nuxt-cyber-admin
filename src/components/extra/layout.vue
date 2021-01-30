@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-8">
-    <div class="col-span-6 col-start-2 bg-white contentt">
-      <div class="flex justify-between items-center px-5" v-if="title">
+    <div class="col-span-6 col-start-2 bg-white content">
+      <div class="flex justify-between items-center px-5 settings__tab" v-if="title">
         <div>
           <div class="sectionmenu">
             <!-- <span class="sectionmenu-item">Home</span> -->
@@ -39,7 +39,7 @@
 
       <hr class="w-100" />
 
-      <div class="p-10">
+      <div class="p-2 md:p-10 lg:p-10 xl:p-10">
         <slot name="content" v-if="content"></slot>
         <div v-else>
           <div>
@@ -60,8 +60,8 @@
                 >
               </div>
 
-              <div v-if="memberTab == 'member' " class="grid grid-cols-3 gap-16 mb-8">
-                <div class="col-span-1 flex flex-col justify-center">
+              <div v-if="memberTab == 'member' " class="flex justify-between mb-8 invite_newmember">
+                <div class="flex flex-col justify-center">
                   <label class="font_12 block"
                     >Role <span class="color_pink">*</span></label
                   >
@@ -73,7 +73,7 @@
                     <option value=""> Report Contributor</option>
                   </select>
                 </div>
-                <div class="col-span-1 flex flex-col justify-center">
+                <div class="flex flex-col justify-center">
                   <label class="font_12 block"
                     >Username/Email <span class="color_pink">*</span></label
                   >
@@ -84,7 +84,7 @@
                     class="bg-gray-50 mt-1 form-control"
                   />
                 </div>
-                <div class="col-span-1 flex flex-col items-end">
+                <div class="flex flex-col items-end">
                   <button
                     class="bg_pink font_16 px-16 py-3 rounded-md shadow-sm text-white block mt-auto"
                   >
@@ -93,7 +93,7 @@
                 </div>
               </div>
 
-              <div v-if="memberTab == 'member_group' " class="w-full mb-8">
+              <div v-if="memberTab == 'member_group' " class="w-full mb-8 overflow-x-auto">
                 <table class="hallOfFame_table">
                   <thead>
                       <tr>
@@ -333,6 +333,28 @@ table.hallOfFame_table th {
 .hallOfFame_table tr td:nth-child(3),
 .hallOfFame_table tr th:nth-child(3) 
 {
-    text-align: center;
+  text-align: center;
 }
+
+@media screen and (max-width: 35em) { /** 560px /16 */
+  .settings__tab{
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 53.75em) { /** 860px /16 */
+  .invite_newmember{
+    flex-direction: column;
+  }
+
+  .invite_newmember > * {
+    margin-bottom: 11px;
+  }
+
+  .invite_newmember > :nth-child(3){
+    align-items: end;
+  }
+}
+
 </style>

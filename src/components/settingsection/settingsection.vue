@@ -10,4 +10,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+@media screen and (max-width: 38.75em) { /** 620px /16 */
+  .setting__input {
+    grid-column: span 2 / span 2;
+  }
+
+  .sectionmenu .sectionmenu-item {
+    font-size: 13px;
+  }
+}
+</style>
