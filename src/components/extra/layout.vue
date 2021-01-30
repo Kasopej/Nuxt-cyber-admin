@@ -16,7 +16,7 @@
               class="sectionmenu-item"
               :class="{ active: !content }"
               @click.prevent="content = false"
-              >Hunters Management</span
+              >Researcher Management</span
             >
           </div>
         </div>
@@ -44,7 +44,7 @@
         <div v-else>
           <div>
             <div class="mb-8 flex justify-center">
-              <p class="font_19 font-bold">Report Members</p>
+              <!-- <p class="font_19 font-bold">Report Members</p> -->
             </div>
             <div>
               <div class="flex mb-6">
@@ -69,6 +69,7 @@
                     <option value="0">Select a Role</option>
                     <option value="">Report Auditor</option>
                     <option value="">Report Viewer</option>
+                    <option value=""> Report Contributor</option>
                   </select>
                 </div>
                 <div class="col-span-1 flex flex-col justify-center">
@@ -95,20 +96,33 @@
                 >Mandatory Field <span class="color_pink">*</span></span
               >
               <div class="mb-6 mt-3">
-                <div class="flex mb-7">
-                  <a href="#" class="font_13 mr-10 unline_pink pb-3 font-bold"
+                <div class="tab flex mb-7">
+                  <a
+                    href="#"
+                    class="font_13 mr-10 pb-3 color_gray  tracking-wide"
+                    :class="{ active: invitation == 'pending' }"
+                    @click.prevent="invitation = 'pending'"
                     >PENDING INVITATIONS</a
                   >
-                  <a href="#" class="font_13 mr-10 color_gray"
+                  <a
+                    href="#"
+                    class="font_13 mr-10 pb-3  color_gray"
+                    :class="{ active: invitation == 'accepted' }"
+                    @click.prevent="invitation = 'accepted'"
                     >ACCEPTED INVITATIONS</a
                   >
-                  <a href="#" class="font_13 mr-10 color_gray"
+                  <a
+                    href="#"
+                    class="font_13 mr-10 pb-3  color_gray"
+                    :class="{ active: invitation == 'revoked' }"
+                    @click.prevent="invitation = 'revoked'"
                     >REVOKED INVITATIONS</a
                   >
                 </div>
 
-                <div v-if="invitations">
-                  <p class="font_13 mb-3">
+                <div v-if="invitation == 'pending'">
+                  <p class="font_18 my-6">No pending Invitatitons</p>
+                  <!-- <p class="font_13 mb-3">
                     Insecure Direct Object Reference (IDOR) (CWE-639) →
                     RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
                     → <span class="color_pink">Pending</span>
@@ -122,20 +136,31 @@
                     Insecure Direct Object Reference (IDOR) (CWE-639) →
                     RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
                     → <span class="color_pink">Pending</span>
+                  </p> -->
+                </div>
+                <div v-if="invitation == 'accepted'">
+                  <p class="font_18 my-6">No accepted Invitatitons</p>
+                </div>
+                <div v-if="invitation == 'revoked'">
+                  <p class="font_13 mb-3">
+                    <!-- Insecure Direct Object Reference (IDOR) (CWE-639) → -->
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    →
+                    <span class="color_blue">Revoked</span>
                   </p>
                   <p class="font_13 mb-3">
-                    Insecure Direct Object Reference (IDOR) (CWE-639) →
+                    <!-- Insecure Direct Object Reference (IDOR) (CWE-639) → -->
                     RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
-                    → <span class="color_pink">Pending</span>
+                    →
+                    <span class="color_blue">Revoked</span>
+                  </p>
+                  <p class="font_13 mb-3">
+                    <!-- Insecure Direct Object Reference (IDOR) (CWE-639) → -->
+                    RemediationInsecure Direct Object Reference (IDOR) (CWE-639)
+                    →
+                    <span class="color_blue">Revoked</span>
                   </p>
                 </div>
-                <p v-else class="font_18 my-6">No pending Invitatitons</p>
-
-                <p class="font_13 mb-3">
-                  Insecure Direct Object Reference (IDOR) (CWE-639) →
-                  RemediationInsecure Direct Object Reference (IDOR) (CWE-639) →
-                  <span class="color_blue">Revoked</span>
-                </p>
               </div>
             </div>
           </div>
@@ -152,6 +177,7 @@ export default {
   data() {
     return {
       content: true,
+      invitation: "pending",
     };
   },
 };
@@ -181,5 +207,10 @@ export default {
 }
 .sectionmenu .sectionmenu-item:hover {
   color: #da04f2;
+}
+.tab .active {
+  border-bottom: 1px solid #da04f2;
+  color: black;
+  font-weight: 800;
 }
 </style>

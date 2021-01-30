@@ -227,20 +227,33 @@ html{
             display: none;
         }
     }
-    @media only screen and (max-width: 1000px){
+    @media only screen and (max-width: 1300px){
         .menu-logo{
             width: 50%;
         }
         .menu-item{
-            width: 50%;
-            justify-content: flex-end;
+            width: 100%;
+            justify-content: space-between;
             .mainmenu{
                 display: none;
             }
-            // .mobilemenu{
-            //     display: block;
-            //     margin-left: 1rem;
-            // }
+            .mobilemenu{
+                display: block;
+                margin-left: 1rem;
+            }
+            .dashboard_side{
+                display: none;
+            }
+        
+            .dashboard_content {
+                grid-column-start: 1;
+                grid-column: span 5/span 5;
+            }
+        
+            .menu-container .menu-item .mobilemenu{
+                display: block;
+                margin-left: 1rem;
+            }
         }
     }
 }
@@ -250,19 +263,7 @@ html{
 }
 
 @media screen and (max-width: 81.25em){ /* 1300px/16 */
-    .dashboard_side{
-        display: none;
-    }
-
-    .dashboard_content {
-        grid-column-start: 1;
-        grid-column: span 5/span 5;
-    }
-
-    .menu-container .menu-item .mobilemenu{
-        display: block;
-        margin-left: 1rem;
-    }
+    
 
 }
 

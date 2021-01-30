@@ -45,7 +45,12 @@
       </div>
 
       <div class="content-1">
-        <p class="color_pink font-bold">{{ item.action }}</p>
+        <p
+          class="color_pink font-bold cursor-pointer"
+          @click.prevent="$router.push('/edit')"
+        >
+          {{ item.action }}
+        </p>
       </div>
     </div>
   </div>

@@ -196,16 +196,31 @@ html {
 .menu-container .menu-item .mobilemenu {
   display: none;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
   .menu-container .menu-logo {
     width: 50%;
   }
   .menu-container .menu-item {
-    width: 50%;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: space-between;
   }
   .menu-container .menu-item .mainmenu {
     display: none;
+  }
+  .menu-container .menu-item .mobilemenu {
+    display: block;
+    margin-left: 1rem;
+  }
+  .menu-container .menu-item .dashboard_side {
+    display: none;
+  }
+  .menu-container .menu-item .dashboard_content {
+    grid-column-start: 1;
+    grid-column: span 5 / span 5;
+  }
+  .menu-container .menu-item .menu-container .menu-item .mobilemenu {
+    display: block;
+    margin-left: 1rem;
   }
 }
 .modal {
@@ -213,17 +228,6 @@ html {
 }
 @media screen and (max-width: 81.25em) {
   /* 1300px/16 */
-  .dashboard_side {
-    display: none;
-  }
-  .dashboard_content {
-    grid-column-start: 1;
-    grid-column: span 5 / span 5;
-  }
-  .menu-container .menu-item .mobilemenu {
-    display: block;
-    margin-left: 1rem;
-  }
 }
 .contentt {
   margin-top: -3rem;
