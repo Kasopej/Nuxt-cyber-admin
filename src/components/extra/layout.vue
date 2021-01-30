@@ -50,16 +50,17 @@
               <div class="flex mb-6">
                 <a
                   href="#"
-                  class="font_13 mr-10 font-bold"
-                  :class="{ 'pb-3': true, unline_pink: true }"
+                  class="font_13 mr-10 color_gray memberTab"
+                  @click="toggleMemberTab('member')"
+                  :class="{ 'pb-3': true, active: memberTab == 'member' }"
                   >INVITE A NEW MEMBER</a
                 >
-                <a href="#" class="font_13 color_gray"
+                <a href="#" class="font_13 color_gray memberTab" :class="{ active: memberTab == 'member_group' }" @click="toggleMemberTab('member_group')"
                   >INVITE MEMBERS FROM GROUP</a
                 >
               </div>
 
-              <div class="grid grid-cols-3 gap-16 mb-8">
+              <div v-if="memberTab == 'member' " class="grid grid-cols-3 gap-16 mb-8">
                 <div class="col-span-1 flex flex-col justify-center">
                   <label class="font_12 block"
                     >Role <span class="color_pink">*</span></label
@@ -90,6 +91,88 @@
                     Send
                   </button>
                 </div>
+              </div>
+
+              <div v-if="memberTab == 'member_group' " class="w-full mb-8">
+                <table class="hallOfFame_table">
+                  <thead>
+                      <tr>
+                          <th>Username</th>
+                          <th>Thumbnail</th>
+                          <th>Email</th>
+                          <th>Verified</th>
+                          <th>Points</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>
+                      <tr>
+                        <td>Alisson</td>
+                        <td class="flex items-center justify-center">
+                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
+                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                            alt=""> <span>Semijor</span>
+                        </td>
+                        <td class="text-orange-600">alisson@gmail.com</td>
+                        <td class="text-blue-600">Yes</td>
+                        <td class="text-red-600">43</td>
+                      </tr>                    
+                  </tbody>
+                </table>
               </div>
 
               <span class="font_12"
@@ -178,8 +261,14 @@ export default {
     return {
       content: true,
       invitation: "pending",
+      memberTab: 'member'
     };
   },
+  methods: {
+    toggleMemberTab(type){
+      this.memberTab = type;
+    }
+  }
 };
 </script>
 
@@ -208,9 +297,42 @@ export default {
 .sectionmenu .sectionmenu-item:hover {
   color: #da04f2;
 }
-.tab .active {
+.tab .active,
+.memberTab.active
+{
   border-bottom: 1px solid #da04f2;
   color: black;
   font-weight: 800;
+}
+
+
+
+
+
+
+table.hallOfFame_table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+table.hallOfFame_table th {
+  background-color: #f2f2f2;
+}
+
+.hallOfFame_table th, td {
+  text-align: center;
+  padding: 16px;
+}
+
+.hallOfFame_table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.hallOfFame_table tr td:nth-child(3),
+.hallOfFame_table tr th:nth-child(3) 
+{
+    text-align: center;
 }
 </style>
