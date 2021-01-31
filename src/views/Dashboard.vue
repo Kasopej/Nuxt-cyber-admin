@@ -27,10 +27,9 @@
       <div class="menu-container z-50 shadow-md">
         <mainmenu v-on:togglemenu="togglemenu"></mainmenu>
       </div>
-
-      <div class="p-5 relative">
-        <div class="p-1 md:p-8 lg:p-8 xl:p-8">
-          <div class="toggle">
+<div class="flex justify-between tabsticky px-10 items-center z-20">
+  <div>
+      <div class="toggle ">
             <a
               href="#"
               class="toggle-item"
@@ -53,15 +52,185 @@
               >COMMENTS</a
             >
           </div>
-          <!-- <div class="flex mb-9">
-            <a href="#" class="font_13 mr-4 unline_pink font-bold"
-              >BUG DESCRIPTION</a
-            >
-            <a href="#" class="font_13 color_gray">COMMENTS</a>
-          </div> -->
+  </div>
+  <div>
+       <div class="flex">
+                <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="members_menu = !members_menu"
+                    class="font_14 mr-4 color_gray summary__menulink"
+                    >MEMBERS MANAGEMENT</a
+                  >
+                  <div
+                    v-if="members_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >Undefined</a
+                      >
+                      <a
+                        href="#"
+                        role="menuitem"
+                        class="block list_item font_12 pb-4 color_pink"
+                        >P 1</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 2</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 3</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 4</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 5</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="priorities_menu = !priorities_menu"
+                    class="font_14 mr-4 color_gray summary__menulink"
+                    >PRIORITIES
+                    <i class="fas fa-angle-down ml-1"></i>
+                  </a>
+                  <div
+                    v-if="priorities_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >Undefined</a
+                      >
+                      <a
+                        href="#"
+                        role="menuitem"
+                        class="block list_item font_12 pb-4 color_pink"
+                        >P 1</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 2</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 3</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 4</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >P 5</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown relative inline-block">
+                  <a
+                    href="#"
+                    @click="export_menu = !export_menu"
+                    class="font_14 mr-4 color_gray summary__menulink"
+                    >EXPORT
+                    <i class="fas fa-angle-down ml-1"></i>
+                  </a>
+                  <div
+                    v-if="export_menu"
+                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                  >
+                    <div
+                      class="p-4"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >CSV</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >XLS</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >JSON</a
+                      >
+                      <a
+                        href="#"
+                        class="block list_item font_12 text-gray-700 font-bold"
+                        role="menuitem"
+                        >PDF</a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <a href="#" class="font_12 mr-4 color_gray">
+                            <i class="fas fa-angle-down ml-1"></i>
+                        </a> -->
+              </div>
+  </div>
+</div>
+      <div class="px-5 ">
+        <div class="px-1 md:px-8 lg:px-8 xl:px-8">
+        
+         
 
           <div v-if="currentTab == 'description'">
-            <div class="my-7">
+            <div class="mb-7">
               <p class="font_13 my-4">
                 Insecure Direct Object Reference (called IDOR from here) occurs
                 when a application exposes a reference to an internal
@@ -257,221 +426,46 @@
             </div>
           </div>
           <div v-if="currentTab == 'summary'">
-            <div class="flex justify-between my-6 summary__headerbox">
+            <div class="flex justify-between summary__headerbox">
               <div>
-                <span class="mr-3 font_14">#YHW-PGM2453-8</span>
+               
 
                 <div class="dropdown relative inline-block">
-                  <button
-                    @click="popup_one = !popup_one"
-                    class="border border-gray-100 font-bold bg-gray-50 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
-                  >
-                    NEED MORE INFO
-                  </button>
+                
 
                   <div
                     v-if="popup_one"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-56 rounded-md shadow-lg
+                    class="dropdown-menu origin-top-right absolute  w-56 rounded-md shadow-lg
                                 bg-white ring-1 ring-black ring-opacity-5 right-6"
                   >
                     <popupone v-on:closeup="closeup" />
                   </div>
                 </div>
               </div>
-              <div class="flex">
-                <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
-                <div class="dropdown relative inline-block">
-                  <a
-                    href="#"
-                    @click="members_menu = !members_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >MEMBERS MANAGEMENT</a
-                  >
-                  <div
-                    v-if="members_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-                  >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >Undefined</a
-                      >
-                      <a
-                        href="#"
-                        role="menuitem"
-                        class="block list_item font_12 pb-4 color_pink"
-                        >P 1</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 2</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 3</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 4</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 5</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="dropdown relative inline-block">
-                  <a
-                    href="#"
-                    @click="priorities_menu = !priorities_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >PRIORITIES
-                    <i class="fas fa-angle-down ml-1"></i>
-                  </a>
-                  <div
-                    v-if="priorities_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-                  >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >Undefined</a
-                      >
-                      <a
-                        href="#"
-                        role="menuitem"
-                        class="block list_item font_12 pb-4 color_pink"
-                        >P 1</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 2</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 3</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 4</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 5</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="dropdown relative inline-block">
-                  <a
-                    href="#"
-                    @click="export_menu = !export_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >EXPORT
-                    <i class="fas fa-angle-down ml-1"></i>
-                  </a>
-                  <div
-                    v-if="export_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-                  >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >CSV</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >XLS</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >JSON</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >PDF</a
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <!-- <a href="#" class="font_12 mr-4 color_gray">
-                            <i class="fas fa-angle-down ml-1"></i>
-                        </a> -->
-              </div>
+           
             </div>
-            <h3 class="font-bold font_18 mb-3">
-              Insecure Direct Object Reference on https://api.example.net allows
-              informations leakage.
-            </h3>
+          
 
-            <div class="flex mb-12 items-center">
-              <input type="checkbox">
-              <h4 class="font_14 ml-3 mr-4">
-                FIDELITY BANK DEMO BUG BOUNTY PROGRAM
-              </h4>
-              <div class="fas fa-comments mr-2"></div>
-              <span class="font_12 color_pink mr-1">8</span>
-              <span class="font_12">Comments</span>
-            </div>
 
-            <div class=" border-t-2 p-4">
+            <div class="px-4">
               <div class="grid grid-cols-4 gap-5 summary__grid">
                 <div class="col-span-3 summary__gridleft">
                   <h3 class="color_gray font_16 tracking-wider pt-4 pb-10">
                     SUMITTED BY
                     <span class="font_16 color_black"
-                      >YESWEBOT ON 2020-12-11</span
+                      >Afolabi ON 2020-12-11</span
                     >
                   </h3>
-                  <div class="bg-white p-10 shadow-md rounded-md">
+                  
+            <div class="flex mb-2 items-center">
+           
+              
+              <div class="fas fa-comments mr-2"></div>
+              <span class="font_12 color_pink mr-1">8</span>
+              <span class="font_12">Comments</span>
+            </div>
+                  <div class="bg-white px-10 py-2 
+                   rounded-md">
                     <div class="flex justify-between mb-5">
                       <h3 class="font_16 font-bold">REPORT DETAILS</h3>
                       <i class="fas fa-angle-down"></i>
@@ -479,55 +473,58 @@
 
                     <div class="report_details">
                       <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">ACTION STATE</div>
+                        <div class="report_value">
+                     New (Open)
+                        </div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">REPORTED TO</div>
+                        <div class="report_value">Company-Name</div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">REPORTED AT</div>
+                        <div class="report_value">
+                          December 22, 2020 7:12am +0100
+                        </div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">SCOPE	</div>
+                        <div class="report_value">api.example.com</div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">REFERENCES </div>
+                        <div class="report_value">TEK-PRG1234567890</div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">CVE ID</div>
+                        <div class="report_value">12345</div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
+                        <div class="report_detail">ASSIGNED TO</div>
+                        <div class="report_value">Company-Representative</div>
+                      </div>
+                      <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">BUG TYPE</div>
                         <div class="report_value">
-                          Insecure Direct Object Reference (IDOR) (CWE-639) →
-                          Remediation
+                         Allocation of Resources Without Limits or Throttling
                         </div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">SCOPE</div>
-                        <div class="report_value">https://api.example.net</div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">END POINT</div>
-                        <div class="report_value">
-                          https://api.example.net/profile.php
-                        </div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">SECURITY</div>
+                        <div class="report_detail">SEVERITY</div>
                         <div class="report_value">Medium</div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">VULNERABLE PART</div>
-                        <div class="report_value">get-parameter</div>
+                        <div class="report_detail">PARTICIPANTS</div>
+                        <div class="report_value">Name-of-participating-Hackers (Add participant)</div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">PART NAME</div>
-                        <div class="report_value">user_id</div>
+                        <div class="report_detail">NOTIFICATIONS</div>
+                        <div class="report_value">Enabled</div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">PAYLOAD</div>
-                        <div class="report_value">1337</div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">TECHNICAL ENVIRONMENT</div>
-                        <div class="report_value">
-                          OSX, 10.14.6; Firefox 688.0
-                        </div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">APPLICATION FINGERPRINT</div>
-                        <div class="report_value">Symfony, PHP</div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">IP USED</div>
-                        <div class="report_value">13.37.13.37</div>
-                      </div>
-                      <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">SECURITY REQUIREMENT</div>
-                        <div class="report_value">high</div>
+                        <div class="report_detail">VISIBILITY</div>
+                        <div class="report_value">Private</div>
                       </div>
                       <div class="flex font_14 mb-8 report__options">
                         <div class="report_detail report__label">
@@ -588,7 +585,7 @@
                         </div>
                       </div>
 
-                      <div class="flex font_14 mb-8 report__options">
+                      <!-- <div class="flex font_14 mb-8 report__options">
                         <div class="report_detail">
                           <div class="flex report__label">
                             <span>PATCH STATUS</span>
@@ -615,7 +612,7 @@
                           >
                           <span>Update</span>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="mb-6">
                         <button
@@ -628,7 +625,7 @@
                   </div>
                 </div>
                 <div class="col-span-1 summary__gridright">
-                  <div class="mb-3 bg-white shadow-md">
+                  <div class="mb-1 bg-white ">
                     <div class="grid grid-cols-2">
                       <div
                         class="rating_box col-span-1 border-r border-white bg_green text-white p-5"
@@ -1060,5 +1057,10 @@ button:active {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+.tabsticky{
+  position:sticky;
+  top:6rem;
+  background:#fff
 }
 </style>

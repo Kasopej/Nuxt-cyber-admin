@@ -128,7 +128,7 @@ html {
   font-size: 1.125rem;
 }
 .font_16 {
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 .font_14 {
   font-size: 0.875rem;
@@ -137,7 +137,7 @@ html {
   font-size: 0.8125rem;
 }
 .font_12 {
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 .font_10 {
   font-size: 0.625rem;
@@ -156,7 +156,7 @@ html {
   justify-content: center;
 }
 .menu-container .menu-logo .name {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
   margin-right: 3rem;
 }
@@ -175,7 +175,7 @@ html {
 .menu-container .menu-item .mainmenu .item {
   margin: 0rem 2rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -270,10 +270,11 @@ select {
 }
 select option {
   border: none;
+  padding: 2rem 1rem !important;
 }
 .toggle {
   display: flex;
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin: 1rem 0rem;
 }
 .toggle .toggle-item {
