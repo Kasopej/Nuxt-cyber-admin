@@ -1,15 +1,21 @@
 <template>
-  <div class="my-5" @click="$router.push('/edit')">
+  <div class="my-5" @dblclick="$router.push('/edit')">
     <div class="grid grid-cols-8 single__tab">
-      <div v-randombg class="single__tableft rounded-l-md col-span-2  flex justify-center items-center" >
+      <div
+        v-randombg
+        class="single__tableft rounded-l-md col-span-2  flex justify-center items-center"
+      >
         <button
           type="button"
+          @click.prevent="$m.showmodal('newprogram')"
           class="border border-gray-200 font-bold bg-gray-200 color_pink rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline"
         >
           {{ button }}
         </button>
       </div>
-      <div class="single__tabright col-span-6 border-2 border-gray-100 p-10 rounded-r-md">
+      <div
+        class="single__tabright col-span-6 border-2 border-gray-100 p-10 rounded-r-md"
+      >
         <div class="flex justify-between">
           <div>
             <p class="font-bold font_19">{{ title }}</p>
@@ -33,8 +39,8 @@ export default {
 </script>
 
 <style>
-
-@media screen and (max-width: 48.75em) { /** 780px /16 */
+@media screen and (max-width: 48.75em) {
+  /** 780px /16 */
 
   .single__tableft {
     grid-column: span 8 / span 8;
@@ -43,22 +49,23 @@ export default {
     border-top-right-radius: 5px;
   }
 
-  .single__tabright{
+  .single__tabright {
     grid-column: span 8 / span 8;
     border-top-right-radius: 0;
   }
 
-  .single__tabright p{
+  .single__tabright p {
     font-size: 13px;
   }
-  .single__tabright div{
+  .single__tabright div {
     flex-direction: column;
     align-items: center;
   }
 }
 
-@media screen and (max-width: 31.25em) { /** 500px /16 */
-  .single__tab{
+@media screen and (max-width: 31.25em) {
+  /** 500px /16 */
+  .single__tab {
     grid-auto-rows: auto;
   }
 }

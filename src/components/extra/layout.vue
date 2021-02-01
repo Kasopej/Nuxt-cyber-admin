@@ -1,7 +1,10 @@
 <template>
   <div class="grid grid-cols-8">
     <div class="col-span-6 col-start-2 bg-white contentt">
-      <div class="flex justify-between items-center px-5 settings__tab" v-if="title">
+      <div
+        class="flex justify-between items-center px-5 settings__tab"
+        v-if="title"
+      >
         <div>
           <div class="sectionmenu">
             <!-- <span class="sectionmenu-item">Home</span> -->
@@ -20,7 +23,7 @@
             >
           </div>
         </div>
-        <div>
+        <div v-if="title && title != 'null'">
           <button
             type="button"
             @click.prevent="$m.showmodal('newprogram')"
@@ -55,13 +58,20 @@
                   :class="{ 'pb-3': true, active: memberTab == 'member' }"
                   >INVITE A NEW MEMBER</a
                 >
-                <a href="#" class="font_13 color_gray memberTab" :class="{ active: memberTab == 'member_group' }" @click="toggleMemberTab('member_group')"
+                <a
+                  href="#"
+                  class="font_13 color_gray memberTab"
+                  :class="{ active: memberTab == 'member_group' }"
+                  @click="toggleMemberTab('member_group')"
                   >INVITE MEMBERS FROM GROUP</a
                 >
               </div>
 
-              <div v-if="memberTab == 'member' " class="flex justify-between mb-8 invite_newmember">
-                <div class="flex flex-col justify-center">
+              <div
+                v-if="memberTab == 'member'"
+                class="flex justify-between items-end mb-8 invite_newmember"
+              >
+                <div class="flex-1 justify-center mr-2">
                   <label class="font_12 block"
                     >Role <span class="color_pink">*</span></label
                   >
@@ -73,7 +83,7 @@
                     <option value=""> Report Contributor</option>
                   </select>
                 </div>
-                <div class="flex flex-col justify-center">
+                <div class=" flex-1 justify-center mr-2">
                   <label class="font_12 block"
                     >Username/Email <span class="color_pink">*</span></label
                   >
@@ -84,99 +94,120 @@
                     class="bg-gray-50 mt-1 form-control"
                   />
                 </div>
-                <div class="flex flex-col items-end">
+                <div class="flex flex-1 items-end">
                   <button
-                    class="bg_pink font_16 px-16 py-3 rounded-md shadow-sm text-white block mt-auto"
+                    class="bg_pink font_16 px-16 p-3 rounded-md shadow-sm text-white block mt-auto"
                   >
                     Send
                   </button>
                 </div>
               </div>
 
-              <div v-if="memberTab == 'member_group' " class="w-full mb-8 overflow-x-auto">
+              <div
+                v-if="memberTab == 'member_group'"
+                class="w-full mb-8 overflow-x-auto"
+              >
                 <table class="hallOfFame_table">
                   <thead>
-                      <tr>
-                          <th>Username</th>
-                          <th>Thumbnail</th>
-                          <th>Email</th>
-                          <th>Verified</th>
-                          <th>Points</th>
-                      </tr>
+                    <tr>
+                      <th>Username</th>
+                      <th>Thumbnail</th>
+                      <th>Email</th>
+                      <th>Verified</th>
+                      <th>Points</th>
+                    </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>
-                      <tr>
-                        <td>Alisson</td>
-                        <td class="flex items-center justify-center">
-                            <img class="avatar rounded-full w-6 h-6 inline mr-3"
-                            src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
-                            alt=""> <span>Semijor</span>
-                        </td>
-                        <td class="text-orange-600">alisson@gmail.com</td>
-                        <td class="text-blue-600">Yes</td>
-                        <td class="text-red-600">43</td>
-                      </tr>                    
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
+                    <tr>
+                      <td>Alisson</td>
+                      <td class="flex items-center justify-center">
+                        <img
+                          class="avatar rounded-full w-6 h-6 inline mr-3"
+                          src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2017/12/attachment_68585523.jpg?auto=format&q=60&fit=max&w=930"
+                          alt=""
+                        />
+                        <span>Semijor</span>
+                      </td>
+                      <td class="text-orange-600">alisson@gmail.com</td>
+                      <td class="text-blue-600">Yes</td>
+                      <td class="text-red-600">43</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
 
               <span class="font_12"
-                >Mandatory Field <span class="color_pink">*</span></span
+                >Invitations<span class="color_pink">*</span></span
               >
               <div class="mb-6 mt-3">
                 <div class="tab flex mb-7">
@@ -261,14 +292,14 @@ export default {
     return {
       content: true,
       invitation: "pending",
-      memberTab: 'member'
+      memberTab: "member",
     };
   },
   methods: {
-    toggleMemberTab(type){
+    toggleMemberTab(type) {
       this.memberTab = type;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -298,17 +329,11 @@ export default {
   color: #da04f2;
 }
 .tab .active,
-.memberTab.active
-{
+.memberTab.active {
   border-bottom: 1px solid #da04f2;
   color: black;
   font-weight: 800;
 }
-
-
-
-
-
 
 table.hallOfFame_table {
   border-collapse: collapse;
@@ -321,7 +346,8 @@ table.hallOfFame_table th {
   background-color: #f2f2f2;
 }
 
-.hallOfFame_table th, td {
+.hallOfFame_table th,
+td {
   text-align: center;
   padding: 16px;
 }
@@ -331,20 +357,21 @@ table.hallOfFame_table th {
 }
 
 .hallOfFame_table tr td:nth-child(3),
-.hallOfFame_table tr th:nth-child(3) 
-{
+.hallOfFame_table tr th:nth-child(3) {
   text-align: center;
 }
 
-@media screen and (max-width: 35em) { /** 560px /16 */
-  .settings__tab{
+@media screen and (max-width: 35em) {
+  /** 560px /16 */
+  .settings__tab {
     flex-direction: column;
     padding: 0;
   }
 }
 
-@media screen and (max-width: 53.75em) { /** 860px /16 */
-  .invite_newmember{
+@media screen and (max-width: 53.75em) {
+  /** 860px /16 */
+  .invite_newmember {
     flex-direction: column;
   }
 
@@ -352,9 +379,8 @@ table.hallOfFame_table th {
     margin-bottom: 11px;
   }
 
-  .invite_newmember > :nth-child(3){
+  .invite_newmember > :nth-child(3) {
     align-items: end;
   }
 }
-
 </style>

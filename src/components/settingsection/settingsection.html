@@ -1,5 +1,5 @@
 <div>
-    <layout title="Update">
+    <layout title="null">
         <div slot="content">
             <div class="flex items-center">
                 <div class="flex-1">
@@ -12,65 +12,93 @@
                 </div>
             </div>
             <div class="mt-10">
-                <p class="font-bold font_19 text-red-500">Company information</p>
+                <div class="flex justify-between items-center">
+                    <p class="font-bold font_19 text-red-500">Company information</p>
+                    <button type="button" @click.prevent="enableEdit" v-if="editable"
+                        class="border border-gray-200 font-bold bg_pink color_white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                        Edit
+                    </button>
+                    <button type="button" @click.prevent="updateEdit" v-if="!editable"
+                        class="border border-gray-200 font-bold bg_pink color_white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-300 focus:outline-none focus:shadow-outline">
+                        Updated
+                    </button>
+                </div>
                 <div class="grid grid-cols-2 mt-8 gap-3">
                     <div class="col-span-1 my-2 setting__input">NAME:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">ADDRESS:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">TYPE:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">VAT NUMBER:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">CITY:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">POSTAL:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">COUNTRY:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">COMPANY REGISTRATION:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">BUSINESS:
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                     <div class="col-span-1 my-2 setting__input">IDENTIFICATION(SIRET):
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" class="form-control" :disabled="editable">
                     </div>
                 </div>
             </div>
             <div class="mt-10">
                 <p class="font-bold font_19 text-red-500">Company Representive</p>
                 <div class="grid grid-cols-2 mt-8 gap-3">
-                    <div class="col-span-1 my-2 setting__input">FIRST NAME: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">LAST NAME: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">BIRTH DATE: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">NATIONALITY: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">EMAIL: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">POSTAL: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">COUNTRY: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">PHONE NUMBER: <input type="text" class="form-control" disabled></div>
+                    <div class="col-span-1 my-2 setting__input">FIRST NAME: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">LAST NAME: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">BIRTH DATE: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">NATIONALITY: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">EMAIL: <input type="text" class="form-control"
+                            :disabled="editable">
+                    </div>
+                    <div class="col-span-1 my-2 setting__input">POSTAL: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">COUNTRY: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">PHONE NUMBER: <input type="text" class="form-control"
+                            :disabled="editable"></div>
                 </div>
             </div>
             <div class="mt-10">
                 <p class="font-bold font_19 text-red-500">Billing Information</p>
                 <div class="grid grid-cols-2 mt-8 gap-3">
-                    <div class="col-span-1 my-2 setting__input">WALLET CURRENCY: <input type="text" class="form-control" disabled>
+                    <div class="col-span-1 my-2 setting__input">WALLET CURRENCY: <input type="text" class="form-control"
+                            :disabled="editable">
                     </div>
-                    <div class="col-span-1 my-2 setting__input">ACCOUNTING: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">WEBSITE: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">NATIONALITY: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">EMAIL: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">POSTAL: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">COUNTRY: <input type="text" class="form-control" disabled></div>
-                    <div class="col-span-1 my-2 setting__input">PHONE NUMBER: <input type="text" class="form-control" disabled></div>
+                    <div class="col-span-1 my-2 setting__input">ACCOUNTING: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">WEBSITE: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">NATIONALITY: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">EMAIL: <input type="text" class="form-control"
+                            :disabled="editable">
+                    </div>
+                    <div class="col-span-1 my-2 setting__input">POSTAL: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">COUNTRY: <input type="text" class="form-control"
+                            :disabled="editable"></div>
+                    <div class="col-span-1 my-2 setting__input">PHONE NUMBER: <input type="text" class="form-control"
+                            :disabled="editable"></div>
                 </div>
             </div>
         </div>

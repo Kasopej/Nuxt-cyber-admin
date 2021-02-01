@@ -56,11 +56,11 @@ export default {
 </script>
 
 <style>
-@media only screen and (max-width: 1300px){
-  .teklab__logo{
-    display: none !important;           
-  }    
-  .mainmenu__box{
+@media only screen and (max-width: 1300px) {
+  .teklab__logo {
+    display: none !important;
+  }
+  .mainmenu__box {
     grid-column: span 5 / span 5;
   }
 }

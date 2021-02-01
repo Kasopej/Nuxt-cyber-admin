@@ -254,6 +254,24 @@ html {
 .flex-5 {
   flex: 5;
 }
+.flex-6 {
+  flex: 6;
+}
+.flex-7 {
+  flex: 7;
+}
+.flex-8 {
+  flex: 8;
+}
+.flex-9 {
+  flex: 9;
+}
+.flex-10 {
+  flex: 10;
+}
+.flex-14 {
+  flex: 14;
+}
 .form-control {
   text-indent: 1rem;
   padding: 0.7rem;

@@ -27,9 +27,9 @@
       <div class="menu-container z-50 shadow-md">
         <mainmenu v-on:togglemenu="togglemenu"></mainmenu>
       </div>
-<div class="flex justify-between tabsticky px-10 items-center z-20">
-  <div>
-      <div class="toggle ">
+      <div class="flex justify-between tabsticky px-10 items-center z-20">
+        <div>
+          <div class="toggle ">
             <a
               href="#"
               class="toggle-item"
@@ -52,183 +52,180 @@
               >COMMENTS</a
             >
           </div>
-  </div>
-  <div>
-       <div class="flex">
-                <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
-                <div class="dropdown relative inline-block">
+        </div>
+        <div>
+          <div class="flex">
+            <!-- <a href="#" class="font_12 mr-4 color_gray">MEMBERS MANAGEMENT</a> -->
+            <div class="dropdown relative inline-block">
+              <a
+                href="#"
+                @click="members_menu = !members_menu"
+                class="font_14 mr-4 color_gray summary__menulink"
+                >MEMBERS MANAGEMENT</a
+              >
+              <div
+                v-if="members_menu"
+                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+              >
+                <div
+                  class="p-4"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
                   <a
                     href="#"
-                    @click="members_menu = !members_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >MEMBERS MANAGEMENT</a
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >Undefined</a
                   >
-                  <div
-                    v-if="members_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
-                  >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >Undefined</a
-                      >
-                      <a
-                        href="#"
-                        role="menuitem"
-                        class="block list_item font_12 pb-4 color_pink"
-                        >P 1</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 2</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 3</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 4</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 5</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="dropdown relative inline-block">
                   <a
                     href="#"
-                    @click="priorities_menu = !priorities_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >PRIORITIES
-                    <i class="fas fa-angle-down ml-1"></i>
-                  </a>
-                  <div
-                    v-if="priorities_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                    role="menuitem"
+                    class="block list_item font_12 pb-4 color_pink"
+                    >P 1</a
                   >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >Undefined</a
-                      >
-                      <a
-                        href="#"
-                        role="menuitem"
-                        class="block list_item font_12 pb-4 color_pink"
-                        >P 1</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 2</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 3</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 4</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >P 5</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="dropdown relative inline-block">
                   <a
                     href="#"
-                    @click="export_menu = !export_menu"
-                    class="font_14 mr-4 color_gray summary__menulink"
-                    >EXPORT
-                    <i class="fas fa-angle-down ml-1"></i>
-                  </a>
-                  <div
-                    v-if="export_menu"
-                    class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
-                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 2</a
                   >
-                    <div
-                      class="p-4"
-                      role="menu"
-                      aria-orientation="vertical"
-                      aria-labelledby="options-menu"
-                    >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >CSV</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >XLS</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >JSON</a
-                      >
-                      <a
-                        href="#"
-                        class="block list_item font_12 text-gray-700 font-bold"
-                        role="menuitem"
-                        >PDF</a
-                      >
-                    </div>
-                  </div>
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 3</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 4</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 5</a
+                  >
                 </div>
+              </div>
+            </div>
+            <div class="dropdown relative inline-block">
+              <a
+                href="#"
+                @click="priorities_menu = !priorities_menu"
+                class="font_14 mr-4 color_gray summary__menulink"
+                >PRIORITIES
+                <i class="fas fa-angle-down ml-1"></i>
+              </a>
+              <div
+                v-if="priorities_menu"
+                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+              >
+                <div
+                  class="p-4"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >Undefined</a
+                  >
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block list_item font_12 pb-4 color_pink"
+                    >P 1</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 2</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 3</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 4</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >P 5</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="dropdown relative inline-block">
+              <a
+                href="#"
+                @click="export_menu = !export_menu"
+                class="font_14 mr-4 color_gray summary__menulink"
+                >EXPORT
+                <i class="fas fa-angle-down ml-1"></i>
+              </a>
+              <div
+                v-if="export_menu"
+                class="dropdown-menu origin-top-right absolute mt-2 w-36 rounded-md shadow-lg
+                            bg-white ring-1 ring-black ring-opacity-5 right-5 z-10"
+              >
+                <div
+                  class="p-4"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >CSV</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >XLS</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >JSON</a
+                  >
+                  <a
+                    href="#"
+                    class="block list_item font_12 text-gray-700 font-bold"
+                    role="menuitem"
+                    >PDF</a
+                  >
+                </div>
+              </div>
+            </div>
 
-                <!-- <a href="#" class="font_12 mr-4 color_gray">
+            <!-- <a href="#" class="font_12 mr-4 color_gray">
                             <i class="fas fa-angle-down ml-1"></i>
                         </a> -->
-              </div>
-  </div>
-</div>
+          </div>
+        </div>
+      </div>
       <div class="px-5 ">
         <div class="px-1 md:px-8 lg:px-8 xl:px-8">
-        
-         
-
           <div v-if="currentTab == 'description'">
             <div class="mb-7">
               <p class="font_13 my-4">
@@ -300,6 +297,62 @@
               <input type="checkbox" class="mr-2" />
               <span class="font_12">Show only private comments</span>
             </div>
+            <div
+              class="bg-white shadow-md my-3 p-5"
+              :key="index"
+              v-for="(i, index) in allcomment"
+            >
+              <div class="mb-4">
+                <div class="flex items-center">
+                  <div class="flex-1 flex justify-center items-center">
+                    <span
+                      class="bg-gray-100 p-3 h-16 w-16 rounded-full flex justify-center items-center"
+                      ><i class="fas fa-2x fa-tag"></i
+                    ></span>
+                  </div>
+                  <div class="flex-14 px-3">
+                    <h1 class="font_19">YESWEBOT ON 2020-12-11</h1>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <div class="flex items-center">
+                  <div class="flex-1 flex justify-center items-center">
+                    <span
+                      class="bg-gray-100 p-3 h-8 w-8 rounded-full flex justify-center items-center"
+                      ><i class="fas  fa-flag"></i
+                    ></span>
+                  </div>
+                  <div class="flex-14 px-3">
+                    <p class="font_16">
+                      <span class="bg-pink-100 px-6 py-2 rounded mr-3"
+                        >NEW</span
+                      >
+                      <i class="fas fa-arrow-right mr-2"></i>
+                      <span class="bg-purple-100 px-6 py-2 rounded mr-3"
+                        >NEED MORE INFO</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="flex items-start">
+                  <div class="flex-1 flex justify-center items-center">
+                    <span
+                      class="bg-gray-100 p-3 h-8 w-8 rounded-full flex justify-center items-center"
+                      ><i class="fas  fa-comment"></i
+                    ></span>
+                  </div>
+                  <div class="flex-14 px-3">
+                    <p class="font_17">
+                      {{ i }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div
               class="mb-8 py-4 px-10 bg_black text-white rounded-sm shadow-lg"
@@ -310,8 +363,11 @@
             <div class="mb-5">
               <p class="font_12">Action <span class="color_pink">*</span></p>
               <div class="flex items-center">
-                <div style="width: 100%;" class="bg-white mr-5 rounded-md
-                    flex items-center justify-between py-4 post__comment">
+                <div
+                  style="width: 100%;"
+                  class="bg-white mr-5 rounded-md
+                    flex items-center justify-between py-4 post__comment"
+                >
                   <div class="flex_1">
                     <select class="bg-gray-50">
                       <option value="">Post Comment</option>
@@ -331,7 +387,6 @@
                     <input type="checkbox" class="mx-3" />
                     <span class="font_13">Make it private</span>
                   </div>
-                  
                 </div>
                 <!-- <div class="flex-2"></div> -->
               </div>
@@ -360,7 +415,7 @@
                         </div>
                     </div> -->
 
-            <customtextfield :item="fields">
+            <customtextfield :item="fields" v-on:dataToParent="pushdata">
               <div slot="tab" class="flex">
                 <button
                   type="button"
@@ -419,6 +474,7 @@
             </p>
             <div class="my-6">
               <button
+                @click.prevent="postresponse"
                 class="bg_pink font_13 px-4 py-3 rounded-md shadow-sm text-white ml-auto block"
               >
                 Post a response
@@ -428,11 +484,7 @@
           <div v-if="currentTab == 'summary'">
             <div class="flex justify-between summary__headerbox">
               <div>
-               
-
                 <div class="dropdown relative inline-block">
-                
-
                   <div
                     v-if="popup_one"
                     class="dropdown-menu origin-top-right absolute  w-56 rounded-md shadow-lg
@@ -442,10 +494,7 @@
                   </div>
                 </div>
               </div>
-           
             </div>
-          
-
 
             <div class="px-4">
               <div class="grid grid-cols-4 gap-5 summary__grid">
@@ -456,16 +505,16 @@
                       >Afolabi ON 2020-12-11</span
                     >
                   </h3>
-                  
-            <div class="flex mb-2 items-center">
-           
-              
-              <div class="fas fa-comments mr-2"></div>
-              <span class="font_12 color_pink mr-1">8</span>
-              <span class="font_12">Comments</span>
-            </div>
-                  <div class="bg-white px-10 py-2 
-                   rounded-md">
+
+                  <div class="flex mb-2 items-center">
+                    <div class="fas fa-comments mr-2"></div>
+                    <span class="font_12 color_pink mr-1">8</span>
+                    <span class="font_12">Comments</span>
+                  </div>
+                  <div
+                    class="bg-white px-10 py-2 
+                   rounded-md"
+                  >
                     <div class="flex justify-between mb-5">
                       <h3 class="font_16 font-bold">REPORT DETAILS</h3>
                       <i class="fas fa-angle-down"></i>
@@ -475,7 +524,7 @@
                       <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">ACTION STATE</div>
                         <div class="report_value">
-                     New (Open)
+                          New (Open)
                         </div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
@@ -489,11 +538,11 @@
                         </div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">SCOPE	</div>
+                        <div class="report_detail">SCOPE</div>
                         <div class="report_value">api.example.com</div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
-                        <div class="report_detail">REFERENCES </div>
+                        <div class="report_detail">REFERENCES</div>
                         <div class="report_value">TEK-PRG1234567890</div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
@@ -507,7 +556,7 @@
                       <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">BUG TYPE</div>
                         <div class="report_value">
-                         Allocation of Resources Without Limits or Throttling
+                          Allocation of Resources Without Limits or Throttling
                         </div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
@@ -516,7 +565,9 @@
                       </div>
                       <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">PARTICIPANTS</div>
-                        <div class="report_value">Name-of-participating-Hackers (Add participant)</div>
+                        <div class="report_value">
+                          Name-of-participating-Hackers (Add participant)
+                        </div>
                       </div>
                       <div class="flex font_14 mb-3 report__options">
                         <div class="report_detail">NOTIFICATIONS</div>
@@ -537,7 +588,9 @@
                             />
                           </div>
                         </div>
-                        <div class="grid grid-cols-4 gap-8 report_value reward__grid">
+                        <div
+                          class="grid grid-cols-4 gap-8 report_value reward__grid"
+                        >
                           <div class="flex flex-col col-span-1">
                             <span
                               class="font_10 color_gray font-bold text-center mb-1"
@@ -718,7 +771,11 @@
           <!-- <span class="close" @click="showMoblieMenu = false">&times;</span> -->
           <div class="bg-gray-50 h-screen mobile_dashboard_side">
             <div class="p-3 py-5">
-              <input type="search" placeholder="Search By ID or Title" class="form-control mb-2"/>
+              <input
+                type="search"
+                placeholder="Search By ID or Title"
+                class="form-control mb-2"
+              />
               <select>
                 <option value="all">All</option>
                 <option value="new">New</option>
@@ -735,7 +792,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <modal class="modal" id="modalone">
@@ -811,7 +867,9 @@ export default {
       ],
       currentTab: "summary",
       fields: "",
-      showMoblieMenu: false
+      showMoblieMenu: false,
+      newdata: "",
+      allcomment: [],
     };
   },
   methods: {
@@ -821,10 +879,18 @@ export default {
     toggleTab(type) {
       this.currentTab = type;
     },
-    togglemenu(){
+    togglemenu() {
       this.showMoblieMenu = !this.showMoblieMenu;
     },
-  }
+    postresponse() {
+      if (this.newdata) {
+        this.allcomment.push(this.newdata);
+      }
+    },
+    pushdata(value) {
+      this.newdata = value;
+    },
+  },
 };
 </script>
 
@@ -958,8 +1024,9 @@ button:active {
   }
 }
 
-@media screen and (max-width: 64.37em) { /**1030px/16 */
-  .summary__grid{
+@media screen and (max-width: 64.37em) {
+  /**1030px/16 */
+  .summary__grid {
     grid-auto-columns: auto;
   }
 
@@ -967,43 +1034,44 @@ button:active {
     grid-column: span 4 / span 4;
   }
 
-  .summary__gridright{
+  .summary__gridright {
     grid-column: span 4 / span 4;
     font-size: 14px !important;
   }
 }
 
-@media screen and (max-width: 48.75em) { /** 780px /16 */
-  .summary__headerbox{
+@media screen and (max-width: 48.75em) {
+  /** 780px /16 */
+  .summary__headerbox {
     flex-direction: column;
   }
 
-  .summary__headerbox :nth-child(2){
+  .summary__headerbox :nth-child(2) {
     justify-content: space-between;
   }
 
-  .mobile__content{
+  .mobile__content {
     width: 50%;
   }
 }
 
-
-
-@media screen and (max-width: 42.5em) { /** 680px /16 */
+@media screen and (max-width: 42.5em) {
+  /** 680px /16 */
   .toggle .toggle-item,
   .summary__menulink {
     font-size: 10px;
   }
   .report__options {
     flex-direction: column;
-  } 
+  }
 
   .report__label {
     margin-bottom: 10px;
   }
 }
 
-@media screen and (max-width: 32.5em) { /** 520px /16 */
+@media screen and (max-width: 32.5em) {
+  /** 520px /16 */
   .reward__grid {
     grid-auto-columns: auto;
     grid-auto-rows: auto;
@@ -1013,23 +1081,21 @@ button:active {
     grid-column: span 4 / span 4;
   }
 
-  .post__comment{
+  .post__comment {
     flex-direction: column;
   }
 
-  .mobile__content{
+  .mobile__content {
     width: 64%;
   }
 }
 
-@media screen and (max-width: 23.75em) { /** 380px /16 */
-  .mobile__content{
+@media screen and (max-width: 23.75em) {
+  /** 380px /16 */
+  .mobile__content {
     width: 100%;
   }
 }
-
-
-
 
 /* Modal Content */
 .mobile__content {
@@ -1058,9 +1124,9 @@ button:active {
   text-decoration: none;
   cursor: pointer;
 }
-.tabsticky{
-  position:sticky;
-  top:6rem;
-  background:#fff
+.tabsticky {
+  position: sticky;
+  top: 6rem;
+  background: #fff;
 }
 </style>

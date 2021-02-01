@@ -3,7 +3,8 @@
     <div class="content">
       <div class="content-1">
         <div
-          class="h-16 w-16 bg-blue-500 rounded-sm flex justify-center items-center"
+          v-randombg
+          class="h-16 w-16  rounded-sm flex justify-center items-center"
         >
           <i class="far fa-2x color_white" :class="[item.icon]"></i>
         </div>

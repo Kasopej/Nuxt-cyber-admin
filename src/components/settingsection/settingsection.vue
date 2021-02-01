@@ -7,11 +7,25 @@ export default {
   components: {
     layout,
   },
+  data() {
+    return {
+      editable: true,
+    };
+  },
+  methods: {
+    enableEdit() {
+      this.editable = false;
+    },
+    updateEdit() {
+      this.editable = true;
+    },
+  },
 };
 </script>
 
 <style>
-@media screen and (max-width: 38.75em) { /** 620px /16 */
+@media screen and (max-width: 38.75em) {
+  /** 620px /16 */
   .setting__input {
     grid-column: span 2 / span 2;
   }
