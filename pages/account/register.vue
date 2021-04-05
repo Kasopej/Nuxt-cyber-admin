@@ -71,8 +71,13 @@
         <template #label>
           <div>
             By clicking sign up, you hereby are in agreement with our
-            <nuxt-link to="#">Terms & Conditions</nuxt-link> and
-            <nuxt-link to="#">Code of conduct</nuxt-link>
+            <a href="https://www.teklabspace.com/terms-condition"
+              >Terms &amp; Conditions</a
+            >
+            and
+            <a href="https://www.teklabspace.com/code-of-conduct"
+              >Code of conduct</a
+            >
           </div>
         </template>
       </v-checkbox>
