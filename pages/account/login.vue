@@ -1,11 +1,13 @@
 <template>
   <v-form ref="form" v-model="valid" class="pa-8 col-12" lazy-validation>
-    <div>
+    <div class="text-center pb-4">
       Don’t have an account?
       <nuxt-link to="/account/register/">Sign Up</nuxt-link>
     </div>
 
-    <header class="headline py-4">Welcome Back!</header>
+    <header class="headline font-weight-bold text-center py-4">
+      Welcome Back!
+    </header>
 
     <div>
       <v-text-field
