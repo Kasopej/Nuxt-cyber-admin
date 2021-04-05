@@ -67,7 +67,7 @@
     </div>
 
     <div class="py-4">
-      <v-checkbox v-model="FORM.persistent">
+      <v-checkbox v-model="FORM.acceptTerms">
         <template #label>
           <div>
             By clicking sign up, you hereby are in agreement with our
@@ -94,7 +94,7 @@ export default {
       FORM: {
         email: null,
         password: null,
-        persistent: true,
+        acceptTerms: false,
       },
 
       valid: true,
