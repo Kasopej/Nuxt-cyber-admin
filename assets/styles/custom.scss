@@ -1,0 +1,26 @@
+$primary: #c504da;
+$secondary: #f9eded;
+
+/***
+***  customize the scroll bar
+**/
+
+/* The emerging W3C standard
+   that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $secondary $primary;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 0.6em;
+}
+*::-webkit-scrollbar-track {
+  background: $secondary;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 1em;
+  background-color: $primary;
+  border: 3px solid $secondary;
+}
