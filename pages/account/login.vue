@@ -37,7 +37,7 @@
 
     <div class="d-flex align-center justify-space-between py-4">
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
-      <nuxt-link to="/account/register/">Forgot Password?</nuxt-link>
+      <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
     </div>
   </v-form>
 </template>
