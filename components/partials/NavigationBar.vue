@@ -1,14 +1,14 @@
 <template>
-  <nav class="d-flex elevation-3">
+  <nav class="d-flex justify-space-between align-center elevation-3">
     <nuxt-link
-      v-if="showLogo"
+      v-if="!submission && !$vuetify.breakpoint.mobile"
       to="/"
-      class="d-flex align-center grey lighten-3 px-16 py-4 fill-height"
+      class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-4"
     >
       <v-img src="/images/logo-app-bar.png" />
     </nuxt-link>
 
-    <div class="d-flex align-center flex-grow-1 pa-4">
+    <div class="d-none d-lg-flex align-center flex-grow-1 pa-4">
       <v-btn
         large
         class="secondary primary--text mx-4 rounded-lg elevation-0"
@@ -27,25 +27,26 @@
         to="/profile"
         >Profile</v-btn
       >
-      <v-spacer />
-      <v-btn large class="grey lighten-3 rounded-lg elevation-0"
-        >Subscribe Now</v-btn
-      >
     </div>
+
+    <v-btn large class="grey lighten-3 rounded-lg elevation-0 mx-4 my-3"
+      >Subscribe Now</v-btn
+    >
+    <v-app-bar-nav-icon class="d-lg-none mr-2" @click.stop="drawer = !drawer" />
   </nav>
 </template>
 
 <script>
 export default {
   props: {
-    showLogo: {
+    submission: {
       type: Boolean,
       default: false,
     },
   },
   data() {
     return {
-      //
+      drawer: true,
     }
   },
 }

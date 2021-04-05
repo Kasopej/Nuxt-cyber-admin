@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
-    <partials-navigation-bar show-logo />
+    <partials-navigation-bar />
     <partials-header />
 
     <v-main>
       <v-container>
-        <nuxt class="white mt-n16 rounded-lg" />
+        <nuxt class="white mt-n16 rounded-lg mx-1" />
       </v-container>
     </v-main>
   </v-app>
