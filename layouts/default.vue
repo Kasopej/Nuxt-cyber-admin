@@ -6,12 +6,14 @@
   </v-app>
 </template>
 
+//
 <script>
-export default {
-  data() {
-    // variables
-  },
-}
+// export default {
+//   data() {
+//     // variables
+//   },
+// }
+//
 </script>
 
 <style lang="scss">

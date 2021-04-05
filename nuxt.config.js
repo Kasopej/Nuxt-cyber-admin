@@ -9,7 +9,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - TekLabspace Admin Portal',
+    titleTemplate: '%s - TekLabspace Company Portal',
     title: 'TekLabspace Admin Portal',
     meta: [
       { charset: 'utf-8' },
@@ -60,7 +60,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/styles/variables.scss'],
     theme: {
       dark: false,
       themes: {
@@ -71,7 +71,7 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          success: '#10b988',
         },
         dark: {
           primary: colors.blue.darken2,

@@ -1,6 +1,6 @@
 {
-  "name": "tecklabspace-admin-portal",
-  "version": "1.0.0",
+  "name": "tecklabspace-company-portal",
+  "version": '0.0.1",
   "private": true,
   "scripts": {
     "dev": "nuxt",
