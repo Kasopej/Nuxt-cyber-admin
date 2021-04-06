@@ -9,7 +9,7 @@
       Welcome Back!
     </header>
 
-    <div>
+    <v-form ref="loginForm">
       <v-text-field
         v-model="FORM.email"
         dense
@@ -32,13 +32,27 @@
         @click:append="showPassword = !showPassword"
       ></v-text-field>
 
-      <v-btn block color="primary" @click="login"> Sign in </v-btn>
-    </div>
+      <v-btn block color="primary" @click="login()"> Sign in </v-btn>
+    </v-form>
 
     <div class="d-flex align-center justify-space-between py-4">
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
       <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
     </div>
+
+    <!--     
+    <notification-toast
+      :status="notification.status"
+      :text="notification.text"
+      :color="notification.color"
+    /> -->
+
+    <v-snackbar v-model="notification.status" :color="notification.color">
+      <v-icon class="mr-3">{{
+        notification.icon || 'mdi-information-outline'
+      }}</v-icon>
+      {{ notification.text }}
+    </v-snackbar>
   </v-form>
 </template>
 
@@ -59,15 +73,41 @@ export default {
       rules: {
         required: (value) => !!value || 'Required.',
       },
+
+      notification: {},
     }
   },
 
   head: { title: 'Sign in' },
 
   methods: {
-    login() {
-      console.log(this.FORM)
-      this.$router.replace('/')
+    async login() {
+      if (this.$refs.loginForm.validate()) {
+        this.$nuxt.$loading.start()
+
+        console.log(this.$config.baseURL)
+
+        const URL = `/login`
+        const PAYLOAD = this.FORM
+
+        await this.$axios
+          .post(URL, PAYLOAD)
+          .then((response) => {
+            this.$router.replace('/')
+          })
+          .catch((error) => {
+            console.log(error.response)
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
+      } else {
+        this.notification = {
+          status: true,
+          color: 'error',
+          text: 'How far?',
+        }
+      }
     },
   },
 }
