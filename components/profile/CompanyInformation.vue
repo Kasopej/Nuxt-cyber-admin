@@ -23,13 +23,13 @@
         <div class="headline font-weight-bold accent--text">
           Company information
         </div>
-        <v-btn color="primary" @click="FORM.readOnly = !FORM.readOnly">
+        <v-btn color="primary" @click="updateProfile()">
           {{ FORM.readOnly ? 'Edit' : 'Update' }}
         </v-btn>
       </header>
 
       <v-row>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.name"
             block
@@ -38,7 +38,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.address"
             block
@@ -47,7 +47,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.type"
             block
@@ -56,7 +56,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.vat"
             block
@@ -65,7 +65,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.city"
             block
@@ -74,7 +74,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.postalCode"
             block
@@ -83,7 +83,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.country"
             block
@@ -92,7 +92,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.registrationNumber"
             block
@@ -101,7 +101,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.business"
             block
@@ -110,7 +110,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.identification"
             block
@@ -128,7 +128,7 @@
       </header>
 
       <v-row>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.firstName"
             block
@@ -137,7 +137,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.lastName"
             block
@@ -146,7 +146,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.dateOfBirth"
             block
@@ -156,7 +156,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.nationality"
             blockrepresentative.
@@ -165,7 +165,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.email"
             block
@@ -175,7 +175,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.postalCode"
             block
@@ -184,7 +184,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.country"
             block
@@ -193,7 +193,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.representative.phoneNumber"
             block
@@ -212,7 +212,7 @@
       </header>
 
       <v-row>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.currency"
             block
@@ -221,7 +221,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.accounting"
             block
@@ -230,7 +230,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.website"
             block
@@ -240,7 +240,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.ationality"
             block
@@ -249,7 +249,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.email"
             block
@@ -259,7 +259,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.postalCode"
             block
@@ -268,7 +268,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.Country"
             block
@@ -277,7 +277,7 @@
             :readonly="FORM.readOnly"
           />
         </v-col>
-        <v-col col="12" md="6">
+        <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.phoneNumber"
             block
@@ -329,6 +329,14 @@ export default {
         //   .finally(() => {
         //     // Close the loader
         //   })
+      }
+    },
+
+    updateProfile() {
+      if (this.FORM.readOnly) {
+        this.FORM.readOnly = !this.FORM.readOnly
+      } else {
+        console.log(JSON.stringify(this.FORM))
       }
     },
   },
