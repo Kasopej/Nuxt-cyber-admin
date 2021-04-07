@@ -9,7 +9,7 @@
       Create your <span class="success--text">Company</span> account
     </header>
 
-    <div>
+    <v-form ref="signUpForm">
       <v-text-field
         v-model="FORM.name"
         dense
@@ -20,21 +20,33 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="FORM.phoneNumber"
+        v-model="FORM.phone"
         dense
+        required
         outlined
         :rules="[rules.required]"
         label="Company Phone Number"
-        required
+        placeholder="+2348123456789"
       ></v-text-field>
 
       <v-text-field
         v-model="FORM.email"
         dense
+        required
         outlined
         :rules="[rules.required]"
         label="Company E-mail"
+        placeholder="example@email.com"
+      ></v-text-field>
+
+      <v-text-field
+        v-model="FORM.website"
+        dense
         required
+        outlined
+        label="Company Website"
+        :rules="[rules.required]"
+        placeholder="https://www.google.com"
       ></v-text-field>
 
       <v-text-field
@@ -57,17 +69,21 @@
         outlined
         password
         label="Confirm Password"
-        :rules="[rules.required]"
+        :rules="[
+          (value) =>
+            value === FORM.password ||
+            'The password confirmation does not match.',
+        ]"
         :type="showConfirmPassword ? 'text' : 'password'"
         :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showConfirmPassword = !showConfirmPassword"
       ></v-text-field>
 
-      <v-btn block color="primary" @click="login"> Sign Up </v-btn>
-    </div>
+      <v-btn block color="primary" @click="signUp"> Sign Up </v-btn>
+    </v-form>
 
     <div class="py-4">
-      <v-checkbox v-model="FORM.acceptTerms">
+      <v-checkbox v-model="FORM.acceptTerms" required>
         <template #label>
           <div>
             By clicking sign up, you hereby are in agreement with our
@@ -109,9 +125,32 @@ export default {
   head: { title: 'Signup' },
 
   methods: {
-    login() {
-      console.log(this.FORM)
-      this.$router.replace('/')
+    async signUp() {
+      if (this.$refs.signUpForm.validate() && this.FORM.acceptTerms) {
+        this.$nuxt.$loading.start()
+        console.log(this.FORM)
+
+        const URL = `/register`
+        const PAYLOAD = this.FORM
+
+        await this.$axios
+          .post(URL, PAYLOAD)
+          .then((response) => {
+            this.$router.replace('/')
+          })
+          .catch((error) => {
+            this.notification = {
+              status: true,
+              color: 'error',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            }
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
+      }
     },
   },
 }
