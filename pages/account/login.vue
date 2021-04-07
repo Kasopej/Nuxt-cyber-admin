@@ -70,6 +70,7 @@ export default {
 
       valid: true,
       showPassword: false,
+
       rules: {
         required: (value) => !!value || 'Required.',
       },
