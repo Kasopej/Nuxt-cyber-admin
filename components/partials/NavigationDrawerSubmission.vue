@@ -16,6 +16,7 @@
         <div>
           <v-select
             dense
+            outlined
             :items="['All', 'New', 'Under Review', 'Accepted']"
             label="Filter"
           ></v-select>

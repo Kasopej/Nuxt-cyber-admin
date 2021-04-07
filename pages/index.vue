@@ -9,16 +9,8 @@
             <logo />
             <vuetify-logo />
           </div>
-          <v-card>
-            <div>
-              <div>
-                {{ $store.state.auth.user }}
-              </div>
-              <div>
-                {{ $store.state.auth.loggedin }}
-              </div>
-            </div>
 
+          <v-card>
             <v-card-title class="headline">
               Welcome to the Vuetify + Nuxt.js template
             </v-card-title>
