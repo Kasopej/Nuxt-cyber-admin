@@ -29,6 +29,12 @@ export default {
     continuous: true,
   },
 
+  loadingIndicator: {
+    name: 'rotating-plane',
+    color: '#c504da',
+    background: 'white',
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -55,6 +61,12 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    [
+      'nuxt-vuex-localstorage',
+      {
+        localStorage: ['auth', 'localStorage'],
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -101,5 +113,9 @@ export default {
   publicRuntimeConfig: {
     axiosTimeout: 3000,
     baseURL: process.env.BASE_URL,
+  },
+
+  generate: {
+    fallback: true,
   },
 }
