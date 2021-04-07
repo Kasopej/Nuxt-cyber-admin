@@ -98,9 +98,10 @@ export default {
 
   layout: 'dashboard',
   middleware: 'auth',
+
   data() {
     return {
-      USER: this.$store.state.user,
+      USER: this.$store.state.auth.user,
     }
   },
 }
