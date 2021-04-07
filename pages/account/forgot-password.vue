@@ -16,7 +16,7 @@
               v-model="FORM.email"
               dense
               outlined
-              :rules="[rules.required]"
+              :rules="[...rules.required]"
               label="E-mail"
               required
             ></v-text-field>
@@ -48,7 +48,7 @@
               v-model="FORM.token"
               dense
               outlined
-              :rules="[rules.required]"
+              :rules="[...rules.required]"
               label="OTP"
               required
               placeholder="000000"
@@ -61,7 +61,7 @@
               outlined
               password
               label="Password"
-              :rules="[rules.password]"
+              :rules="[...rules.password]"
               :type="showPassword ? 'text' : 'password'"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="showPassword = !showPassword"
@@ -75,7 +75,7 @@
               password
               label="Confirm Password"
               :rules="[
-                (value) =>
+                ...(value) =>
                   value === FORM.password ||
                   'The password confirmation does not match.',
               ]"
@@ -113,6 +113,7 @@
 <script>
 export default {
   layout: 'account',
+  middleware: 'guest',
 
   data() {
     return {

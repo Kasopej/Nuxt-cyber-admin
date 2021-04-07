@@ -59,6 +59,7 @@
 <script>
 export default {
   layout: 'account',
+  middleware: 'guest',
 
   data() {
     return {
@@ -92,6 +93,7 @@ export default {
         await this.$axios
           .post(URL, PAYLOAD)
           .then((response) => {
+            this.$store.commit('auth/LOG_USER_IN', response.data)
             this.$router.replace('/')
           })
           .catch((error) => {

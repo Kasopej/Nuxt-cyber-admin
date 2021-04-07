@@ -16,7 +16,7 @@
         required
         outlined
         label="Company Name"
-        :rules="[rules.name]"
+        :rules="[...rules.name]"
       ></v-text-field>
 
       <v-text-field
@@ -26,7 +26,7 @@
         outlined
         label="Company Phone Number"
         placeholder="+2348123456789"
-        :rules="[rules.phone]"
+        :rules="[...rules.phone]"
       ></v-text-field>
 
       <v-text-field
@@ -36,7 +36,7 @@
         outlined
         label="Company E-mail"
         placeholder="example@email.com"
-        :rules="[rules.email]"
+        :rules="[...rules.email]"
       ></v-text-field>
 
       <v-text-field
@@ -45,7 +45,7 @@
         required
         outlined
         label="Company Website"
-        :rules="[rules.required]"
+        :rules="[...rules.required]"
         placeholder="https://www.google.com"
       ></v-text-field>
 
@@ -56,7 +56,7 @@
         outlined
         password
         label="Password"
-        :rules="[rules.password]"
+        :rules="[...rules.password]"
         :type="showPassword ? 'text' : 'password'"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showPassword = !showPassword"
@@ -70,7 +70,7 @@
         password
         label="Confirm Password"
         :rules="[
-          (value) =>
+          ...(value) =>
             value === FORM.password ||
             'The password confirmation does not match.',
         ]"
@@ -111,6 +111,7 @@
 <script>
 export default {
   layout: 'account',
+  middleware: 'guest',
 
   data() {
     return {
