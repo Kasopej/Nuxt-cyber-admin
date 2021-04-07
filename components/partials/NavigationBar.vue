@@ -11,19 +11,19 @@
     <div class="d-none d-lg-flex align-center flex-grow-1 pa-4">
       <v-btn
         large
-        class="secondary primary--text mx-4 rounded-lg elevation-0"
+        class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"
         to="/"
         >Programs</v-btn
       >
       <v-btn
         large
-        class="secondary primary--text mx-4 rounded-lg elevation-0"
+        class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"
         to="/submission"
         >Submission</v-btn
       >
       <v-btn
         large
-        class="secondary primary--text mx-4 rounded-lg elevation-0"
+        class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"
         to="/profile"
         >Profile</v-btn
       >
@@ -44,6 +44,7 @@ export default {
       default: false,
     },
   },
+
   data() {
     return {
       drawer: true,
