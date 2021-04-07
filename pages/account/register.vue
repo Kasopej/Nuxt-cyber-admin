@@ -1,22 +1,22 @@
 <template>
-  <v-form ref="form" v-model="valid" class="pa-8 col-12" lazy-validation>
-    <div class="text-center pb-4">
+  <v-form ref="signUpForm" v-model="valid" class="pa-8 col-12">
+    <nav class="text-center pb-4">
       Already have an account?
       <nuxt-link to="/account/login/">Sign In</nuxt-link>
-    </div>
+    </nav>
 
     <header class="display-1 font-weight-bold text-center py-4">
       Create your <span class="success--text">Company</span> account
     </header>
 
-    <v-form ref="signUpForm">
+    <section>
       <v-text-field
         v-model="FORM.name"
         dense
-        outlined
-        :rules="[rules.required]"
-        label="Company Name"
         required
+        outlined
+        label="Company Name"
+        :rules="[rules.name]"
       ></v-text-field>
 
       <v-text-field
@@ -24,9 +24,9 @@
         dense
         required
         outlined
-        :rules="[rules.required]"
         label="Company Phone Number"
         placeholder="+2348123456789"
+        :rules="[rules.phone]"
       ></v-text-field>
 
       <v-text-field
@@ -34,9 +34,9 @@
         dense
         required
         outlined
-        :rules="[rules.required]"
         label="Company E-mail"
         placeholder="example@email.com"
+        :rules="[rules.email]"
       ></v-text-field>
 
       <v-text-field
@@ -56,7 +56,7 @@
         outlined
         password
         label="Password"
-        :rules="[rules.required]"
+        :rules="[rules.password]"
         :type="showPassword ? 'text' : 'password'"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showPassword = !showPassword"
@@ -80,10 +80,10 @@
       ></v-text-field>
 
       <v-btn block color="primary" @click="signUp"> Sign Up </v-btn>
-    </v-form>
+    </section>
 
     <div class="py-4">
-      <v-checkbox v-model="FORM.acceptTerms" required>
+      <v-checkbox v-model="FORM.acceptTerms">
         <template #label>
           <div>
             By clicking sign up, you hereby are in agreement with our
@@ -98,6 +98,13 @@
         </template>
       </v-checkbox>
     </div>
+
+    <v-snackbar v-model="notification.status" :color="notification.color">
+      <v-icon class="mr-3">{{
+        notification.icon || 'mdi-information-outline'
+      }}</v-icon>
+      {{ notification.text }}
+    </v-snackbar>
   </v-form>
 </template>
 
@@ -113,11 +120,44 @@ export default {
         acceptTerms: false,
       },
 
+      notification: {},
+
       valid: true,
       showPassword: false,
       showConfirmPassword: false,
+
       rules: {
-        required: (value) => !!value || 'Required.',
+        required: [(value) => !!value || 'This field is required'],
+        name: [
+          (v) => !!v || 'Company name is required',
+          (v) =>
+            (v && v.length <= 100) || 'Name must be less than 100 characters',
+        ],
+        phone: [
+          (v) => !!v || 'Company Phone number is required',
+          (v) =>
+            !v ||
+            /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+              v
+            ) ||
+            'Invalid Phone number',
+        ],
+        email: [
+          (v) => !!v || 'Company Email is required',
+          (v) =>
+            !v ||
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+            'E-mail must be valid',
+        ],
+        password: [
+          (value) => {
+            const pattern = /^(?=.*[a-z]){3,}(?=.*[A-Z]){2,}(?=.*[0-9]){2,}(?=.*[!@#$%^&*()--__=~`|'"{}+.]){1,}.{8,}$/
+            return (
+              pattern.test(value) ||
+              'Min. 8 characters with at least one capital letter, a number and a special character.'
+            )
+          },
+        ],
       },
     }
   },
@@ -128,7 +168,6 @@ export default {
     async signUp() {
       if (this.$refs.signUpForm.validate() && this.FORM.acceptTerms) {
         this.$nuxt.$loading.start()
-        console.log(this.FORM)
 
         const URL = `/register`
         const PAYLOAD = this.FORM
