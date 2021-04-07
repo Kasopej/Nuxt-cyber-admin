@@ -85,8 +85,6 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
-        console.log(this.$config.baseURL)
-
         const URL = `/login`
         const PAYLOAD = this.FORM
 
@@ -96,17 +94,17 @@ export default {
             this.$router.replace('/')
           })
           .catch((error) => {
-            console.log(error.response)
+            this.notification = {
+              status: true,
+              color: 'error',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            }
           })
           .finally(() => {
             this.$nuxt.$loading.finish()
           })
-      } else {
-        this.notification = {
-          status: true,
-          color: 'error',
-          text: 'How far?',
-        }
       }
     },
   },
