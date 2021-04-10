@@ -18,7 +18,7 @@
       </label>
     </div>
 
-    <section>
+    <section class="py-8">
       <v-tabs v-model="profileEditTab" color="accent" grow>
         <v-tab class="text-capitalize">
           <v-icon class="mr-3">mdi-contacts-outline</v-icon>
@@ -40,7 +40,7 @@
           </span>
         </v-tab>
 
-        <v-tabs-items v-model="profileEditTab" class="pt-4">
+        <v-tabs-items v-model="profileEditTab" class="pt-8">
           <v-tab-item>
             <profile-modify-contact-info />
           </v-tab-item>

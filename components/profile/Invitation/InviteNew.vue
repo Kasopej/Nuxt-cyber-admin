@@ -5,7 +5,9 @@
         <v-select
           outlined
           label="Select a Role"
-          :items="['Report Auditor', 'Report Viewer', 'Report Contributor']"
+          :items="roles"
+          item-text="title"
+          item-value="value"
         ></v-select>
       </v-col>
       <v-col cols="12" sm="6" class="py-0">
@@ -25,6 +27,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      roles: [
+        { title: 'Report XX Auditor', value: 'auditor' },
+        { title: 'Report Viewer', value: 'viewer' },
+        { title: 'Report Contributor', value: 'contributor' },
+      ],
+      FORM: {},
+    }
+  },
+
   methods: {
     sendInvitation() {
       this.$store.commit('notification/SHOW', {

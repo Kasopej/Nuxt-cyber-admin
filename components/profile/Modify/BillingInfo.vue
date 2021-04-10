@@ -6,7 +6,6 @@
           <v-text-field
             v-model="FORM.billing.currency"
             block
-            dense
             outlined
             label="Wallet Currency"
             :readonly="FORM.readOnly"
@@ -16,7 +15,6 @@
           <v-text-field
             v-model="FORM.billing.accounting"
             block
-            dense
             outlined
             label="Accounting"
             :readonly="FORM.readOnly"
@@ -26,7 +24,6 @@
           <v-text-field
             v-model="FORM.billing.website"
             block
-            dense
             outlined
             label="Website"
             type="url"
@@ -37,7 +34,6 @@
           <v-text-field
             v-model="FORM.billing.ationality"
             block
-            dense
             outlined
             label="Nationality"
             :readonly="FORM.readOnly"
@@ -47,7 +43,6 @@
           <v-text-field
             v-model="FORM.billing.email"
             block
-            dense
             outlined
             label="Email"
             type="email"
@@ -58,7 +53,6 @@
           <v-text-field
             v-model="FORM.billing.postalCode"
             block
-            dense
             outlined
             label="Postal Code"
             :readonly="FORM.readOnly"
@@ -68,7 +62,6 @@
           <v-text-field
             v-model="FORM.billing.Country"
             block
-            dense
             outlined
             label="country"
             :readonly="FORM.readOnly"
@@ -78,7 +71,6 @@
           <v-text-field
             v-model="FORM.billing.phoneNumber"
             block
-            dense
             outlined
             label="Phone Number"
             :readonly="FORM.readOnly"
