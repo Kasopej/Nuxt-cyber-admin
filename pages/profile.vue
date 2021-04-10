@@ -12,7 +12,7 @@
 
           <v-tabs-items v-model="tab">
             <v-tab-item>
-              <profile-company-information />
+              <profile-modify-index-page />
             </v-tab-item>
 
             <v-tab-item>

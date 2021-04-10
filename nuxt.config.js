@@ -32,7 +32,7 @@ export default {
   loadingIndicator: {
     name: 'rotating-plane',
     color: '#c504da',
-    background: 'white',
+    background: '#f9eded',
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
