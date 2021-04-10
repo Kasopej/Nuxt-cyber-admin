@@ -3,6 +3,8 @@
     <v-main>
       <nuxt />
     </v-main>
+
+    <partials-notification-toast />
   </v-app>
 </template>
 

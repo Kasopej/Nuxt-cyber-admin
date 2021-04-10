@@ -2,6 +2,8 @@
   <v-app>
     <partials-navigation-bar />
     <nuxt />
+
+    <partials-notification-toast />
   </v-app>
 </template>
 

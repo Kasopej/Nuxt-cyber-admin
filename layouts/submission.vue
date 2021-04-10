@@ -7,6 +7,8 @@
         <partials-navigation-bar submission />
         <nuxt class="pa-4" />
       </main>
+
+      <partials-notification-toast />
     </div>
   </v-app>
 </template>

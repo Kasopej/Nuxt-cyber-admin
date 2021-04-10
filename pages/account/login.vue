@@ -39,20 +39,6 @@
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
       <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
     </div>
-
-    <!--     
-    <notification-toast
-      :status="notification.status"
-      :text="notification.text"
-      :color="notification.color"
-    /> -->
-
-    <v-snackbar v-model="notification.status" :color="notification.color">
-      <v-icon class="mr-3">{{
-        notification.icon || 'mdi-information-outline'
-      }}</v-icon>
-      {{ notification.text }}
-    </v-snackbar>
   </v-form>
 </template>
 
@@ -75,8 +61,6 @@ export default {
       rules: {
         required: (value) => !!value || 'Required.',
       },
-
-      notification: {},
     }
   },
 
@@ -97,13 +81,12 @@ export default {
             this.$router.replace('/')
           })
           .catch((error) => {
-            this.notification = {
-              status: true,
+            this.$store.commit('notification/SHOW', {
               color: 'error',
               text: error.response
                 ? error.response.data.message
                 : "Sorry, that didn't work. Please try again",
-            }
+            })
           })
           .finally(() => {
             this.$nuxt.$loading.finish()

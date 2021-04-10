@@ -100,13 +100,6 @@
         </v-form>
       </v-stepper-content>
     </v-stepper-items>
-
-    <v-snackbar v-model="notification.status" :color="notification.color">
-      <v-icon class="mr-3">{{
-        notification.icon || 'mdi-information-outline'
-      }}</v-icon>
-      {{ notification.text }}
-    </v-snackbar>
   </v-stepper>
 </template>
 
@@ -126,8 +119,6 @@ export default {
       valid: true,
       showPassword: false,
       showConfirmPassword: false,
-
-      notification: {},
 
       rules: {
         required: [(value) => !!value || 'This field is required'],
@@ -155,11 +146,8 @@ export default {
 
   methods: {
     async sendEmail() {
-      console.log(this.FORM)
-
       if (this.$refs.form1.validate()) {
         this.$nuxt.$loading.start()
-        console.log(this.FORM)
 
         const URL = `/reset-password`
         const PAYLOAD = this.FORM
@@ -170,13 +158,12 @@ export default {
             this.step = 2
           })
           .catch((error) => {
-            this.notification = {
-              status: true,
-              color: 'accent',
+            this.$store.commit('notification/SHOW', {
+              color: 'error',
               text: error.response
                 ? error.response.data.message
                 : "Sorry, that didn't work. Please try again",
-            }
+            })
           })
           .finally(() => {
             this.$nuxt.$loading.finish()
@@ -185,11 +172,8 @@ export default {
     },
 
     async resetPassword() {
-      console.log(this.FORM)
-
       if (this.$refs.form2.validate()) {
         this.$nuxt.$loading.start()
-        console.log(this.FORM)
 
         const URL = `/reset-password`
         const PAYLOAD = this.FORM
@@ -200,13 +184,12 @@ export default {
             this.$router.replace('/')
           })
           .catch((error) => {
-            this.notification = {
-              status: true,
-              color: 'error',
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
               text: error.response
                 ? error.response.data.message
                 : "Sorry, that didn't work. Please try again",
-            }
+            })
           })
           .finally(() => {
             this.$nuxt.$loading.finish()
