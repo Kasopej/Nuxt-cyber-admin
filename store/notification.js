@@ -1,9 +1,9 @@
 export const strict = false
 
 export const state = () => ({
-  color: 'red',
-  status: true,
-  text: '{Sample Text}',
+  color: null,
+  status: false,
+  text: null,
   icon: null,
   timeout: 5000,
 })
@@ -22,10 +22,10 @@ export const mutations = {
   },
 
   CLOSE(state) {
+    state.text = null
+    state.icon = null
+    state.color = null
     state.status = false
-    state.text = '<< TEXT HERE >>'
-    state.icon = 'mdi-information-outline'
-    state.color = 'accent'
     state.timeout = 5000
   },
 }

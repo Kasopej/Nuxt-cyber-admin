@@ -117,6 +117,11 @@ export default {
         this.FORM.readOnly = !this.FORM.readOnly
       } else {
         console.log(JSON.stringify(this.FORM))
+
+        this.$store.commit('notification/SHOW', {
+          color: 'accent',
+          text: 'Feature under construction',
+        })
       }
     },
   },

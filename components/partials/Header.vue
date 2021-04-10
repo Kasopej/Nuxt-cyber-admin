@@ -4,7 +4,7 @@
     style="background: linear-gradient(to right, #c504da, #6921b6)"
   >
     <div
-      class="py-16 text-center white--text display-1 font-weight-bold"
+      class="py-16 text-center white--text display-2 font-weight-bold"
       v-text="title"
     />
   </header>
