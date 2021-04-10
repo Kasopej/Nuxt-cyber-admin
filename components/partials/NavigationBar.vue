@@ -32,6 +32,10 @@
     <v-btn large class="grey lighten-3 rounded-lg elevation-0 mx-4 my-3"
       >Subscribe Now</v-btn
     >
+
+    <v-btn icon large color="accent" class="mx-4" @click="logout()"
+      ><v-icon>mdi-logout</v-icon></v-btn
+    >
     <v-app-bar-nav-icon class="d-lg-none mr-2" @click.stop="drawer = !drawer" />
   </nav>
 </template>
@@ -49,6 +53,13 @@ export default {
     return {
       drawer: true,
     }
+  },
+
+  methods: {
+    logout() {
+      this.$store.commit('auth/LOG_USER_OUT')
+      this.$router.replace('/account/login')
+    },
   },
 }
 </script>
