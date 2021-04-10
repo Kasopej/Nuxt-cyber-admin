@@ -32,13 +32,15 @@
       >
     </div>
 
-    <v-btn large class="grey lighten-3 rounded-lg elevation-0 mx-4 my-3"
-      >Subscribe Now</v-btn
-    >
+    <div>
+      <v-btn large class="grey lighten-3 rounded-lg elevation-0 mx-4 my-3"
+        >Subscribe Now</v-btn
+      >
 
-    <v-btn icon large color="accent" class="mx-4" @click="logout()"
-      ><v-icon>mdi-logout</v-icon></v-btn
-    >
+      <v-btn icon large color="accent" class="mr-4" @click="logout()"
+        ><v-icon>mdi-logout</v-icon></v-btn
+      >
+    </div>
     <v-app-bar-nav-icon class="d-lg-none mr-2" @click.stop="drawer = !drawer" />
   </nav>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-4">
+  <div class="pa-md-4">
     <div class="pt-8">
       <label>
         <v-img
@@ -19,32 +19,39 @@
     </div>
 
     <section>
-      <v-tabs v-model="profileEditTab" color="accent" class="py-8">
+      <v-tabs v-model="profileEditTab" color="accent" grow>
         <v-tab class="text-capitalize">
           <v-icon class="mr-3">mdi-contacts-outline</v-icon>
-          <span> Company Information</span>
+          <span>
+            Company <span class="d-none d-md-inline">Information</span></span
+          >
         </v-tab>
         <v-tab class="text-capitalize">
           <v-icon class="mr-3">mdi-account-edit-outline</v-icon>
-          <span> Representative Information</span></v-tab
+          <span>
+            Representative
+            <span class="d-none d-md-inline">Information</span></span
+          ></v-tab
         >
         <v-tab class="text-capitalize">
           <v-icon class="mr-3">mdi-credit-card-settings-outline</v-icon>
-          <span> Information </span>
+          <span>
+            Billing <span class="d-none d-md-inline">Information</span>
+          </span>
         </v-tab>
-      </v-tabs>
 
-      <v-tabs-items v-model="profileEditTab">
-        <v-tab-item>
-          <profile-modify-contact-info />
-        </v-tab-item>
-        <v-tab-item>
-          <profile-modify-representative-info />
-        </v-tab-item>
-        <v-tab-item>
-          <profile-modify-billing-info />
-        </v-tab-item>
-      </v-tabs-items>
+        <v-tabs-items v-model="profileEditTab" class="pt-4">
+          <v-tab-item>
+            <profile-modify-contact-info />
+          </v-tab-item>
+          <v-tab-item>
+            <profile-modify-representative-info />
+          </v-tab-item>
+          <v-tab-item>
+            <profile-modify-billing-info />
+          </v-tab-item>
+        </v-tabs-items>
+      </v-tabs>
     </section>
   </div>
 </template>

@@ -4,7 +4,7 @@
 
     <v-main>
       <v-container>
-        <div class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
+        <div class="white mt-n16 rounded-lg pa-2 pa-md-4 pa-md-8 mx-1">
           <v-tabs v-model="tab" grow>
             <v-tab class="text-capitalize">Profile</v-tab>
             <v-tab class="text-capitalize">Researcher Management</v-tab>
