@@ -21,22 +21,23 @@
     <section class="py-8">
       <v-tabs v-model="profileEditTab" color="accent" grow>
         <v-tab class="text-capitalize">
-          <v-icon class="mr-3">mdi-contacts-outline</v-icon>
+          <v-icon class="mr-3">mdi-contacts</v-icon>
           <span>
-            Company <span class="d-none d-md-inline">Information</span></span
+            Company
+            <span class="d-none d-md-inline ml-2">Information</span></span
           >
         </v-tab>
         <v-tab class="text-capitalize">
-          <v-icon class="mr-3">mdi-account-edit-outline</v-icon>
+          <v-icon class="mr-3">mdi-account-edit</v-icon>
           <span>
             Representative
-            <span class="d-none d-md-inline">Information</span></span
+            <span class="d-none d-md-inline ml-2">Information</span></span
           ></v-tab
         >
         <v-tab class="text-capitalize">
-          <v-icon class="mr-3">mdi-credit-card-settings-outline</v-icon>
+          <v-icon class="mr-3">mdi-credit-card-settings</v-icon>
           <span>
-            Billing <span class="d-none d-md-inline">Information</span>
+            Billing <span class="d-none d-md-inline ml-2">Information</span>
           </span>
         </v-tab>
 
