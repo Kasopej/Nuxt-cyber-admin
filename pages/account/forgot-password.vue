@@ -159,7 +159,7 @@ export default {
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
-              color: 'error',
+              color: 'accent',
               text: error.response
                 ? error.response.data.message
                 : "Sorry, that didn't work. Please try again",
