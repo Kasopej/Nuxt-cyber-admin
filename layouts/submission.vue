@@ -3,13 +3,16 @@
     <div class="d-flex w-100" style="max-height: 100vh">
       <partials-navigation-drawer-submission />
 
-      <main class="flex-grow-1 overflow-y-auto">
+      <main
+        style="height: 100vh"
+        class="flex-grow-1 d-flex flex-column overflow-y-hidden"
+      >
         <partials-navigation-bar submission />
-        <nuxt class="pa-4" />
+        <nuxt class="flex-grow-1 overflow-y-auto pa-4" />
       </main>
-
-      <partials-notification-toast />
     </div>
+
+    <partials-notification-toast />
   </v-app>
 </template>
 

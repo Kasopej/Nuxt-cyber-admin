@@ -1,5 +1,8 @@
 <template>
-  <nav class="d-flex justify-space-between align-center elevation-3">
+  <nav
+    class="d-flex justify-space-between align-center elevation-3"
+    style="z-index: 9999"
+  >
     <nuxt-link
       v-if="!submission && !$vuetify.breakpoint.mobile"
       to="/"

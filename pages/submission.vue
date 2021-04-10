@@ -1,5 +1,7 @@
 <template>
-  <div style="height: 150vh">S U B M I S S I O N</div>
+  <main>
+    <div v-for="i in 100" :key="i">S U B M I S S I O N {{ i }}</div>
+  </main>
 </template>
 
 <script>

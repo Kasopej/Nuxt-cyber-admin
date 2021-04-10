@@ -10,6 +10,14 @@
     </header>
 
     <v-form ref="loginForm">
+      <v-select
+        v-model="FORM.role"
+        dense
+        outlined
+        label="Who are you?"
+        :items="['Company Admin', 'Company Representative']"
+      ></v-select>
+
       <v-text-field
         v-model="FORM.email"
         dense

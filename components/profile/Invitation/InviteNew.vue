@@ -3,9 +3,9 @@
     <v-row class="py-8">
       <v-col cols="12" sm="6" class="py-0">
         <v-select
-          :items="['Report Auditor', 'Report Viewer', 'Report Contributor']"
-          label="Select a Role"
           outlined
+          label="Select a Role"
+          :items="['Report Auditor', 'Report Viewer', 'Report Contributor']"
         ></v-select>
       </v-col>
       <v-col cols="12" sm="6" class="py-0">
