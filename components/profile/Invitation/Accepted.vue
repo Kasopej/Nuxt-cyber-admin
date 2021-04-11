@@ -7,7 +7,12 @@
         >
           <div>{{ user.email }}</div>
           <div>
-            <v-btn small color="red" outlined class="text-capitalize"
+            <v-btn
+              small
+              color="red"
+              outlined
+              class="text-capitalize"
+              @click="revokeUser(user.email)"
               >Revoke <v-icon small class="ml-3">mdi-cancel</v-icon></v-btn
             >
           </div>
@@ -25,11 +30,40 @@ export default {
   data() {
     return {
       revokedUsers: [
-        { id: 2, email: 'olajide.a.hammed@gmail.com' },
-        { id: 0, email: 'lvvjxbpunpi@biojuris.com' },
+        { id: 0, email: 'olajide.a.hammed@gmail.com' },
+        { id: 1, email: 'lvvjxbpunpi@biojuris.com' },
         { id: 2, email: 'xyz.lvvjxb.punpi@biojuris.com' },
       ],
     }
+  },
+
+  methods: {
+    async revokeUser(email) {
+      this.$nuxt.$loading.finish()
+
+      const URL = `/revoke-member`
+      // Make upload request to the API
+      await this.$axios
+        .$post(URL, { email })
+        .then(() => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Invitation Revoked',
+          })
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+    },
   },
 }
 </script>

@@ -29,7 +29,7 @@ export default {
     return {
       revokedUsers: [
         { id: 0, email: 'lvvjxbpunpi@biojuris.com' },
-        { id: 2, email: 'olajide.a.hammed@gmail.com' },
+        { id: 1, email: 'olajide.a.hammed@gmail.com' },
         { id: 2, email: 'xyz.lvvjxb.punpi@biojuris.com' },
       ],
     }
