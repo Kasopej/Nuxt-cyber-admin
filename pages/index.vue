@@ -26,12 +26,15 @@
                     Program Name
                   </header>
                   <div class="grey--text text--darken-2 py-3">
-                    $150 - $2,500
+                    <v-icon small class="mr-2">mdi-gift</v-icon> $150 - $2,500
+                    Per vulnerability
                   </div>
                 </div>
 
                 <div class="grey--text text--darken-3">
-                  <div class="pb-1">Company Name</div>
+                  <div class="pb-1">
+                    <v-icon small class="mr-2">mdi-factory</v-icon>Company Name
+                  </div>
                   <small><em>Vulnerability Disclosure Program</em></small>
                 </div>
               </div>
