@@ -5,81 +5,49 @@
     <v-main>
       <v-container>
         <div class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
-          <div class="text-center">
-            <logo />
-            <vuetify-logo />
+          <div class="d-flex justify-space-between pb-2">
+            <div class="headline">Dashboard</div>
+            <v-btn color="primary">Add</v-btn>
           </div>
+          <v-divider />
 
-          <v-card>
-            <v-card-title class="headline">
-              Welcome to the Vuetify + Nuxt.js template
-            </v-card-title>
-            <v-card-text>
-              <p>
-                Vuetify is a progressive Material Design component framework for
-                Vue.js. It was designed to empower developers to create amazing
-                applications.
-              </p>
-              <p>
-                For more information on Vuetify, check out the
-                <a
-                  href="https://vuetifyjs.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  documentation </a
-                >.
-              </p>
-              <p>
-                If you have questions, please join the official
-                <a
-                  href="https://chat.vuetifyjs.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="chat"
-                >
-                  discord </a
-                >.
-              </p>
-              <p>
-                Find a bug? Report it on the github
-                <a
-                  href="https://github.com/vuetifyjs/vuetify/issues"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="contribute"
-                >
-                  issue board </a
-                >.
-              </p>
-              <p>
-                Thank you for developing with Vuetify and I look forward to
-                bringing more exciting features in the future.
-              </p>
-              <div class="text-xs-right">
-                <em><small>&mdash; John Leider</small></em>
+          <v-card v-for="i in 5" :key="i" class="d-flex mt-6">
+            <v-img
+              src="/images/dummy.jpg"
+              width="250"
+              max-width="250"
+              height="200"
+              cover
+            />
+            <div class="flex-grow-1 d-flex justify-space-between w-full pa-4">
+              <div class="flex-grow-1 d-flex flex-column justify-space-between">
+                <div>
+                  <header class="headline font-weight-bold">
+                    Program Name
+                  </header>
+                  <div class="grey--text text--darken-2 py-3">
+                    $150 - $2,500
+                  </div>
+                </div>
+
+                <div class="grey--text text--darken-3">
+                  <div class="pb-1">Company Name</div>
+                  <small><em>Vulnerability Disclosure Program</em></small>
+                </div>
               </div>
-              <hr class="my-3" />
-              <a
-                href="https://nuxtjs.org/"
-                target="_blank"
-                rel="noopener noreferrer"
+
+              <div
+                class="d-flex flex-column justify-space-between text-right subtitle-1"
               >
-                Nuxt Documentation
-              </a>
-              <br />
-              <a
-                href="https://github.com/nuxt/nuxt.js"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Nuxt GitHub
-              </a>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-            </v-card-actions>
+                <div class="grey--text text--darken-2 px-4">In Progress</div>
+                <v-btn
+                  text
+                  color="accent"
+                  class="text-capitalize subtitle-1 font-weight-bold"
+                  >View Summary</v-btn
+                >
+              </div>
+            </div>
           </v-card>
         </div>
       </v-container>
@@ -88,15 +56,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo,
-  },
-
   layout: 'dashboard',
   middleware: 'auth',
 }
