@@ -1,10 +1,12 @@
 // This is the middleware for pages that requires authentication
 
-export default ({ store, redirect }) => {
+export default ({ $axios, store, redirect }) => {
   let authenticated = ''
 
   try {
     authenticated = store.state.auth.loggedIn
+    // Adds header: `Authorization: Bearer XXXX` to requests
+    $axios.setToken(store.state.auth.user.token, 'Bearer')
   } catch {
     // do nothing
   }

@@ -3,6 +3,7 @@
     <v-row class="py-8">
       <v-col cols="12" sm="6" class="py-0">
         <v-select
+          v-model="FORM.role"
           outlined
           :items="roles"
           item-text="title"
@@ -13,6 +14,7 @@
       </v-col>
       <v-col cols="12" sm="6" class="py-0">
         <v-text-field
+          v-model="FORM.email"
           block
           outlined
           label="E-mail"
@@ -31,11 +33,7 @@
 export default {
   data() {
     return {
-      roles: [
-        { title: 'Report Auditor', value: 'auditor' },
-        { title: 'Report Viewer', value: 'viewer' },
-        { title: 'Report Contributor', value: 'contributor' },
-      ],
+      roles: ['Report Auditor', 'Report Viewer', 'Report Contributor'],
       FORM: {},
       rules: {
         required: [(value) => !!value || 'This field is required'],
@@ -51,11 +49,33 @@ export default {
   },
 
   methods: {
-    sendInvitation() {
-      this.$store.commit('notification/SHOW', {
-        color: 'accent',
-        text: 'Feature under construction',
-      })
+    async sendInvitation() {
+      if (this.$refs.invitationForm.validate()) {
+        const URLL = `/invite-member`
+        // Make upload request to the API
+        await this.$axios
+          .$post(URLL, this.FORM)
+          .then(() => {
+            this.FORM = {}
+
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Invitation Sent Successfully',
+            })
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            // Close the loader
+          })
+      }
     },
   },
 }
