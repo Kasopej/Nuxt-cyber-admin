@@ -24,7 +24,7 @@
       </div>
 
       <section class="overflow-y-auto">
-        <div v-for="x in 50" :key="x">
+        <div v-for="x in 50" :key="x" @click="$router.push(`#!/${x}`)">
           <v-hover v-slot="{ hover }">
             <article class="pa-4" :class="hover ? 'secondary' : ''">
               <span
