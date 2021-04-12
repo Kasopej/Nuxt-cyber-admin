@@ -61,19 +61,21 @@
           </tr>
           <tr>
             <td>REWARD GRID</td>
-            <td class="d-flex justify-space-between">
-              <div
-                v-for="reward in rewards"
-                :key="reward.severtity"
-                class="text-center mx-2"
-              >
-                <div class="grey--text darken-3 pb-2">
-                  {{ reward.severtity }}
-                </div>
-                <div>
-                  <v-btn rounded color="secondary" class="primary--text"
-                    >$ {{ reward.price }}</v-btn
-                  >
+            <td>
+              <div class="d-flex justify-space-around py-1">
+                <div
+                  v-for="reward in rewards"
+                  :key="reward.severtity"
+                  class="text-center mx-2"
+                >
+                  <div class="grey--text darken-3 pb-2">
+                    {{ reward.severtity }}
+                  </div>
+                  <div>
+                    <v-btn rounded color="secondary" class="primary--text"
+                      >$ {{ reward.price }}</v-btn
+                    >
+                  </div>
                 </div>
               </div>
             </td>
