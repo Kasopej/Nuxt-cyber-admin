@@ -23,7 +23,7 @@
           </div>
 
           <div class="py-4">
-            <v-text-field block outlined label="Program Name" />
+            <v-text-field block outlined label="Program Title" />
           </div>
         </main>
       </v-container>
@@ -42,7 +42,7 @@ export default {
         {
           text: 'Dashboard',
           disabled: false,
-          to: 'breadcrumbs_dashboard',
+          to: '/',
         },
         {
           text: 'Add Program',
