@@ -21,13 +21,13 @@
       <v-btn
         large
         class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"
-        to="/submission"
+        to="/submission/"
         >Submission</v-btn
       >
       <v-btn
         large
         class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"
-        to="/profile"
+        to="/profile/"
         >Profile</v-btn
       >
     </div>
