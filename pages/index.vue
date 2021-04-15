@@ -33,7 +33,8 @@
 
                 <div class="grey--text text--darken-3">
                   <div class="pb-1">
-                    <v-icon small class="mr-2">mdi-factory</v-icon>Company Name
+                    <v-icon small class="mr-2">mdi-counter</v-icon
+                    ><strong>3</strong> Submissions
                   </div>
                   <small><em>Vulnerability Disclosure Program</em></small>
                 </div>
