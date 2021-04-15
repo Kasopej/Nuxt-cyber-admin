@@ -93,27 +93,18 @@
       <v-col cols="12" md="4" class="px-4">
         <v-card class="px-4 py-8">
           <div class="d-flex justify-center">
-            <div class="accent text-center white--text rounded px-8 py-4 mx-1">
+            <div class="accent text-center white--text rounded px-8 py-3 mx-1">
               <div>CVSS Score</div>
               <div class="font-weight-bold">2.2</div>
             </div>
-            <div class="accent text-center white--text rounded px-8 py-4 mx-1">
+            <div class="accent text-center white--text rounded px-8 py-3 mx-1">
               <div>Severity</div>
               <div class="font-weight-bold">MEDIUM</div>
             </div>
           </div>
 
-          <div class="subtitle-1 text-center text-text-uppercase py-4">
-            { Vector String }
-          </div>
-
-          <header>
-            <div class="headline primary--text font-weight-bold pb-2">
-              Severity
-            </div>
-            <div class="grey--text text--darken-1 pb-4">
-              Please enter the relevant vector of the vulnerability
-            </div>
+          <header class="grey--text text--darken-1 text-center py-4">
+            Please enter the relevant vector of the vulnerability
           </header>
 
           <div class="py-2">
@@ -236,17 +227,29 @@
               value="1.5"
             ></v-rating>
           </div>
-          <div class="pt-4">
-            <v-btn block color="primary">Save Changes</v-btn>
+          <div class="py-2">
+            <v-autocomplete
+              v-model="FORM.tags"
+              :items="['tag 1', 'tag 2', 'tag 3']"
+              small-chips
+              label="Tags"
+              multiple
+              outlined
+              dense
+              chips
+            ></v-autocomplete>
           </div>
+          <v-row>
+            <v-col>
+              <v-btn color="primary">Save Changes</v-btn>
+            </v-col>
+            <v-col>
+              <v-btn text color="accent">Reset</v-btn>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
-
-    <div class="py-8">
-      <v-btn color="primary">Edit</v-btn>
-      <v-btn text color="accent"> + Add Tags</v-btn>
-    </div>
   </div>
 </template>
 
