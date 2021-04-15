@@ -92,6 +92,21 @@
 
       <v-col cols="12" md="4" class="px-4">
         <v-card class="px-4 py-8">
+          <div class="d-flex justify-center">
+            <div class="accent text-center white--text rounded px-8 py-4 mx-1">
+              <div>CVSS Score</div>
+              <div class="font-weight-bold">2.2</div>
+            </div>
+            <div class="accent text-center white--text rounded px-8 py-4 mx-1">
+              <div>Severity</div>
+              <div class="font-weight-bold">MEDIUM</div>
+            </div>
+          </div>
+
+          <div class="subtitle-1 text-center text-text-uppercase py-4">
+            { Vector String }
+          </div>
+
           <header>
             <div class="headline primary--text font-weight-bold pb-2">
               Severity
@@ -100,6 +115,7 @@
               Please enter the relevant vector of the vulnerability
             </div>
           </header>
+
           <div class="py-2">
             <div class="subtitle-1 font-weight-medium">Attack Vector</div>
             <v-btn-toggle
@@ -208,6 +224,17 @@
               <v-btn class="text-capitalize" value="high"> High </v-btn>
               <v-btn class="text-capitalize" value="low"> Low </v-btn>
             </v-btn-toggle>
+          </div>
+          <div class="py-4">
+            <div class="subtitle-1 font-weight-medium">Quality Rating</div>
+            <v-rating
+              v-model="FORM.qualityRating"
+              color="accent"
+              half-increments
+              hover
+              length="5"
+              value="1.5"
+            ></v-rating>
           </div>
           <div class="pt-4">
             <v-btn block color="primary">Save Changes</v-btn>
