@@ -1,93 +1,80 @@
 <template>
   <div class="py-6">
-    <div>
-      <span class="subtitle-1 font-weight-bold"> Submitted By:</span>
-      <nuxt-link to="/hacker/001" class="grey--text text--darken-2"
-        >Afolabi Olajide</nuxt-link
-      >
-      on
-      <span class="grey--text text--darken-2">2020-12-11</span>
-    </div>
-    <div class="py-4">
-      <v-icon color="primary" class="mr-3">mdi-chat</v-icon>
-      <strong>8</strong> Comments
-    </div>
-
-    <div class="subtitle-1 font-weight-bold py-6">REPORT DETAILS</div>
-
     <v-row>
       <v-col cols="12" md="8">
-        <v-simple-table>
-          <template #default>
-            <tbody>
-              <tr>
-                <td>ACTION STATE</td>
-                <td>New (Open)</td>
-              </tr>
-              <tr>
-                <td>REPORTED TO</td>
-                <td>Company-Name</td>
-              </tr>
-              <tr>
-                <td>REPORTED AT</td>
-                <td>{{ new Date().toLocaleString() }}</td>
-              </tr>
-              <tr>
-                <td>SCOPE</td>
-                <td>api.example.com</td>
-              </tr>
-              <tr>
-                <td>REFERENCES</td>
-                <td>TEK-PRG1234567890 CVE ID 12345</td>
-              </tr>
-              <tr>
-                <td>ASSIGNED TO</td>
-                <td>Company-Representative</td>
-              </tr>
-              <tr>
-                <td>BUG TYPE</td>
-                <td>Allocation of Resources Without Limits or Throttling</td>
-              </tr>
-              <tr>
-                <td>SEVERITY</td>
-                <td>Medium</td>
-              </tr>
-              <tr>
-                <td>PARTICIPANTS</td>
-                <td>Name-of-participating-Hackers (Add participant)</td>
-              </tr>
-              <tr>
-                <td>NOTIFICATIONS</td>
-                <td>Enabled</td>
-              </tr>
-              <tr>
-                <td>VISIBILITY</td>
-                <td>Private</td>
-              </tr>
-              <tr>
-                <td>REWARD GRID</td>
-                <td>
-                  <div class="d-flex justify-space-around py-1">
-                    <div
-                      v-for="reward in rewards"
-                      :key="reward.severtity"
-                      class="text-center mx-2"
-                    >
-                      <div class="grey--text darken-3 pb-2">
-                        {{ reward.severtity }}
-                      </div>
-                      <div>
-                        <v-btn rounded color="secondary" class="primary--text"
-                          >$ {{ reward.price }}</v-btn
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">ACTION STATE</v-col>
+          <v-col>New (Open)</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">REPORTED By</v-col>
+          <v-col>
+            <nuxt-link to="/hacker/001" class="primary--text"
+              >Afolabi Olajide</nuxt-link
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">REPORTED TO</v-col>
+          <v-col>Company-Name</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">REPORTED AT</v-col>
+          <v-col>{{ new Date().toLocaleString() }}</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">SCOPE</v-col>
+          <v-col>api.example.com</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">REFERENCES</v-col>
+          <v-col>TEK-PRG1234567890 CVE ID 12345</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">ASSIGNED TO</v-col>
+          <v-col>Company-Representative</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">BUG TYPE</v-col>
+          <v-col>Allocation of Resources Without Limits or Throttling</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">SEVERITY</v-col>
+          <v-col>Medium</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">PARTICIPANTS</v-col>
+          <v-col>Name-of-participating-Hackers (Add participant)</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">NOTIFICATIONS</v-col>
+          <v-col>Enabled</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">VISIBILITY</v-col>
+          <v-col>Private</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="font-weight-medium" cols="3">REWARD GRID</v-col>
+          <v-col>
+            <div class="d-flex justify-space-around py-1">
+              <div
+                v-for="reward in rewards"
+                :key="reward.severtity"
+                class="text-center mx-2"
+              >
+                <div class="grey--text darken-3 pb-2">
+                  {{ reward.severtity }}
+                </div>
+                <div>
+                  <v-btn rounded color="secondary" class="primary--text"
+                    >$ {{ reward.price }}</v-btn
+                  >
+                </div>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
       </v-col>
 
       <v-col cols="12" md="4" class="px-4">

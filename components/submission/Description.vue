@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <div class="py-6" v-html="description" />
   </div>
 </template>

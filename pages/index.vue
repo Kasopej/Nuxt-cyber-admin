@@ -11,7 +11,7 @@
           </div>
           <v-divider />
 
-          <v-card v-for="i in 5" :key="i" class="d-flex mt-6">
+          <v-card v-for="i in 3" :key="i" class="d-flex mt-6">
             <v-img
               src="/images/dummy.jpg"
               width="250"
