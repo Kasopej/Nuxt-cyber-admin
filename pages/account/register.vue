@@ -20,7 +20,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="FORM.phone"
+        v-model="FORM.phoneNumber"
         dense
         required
         outlined

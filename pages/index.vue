@@ -7,7 +7,7 @@
         <main class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
           <div class="d-flex justify-space-between pb-2">
             <div class="headline">Dashboard</div>
-            <v-btn color="primary" to="/program/add/">Add</v-btn>
+            <v-btn color="primary" to="/program/add/">Add Program</v-btn>
           </div>
           <v-divider />
 
