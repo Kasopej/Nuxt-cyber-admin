@@ -71,6 +71,7 @@
                 <v-autocomplete
                   v-model="FORM.tags"
                   outlined
+                  multiple
                   label="Tags"
                   :items="tags"
                 >
@@ -78,11 +79,12 @@
               </v-col>
               <v-col cols="12" md="6" class="py-0">
                 <v-autocomplete
-                  v-model="FORM.reward"
+                  v-model="FORM.rewards"
                   outlined
                   label="Reward Type"
                   :items="rewards"
                 >
+                  s
                 </v-autocomplete>
               </v-col>
             </v-row>
@@ -91,7 +93,7 @@
             <v-row>
               <v-col cols="12" md="6" lg="3" class="py-0">
                 <v-text-field
-                  v-model="FORM.rewardGridLow"
+                  v-model="FORM.rewardGrid.low"
                   block
                   outlined
                   label="Low"
@@ -99,7 +101,7 @@
               </v-col>
               <v-col cols="12" md="6" lg="3" class="py-0">
                 <v-text-field
-                  v-model="FORM.rewardGridLow"
+                  v-model="FORM.rewardGrid.medium"
                   block
                   outlined
                   label="Medium"
@@ -107,7 +109,7 @@
               </v-col>
               <v-col cols="12" md="6" lg="3" class="py-0">
                 <v-text-field
-                  v-model="FORM.rewardGridLow"
+                  v-model="FORM.rewardGrid.high"
                   block
                   outlined
                   label="High"
@@ -115,7 +117,7 @@
               </v-col>
               <v-col cols="12" md="6" lg="3" class="py-0">
                 <v-text-field
-                  v-model="FORM.rewardGridCritical"
+                  v-model="FORM.rewardGrid.critical"
                   block
                   outlined
                   label="Critical"
@@ -171,10 +173,9 @@
               >
             </div>
 
-            <!-- eslint-disable-next-line vue/no-v-html -->
             <div
               v-if="descriptionPreview"
-              class="py-4"
+              class="elevation-2 rounded px-2 py-4"
               v-html="descriptionPreview"
             />
             <v-textarea
@@ -216,7 +217,7 @@ export default {
   data() {
     return {
       validate: true,
-      FORM: {},
+      FORM: { rewardGrid: {} },
       descriptionPreview: null,
       types: [
         { title: 'Premuim Pen Test', value: 'Compliance' },
@@ -244,6 +245,8 @@ export default {
         },
       ],
       languages: [
+        'English',
+        'French',
         'Abkhazian',
         'Afar',
         'Afrikaans',
@@ -286,14 +289,12 @@ export default {
         'Divehi, Dhivehi, Maldivian',
         'Dutch, Flemish',
         'Dzongkha',
-        'English',
         'Esperanto',
         'Estonian',
         'Ewe',
         'Faroese',
         'Fijian',
         'Finnish',
-        'French',
         'Fulah',
         'Gaelic, Scottish Gaelic',
         'Galician',
@@ -440,16 +441,34 @@ export default {
 
     async addProgram() {
       if (this.$refs.form1.validate()) {
+        this.$nuxt.$loading.start()
+
         const URL = `/create-program`
         // Make upload request to the API
-        await this.$axios.$post(URL, this.FORM).then(() => {
-          this.FORM = {}
+        await this.$axios
+          .$post(URL, this.FORM)
+          .then(() => {
+            this.FORM = {}
 
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Invitation Sent Successfully',
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Program Created Successfully',
+            })
+
+            this.$router.push('/')
           })
-        })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
       }
     },
   },

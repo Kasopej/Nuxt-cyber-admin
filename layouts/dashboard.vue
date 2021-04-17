@@ -9,6 +9,10 @@
   </v-app>
 </template>
 
+<script>
+export default {}
+</script>
+
 <style lang="scss">
 //Import SCSS files importer
 @import '~~/assets/styles/custom.scss';

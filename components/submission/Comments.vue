@@ -59,7 +59,11 @@
         </v-row>
 
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <div v-if="commentPreview" class="py-4" v-html="commentPreview" />
+        <div
+          v-if="commentPreview"
+          class="elevation-2 rounded px-2 py-4"
+          v-html="commentPreview"
+        />
         <v-textarea v-else v-model="FORM.comment" else outlined hide-details />
 
         <div class="pb-4">
