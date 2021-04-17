@@ -10,7 +10,7 @@ export const state = () => ({
 
 export const mutations = {
   async SHOW(state, payload) {
-    state.text = payload.text || '<< TEXT HERE >>'
+    state.text = payload.text || 'Something Occured!'
     state.icon = payload.icon || 'mdi-information-outline'
     state.color = payload.color || 'accent'
     state.timeout = payload.timeout || 5000
