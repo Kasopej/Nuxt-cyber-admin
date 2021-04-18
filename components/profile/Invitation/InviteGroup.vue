@@ -6,7 +6,11 @@
       <template #default>
         <tbody>
           <tr v-for="q in 5" :key="q">
-            <td>Olajide.{{ q }}.Hammed@gmail.com</td>
+            <td>
+              <v-avatar
+                ><v-icon color="accent">mdi-account-circle</v-icon></v-avatar
+              >Olajide_{{ q }}_Hammed
+            </td>
             <td>Verified</td>
             <td>{{ q }}0 Points</td>
             <td>
