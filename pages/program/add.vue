@@ -89,7 +89,6 @@
                   label="Reward Type"
                   :items="rewards"
                 >
-                  s
                 </v-autocomplete>
               </v-col>
             </v-row>

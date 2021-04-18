@@ -20,11 +20,10 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.website"
+            v-model="FORM.billing.phoneNumber"
             block
             outlined
-            label="Website"
-            type="url"
+            label="Phone Number"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -58,14 +57,6 @@
             block
             outlined
             label="country"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.billing.phoneNumber"
-            block
-            outlined
-            label="Phone Number"
           />
         </v-col>
       </v-row>

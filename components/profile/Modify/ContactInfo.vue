@@ -20,10 +20,10 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.type"
+            v-model="FORM.company.industry"
             block
             outlined
-            label="Company Type"
+            label="Industry Type"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -32,6 +32,65 @@
             block
             outlined
             label="VAT Number"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.company.registrationNumber"
+            block
+            outlined
+            label="Registration Number"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.company.business"
+            block
+            outlined
+            label="Business Type"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.company.staffStrenght"
+            block
+            outlined
+            type="number"
+            label="Staff Strenght"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.billing.phoneNumber"
+            block
+            outlined
+            label="Phone Number"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.billing.email"
+            block
+            outlined
+            label="Company E-mail"
+            type="email"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.billing.website"
+            block
+            outlined
+            label="Company Website"
+            type="url"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model="FORM.company.country"
+            block
+            outlined
+            label="Country"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -48,38 +107,6 @@
             block
             outlined
             label="Postal Code"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.company.country"
-            block
-            outlined
-            label="Country"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.company.registrationNumber"
-            block
-            outlined
-            label="Registration Number"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.company.business"
-            block
-            outlined
-            label="Business"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.company.identification"
-            block
-            outlined
-            label="Identification (SIRET)"
           />
         </v-col>
       </v-row>
