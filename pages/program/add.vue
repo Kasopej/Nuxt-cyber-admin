@@ -9,19 +9,24 @@
 
           <v-form ref="form1" v-model="validate">
             <div>
-              <div class="headline">Banner &amp; Thumbnail</div>
-              <div class="pt-8">
-                <label>
-                  <v-img
-                    :src="'/images/dummy.jpg'"
-                    class="rounded"
-                    width="250"
-                    contain
-                  />
-                  <small class="grey--text text-center pt-3">Thumbnail</small>
-                  <v-file-input class="d-none" accept="image/jpeg, image/png" />
-                </label>
-              </div>
+              <div class="headline pb-8">Banner &amp; Thumbnail</div>
+              <label>
+                <v-img
+                  :src="'/images/dummy.jpg'"
+                  class="rounded"
+                  width="250"
+                  contain
+                />
+                <small class="grey--text text-center pt-3">Thumbnail</small>
+                <v-file-input class="d-none" accept="image/jpeg, image/png" />
+              </label>
+
+              <v-file-input
+                outlined
+                class="pt-4"
+                placeholder="Upload Banner"
+                accept="image/jpeg, image/png"
+              />
             </div>
 
             <header class="headline py-8">Program Details</header>
