@@ -1,6 +1,6 @@
 <template>
   <div class="pa-md-4">
-    <div>
+    <div class="d-flex">
       <label class="pt-8">
         <v-avatar size="250">
           <v-img

@@ -62,7 +62,7 @@
                     <div class="grey--text text--darken-3">
                       <div class="pb-1">
                         <v-icon small class="mr-2">mdi-counter</v-icon
-                        ><strong>3</strong> Submissions
+                        ><strong v-text="program.submission || 0" /> Submissions
                       </div>
                       <small><em v-text="programTypes[program.type]" /> </small>
                     </div>
