@@ -1,6 +1,6 @@
 <template>
   <div>
-    <partials-header :title="USER.name" />
+    <partials-header :title="USER.account.company[0].name" />
 
     <v-main>
       <v-container>
