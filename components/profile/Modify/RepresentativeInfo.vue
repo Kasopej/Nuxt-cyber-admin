@@ -8,7 +8,6 @@
             block
             outlined
             label="First Name"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -17,7 +16,6 @@
             block
             outlined
             label="Last Name"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -27,7 +25,6 @@
             outlined
             label="Date Of Birth"
             type="date"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -36,7 +33,6 @@
             blockrepresentative.
             outlined
             label="Nationality"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -46,7 +42,6 @@
             outlined
             label="E-mail"
             type="email"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -55,7 +50,6 @@
             block
             outlined
             label="Postal Code"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -64,7 +58,6 @@
             block
             outlined
             label="Country"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -74,7 +67,6 @@
             outlined
             label="Phone Number"
             type="tel"
-            :readonly="FORM.readOnly"
           />
         </v-col>
       </v-row>

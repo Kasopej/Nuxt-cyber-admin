@@ -8,7 +8,6 @@
             block
             outlined
             label="Company Name"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -17,7 +16,6 @@
             block
             outlined
             label="Address"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -26,7 +24,6 @@
             block
             outlined
             label="Company Type"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -35,7 +32,6 @@
             block
             outlined
             label="VAT Number"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -44,7 +40,6 @@
             block
             outlined
             label="City"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -53,7 +48,6 @@
             block
             outlined
             label="Postal Code"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -62,7 +56,6 @@
             block
             outlined
             label="Country"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -71,7 +64,6 @@
             block
             outlined
             label="Registration Number"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -80,7 +72,6 @@
             block
             outlined
             label="Business"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -89,7 +80,6 @@
             block
             outlined
             label="Identification (SIRET)"
-            :readonly="FORM.readOnly"
           />
         </v-col>
       </v-row>

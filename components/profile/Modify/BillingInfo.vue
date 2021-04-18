@@ -8,7 +8,6 @@
             block
             outlined
             label="Wallet Currency"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -17,7 +16,6 @@
             block
             outlined
             label="Accounting"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -27,7 +25,6 @@
             outlined
             label="Website"
             type="url"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -36,7 +33,6 @@
             block
             outlined
             label="Nationality"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -46,7 +42,6 @@
             outlined
             label="Email"
             type="email"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -55,7 +50,6 @@
             block
             outlined
             label="Postal Code"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -64,7 +58,6 @@
             block
             outlined
             label="country"
-            :readonly="FORM.readOnly"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -73,7 +66,6 @@
             block
             outlined
             label="Phone Number"
-            :readonly="FORM.readOnly"
           />
         </v-col>
       </v-row>
