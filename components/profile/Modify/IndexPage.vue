@@ -1,14 +1,19 @@
 <template>
   <div class="pa-md-4">
-    <div class="pt-8">
-      <label>
-        <v-img
-          :src="FILE_BLOB || USER.image || '/images/dummy.jpg'"
-          class="rounded"
-          width="250"
-          contain
-        />
-        <small class="grey--text text-center pt-3">{{ labelText }}</small>
+    <div>
+      <label class="pt-8">
+        <v-avatar size="250">
+          <v-img
+            :src="FILE_BLOB || USER.image || '/images/dummy.jpg'"
+            class="rounded"
+            contain
+          />
+        </v-avatar>
+        <small
+          class="d-block grey--text text-center pt-3"
+          style="width: 250px"
+          >{{ labelText }}</small
+        >
         <v-file-input
           v-model="FILE"
           class="d-none"
