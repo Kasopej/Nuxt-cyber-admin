@@ -137,6 +137,7 @@
                   block
                   outlined
                   label="Account Credentials"
+                  placeholder="Username &amp; Password"
                 />
               </v-col>
               <v-col cols="12" md="4" class="py-0">
@@ -145,6 +146,7 @@
                   block
                   outlined
                   label="API Documentation Link"
+                  placeholder="https://api.example.com/docs"
                 />
               </v-col>
               <v-col cols="12" md="4" class="py-0">
@@ -153,6 +155,88 @@
                   block
                   outlined
                   label="VPN Access"
+                  placeholder="Username &amp; Password"
+                />
+              </v-col>
+            </v-row>
+
+            <header class="headline pt-8">Target Scope</header>
+            <header class="subtitle-1 py-4">Scope</header>
+            <v-row>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.webApplication"
+                  block
+                  outlined
+                  label="Web Application"
+                  placeholder="https://example.com"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.api"
+                  block
+                  outlined
+                  label="API"
+                  placeholder="https://api.example.com/docs"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.androidApp"
+                  block
+                  outlined
+                  label="Android App"
+                  placeholder="com.example.google"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.playstoreId"
+                  block
+                  outlined
+                  label="IOS Playstore"
+                  placeholder="123456"
+                />
+              </v-col>
+            </v-row>
+
+            <header class="subtitle-1 py-4">Out-Of-Scope</header>
+            <v-row>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.webApplication"
+                  block
+                  outlined
+                  label="Web Application"
+                  placeholder="https://example.com"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.api"
+                  block
+                  outlined
+                  label="API"
+                  placeholder="https://api.example.com/docs"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.androidApp"
+                  block
+                  outlined
+                  label="Android App"
+                  placeholder="com.example.google"
+                />
+              </v-col>
+              <v-col cols="12" md="3" class="py-0">
+                <v-text-field
+                  v-model="FORM.targetScope.playstoreId"
+                  block
+                  outlined
+                  label="IOS Playstore"
+                  placeholder="123456"
                 />
               </v-col>
             </v-row>
@@ -221,7 +305,7 @@ export default {
   data() {
     return {
       validate: true,
-      FORM: { rewardGrid: {} },
+      FORM: { rewardGrid: {}, targetScope: {} },
       descriptionPreview: null,
       types: [
         { title: 'Premuim Pen Test', value: 'Compliance' },
