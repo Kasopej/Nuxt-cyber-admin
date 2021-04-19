@@ -4,7 +4,7 @@
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.name"
+            v-model.trim="FORM.company.name"
             :rules="[...rules.required]"
             placeholder="Company Name"
             label="Company Name"
@@ -14,27 +14,28 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.company.industry"
-            block
-            outlined
+            v-model.trim="FORM.company.industry"
             :rules="[...rules.required]"
             :items="industries"
             label="Industry Type"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.company.vat"
-            block
-            outlined
             :rules="[...rules.required]"
-            label="VAT Number"
             placeholder="0123456789"
+            label="VAT Number"
+            type="number"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.registrationNumber"
+            v-model.trim="FORM.company.registrationNumber"
             block
             outlined
             :rules="[...rules.required]"
@@ -44,7 +45,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.business"
+            v-model.trim="FORM.company.business"
             block
             outlined
             :rules="[...rules.required]"
@@ -84,15 +85,16 @@
                 block
                 outlined
                 :rules="[...rules.required]"
-                label="Phone Number"
                 placeholder="08012345603"
+                label="Phone Number"
+                type="number"
               />
             </v-col>
           </v-row>
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.email"
+            v-model.trim="FORM.billing.email"
             block
             outlined
             :rules="[...rules.required]"
@@ -124,7 +126,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.city"
+            v-model.trim="FORM.company.city"
             block
             outlined
             :rules="[...rules.required]"
@@ -134,7 +136,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.address"
+            v-model.trim="FORM.company.address"
             block
             outlined
             :rules="[...rules.required]"
@@ -144,7 +146,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.postalCode"
+            v-model.trim="FORM.company.postalCode"
             block
             outlined
             :rules="[...rules.required]"
