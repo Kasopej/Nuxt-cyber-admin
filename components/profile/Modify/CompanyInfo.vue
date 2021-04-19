@@ -5,7 +5,7 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model.trim="FORM.company.name"
-            :rules="[...rules.required]"
+            :rules="[...rules.name]"
             placeholder="Company Name"
             label="Company Name"
             block
@@ -24,7 +24,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.vat"
+            v-model="FORM.company.vatNumber"
             :rules="[...rules.required]"
             placeholder="0123456789"
             label="VAT Number"
@@ -45,7 +45,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.business"
+            v-model.trim="FORM.company.businessType"
             block
             outlined
             :rules="[...rules.required]"
@@ -54,7 +54,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.staffStrenght"
+            v-model="FORM.company.staffStrength"
             block
             outlined
             :rules="[...rules.required]"
@@ -67,7 +67,7 @@
           <v-row no-gutters>
             <v-col cols="4" class="py-0 pl-0 pr-1">
               <v-autocomplete
-                v-model="FORM.billing.phoneNumber.countryCode"
+                v-model="FORM.company.phoneNumber.countryCode"
                 outlined
                 :rules="[...rules.required]"
                 class="pa-0"
@@ -81,10 +81,10 @@
 
             <v-col cols="8" class="py-0 pl-0 pr-1">
               <v-text-field
-                v-model="FORM.billing.phoneNumber.phoneNumber"
+                v-model="FORM.company.phoneNumber.phoneNumber"
                 block
                 outlined
-                :rules="[...rules.required]"
+                :rules="[...rules.phone]"
                 placeholder="08012345603"
                 label="Phone Number"
                 type="number"
@@ -94,10 +94,10 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.billing.email"
+            v-model.trim="FORM.company.email"
             block
             outlined
-            :rules="[...rules.required]"
+            :rules="[...rules.email]"
             label="Company E-mail"
             placeholder="e-mail@example.com"
             type="email"
@@ -105,7 +105,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.website"
+            v-model="FORM.company.website"
             block
             outlined
             :rules="[...rules.required]"
@@ -147,10 +147,11 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model.trim="FORM.company.postalCode"
-            block
-            outlined
             :rules="[...rules.required]"
+            placeholder="optional"
             label="Postal Code"
+            outlined
+            block
           />
         </v-col>
       </v-row>
@@ -170,10 +171,7 @@ export default {
   data() {
     return {
       FORM: {
-        readOnly: true,
-        company: {},
-        representative: {},
-        billing: { phoneNumber: {} },
+        company: { phoneNumber: {} },
       },
 
       USER: this.$store.state.auth.user,
@@ -182,6 +180,27 @@ export default {
 
       rules: {
         required: [(value) => !!value || 'This Field Is Require'],
+        name: [
+          (v) => !!v || 'Company name is required',
+          (v) =>
+            (v && v.length <= 100) || 'Name must be less than 100 characters',
+        ],
+        phone: [
+          (v) => !!v || 'Phone number is required',
+          (v) =>
+            !v ||
+            /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+              v
+            ) ||
+            'Invalid Phone number',
+        ],
+        email: [
+          (v) => !!v || 'E-mail is required',
+          (v) =>
+            !v ||
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+            'E-mail must be valid',
+        ],
       },
     }
   },
