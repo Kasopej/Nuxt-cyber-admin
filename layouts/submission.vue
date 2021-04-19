@@ -13,6 +13,7 @@
     </div>
 
     <partials-notification-toast />
+    <partials-mobile-navigation-drawer />
   </v-app>
 </template>
 

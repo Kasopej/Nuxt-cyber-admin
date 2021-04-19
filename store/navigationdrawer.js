@@ -5,7 +5,7 @@ export const state = () => ({
 })
 
 export const mutations = {
-  SHOW(state) {
+  TOGGLE_STATE(state) {
     state.status = !state.status
   },
 }
