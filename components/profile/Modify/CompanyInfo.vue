@@ -46,10 +46,11 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model.trim="FORM.company.businessType"
-            block
-            outlined
             :rules="[...rules.required]"
+            placeholder="Business Type"
             label="Business Type"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -72,7 +73,7 @@
                 :rules="[...rules.required]"
                 class="pa-0"
                 label="Dial Code"
-                :items="countries"
+                :items="countryCodes"
                 item-value="dial_code"
                 :item-text="(item) => `${item.flag} +${item.dial_code}`"
                 @keyup.enter="signup()"
@@ -165,6 +166,7 @@
 
 <script>
 import countriesJSON from '~/assets/json/countries.json'
+import countryCodesJSON from '~/assets/json/countryCodes.json'
 import industriesJSON from '~/assets/json/industries.json'
 
 export default {
@@ -175,8 +177,10 @@ export default {
       },
 
       USER: this.$store.state.auth.user,
-      industries: industriesJSON,
+
       countries: countriesJSON,
+      industries: industriesJSON,
+      countryCodes: countryCodesJSON,
 
       rules: {
         required: [(value) => !!value || 'This Field Is Require'],
