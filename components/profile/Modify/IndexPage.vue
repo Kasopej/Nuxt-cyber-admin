@@ -48,7 +48,7 @@
 
         <v-tabs-items v-model="profileEditTab" class="pt-8">
           <v-tab-item>
-            <profile-modify-contact-info />
+            <profile-modify-company-info />
           </v-tab-item>
           <v-tab-item>
             <profile-modify-representative-info />
