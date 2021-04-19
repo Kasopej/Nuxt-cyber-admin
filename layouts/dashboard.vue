@@ -5,6 +5,7 @@
       <nuxt class="flex-grow-1 overflow-y-auto" />
     </section>
     <partials-notification-toast />
+    <partials-mobile-navigation-drawer />
   </v-app>
 </template>
 
