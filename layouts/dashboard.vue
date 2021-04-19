@@ -4,7 +4,6 @@
       <partials-navigation-bar />
       <nuxt class="flex-grow-1 overflow-y-auto" />
     </section>
-
     <partials-notification-toast />
   </v-app>
 </template>
