@@ -146,9 +146,9 @@
                 rounded
                 dense
               >
-                <v-btn class="text-capitalize" value="network"> Network </v-btn>
-                <v-btn class="text-capitalize" value="adjacent">
-                  Adjacent
+                <v-btn class="text-capitalize" value="none"> None </v-btn>
+                <v-btn class="text-capitalize" value="required">
+                  Required
                 </v-btn>
               </v-btn-toggle>
             </div>
