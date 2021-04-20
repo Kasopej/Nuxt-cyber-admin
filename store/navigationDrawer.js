@@ -1,7 +1,7 @@
 export const strict = false
 
 export const state = () => ({
-  status: true,
+  status: false,
 })
 
 export const mutations = {

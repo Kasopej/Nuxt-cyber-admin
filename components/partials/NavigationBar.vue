@@ -48,7 +48,7 @@
     </div>
     <v-app-bar-nav-icon
       class="d-lg-none mr-2"
-      @click.stop="$store.commit('navigationdrawer/TOGGLE_STATE')"
+      @click.stop="$store.commit('navigationDrawer/TOGGLE_STATE')"
     />
   </nav>
 </template>
@@ -60,12 +60,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-
-  data() {
-    return {
-      drawer: true,
-    }
   },
 
   methods: {

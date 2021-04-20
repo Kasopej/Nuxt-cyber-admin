@@ -1,11 +1,5 @@
 <template>
-  <v-navigation-drawer
-    v-if="$store.state.navigationdrawer.status"
-    absolute
-    bottom
-    permanent
-    style="z-index: 9999"
-  >
+  <v-navigation-drawer v-model="drawer" style="z-index: 9999" absolute>
     <nuxt-link
       to="/"
       class="d-flex align-center grey lighten-3 px-4 px-lg-16 py-4"
@@ -35,3 +29,18 @@
     </div>
   </v-navigation-drawer>
 </template>
+
+<script>
+export default {
+  computed: {
+    drawer: {
+      get() {
+        return this.$store.state.navigationDrawer.status
+      },
+      set(v) {
+        return v || this.$store.commit('navigationDrawer/TOGGLE_STATE')
+      },
+    },
+  },
+}
+</script>
