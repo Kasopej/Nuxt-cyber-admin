@@ -44,47 +44,39 @@
                 />
 
                 <section
-                  :style="
-                    $vuetify.breakpoint.mobile
-                      ? 'min-height: 150px;'
-                      : 'min-height: 200px;'
-                  "
-                  class="flex-grow-1 fill-height h-fill w-full d-sm-flex justify-space-between pa-2 pa-md-4"
+                  style="min-height: 200px"
+                  class="flex-grow-1 fill-height w-full d-flex flex-column justify-space-between pa-2 pa-md-4"
                 >
-                  <article
-                    class="flex-grow-1 d-flex flex-column justify-space-between"
+                  <div class="d-sm-flex justify-space-between">
+                    <header
+                      class="headline font-weight-medium accent--text"
+                      v-text="program.title"
+                    />
+
+                    <aside
+                      class="grey--text text--darken-2 font-weight-bold py-2 px-sm-4 py-sm-0"
+                      v-text="program.status"
+                    />
+                  </div>
+
+                  <div
+                    class="d-none d-sm-inline grey--text text--darken-2 text-no-wrap py-3"
                   >
-                    <div>
-                      <header
-                        class="headline font-weight-medium accent--text"
-                        v-text="program.title"
-                      />
+                    <v-icon small class="mr-2">mdi-gift</v-icon> $150 - $2,500
+                  </div>
 
-                      <div class="grey--text text--darken-2 text-no-wrap py-3">
-                        <v-icon small class="mr-2">mdi-gift</v-icon> $150 -
-                        $2,500
-                      </div>
-                    </div>
-
-                    <div class="grey--text text--darken-3">
-                      <div class="pb-1 text-no-wrap">
-                        <v-icon small class="mr-2">mdi-counter</v-icon
-                        ><strong v-text="program.submission || 0" />
-                        Submissions
-                      </div>
-                      <div class="font-italic text-no-wrap">
-                        <small v-text="programTypes[program.type]" />
-                      </div>
-                    </div>
-                  </article>
-
-                  <aside
-                    class="grey--text text--darken-2 font-weight-bold px-md-4"
-                    v-text="program.status"
-                  />
+                  <div class="pb-1 text-no-wrap">
+                    <v-icon small class="mr-2">mdi-counter</v-icon
+                    ><strong v-text="program.submission || 0" />
+                    Submissions
+                  </div>
+                  <div class="font-italic text-no-wrap">
+                    <small v-text="programTypes[program.type]" />
+                  </div>
                 </section>
               </v-card>
             </template>
+
             <template v-else>
               <section class="py-12">
                 <div class="text-center">
