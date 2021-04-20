@@ -10,17 +10,17 @@
         </nuxt-link>
 
         <div class="subtitle-1">
-          <nuxt-link
+          <div
             v-for="link in links"
             :key="link.title"
-            :to="link.slug"
             class="d-block subtitle-1 accent--text px-3 py-2 my-2"
+            @click.stop="gotoLink(link.slug)"
           >
             <v-icon class="mr-3" color="accent">{{ link.icon }}</v-icon>
             <span>
               {{ link.title }}
             </span>
-          </nuxt-link>
+          </div>
         </div>
       </section>
 
@@ -56,6 +56,15 @@ export default {
       set(v) {
         return v || this.$store.commit('navigationDrawer/TOGGLE_STATE')
       },
+    },
+  },
+
+  methods: {
+    gotoLink(slug) {
+      this.drawer = false
+
+      console.log(this.drawer)
+      this.$router.push(slug)
     },
   },
 }
