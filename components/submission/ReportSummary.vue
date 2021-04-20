@@ -204,7 +204,16 @@
             </v-btn-toggle>
           </div>
           <div class="py-4">
-            <div class="subtitle-1 font-weight-medium">Quality Rating</div>
+            <div class="subtitle-1 font-weight-medium">
+              Quality Rating
+              <v-badge
+                v-if="FORM.qualityRating"
+                inline
+                color="primary"
+                :content="FORM.qualityRating * 20"
+              >
+              </v-badge>
+            </div>
             <v-rating
               v-model="FORM.qualityRating"
               color="accent"
