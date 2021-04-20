@@ -1,15 +1,24 @@
 <template>
   <v-app>
-    <div class="d-flex w-100" style="max-height: 100vh">
-      <partials-navigation-drawer-submission />
+    <div class="d-flex w-full" style="max-height: 100vh">
+      <partials-navigation-drawer-submission
+        v-if="!$vuetify.breakpoint.mobile"
+      />
 
-      <main
+      <section
         style="height: 100vh"
         class="flex-grow-1 d-flex flex-column overflow-y-hidden"
       >
         <partials-navigation-bar submission />
-        <nuxt class="flex-grow-1 overflow-y-auto pa-4" />
-      </main>
+
+        <main class="flex-grow-1 overflow-y-auto">
+          <partials-navigation-drawer-submission
+            v-if="$vuetify.breakpoint.mobile && !$route.hash"
+          />
+
+          <nuxt v-else class="pa-4" />
+        </main>
+      </section>
     </div>
 
     <partials-notification-toast />

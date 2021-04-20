@@ -1,12 +1,11 @@
 <template>
   <v-navigation-drawer
-    v-if="drawer"
-    v-model="drawer"
-    width="320px"
-    style="height: 100vh; min-width: 320px"
+    :width="$vuetify.breakpoint.mobile ? '100%' : '320px'"
+    style="height: 100vh"
+    permanent
   >
     <nav class="d-flex flex-column fill-height">
-      <div class="grey lighten-5 pa-2 py-8">
+      <div class="grey lighten-5 pa-2 py-4">
         <v-text-field
           dense
           outlined
@@ -44,13 +43,3 @@
     </nav>
   </v-navigation-drawer>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      drawer: true,
-    }
-  },
-}
-</script>
