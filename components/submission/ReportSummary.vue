@@ -67,7 +67,7 @@
                   {{ reward.severtity }}
                 </div>
                 <div>
-                  <v-btn rounded color="secondary" class="primary--text"
+                  <v-btn color="secondary" class="primary--text"
                     >$ {{ reward.price }}</v-btn
                   >
                 </div>
@@ -80,11 +80,11 @@
       <v-col cols="12" md="4" class="px-4">
         <v-card class="px-4 py-8">
           <div class="d-flex justify-center">
-            <div class="accent text-center white--text rounded px-8 py-3 mx-1">
+            <div class="accent text-center white--text px-8 py-3 mx-1">
               <div>CVSS Score</div>
               <div class="font-weight-bold">2.2</div>
             </div>
-            <div class="accent text-center white--text rounded px-8 py-3 mx-1">
+            <div class="accent text-center white--text px-8 py-3 mx-1">
               <div>Severity</div>
               <div class="font-weight-bold">MEDIUM</div>
             </div>
@@ -96,16 +96,17 @@
 
           <div class="py-2">
             <div class="subtitle-1 font-weight-medium">Attack Vector</div>
-            <v-btn-toggle
-              v-model="FORM.atackVector"
-              color="primary"
-              rounded
-              dense
-            >
-              <v-btn class="text-capitalize" value="netework"> Network </v-btn>
-              <v-btn class="text-capitalize" value="adjacent"> Adjacent </v-btn>
-              <v-btn class="text-capitalize" value="local"> Local </v-btn>
-              <v-btn class="text-capitalize" value="physical"> Physical </v-btn>
+            <v-btn-toggle v-model="FORM.atackVector" color="primary" dense>
+              <v-btn class="text-capitalize" small value="netework">
+                Network
+              </v-btn>
+              <v-btn class="text-capitalize" small value="adjacent">
+                Adjacent
+              </v-btn>
+              <v-btn class="text-capitalize" small value="local"> Local </v-btn>
+              <v-btn class="text-capitalize" small value="physical">
+                Physical
+              </v-btn>
             </v-btn-toggle>
           </div>
           <div class="d-flex py-2">
@@ -114,11 +115,10 @@
               <v-btn-toggle
                 v-model="FORM.atackComplexity"
                 color="primary"
-                rounded
                 dense
               >
-                <v-btn class="text-capitalize" value="high"> High </v-btn>
-                <v-btn class="text-capitalize" value="low"> Low </v-btn>
+                <v-btn class="text-capitalize" small value="high"> High </v-btn>
+                <v-btn class="text-capitalize" small value="low"> Low </v-btn>
               </v-btn-toggle>
             </div>
             <div>
@@ -128,12 +128,11 @@
               <v-btn-toggle
                 v-model="FORM.previledgeRequired"
                 color="primary"
-                rounded
                 dense
               >
-                <v-btn class="text-capitalize" value="none"> None </v-btn>
-                <v-btn class="text-capitalize" value="high"> High </v-btn>
-                <v-btn class="text-capitalize" value="low"> Low </v-btn>
+                <v-btn class="text-capitalize" small value="none"> None </v-btn>
+                <v-btn class="text-capitalize" small value="high"> High </v-btn>
+                <v-btn class="text-capitalize" small value="low"> Low </v-btn>
               </v-btn-toggle>
             </div>
           </div>
@@ -143,22 +142,23 @@
               <v-btn-toggle
                 v-model="FORM.userInteraction"
                 color="primary"
-                rounded
                 dense
               >
-                <v-btn class="text-capitalize" value="none"> None </v-btn>
-                <v-btn class="text-capitalize" value="required">
+                <v-btn class="text-capitalize" small value="none"> None </v-btn>
+                <v-btn class="text-capitalize" small value="required">
                   Required
                 </v-btn>
               </v-btn-toggle>
             </div>
             <div>
               <div class="subtitle-1 font-weight-medium">Scope</div>
-              <v-btn-toggle v-model="FORM.scope" color="primary" rounded dense>
-                <v-btn class="text-capitalize" value="unchanged">
+              <v-btn-toggle v-model="FORM.scope" color="primary" dense>
+                <v-btn class="text-capitalize" small value="unchanged">
                   Unchanged
                 </v-btn>
-                <v-btn class="text-capitalize" value="changed"> Changed </v-btn>
+                <v-btn class="text-capitalize" small value="changed">
+                  Changed
+                </v-btn>
               </v-btn-toggle>
             </div>
           </div>
@@ -168,39 +168,28 @@
               <v-btn-toggle
                 v-model="FORM.confidentiality"
                 color="primary"
-                rounded
                 dense
               >
-                <v-btn class="text-capitalize" value="none"> None </v-btn>
-                <v-btn class="text-capitalize" value="high"> High </v-btn>
-                <v-btn class="text-capitalize" value="low"> Low </v-btn>
+                <v-btn class="text-capitalize" small value="none"> None </v-btn>
+                <v-btn class="text-capitalize" small value="high"> High </v-btn>
+                <v-btn class="text-capitalize" small value="low"> Low </v-btn>
               </v-btn-toggle>
             </div>
             <div>
               <div class="subtitle-1 font-weight-medium">Integrity</div>
-              <v-btn-toggle
-                v-model="FORM.integrity"
-                color="primary"
-                rounded
-                dense
-              >
-                <v-btn class="text-capitalize" value="none"> None </v-btn>
-                <v-btn class="text-capitalize" value="high"> High </v-btn>
-                <v-btn class="text-capitalize" value="low"> Low </v-btn>
+              <v-btn-toggle v-model="FORM.integrity" color="primary" dense>
+                <v-btn class="text-capitalize" small value="none"> None </v-btn>
+                <v-btn class="text-capitalize" small value="high"> High </v-btn>
+                <v-btn class="text-capitalize" small value="low"> Low </v-btn>
               </v-btn-toggle>
             </div>
           </div>
           <div class="py-2">
             <div class="subtitle-1 font-weight-medium">Availability</div>
-            <v-btn-toggle
-              v-model="FORM.availability"
-              color="primary"
-              rounded
-              dense
-            >
-              <v-btn class="text-capitalize" value="none"> None </v-btn>
-              <v-btn class="text-capitalize" value="high"> High </v-btn>
-              <v-btn class="text-capitalize" value="low"> Low </v-btn>
+            <v-btn-toggle v-model="FORM.availability" color="primary" dense>
+              <v-btn class="text-capitalize" small value="none"> None </v-btn>
+              <v-btn class="text-capitalize" small value="high"> High </v-btn>
+              <v-btn class="text-capitalize" small value="low"> Low </v-btn>
             </v-btn-toggle>
           </div>
           <div class="py-4">
