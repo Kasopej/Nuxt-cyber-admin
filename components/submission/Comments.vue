@@ -19,7 +19,10 @@
           </v-autocomplete>
         </v-col>
         <v-col>
-          <v-switch v-model="FORM.private" label="Make It private?"></v-switch>
+          <v-switch
+            v-model="FORM.private"
+            :label="FORM.private ? 'Open Report?' : 'Close Report?'"
+          ></v-switch>
         </v-col>
       </v-row>
 
