@@ -33,58 +33,58 @@
               <v-card
                 v-for="program in programs"
                 :key="program.id"
-                class="d-flex mt-6"
+                class="d-flex align-center mt-6 overflow-x-hidden"
               >
                 <v-img
                   src="/images/dummy.jpg"
                   width="250"
-                  max-width="250"
                   height="200"
+                  :max-width="$vuetify.breakpoint.mobile ? '100px' : '250px'"
                   cover
                 />
-                <div
-                  class="flex-grow-1 d-flex justify-space-between w-full pa-4"
+
+                <section
+                  :style="
+                    $vuetify.breakpoint.mobile
+                      ? 'min-height: 150px;'
+                      : 'min-height: 200px;'
+                  "
+                  class="flex-grow-1 fill-height h-fill w-full d-sm-flex justify-space-between pa-2 pa-md-4"
                 >
-                  <div
+                  <article
                     class="flex-grow-1 d-flex flex-column justify-space-between"
                   >
                     <div>
                       <header
-                        class="headline font-weight-bold"
+                        class="headline font-weight-medium accent--text"
                         v-text="program.title"
                       />
-                      <div class="grey--text text--darken-2 py-3">
+
+                      <div class="grey--text text--darken-2 text-no-wrap py-3">
                         <v-icon small class="mr-2">mdi-gift</v-icon> $150 -
-                        $2,500 Per vulnerability
+                        $2,500
                       </div>
                     </div>
 
                     <div class="grey--text text--darken-3">
-                      <div class="pb-1">
+                      <div class="pb-1 text-no-wrap">
                         <v-icon small class="mr-2">mdi-counter</v-icon
-                        ><strong v-text="program.submission || 0" /> Submissions
+                        ><strong v-text="program.submission || 0" />
+                        Submissions
                       </div>
-                      <small><em v-text="programTypes[program.type]" /> </small>
+                      <div class="font-italic text-no-wrap">
+                        <small v-text="programTypes[program.type]" />
+                      </div>
                     </div>
-                  </div>
+                  </article>
 
-                  <div
-                    class="d-flex flex-column justify-space-between text-right subtitle-1"
-                  >
-                    <div
-                      class="grey--text text--darken-2 font-weight-bold px-4"
-                      v-text="program.status"
-                    />
-                    <v-btn
-                      text
-                      color="accent"
-                      class="text-capitalize subtitle-1 font-weight-bold"
-                      >View Summary</v-btn
-                    >
-                  </div>
-                </div>
-              </v-card></template
-            >
+                  <aside
+                    class="grey--text text--darken-2 font-weight-bold px-md-4"
+                    v-text="program.status"
+                  />
+                </section>
+              </v-card>
+            </template>
             <template v-else>
               <section class="py-12">
                 <div class="text-center">
