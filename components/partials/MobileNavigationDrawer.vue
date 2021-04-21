@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer v-model="drawer" style="z-index: 9999" absolute>
+  <v-navigation-drawer
+    v-if="$vuetify.breakpoint.mobile && drawer"
+    v-model="drawer"
+    style="z-index: 9999"
+    absolute
+  >
     <nav class="fill-height d-flex flex-column justify-space-between">
       <section>
         <nuxt-link
