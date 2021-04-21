@@ -143,7 +143,7 @@ export default {
       nationalities: nationalitiesJSON,
 
       rules: {
-        required: [(value) => !!value || 'This Field Is Require'],
+        required: [(value) => !!value || 'This Field Is Required'],
         name: [
           (v) => !!v || 'This is required',
           (v) =>

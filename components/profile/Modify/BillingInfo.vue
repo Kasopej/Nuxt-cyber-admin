@@ -8,6 +8,7 @@
             block
             outlined
             label="Wallet Currency"
+            :rules="[...rules.required]"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -16,23 +17,37 @@
             block
             outlined
             label="Accounting"
+            :rules="[...rules.required]"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.billing.phoneNumber"
-            block
-            outlined
-            label="Phone Number"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.billing.ationality"
-            block
-            outlined
-            label="Nationality"
-          />
+          <v-row no-gutters>
+            <v-col cols="4" class="py-0 pl-0 pr-1">
+              <v-autocomplete
+                v-model="FORM.billing.phoneNumber.countryCode"
+                outlined
+                :rules="[...rules.required]"
+                class="pa-0"
+                label="Dial Code"
+                :items="countryCodes"
+                item-value="dial_code"
+                :item-text="(item) => `${item.flag} +${item.dial_code}`"
+                @keyup.enter="signup()"
+              ></v-autocomplete>
+            </v-col>
+
+            <v-col cols="8" class="py-0 pl-0 pr-1">
+              <v-text-field
+                v-model="FORM.billing.phoneNumber.phoneNumber"
+                block
+                outlined
+                :rules="[...rules.phone]"
+                placeholder="08012345603"
+                label="Phone Number"
+                type="number"
+              />
+            </v-col>
+          </v-row>
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
@@ -41,22 +56,47 @@
             outlined
             label="Email"
             type="email"
+            :rules="[...rules.email]"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-autocomplete
+            v-model="FORM.billing.country"
+            block
+            outlined
+            :rules="[...rules.required]"
+            :items="countries"
+            label="Country"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.postalCode"
+            v-model.trim="FORM.billing.city"
             block
             outlined
+            :rules="[...rules.required]"
+            placeholder="Lagos"
+            label="City"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model.trim="FORM.billing.address"
+            block
+            outlined
+            :rules="[...rules.required]"
+            placeholder="123, Ikorodu Road"
+            label="Address"
+          />
+        </v-col>
+        <v-col cols="12" sm="6" class="py-0">
+          <v-text-field
+            v-model.trim="FORM.billing.postalCode"
+            :rules="[...rules.required]"
+            placeholder="optional"
             label="Postal Code"
-          />
-        </v-col>
-        <v-col cols="12" sm="6" class="py-0">
-          <v-text-field
-            v-model="FORM.billing.Country"
-            block
             outlined
-            label="country"
+            block
           />
         </v-col>
       </v-row>
@@ -69,12 +109,47 @@
 </template>
 
 <script>
+import countriesJSON from '~/assets/json/countries.json'
+import countryCodesJSON from '~/assets/json/countryCodes.json'
+
 export default {
   data() {
     return {
-      FORM: { readOnly: true, company: {}, representative: {}, billing: {} },
-
       USER: this.$store.state.auth.user,
+      FORM: {
+        company: {},
+        readOnly: true,
+        representative: {},
+        billing: { phoneNumber: {} },
+      },
+
+      countries: countriesJSON,
+      countryCodes: countryCodesJSON,
+
+      rules: {
+        required: [(value) => !!value || 'This Field Is Required'],
+        name: [
+          (v) => !!v || 'Name is required',
+          (v) =>
+            (v && v.length <= 100) || 'Name must be less than 100 characters',
+        ],
+        phone: [
+          (v) => !!v || 'Phone number is required',
+          (v) =>
+            !v ||
+            /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+              v
+            ) ||
+            'Invalid Phone number',
+        ],
+        email: [
+          (v) => !!v || 'E-mail is required',
+          (v) =>
+            !v ||
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+            'E-mail must be valid',
+        ],
+      },
     }
   },
 

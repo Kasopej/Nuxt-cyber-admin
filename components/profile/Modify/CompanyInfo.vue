@@ -183,7 +183,7 @@ export default {
       countryCodes: countryCodesJSON,
 
       rules: {
-        required: [(value) => !!value || 'This Field Is Require'],
+        required: [(value) => !!value || 'This Field Is Required'],
         name: [
           (v) => !!v || 'Company name is required',
           (v) =>
