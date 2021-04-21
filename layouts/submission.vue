@@ -11,7 +11,7 @@
 
         <main class="flex-grow-1 overflow-y-auto">
           <submission-side-bar
-            v-if="$vuetify.breakpoint.mobile && !$route.hash"
+            v-if="$vuetify.breakpoint.mobile && !$route.params.submissionId"
           />
 
           <nuxt v-else class="pa-4" />

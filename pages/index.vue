@@ -6,7 +6,12 @@
       <v-container>
         <main class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
           <div class="d-flex justify-space-between pb-4">
-            <div class="headline">Dashboard</div>
+            <v-breadcrumbs
+              large
+              divider="»"
+              :items="[{ text: 'Dashboard', disabled: false, to: '/' }]"
+              class="pa-0"
+            />
             <v-btn color="primary" to="/program/add/">Add Program</v-btn>
           </div>
 
