@@ -2,18 +2,18 @@
   <v-col cols="12" md="4" class="px-4">
     <v-card class="px-4 py-8">
       <div class="d-flex justify-center">
-        <div class="accent text-center white--text px-8 py-3 mx-1">
+        <div class="accent text-center white--text rounded px-8 py-2 mx-1">
           <div>CVSS Score</div>
           <div class="font-weight-bold" v-text="ccvsScore.toFixed(1)" />
         </div>
-        <div class="accent text-center white--text px-8 py-3 mx-1">
+        <div class="accent text-center white--text rounded px-8 py-2 mx-1">
           <div>Severity</div>
           <div class="font-weight-bold" v-text="severity" />
         </div>
       </div>
 
-      <header class="grey--text text--darken-1 text-center py-4">
-        Please enter the relevant vector of the vulnerability
+      <header class="grey--text text--darken-1 text-center py-2">
+        Please select the relevant vector of the vulnerability below.
       </header>
 
       <div class="py-2">
@@ -126,11 +126,11 @@
           chips
         ></v-autocomplete>
       </div>
-      <v-row>
-        <v-col>
+      <v-row class="flex-sm-row-reverse">
+        <v-col cols="12" sm="6">
           <v-btn color="primary">Save Changes</v-btn>
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="6">
           <v-btn text color="accent">Reset</v-btn>
         </v-col>
       </v-row>

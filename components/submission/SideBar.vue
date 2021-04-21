@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer
     :width="$vuetify.breakpoint.mobile ? '100%' : '320px'"
-    style="height: 100vh"
+    style="height: 100vh; min-width: 320px"
     permanent
   >
     <nav class="d-flex flex-column fill-height">
@@ -23,7 +23,11 @@
       </div>
 
       <section class="overflow-y-auto">
-        <div v-for="x in 50" :key="x" @click="$router.push(`#!/${x}`)">
+        <div
+          v-for="x in 50"
+          :key="x"
+          @click="$router.push(`/submission/${x}/`)"
+        >
           <v-hover v-slot="{ hover }">
             <article class="pa-4" :class="hover ? 'secondary' : ''">
               <span

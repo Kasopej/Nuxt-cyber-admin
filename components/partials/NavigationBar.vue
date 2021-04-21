@@ -6,12 +6,12 @@
     <nuxt-link
       v-if="!submission && !$vuetify.breakpoint.mobile"
       to="/"
-      class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-4"
+      class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-2"
     >
       <v-img src="/images/logo-app-bar.png" />
     </nuxt-link>
 
-    <div class="d-none d-lg-flex align-center flex-grow-1 pa-4">
+    <div class="d-none d-lg-flex align-center flex-grow-1 pa-3">
       <v-btn
         large
         class="secondary primary--text mx-4 rounded-lg elevation-0 text-capitalize"

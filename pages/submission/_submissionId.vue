@@ -1,5 +1,11 @@
 <template>
   <main>
+    <v-breadcrumbs
+      large
+      divider="»"
+      :items="breadcrumbsItems"
+      class="pa-0 pb-2"
+    />
     <v-tabs v-model="tab">
       <v-tab>Report Summary</v-tab>
       <v-tab>Bug Description</v-tab>
@@ -22,7 +28,21 @@
 export default {
   layout: 'submission',
   data() {
-    return { tab: 0 }
+    return {
+      tab: 0,
+      breadcrumbsItems: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          to: '/',
+        },
+        {
+          exact: true,
+          text: 'Submissions',
+          to: '/submission/',
+        },
+      ],
+    }
   },
 }
 </script>

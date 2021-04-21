@@ -1,9 +1,7 @@
 <template>
   <v-app>
     <div class="d-flex w-full" style="max-height: 100vh">
-      <partials-navigation-drawer-submission
-        v-if="!$vuetify.breakpoint.mobile"
-      />
+      <submission-side-bar v-if="!$vuetify.breakpoint.mobile" />
 
       <section
         style="height: 100vh"
@@ -12,7 +10,7 @@
         <partials-navigation-bar submission />
 
         <main class="flex-grow-1 overflow-y-auto">
-          <partials-navigation-drawer-submission
+          <submission-side-bar
             v-if="$vuetify.breakpoint.mobile && !$route.hash"
           />
 

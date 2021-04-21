@@ -5,11 +5,16 @@
     <v-main>
       <v-container>
         <main class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
-          <v-breadcrumbs divider=">" :items="breadcrumbsItems"></v-breadcrumbs>
+          <v-breadcrumbs
+            large
+            divider="»"
+            :items="breadcrumbsItems"
+            class="pa-0"
+          />
 
           <v-form ref="form1" v-model="validate">
             <div>
-              <div class="headline pb-8">Banner &amp; Thumbnail</div>
+              <div class="headline py-8">Banner &amp; Thumbnail</div>
               <label>
                 <v-img
                   :src="'/images/dummy.jpg'"
@@ -347,7 +352,7 @@ export default {
           content: `#Policy Rule
 
 No technology is perfect, and Name_of_Company believes that working with skilled security researchers across the globe is crucial in identifying weaknesses in any technology. If you believe you've found a security issue in our product or service, we encourage you to notify us. We welcome working with you to resolve the issue promptly. 
-Disclosure Policy
+Disclosure Policy\n
 - Let us know as soon as possible upon discovery of a potential security issue, and we'll make every effort to quickly resolve the issue. 
 - Provide us a reasonable amount of time to resolve the issue before any disclosure to the public or a third-party. 
 - Make a good faith effort to avoid privacy violations, destruction of data, and interruption or degradation of our service. Only interact with accounts you own or with explicit permission of the account holder. 
