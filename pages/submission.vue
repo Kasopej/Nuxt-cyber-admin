@@ -7,12 +7,12 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item>
-          <submission-report-summary />
+          <submission-report-summary-tab />
         </v-tab-item>
         <v-tab-item>
-          <submission-description />
+          <submission-description-tab />
         </v-tab-item>
-        <v-tab-item> <submission-comments /> </v-tab-item
+        <v-tab-item> <submission-comment-tab /> </v-tab-item
       ></v-tabs-items>
     </v-tabs>
   </main>
