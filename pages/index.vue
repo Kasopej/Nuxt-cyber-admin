@@ -39,6 +39,7 @@
                 v-for="program in programs"
                 :key="program.id"
                 class="d-flex align-center mt-6 overflow-x-hidden"
+                @click="$router.push(`/#!/${program._id}/`)"
               >
                 <v-img
                   src="/images/dummy.jpg"

@@ -128,7 +128,7 @@
       </div>
       <v-row class="flex-sm-row-reverse">
         <v-col cols="12" sm="6">
-          <v-btn color="primary">Save Changes</v-btn>
+          <v-btn color="primary" @click="saveChanges()">Save Changes</v-btn>
         </v-col>
         <v-col cols="12" sm="6">
           <v-btn text color="accent">Reset</v-btn>
@@ -287,6 +287,15 @@ export default {
         this.ccvsScore = ccvsScore
       },
       deep: true,
+    },
+  },
+
+  methods: {
+    saveChanges() {
+      this.$store.commit('notification/SHOW', {
+        color: 'accent',
+        text: 'Feature not availabble at the moment',
+      })
     },
   },
 }

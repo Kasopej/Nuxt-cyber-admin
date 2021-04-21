@@ -4,43 +4,43 @@
       <v-col cols="12" md="8">
         <v-row>
           <v-col class="font-weight-medium" cols="3">ACTION STATE</v-col>
-          <v-col>New (Open)</v-col>
+          <v-col class="text-capitalize">{{ submission.actionstate }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">REPORTED By</v-col>
           <v-col>
-            <nuxt-link to="/hacker/001" class="primary--text"
-              >Afolabi Olajide</nuxt-link
+            <nuxt-link
+              :to="`/hacker/${submission.hunterId}/`"
+              class="primary--text"
+              >{{ submission.hunterName || 'Not defined' }}</nuxt-link
             >
           </v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">REPORTED TO</v-col>
-          <v-col>Company-Name</v-col>
+          <v-col>
+            <nuxt-link
+              :to="`/user/${submission.reportedto}/`"
+              class="primary--text"
+              >{{ submission.reportedto || 'Not defined' }}</nuxt-link
+            >
+          </v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">REPORTED AT</v-col>
-          <v-col>{{ new Date().toLocaleString() }}</v-col>
-        </v-row>
-        <v-row>
-          <v-col class="font-weight-medium" cols="3">SCOPE</v-col>
-          <v-col>api.example.com</v-col>
+          <v-col>{{ new Date(submission.reportedat).toLocaleString() }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">REFERENCES</v-col>
-          <v-col>TEK-PRG1234567890 CVE ID 12345</v-col>
+          <v-col>{{ submission.reference }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">ASSIGNED TO</v-col>
-          <v-col>Company-Representative</v-col>
+          <v-col>{{ submission.assignedTo || 'Not defined' }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">BUG TYPE</v-col>
-          <v-col>Allocation of Resources Without Limits or Throttling</v-col>
-        </v-row>
-        <v-row>
-          <v-col class="font-weight-medium" cols="3">SEVERITY</v-col>
-          <v-col>Medium</v-col>
+          <v-col>{{ submission.bugtype }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">PARTICIPANTS</v-col>
@@ -48,11 +48,11 @@
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">NOTIFICATIONS</v-col>
-          <v-col>Enabled</v-col>
+          <v-col>{{ submission.notification }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">VISIBILITY</v-col>
-          <v-col>Private</v-col>
+          <v-col>{{ submission.visibility }}</v-col>
         </v-row>
         <v-row>
           <v-col class="font-weight-medium" cols="3">REWARD GRID</v-col>
@@ -84,6 +84,10 @@
 
 <script>
 export default {
+  props: {
+    submission: { type: Object, default: () => {} },
+  },
+
   data() {
     return {
       rewards: [

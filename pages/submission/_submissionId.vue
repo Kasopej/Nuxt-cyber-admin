@@ -25,10 +25,10 @@
 
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <submission-report-summary-tab />
+            <submission-report-summary-tab :submission="submission" />
           </v-tab-item>
           <v-tab-item>
-            <submission-description-tab />
+            <submission-description-tab :submission="submission" />
           </v-tab-item>
           <v-tab-item> <submission-comment-tab /> </v-tab-item>
         </v-tabs-items>
@@ -43,6 +43,26 @@ export default {
   data() {
     return {
       tab: 0,
+      submission: {
+        actionstate: 'pending',
+        _id: '60805284c4ca9b0022f31380',
+        hunterId: '607044ae84a822153464ab67',
+        programId: '607a90d36691490022857707',
+        title: 'FutureX Na Baba',
+        description: 'This is just another Sample Description.',
+        reportedto: 'OgbeniHMMD',
+        scope: 'Sample-scope-0',
+        reference: 'Sample-reference-1',
+        cveid: '420',
+        bugtype: 'Nothing to report o. LOL',
+        notification: true,
+        visibility: 'Public',
+        reportedat: '2021-04-21T16:27:48.111Z',
+        date: '2021-04-21T16:27:48.111Z',
+        createdAt: '2021-04-21T16:27:48.113Z',
+        updatedAt: '2021-04-21T16:27:48.113Z',
+        __v: 0,
+      },
       breadcrumbsItems: [
         {
           text: 'Dashboard',
