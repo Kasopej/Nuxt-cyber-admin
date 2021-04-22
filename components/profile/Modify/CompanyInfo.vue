@@ -76,7 +76,6 @@
                 :items="countryCodes"
                 item-value="dial_code"
                 :item-text="(item) => `${item.flag} +${item.dial_code}`"
-                @keyup.enter="signup()"
               ></v-autocomplete>
             </v-col>
 
@@ -210,14 +209,32 @@ export default {
   },
 
   methods: {
-    updateProfile() {
+    async updateProfile() {
       if (this.$refs.formCompanyInfo.validate()) {
-        console.log(JSON.stringify(this.FORM))
+        this.$nuxt.$loading.finish()
 
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          text: 'Oops! Something Went wrong. . .',
-        })
+        const URL = `/update-profile`
+        // Make upload request to the API
+        await this.$axios
+          .$patch(URL, this.FORM)
+          .then(() => {
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Profile Updated',
+            })
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
       }
     },
   },

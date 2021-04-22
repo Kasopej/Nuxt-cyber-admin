@@ -1,6 +1,6 @@
 <template>
   <div class="pa-4">
-    <section>
+    <v-form ref="formBillingInfo">
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
@@ -25,26 +25,25 @@
             <v-col cols="4" class="py-0 pl-0 pr-1">
               <v-autocomplete
                 v-model="FORM.billing.phoneNumber.countryCode"
-                outlined
+                :item-text="(item) => `${item.flag} +${item.dial_code}`"
                 :rules="[...rules.required]"
-                class="pa-0"
-                label="Dial Code"
                 :items="countryCodes"
                 item-value="dial_code"
-                :item-text="(item) => `${item.flag} +${item.dial_code}`"
-                @keyup.enter="signup()"
+                label="Dial Code"
+                class="pa-0"
+                outlined
               ></v-autocomplete>
             </v-col>
 
             <v-col cols="8" class="py-0 pl-0 pr-1">
               <v-text-field
                 v-model="FORM.billing.phoneNumber.phoneNumber"
-                block
-                outlined
                 :rules="[...rules.phone]"
                 placeholder="08012345603"
                 label="Phone Number"
                 type="number"
+                outlined
+                block
               />
             </v-col>
           </v-row>
@@ -52,31 +51,31 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model="FORM.billing.email"
-            block
-            outlined
+            :rules="[...rules.email]"
             label="Email"
             type="email"
-            :rules="[...rules.email]"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
             v-model="FORM.billing.country"
-            block
-            outlined
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             v-model.trim="FORM.billing.city"
-            block
-            outlined
             :rules="[...rules.required]"
             placeholder="Lagos"
             label="City"
+            outlined
+            block
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -104,7 +103,7 @@
       <div>
         <v-btn color="primary" @click="updateProfile()"> Save Changes </v-btn>
       </div>
-    </section>
+    </v-form>
   </div>
 </template>
 
@@ -117,9 +116,6 @@ export default {
     return {
       USER: this.$store.state.auth.user,
       FORM: {
-        company: {},
-        readOnly: true,
-        representative: {},
         billing: { phoneNumber: {} },
       },
 
@@ -154,16 +150,32 @@ export default {
   },
 
   methods: {
-    updateProfile() {
-      if (this.FORM.readOnly) {
-        this.FORM.readOnly = !this.FORM.readOnly
-      } else {
-        console.log(JSON.stringify(this.FORM))
+    async updateProfile() {
+      if (this.$refs.formBillingInfo.validate()) {
+        this.$nuxt.$loading.finish()
 
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          text: 'Feature under construction',
-        })
+        const URL = `/update-profile`
+        // Make upload request to the API
+        await this.$axios
+          .$patch(URL, this.FORM)
+          .then(() => {
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Profile Updated',
+            })
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
       }
     },
   },

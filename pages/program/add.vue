@@ -67,12 +67,6 @@
                   />
                 </v-col>
                 <v-col cols="12" md="6" class="py-0">
-                  <v-switch
-                    v-model="FORM.private"
-                    label="Make Program Private?"
-                  ></v-switch>
-                </v-col>
-                <v-col cols="12" md="6" class="py-0">
                   <v-autocomplete
                     v-model="FORM.languages"
                     outlined
@@ -84,19 +78,9 @@
                 </v-col>
                 <v-col cols="12" md="6" class="py-0">
                   <v-switch
-                    v-model="FORM.allowCollaborations"
-                    label="Enable Report Collaborations?"
+                    v-model="FORM.private"
+                    label="Make Program Private?"
                   ></v-switch>
-                </v-col>
-                <v-col cols="12" md="6" class="py-0">
-                  <v-autocomplete
-                    v-model="FORM.tags"
-                    outlined
-                    multiple
-                    label="Tags"
-                    :items="tags"
-                  >
-                  </v-autocomplete>
                 </v-col>
                 <v-col cols="12" md="6" class="py-0">
                   <v-autocomplete
@@ -104,6 +88,22 @@
                     outlined
                     label="Reward Type"
                     :items="rewards"
+                  >
+                  </v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" class="py-0">
+                  <v-switch
+                    v-model="FORM.allowCollaborations"
+                    label="Enable Report Collaborations?"
+                  ></v-switch>
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <v-autocomplete
+                    v-model="FORM.tags"
+                    outlined
+                    multiple
+                    label="Tags"
+                    :items="tags"
                   >
                   </v-autocomplete>
                 </v-col>
@@ -216,7 +216,7 @@
                   />
                 </v-col>
 
-                <v-btn icon><v-icon>mdi-minus</v-icon></v-btn>
+                <v-btn icon><v-icon>mdi-home</v-icon></v-btn>
               </v-row>
 
               <header class="subtitle-1 py-4">Out-Of-Scope</header>
