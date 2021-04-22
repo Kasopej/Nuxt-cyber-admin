@@ -1,10 +1,10 @@
 <template>
   <div class="pa-4">
-    <v-form ref="formCompanyInfo">
+    <v-form v-if="FORM" ref="formCompanyInfo">
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.name"
+            v-model.trim="FORM.name"
             :rules="[...rules.name]"
             placeholder="Company Name"
             label="Company Name"
@@ -14,7 +14,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model.trim="FORM.company.industry"
+            v-model.trim="FORM.industry"
             :rules="[...rules.required]"
             :items="industries"
             label="Industry Type"
@@ -24,7 +24,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.vatNumber"
+            v-model="FORM.vatNumber"
             :rules="[...rules.required]"
             placeholder="0123456789"
             label="VAT Number"
@@ -35,7 +35,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.registrationNumber"
+            v-model.trim="FORM.registrationNumber"
             block
             outlined
             :rules="[...rules.required]"
@@ -45,7 +45,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.businessType"
+            v-model.trim="FORM.businessType"
             :rules="[...rules.required]"
             placeholder="Business Type"
             label="Business Type"
@@ -55,7 +55,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.staffStrength"
+            v-model="FORM.staffStrength"
             block
             outlined
             :rules="[...rules.required]"
@@ -68,7 +68,7 @@
           <v-row no-gutters>
             <v-col cols="4" class="py-0 pl-0 pr-1">
               <v-autocomplete
-                v-model="FORM.company.phoneNumber.countryCode"
+                v-model="FORM.phoneNumber.countryCode"
                 outlined
                 :rules="[...rules.required]"
                 class="pa-0"
@@ -81,7 +81,7 @@
 
             <v-col cols="8" class="py-0 pl-0 pr-1">
               <v-text-field
-                v-model="FORM.company.phoneNumber.phoneNumber"
+                v-model="FORM.phoneNumber.phoneNumber"
                 block
                 outlined
                 :rules="[...rules.phone]"
@@ -94,7 +94,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.email"
+            v-model.trim="FORM.email"
             block
             outlined
             :rules="[...rules.email]"
@@ -105,7 +105,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.company.website"
+            v-model="FORM.website"
             block
             outlined
             :rules="[...rules.required]"
@@ -116,7 +116,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.company.country"
+            v-model="FORM.country"
             block
             outlined
             :rules="[...rules.required]"
@@ -126,7 +126,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.city"
+            v-model.trim="FORM.city"
             block
             outlined
             :rules="[...rules.required]"
@@ -136,7 +136,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.address"
+            v-model.trim="FORM.address"
             block
             outlined
             :rules="[...rules.required]"
@@ -146,7 +146,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.company.postalCode"
+            v-model.trim="FORM.postalCode"
             :rules="[...rules.required]"
             placeholder="optional"
             label="Postal Code"
@@ -171,15 +171,11 @@ import industriesJSON from '~/assets/json/industries.json'
 export default {
   data() {
     return {
-      FORM: {
-        company: { phoneNumber: {} },
-      },
-
-      USER: this.$store.state.auth.user,
-
       countries: countriesJSON,
       industries: industriesJSON,
       countryCodes: countryCodesJSON,
+
+      FORM: { phoneNumber: {} },
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -206,6 +202,11 @@ export default {
         ],
       },
     }
+  },
+
+  mounted() {
+    this.FORM = { ...this.$store.state.auth.user.account.company[0] }
+    this.FORM.phoneNumber = {}
   },
 
   methods: {

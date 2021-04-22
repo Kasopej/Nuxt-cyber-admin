@@ -1,10 +1,10 @@
 <template>
   <div class="pa-4">
-    <v-form ref="formBillingInfo">
+    <v-form v-if="FORM" ref="formBillingInfo">
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.currency"
+            v-model="FORM.currency"
             block
             outlined
             label="Wallet Currency"
@@ -13,7 +13,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.accounting"
+            v-model="FORM.accounting"
             block
             outlined
             label="Accounting"
@@ -24,7 +24,7 @@
           <v-row no-gutters>
             <v-col cols="4" class="py-0 pl-0 pr-1">
               <v-autocomplete
-                v-model="FORM.billing.phoneNumber.countryCode"
+                v-model="FORM.phoneNumber.countryCode"
                 :item-text="(item) => `${item.flag} +${item.dial_code}`"
                 :rules="[...rules.required]"
                 :items="countryCodes"
@@ -37,7 +37,7 @@
 
             <v-col cols="8" class="py-0 pl-0 pr-1">
               <v-text-field
-                v-model="FORM.billing.phoneNumber.phoneNumber"
+                v-model="FORM.phoneNumber.phoneNumber"
                 :rules="[...rules.phone]"
                 placeholder="08012345603"
                 label="Phone Number"
@@ -50,7 +50,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.billing.email"
+            v-model="FORM.email"
             :rules="[...rules.email]"
             label="Email"
             type="email"
@@ -60,7 +60,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.billing.country"
+            v-model="FORM.country"
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
@@ -70,7 +70,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.billing.city"
+            v-model.trim="FORM.city"
             :rules="[...rules.required]"
             placeholder="Lagos"
             label="City"
@@ -80,7 +80,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.billing.address"
+            v-model.trim="FORM.address"
             block
             outlined
             :rules="[...rules.required]"
@@ -90,7 +90,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.billing.postalCode"
+            v-model.trim="FORM.postalCode"
             :rules="[...rules.required]"
             placeholder="optional"
             label="Postal Code"
@@ -114,13 +114,10 @@ import countryCodesJSON from '~/assets/json/countryCodes.json'
 export default {
   data() {
     return {
-      USER: this.$store.state.auth.user,
-      FORM: {
-        billing: { phoneNumber: {} },
-      },
-
       countries: countriesJSON,
       countryCodes: countryCodesJSON,
+
+      FORM: { phoneNumber: {} },
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -147,6 +144,11 @@ export default {
         ],
       },
     }
+  },
+
+  mounted() {
+    this.FORM = { ...this.$store.state.auth.user.account.billing[0] }
+    this.FORM.phoneNumber = {}
   },
 
   methods: {

@@ -1,10 +1,10 @@
 <template>
   <div class="pa-4">
-    <v-form ref="formRepresentativeInfo">
+    <v-form v-if="FORM" ref="formRepresentativeInfo">
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.representative.firstName"
+            v-model="FORM.firstName"
             block
             outlined
             :rules="[...rules.name]"
@@ -14,7 +14,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.representative.lastName"
+            v-model="FORM.lastName"
             block
             outlined
             :rules="[...rules.name]"
@@ -24,7 +24,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.representative.dateOfBirth"
+            v-model="FORM.dateOfBirth"
             block
             outlined
             :rules="[...rules.required]"
@@ -36,7 +36,7 @@
           <v-row no-gutters>
             <v-col cols="4" class="py-0 pl-0 pr-1">
               <v-autocomplete
-                v-model="FORM.representative.phoneNumber.countryCode"
+                v-model="FORM.phoneNumber.countryCode"
                 outlined
                 :rules="[...rules.required]"
                 class="pa-0"
@@ -49,7 +49,7 @@
 
             <v-col cols="8" class="py-0 pl-0 pr-1">
               <v-text-field
-                v-model="FORM.representative.phoneNumber.phoneNumber"
+                v-model="FORM.phoneNumber.phoneNumber"
                 block
                 outlined
                 :rules="[...rules.phone]"
@@ -62,7 +62,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.representative.email"
+            v-model="FORM.email"
             block
             outlined
             :rules="[...rules.email]"
@@ -73,7 +73,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.representative.country"
+            v-model="FORM.country"
             block
             outlined
             :rules="[...rules.required]"
@@ -83,7 +83,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.representative.city"
+            v-model.trim="FORM.city"
             block
             outlined
             :rules="[...rules.required]"
@@ -93,7 +93,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.representative.address"
+            v-model.trim="FORM.address"
             block
             outlined
             :rules="[...rules.required]"
@@ -103,7 +103,7 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.representative.postalCode"
+            v-model="FORM.postalCode"
             block
             outlined
             :rules="[...rules.required]"
@@ -124,19 +124,15 @@
 import countriesJSON from '~/assets/json/countries.json'
 import industriesJSON from '~/assets/json/industries.json'
 import countryCodesJSON from '~/assets/json/countryCodes.json'
-import nationalitiesJSON from '~/assets/json/nationalities.json'
 
 export default {
   data() {
     return {
-      FORM: {
-        representative: { phoneNumber: {} },
-      },
-
       countries: countriesJSON,
       industries: industriesJSON,
       countryCodes: countryCodesJSON,
-      nationalities: nationalitiesJSON,
+
+      FORM: { phoneNumber: {} },
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -162,9 +158,12 @@ export default {
             'E-mail must be valid',
         ],
       },
-
-      USER: this.$store.state.auth.user,
     }
+  },
+
+  mounted() {
+    this.FORM = { ...this.$store.state.auth.user.account.representative[0] }
+    this.FORM.phoneNumber = {}
   },
 
   methods: {

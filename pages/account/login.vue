@@ -72,6 +72,27 @@ export default {
     }
   },
 
+  async fetch() {
+    await this.$axios
+      .post(URL)
+      .then((response) => {
+        this.$store.commit('auth/LOG_USER_IN', response.data)
+        this.$router.replace('/')
+      })
+      .catch((error) => {
+        this.$store.commit('notification/SHOW', {
+          color: 'accent',
+          icon: 'mdi-alert-outline',
+          text: error.response
+            ? error.response.data.message
+            : "Sorry, that didn't work. Please try again",
+        })
+      })
+      .finally(() => {
+        this.$nuxt.$loading.finish()
+      })
+  },
+
   head: { title: 'Sign in' },
 
   methods: {
