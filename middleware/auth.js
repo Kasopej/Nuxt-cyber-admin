@@ -15,6 +15,6 @@ export default ({ $axios, store, redirect }) => {
     // Remove User's data from a perstisted Vuex store
     store.commit('auth/LOG_USER_OUT')
     //  Redirect to login page
-    return redirect('/account/register/')
+    return redirect('/account/login/')
   }
 }
