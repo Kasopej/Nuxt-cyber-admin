@@ -125,10 +125,6 @@ export default {
     }
   },
 
-  created() {
-    console.log(this.USER)
-  },
-
   methods: {
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
