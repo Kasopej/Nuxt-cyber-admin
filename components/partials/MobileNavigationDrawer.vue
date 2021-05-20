@@ -31,7 +31,7 @@
 
       <footer class="px-3 py-4">
         <nuxt-link
-          to="/logout/"
+          to="/account/logout/"
           class="subtitle-1 font-weight-medium accent--text"
           ><v-icon class="mr-3" color="accent">mdi-logout</v-icon>
           Logout</nuxt-link

@@ -93,7 +93,7 @@
           </v-list-item>
 
           <v-divider></v-divider>
-          <v-list-item @click="logout()">
+          <v-list-item to="/account/logout/">
             <v-list-item-title>
               <v-icon class="mr-3">mdi-logout</v-icon>
               <span>Sign out</span>
@@ -123,13 +123,6 @@ export default {
     return {
       USER: this.$store.state.auth.user,
     }
-  },
-
-  methods: {
-    logout() {
-      this.$store.commit('auth/LOG_USER_OUT')
-      this.$router.replace('/account/login')
-    },
   },
 }
 </script>
