@@ -12,7 +12,7 @@
             class="pa-0"
           />
 
-          <v-form ref="form1" v-model="validate">
+          <v-form ref="form1">
             <template v-if="!FORM.type">
               <header class="headline py-6">Select a Program Type</header>
               <v-hover
@@ -50,6 +50,7 @@
 
                 <v-file-input
                   outlined
+                  :rules="[...rules.required]"
                   class="pt-4"
                   placeholder="Upload Banner"
                   accept="image/jpeg, image/png"
@@ -60,18 +61,20 @@
               <v-row>
                 <v-col cols="12" class="py-0">
                   <v-text-field
-                    v-model="FORM.title"
+                    v-model.trim="FORM.title"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="Program Title"
                   />
                 </v-col>
                 <v-col cols="12" md="6" class="py-0">
                   <v-autocomplete
-                    v-model="FORM.language"
+                    v-model.trim="FORM.language"
                     label="Languages"
                     :items="languages"
                     outlined
+                    :rules="[...rules.required]"
                   >
                   </v-autocomplete>
                 </v-col>
@@ -83,8 +86,9 @@
                 </v-col>
                 <v-col cols="12" md="6" class="py-0">
                   <v-autocomplete
-                    v-model="FORM.reward"
+                    v-model.trim="FORM.reward"
                     outlined
+                    :rules="[...rules.required]"
                     label="Reward Type"
                     :items="rewards"
                   >
@@ -98,9 +102,10 @@
                 </v-col>
                 <v-col cols="12" class="py-0">
                   <v-autocomplete
-                    v-model="FORM.tags"
-                    outlined
+                    v-model.trim="FORM.tags"
+                    :rules="[...rules.required]"
                     multiple
+                    outlined
                     label="Tags"
                     :items="tags"
                   >
@@ -112,33 +117,37 @@
               <v-row>
                 <v-col cols="12" md="6" lg="3" class="py-0">
                   <v-text-field
-                    v-model="FORM.rewardGrid.low"
+                    v-model.trim="FORM.rewardGrid.low"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="Low"
                   />
                 </v-col>
                 <v-col cols="12" md="6" lg="3" class="py-0">
                   <v-text-field
-                    v-model="FORM.rewardGrid.medium"
+                    v-model.trim="FORM.rewardGrid.medium"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="Medium"
                   />
                 </v-col>
                 <v-col cols="12" md="6" lg="3" class="py-0">
                   <v-text-field
-                    v-model="FORM.rewardGrid.high"
+                    v-model.trim="FORM.rewardGrid.high"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="High"
                   />
                 </v-col>
                 <v-col cols="12" md="6" lg="3" class="py-0">
                   <v-text-field
-                    v-model="FORM.rewardGrid.critical"
+                    v-model.trim="FORM.rewardGrid.critical"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="Critical"
                   />
                 </v-col>
@@ -148,27 +157,30 @@
               <v-row>
                 <v-col cols="12" md="4" class="py-0">
                   <v-text-field
-                    v-model="FORM.accountCredentials"
+                    v-model.trim="FORM.accountCredentials"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="Account Credentials"
                     placeholder="Username &amp; Password"
                   />
                 </v-col>
                 <v-col cols="12" md="4" class="py-0">
                   <v-text-field
-                    v-model="FORM.documentationLink"
+                    v-model.trim="FORM.documentationLink"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="API Documentation Link"
                     placeholder="https://api.example.com/docs"
                   />
                 </v-col>
                 <v-col cols="12" md="4" class="py-0">
                   <v-text-field
-                    v-model="FORM.vpnAccess"
+                    v-model.trim="FORM.vpnAccess"
                     block
                     outlined
+                    :rules="[...rules.required]"
                     label="VPN Access"
                     placeholder="Username &amp; Password"
                   />
@@ -177,86 +189,126 @@
 
               <header class="headline pt-8">Target Scope</header>
               <header class="subtitle-1 py-4">Scope</header>
-              <v-row>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.webApplication"
-                    block
-                    outlined
-                    label="Web Application"
-                    placeholder="https://example.com"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.api"
-                    block
-                    outlined
-                    label="API"
-                    placeholder="https://api.example.com/docs"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.androidApp"
-                    block
-                    outlined
-                    label="Android App"
-                    placeholder="com.example.google"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.playstoreId"
-                    block
-                    outlined
-                    label="IOS Playstore"
-                    placeholder="123456"
-                  />
-                </v-col>
+              <section>
+                <div class="d-flex justify-space-between">
+                  <v-row class="flex-grow-1">
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.webApplication"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="Web Application"
+                        placeholder="https://example.com"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.api"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="API"
+                        placeholder="https://api.example.com/docs"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.androidApp"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="Android App"
+                        placeholder="com.example.google"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.playstoreId"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="IOS Playstore"
+                        placeholder="123456"
+                      />
+                    </v-col>
+                  </v-row>
 
-                <v-btn icon><v-icon>mdi-home</v-icon></v-btn>
-              </v-row>
+                  <div class="px-2">
+                    <v-btn icon color="red">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </div>
+                </div>
+
+                <div>
+                  <v-btn small color="primary">
+                    <span class="mr-3">Add More</span>
+                    <v-icon small>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
+              </section>
 
               <header class="subtitle-1 py-4">Out-Of-Scope</header>
-              <v-row>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.webApplication"
-                    block
-                    outlined
-                    label="Web Application"
-                    placeholder="https://example.com"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.api"
-                    block
-                    outlined
-                    label="API"
-                    placeholder="https://api.example.com/docs"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.androidApp"
-                    block
-                    outlined
-                    label="Android App"
-                    placeholder="com.example.google"
-                  />
-                </v-col>
-                <v-col cols="12" md="3" class="py-0">
-                  <v-text-field
-                    v-model="FORM.targetScope.playstoreId"
-                    block
-                    outlined
-                    label="IOS Playstore"
-                    placeholder="123456"
-                  />
-                </v-col>
-              </v-row>
+              <section>
+                <div class="d-flex justify-space-between">
+                  <v-row class="flex-grow-1">
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.webApplication"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="Web Application"
+                        placeholder="https://example.com"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.api"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="API"
+                        placeholder="https://api.example.com/docs"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.androidApp"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="Android App"
+                        placeholder="com.example.google"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3" class="py-0">
+                      <v-text-field
+                        v-model.trim="FORM.targetScope.playstoreId"
+                        block
+                        outlined
+                        :rules="[...rules.required]"
+                        label="IOS Playstore"
+                        placeholder="123456"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <div class="px-2">
+                    <v-btn icon color="red">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </div>
+                </div>
+
+                <div>
+                  <v-btn small color="primary">
+                    <span class="mr-3">Add More</span>
+                    <v-icon small>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
+              </section>
 
               <header class="headline py-8">Program Description</header>
               <section class="elevation-2 pa-4 rounded">
@@ -265,6 +317,7 @@
                     <v-btn
                       small
                       :outlined="!!descriptionPreview"
+                      :rules="[...rules.required]"
                       color="accent"
                       @click="descriptionPreview = null"
                       >Write
@@ -285,7 +338,7 @@
 
                   <v-col>
                     <v-autocomplete
-                      v-model="selectedPresetDescription"
+                      v-model.trim="selectedPresetDescription"
                       dense
                       outlined
                       label="Comment Templates"
@@ -305,9 +358,10 @@
                 />
                 <v-textarea
                   v-else
-                  v-model="FORM.description"
+                  v-model.trim="FORM.description"
                   else
                   outlined
+                  :rules="[...rules.required]"
                   hide-details
                 />
 
@@ -350,9 +404,10 @@ export default {
 
   data() {
     return {
-      validate: true,
+      languages,
       FORM: { rewardGrid: {}, targetScope: {} },
       descriptionPreview: null,
+
       programTypes: [
         {
           value: 'Compliance',
@@ -623,6 +678,7 @@ A web application example might constitute calls to a back-end API via JavaScrip
 Thank you for helping keep Company_Name and our users safe!`,
         },
       ],
+
       breadcrumbsItems: [
         {
           text: 'Dashboard',
@@ -635,7 +691,10 @@ Thank you for helping keep Company_Name and our users safe!`,
           to: '/prrogram/add/',
         },
       ],
-      languages,
+
+      rules: {
+        required: [(value) => !!value || 'This Field Is Required'],
+      },
     }
   },
 
