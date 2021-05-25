@@ -1,6 +1,8 @@
 <template>
   <main>
-    <section v-if="!$route.hash" class="py-12">
+    <section v-if="!$route.hash" class="pb-12">
+      <program-item-list :program="program" class="mb-12" />
+
       <div class="text-center">
         <v-img src="/images/no-data.svg" max-height="420" contain />
         <div
@@ -43,6 +45,9 @@ export default {
   data() {
     return {
       tab: 0,
+
+      program: this.$store.state.program.data,
+
       submission: {
         actionstate: 'pending',
         _id: '60805284c4ca9b0022f31380',

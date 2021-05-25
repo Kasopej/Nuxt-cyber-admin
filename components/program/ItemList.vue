@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="d-flex align-center mt-6 overflow-x-hidden"
-    @click="$router.push(`/program/${program._id}/`)"
+    @click="openDetails(program)"
   >
     <v-img
       src="/images/dummy.jpg"
@@ -68,6 +68,13 @@ export default {
     program: {
       type: Object,
       default: () => {},
+    },
+  },
+
+  methods: {
+    openDetails(program) {
+      this.$store.commit('program/SAVE_DATA', program)
+      this.$router.push(`/program/${program._id}/`)
     },
   },
 }
