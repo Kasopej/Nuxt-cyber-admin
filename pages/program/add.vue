@@ -420,7 +420,7 @@ export default {
   data() {
     return {
       languages,
-      FORM: { rewardGrid: {}, targetScope: [{}, {}], outScope: [{}, {}] },
+      FORM: { rewardGrid: {}, targetScope: [{}], outScope: [{}] },
       descriptionPreview: null,
 
       programTypes: [
