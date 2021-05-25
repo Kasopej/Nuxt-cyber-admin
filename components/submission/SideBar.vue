@@ -26,12 +26,20 @@
         <div
           v-for="submmission in submmissions"
           :key="submmission._id"
-          @click="$router.push(`/submission/${submmission._id}/`)"
+          @click="$router.push(`${submmission._id}/`)"
         >
           <v-hover v-slot="{ hover }">
             <article class="pa-4" :class="hover ? 'secondary' : ''">
               <span
-                class="caption text-no-wrap grey lighten-4 grey--text rounded-lg pa-2"
+                class="
+                  caption
+                  text-no-wrap
+                  grey
+                  lighten-4
+                  grey--text
+                  rounded-lg
+                  pa-2
+                "
               >
                 #{{ submmission.reference }}
               </span>

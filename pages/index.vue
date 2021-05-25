@@ -39,7 +39,7 @@
                 v-for="program in programs"
                 :key="program.id"
                 class="d-flex align-center mt-6 overflow-x-hidden"
-                @click="$router.push(`/#!/${program._id}/`)"
+                @click="$router.push(`/program/${program._id}/`)"
               >
                 <v-img
                   src="/images/dummy.jpg"
@@ -51,7 +51,15 @@
 
                 <section
                   style="min-height: 200px"
-                  class="flex-grow-1 fill-height w-full d-flex flex-column justify-space-between pa-2 pa-md-4"
+                  class="
+                    flex-grow-1
+                    fill-height
+                    w-full
+                    d-flex
+                    flex-column
+                    justify-space-between
+                    pa-2 pa-md-4
+                  "
                 >
                   <div class="d-sm-flex justify-space-between">
                     <header
@@ -60,13 +68,25 @@
                     />
 
                     <aside
-                      class="grey--text text--darken-2 font-weight-bold py-2 px-sm-4 py-sm-0"
+                      class="
+                        grey--text
+                        text--darken-2
+                        font-weight-bold
+                        py-2
+                        px-sm-4
+                        py-sm-0
+                      "
                       v-text="program.status"
                     />
                   </div>
 
                   <div
-                    class="d-none d-sm-inline grey--text text--darken-2 text-no-wrap py-3"
+                    class="
+                      d-none d-sm-inline
+                      grey--text
+                      text--darken-2 text-no-wrap
+                      py-3
+                    "
                   >
                     <v-icon small class="mr-2">mdi-gift</v-icon> $150 - $2,500
                   </div>
@@ -88,7 +108,13 @@
                 <div class="text-center">
                   <v-img src="/images/no-data.svg" max-height="420" contain />
                   <div
-                    class="subtitle-1 text-center accent--text font-weight-bold py-8"
+                    class="
+                      subtitle-1
+                      text-center
+                      accent--text
+                      font-weight-bold
+                      py-8
+                    "
                   >
                     No programs Found
                   </div>

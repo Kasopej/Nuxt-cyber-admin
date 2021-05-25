@@ -72,7 +72,7 @@ export default {
         {
           exact: true,
           text: 'Submissions',
-          to: '/submission/',
+          to: '..',
         },
       ],
     }

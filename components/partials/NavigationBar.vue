@@ -25,7 +25,7 @@
         to="/"
         >Programs</v-btn
       >
-      <v-btn
+      <!-- <v-btn
         large
         class="
           secondary
@@ -37,7 +37,7 @@
         "
         to="/submission/"
         >Submission</v-btn
-      >
+      > -->
     </div>
 
     <div class="d-flex align-center">

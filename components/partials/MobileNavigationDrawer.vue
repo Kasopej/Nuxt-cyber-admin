@@ -48,7 +48,7 @@ export default {
       links: [
         { title: 'Programs', icon: 'mdi-briefcase', slug: '/' },
         { title: 'Submissions', icon: 'mdi-bookshelf', slug: '/submission/' },
-        { title: 'Profile', icon: 'mdi-account', slug: '/profile/' },
+        { title: 'Profile', icon: 'mdi-account', slug: '/account/settings/' },
       ],
     }
   },
