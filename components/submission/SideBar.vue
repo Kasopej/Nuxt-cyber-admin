@@ -26,7 +26,7 @@
         <div
           v-for="submmission in submmissions"
           :key="submmission._id"
-          @click="$router.push(`${submmission._id}/`)"
+          @click="$router.push(`#!/${submmission._id}`)"
         >
           <v-hover v-slot="{ hover }">
             <article class="pa-4" :class="hover ? 'secondary' : ''">
@@ -102,6 +102,27 @@ export default {
         },
       ],
     }
+  },
+
+  async fetch() {
+    const URL = `/get-program-submissions/60ad6f7bcb3eee0022e219f1`
+    // Make upload request to the API
+    await this.$axios
+      .$get(URL, this.FORM)
+      .then((res) => {
+        this.submmissions = res.data
+
+        console.log(this.submmissions)
+      })
+      .catch((error) => {
+        this.$store.commit('notification/SHOW', {
+          color: 'accent',
+          icon: 'mdi-alert-outline',
+          text: error.response
+            ? error.response.data.message
+            : 'Something occured. Please try again',
+        })
+      })
   },
 }
 </script>

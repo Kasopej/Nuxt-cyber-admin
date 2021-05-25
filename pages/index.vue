@@ -88,7 +88,8 @@
                       py-3
                     "
                   >
-                    <v-icon small class="mr-2">mdi-gift</v-icon> $150 - $2,500
+                    <v-icon small class="mr-2">mdi-gift</v-icon>
+                    <span v-text="program.reward" />
                   </div>
 
                   <div class="pb-1 text-no-wrap">

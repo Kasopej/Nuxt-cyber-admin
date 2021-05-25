@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section v-if="!$route.params.submissionId" class="py-12">
+    <section v-if="!$route.hash" class="py-12">
       <div class="text-center">
         <v-img src="/images/no-data.svg" max-height="420" contain />
         <div
@@ -63,6 +63,7 @@ export default {
         updatedAt: '2021-04-21T16:27:48.113Z',
         __v: 0,
       },
+
       breadcrumbsItems: [
         {
           text: 'Dashboard',
