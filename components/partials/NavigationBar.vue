@@ -124,5 +124,11 @@ export default {
       USER: this.$store.state.auth.user,
     }
   },
+
+  methods: {
+    toggleDarkMode() {
+      // Do nothing
+    },
+  },
 }
 </script>
