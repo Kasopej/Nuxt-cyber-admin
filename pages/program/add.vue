@@ -59,7 +59,7 @@
 
               <header class="headline py-8">Program Details</header>
               <v-row>
-                <v-col cols="12" class="py-0">
+                <v-col cols="12">
                   <v-text-field
                     v-model.trim="FORM.title"
                     block
@@ -68,7 +68,7 @@
                     label="Program Title"
                   />
                 </v-col>
-                <v-col cols="12" md="6" class="py-0">
+                <v-col cols="12" md="6">
                   <v-autocomplete
                     v-model.trim="FORM.language"
                     label="Languages"
@@ -78,13 +78,13 @@
                   >
                   </v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="6" class="py-0">
+                <v-col cols="12" md="6">
                   <v-switch
                     v-model="FORM.private"
                     label="Make Program Private?"
                   ></v-switch>
                 </v-col>
-                <v-col cols="12" md="6" class="py-0">
+                <v-col cols="12" md="6">
                   <v-autocomplete
                     v-model.trim="FORM.reward"
                     outlined
@@ -94,13 +94,13 @@
                   >
                   </v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="6" class="py-0">
+                <v-col cols="12" md="6">
                   <v-switch
                     v-model="FORM.allowCollaborations"
                     label="Enable Report Collaborations?"
                   ></v-switch>
                 </v-col>
-                <v-col cols="12" class="py-0">
+                <v-col cols="12">
                   <v-autocomplete
                     v-model.trim="FORM.tags"
                     :rules="[...rules.required]"
@@ -115,7 +115,7 @@
 
               <header class="headline py-8">Reward Grid</header>
               <v-row>
-                <v-col cols="12" md="6" lg="3" class="py-0">
+                <v-col cols="12" md="6" lg="3">
                   <v-text-field
                     v-model.trim="FORM.rewardGrid.low"
                     block
@@ -124,7 +124,7 @@
                     label="Low"
                   />
                 </v-col>
-                <v-col cols="12" md="6" lg="3" class="py-0">
+                <v-col cols="12" md="6" lg="3">
                   <v-text-field
                     v-model.trim="FORM.rewardGrid.medium"
                     block
@@ -133,7 +133,7 @@
                     label="Medium"
                   />
                 </v-col>
-                <v-col cols="12" md="6" lg="3" class="py-0">
+                <v-col cols="12" md="6" lg="3">
                   <v-text-field
                     v-model.trim="FORM.rewardGrid.high"
                     block
@@ -142,7 +142,7 @@
                     label="High"
                   />
                 </v-col>
-                <v-col cols="12" md="6" lg="3" class="py-0">
+                <v-col cols="12" md="6" lg="3">
                   <v-text-field
                     v-model.trim="FORM.rewardGrid.critical"
                     block
@@ -155,7 +155,7 @@
 
               <header class="headline py-8">Researcher's Requirement</header>
               <v-row>
-                <v-col cols="12" md="4" class="py-0">
+                <v-col cols="12">
                   <v-text-field
                     v-model.trim="FORM.accountCredentials"
                     block
@@ -165,7 +165,7 @@
                     placeholder="Username &amp; Password"
                   />
                 </v-col>
-                <v-col cols="12" md="4" class="py-0">
+                <v-col cols="12">
                   <v-text-field
                     v-model.trim="FORM.documentationLink"
                     block
@@ -175,7 +175,7 @@
                     placeholder="https://api.example.com/docs"
                   />
                 </v-col>
-                <v-col cols="12" md="4" class="py-0">
+                <v-col cols="12">
                   <v-text-field
                     v-model.trim="FORM.vpnAccess"
                     block
@@ -190,11 +190,15 @@
               <header class="headline pt-8">Target Scope</header>
               <header class="subtitle-1 py-4">Scope</header>
               <section>
-                <div class="d-flex justify-space-between">
+                <div
+                  v-for="(scope, index) in FORM.targetScope"
+                  :key="index"
+                  class="d-flex justify-space-between"
+                >
                   <v-row class="flex-grow-1">
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.webApplication"
+                        v-model.trim="FORM.targetScope[index].webApplication"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -202,9 +206,9 @@
                         placeholder="https://example.com"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.api"
+                        v-model.trim="FORM.targetScope[index].api"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -212,9 +216,9 @@
                         placeholder="https://api.example.com/docs"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.androidApp"
+                        v-model.trim="FORM.targetScope[index].androidApp"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -222,9 +226,9 @@
                         placeholder="com.example.google"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.playstoreId"
+                        v-model.trim="FORM.targetScope[index].playstoreId"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -235,14 +239,18 @@
                   </v-row>
 
                   <div class="px-2">
-                    <v-btn icon color="red">
+                    <v-btn
+                      icon
+                      color="red"
+                      @click="deleteRow('target-scope', index)"
+                    >
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </div>
                 </div>
 
                 <div>
-                  <v-btn small color="primary">
+                  <v-btn small color="primary" @click="addRow('target-scope')">
                     <span class="mr-3">Add More</span>
                     <v-icon small>mdi-plus</v-icon>
                   </v-btn>
@@ -251,11 +259,15 @@
 
               <header class="subtitle-1 py-4">Out-Of-Scope</header>
               <section>
-                <div class="d-flex justify-space-between">
+                <div
+                  v-for="(scope, index) in FORM.outScope"
+                  :key="index"
+                  class="d-flex justify-space-between"
+                >
                   <v-row class="flex-grow-1">
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.webApplication"
+                        v-model.trim="FORM.outScope[index].webApplication"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -263,9 +275,9 @@
                         placeholder="https://example.com"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.api"
+                        v-model.trim="FORM.outScope[index].api"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -273,9 +285,9 @@
                         placeholder="https://api.example.com/docs"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.androidApp"
+                        v-model.trim="FORM.outScope[index].androidApp"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -283,9 +295,9 @@
                         placeholder="com.example.google"
                       />
                     </v-col>
-                    <v-col cols="12" md="3" class="py-0">
+                    <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope.playstoreId"
+                        v-model.trim="FORM.outScope[index].playstoreId"
                         block
                         outlined
                         :rules="[...rules.required]"
@@ -296,14 +308,18 @@
                   </v-row>
 
                   <div class="px-2">
-                    <v-btn icon color="red">
+                    <v-btn
+                      icon
+                      color="red"
+                      @click="deleteRow('target-scope', index)"
+                    >
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </div>
                 </div>
 
                 <div>
-                  <v-btn small color="primary">
+                  <v-btn small color="primary" @click="addRow('out-scope')">
                     <span class="mr-3">Add More</span>
                     <v-icon small>mdi-plus</v-icon>
                   </v-btn>
@@ -321,10 +337,9 @@
                       color="accent"
                       @click="descriptionPreview = null"
                       >Write
-                      <v-icon small class="ml-2"
-                        >mdi-fountain-pen-tip</v-icon
-                      ></v-btn
-                    >
+                      <v-icon small class="ml-2">mdi-fountain-pen-tip</v-icon>
+                    </v-btn>
+
                     <v-btn
                       small
                       :outlined="!descriptionPreview"
@@ -332,9 +347,9 @@
                       class="my-2 mx-md-3"
                       @click="previewdescription()"
                       >Preview
-                      <v-icon small class="ml-2">mdi-eye</v-icon></v-btn
-                    ></v-col
-                  >
+                      <v-icon small class="ml-2">mdi-eye</v-icon>
+                    </v-btn>
+                  </v-col>
 
                   <v-col>
                     <v-autocomplete
@@ -405,7 +420,7 @@ export default {
   data() {
     return {
       languages,
-      FORM: { rewardGrid: {}, targetScope: {} },
+      FORM: { rewardGrid: {}, targetScope: [{}, {}], outScope: [{}, {}] },
       descriptionPreview: null,
 
       programTypes: [
@@ -699,6 +714,41 @@ Thank you for helping keep Company_Name and our users safe!`,
   },
 
   methods: {
+    addRow(type) {
+      switch (type) {
+        case 'target-scope':
+          this.FORM.targetScope.push({})
+          break
+
+        case 'out-scope':
+          this.FORM.outScope.push({})
+          break
+
+        default:
+          break
+      }
+    },
+
+    deleteRow(type, index) {
+      switch (type) {
+        case 'target-scope':
+          if (this.FORM.targetScope.length > 1) {
+            this.FORM.targetScope.splice(index, 1)
+          }
+
+          break
+
+        case 'out-scope':
+          if (this.FORM.outScope.length > 1) {
+            this.FORM.outScope.splice(index, 1)
+          }
+          break
+
+        default:
+          break
+      }
+    },
+
     selectProgramType(type) {
       this.FORM.type = type
       this.$forceUpdate()
