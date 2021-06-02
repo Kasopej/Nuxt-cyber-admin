@@ -12,7 +12,7 @@
 
     <v-menu open-on-hover bottom offset-y min-width="250">
       <template #activator="{ on, attrs }">
-        <v-btn icon class="mx-80" v-bind="attrs" v-on="on">
+        <v-btn icon class="mx-8" v-bind="attrs" v-on="on">
           <v-avatar color="secondary">
             <!-- <v-img
                   v-if="USER.image"
