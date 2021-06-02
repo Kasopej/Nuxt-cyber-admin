@@ -42,11 +42,11 @@
         </section>
 
         <template v-else>
-          <template v-if="submmissions.length">
+          <template v-if="submissions.length">
             <div
-              v-for="submmission in submmissions"
-              :key="submmission._id"
-              @click="$router.push(`#!/${submmission._id}`)"
+              v-for="submission in submissions"
+              :key="submission._id"
+              @click="openSubmission(submission)"
             >
               <v-hover v-slot="{ hover }">
                 <article class="pa-4" :class="hover ? 'secondary' : ''">
@@ -61,10 +61,10 @@
                       pa-2
                     "
                   >
-                    #{{ submmission.reference }}
+                    #{{ submission.reference }}
                   </span>
                   <div class="subtitle-2 text-no-wrap overflow-x-hidden pt-2">
-                    {{ submmission.title }}
+                    {{ submission.title }}
                   </div>
                 </article>
               </v-hover>
@@ -88,7 +88,7 @@
 export default {
   data() {
     return {
-      submmissions: [],
+      submissions: [],
     }
   },
 
@@ -98,9 +98,9 @@ export default {
     await this.$axios
       .$get(URL, this.FORM)
       .then((res) => {
-        this.submmissions = res.data.docs
+        this.submissions = res.data.docs
 
-        console.log(this.submmissions)
+        console.log(this.submissions)
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -111,6 +111,13 @@ export default {
             : 'Something occured. Please try again',
         })
       })
+  },
+
+  methods: {
+    openSubmission(submission) {
+      this.$store.commit('submission/SAVE_DATA', submission)
+      this.$router.push(`#!/${submission._id}`)
+    },
   },
 }
 </script>
