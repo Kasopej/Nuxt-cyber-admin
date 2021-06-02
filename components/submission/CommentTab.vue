@@ -47,8 +47,8 @@
       </div>
     </section>
 
-    <v-form ref="commentForm">
-      <div class="accent--text headline font-weight-bold py-4">
+    <v-form ref="commentForm" class="py-8">
+      <div class="accent--text headline font-weight-bold pb-4">
         Post A Respone
       </div>
       <v-row>
