@@ -49,16 +49,25 @@
               @click="openSubmission(submission)"
             >
               <v-hover v-slot="{ hover }">
-                <article class="pa-4" :class="hover ? 'secondary' : ''">
+                <article
+                  class="pa-4"
+                  :class="
+                    hover ||
+                    ($store.state.submission.data &&
+                      submission._id == $store.state.submission.data._id)
+                      ? 'secondary'
+                      : ''
+                  "
+                >
                   <span
                     class="
-                      caption
-                      text-no-wrap
+                      pa-2
                       grey
+                      caption
                       lighten-4
                       grey--text
                       rounded-lg
-                      pa-2
+                      text-no-wrap text--darken-2
                     "
                   >
                     #{{ submission.reference }}
