@@ -93,14 +93,12 @@ export default {
   },
 
   async fetch() {
-    const URL = `/get-program-submissions/${this.$route.params.programId}`
+    const URL = `/get-program-submissions/${this.$route.params.programId}?limit=999`
     // Make upload request to the API
     await this.$axios
       .$get(URL, this.FORM)
       .then((res) => {
         this.submissions = res.data.docs
-
-        console.log(this.submissions)
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -115,8 +113,9 @@ export default {
 
   methods: {
     openSubmission(submission) {
+      // Save data to Vuex store
       this.$store.commit('submission/SAVE_DATA', submission)
-      this.$router.push(`#!/${submission._id}`)
+      // this.$forceUpdate()
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section v-if="!$route.hash" class="pb-12">
+    <section v-if="!submission" class="pb-12">
       <program-item-list :program="program" class="mb-12" />
 
       <div class="text-center">
@@ -68,6 +68,11 @@ export default {
     submission() {
       return this.$store.state.submission.data
     },
+  },
+
+  mounted() {
+    // Clear Vuex data on page load to avoid error
+    this.$store.commit('submission/SAVE_DATA', null)
   },
 }
 </script>
