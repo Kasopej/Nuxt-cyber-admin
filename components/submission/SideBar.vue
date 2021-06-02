@@ -10,7 +10,7 @@
           v-model.trim="SEARCH.title"
           dense
           outlined
-          label=" Search by or Title"
+          label=" Search by title or reference"
           no-details
           @blur="filterSubmission()"
           @change="filterSubmission()"
@@ -142,7 +142,9 @@ export default {
         const actionstate = this.SEARCH.actionstate
 
         if (title) {
-          res = el.title.toLowerCase().includes(title.toLowerCase())
+          res =
+            el.title.toLowerCase().includes(title.toLowerCase()) ||
+            el.reference.toLowerCase().includes(title.toLowerCase())
         }
 
         // eslint-disable-next-line eqeqeq
