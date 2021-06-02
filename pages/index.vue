@@ -40,20 +40,7 @@
               </template>
             </template>
 
-            <section v-else class="py-12 text-center">
-              <v-img src="/images/no-data.svg" max-height="420" contain />
-              <div
-                class="
-                  subtitle-1
-                  text-center
-                  accent--text
-                  font-weight-bold
-                  py-8
-                "
-              >
-                No programs Found
-              </div>
-            </section>
+            <partials-empty-data v-else caption="No Submmision Selected" />
           </template>
         </main>
       </v-container>

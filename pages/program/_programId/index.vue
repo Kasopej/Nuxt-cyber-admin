@@ -2,15 +2,7 @@
   <main>
     <section v-if="!submission" class="pb-12">
       <program-item-list :program="program" class="mb-12" />
-
-      <div class="text-center">
-        <v-img src="/images/no-data.svg" max-height="420" contain />
-        <div
-          class="subtitle-1 text-center accent--text font-weight-meduim py-8"
-        >
-          No Submmision Selected
-        </div>
-      </div>
+      <partials-empty-data caption="No Submmision Selected" />
     </section>
 
     <section v-else>

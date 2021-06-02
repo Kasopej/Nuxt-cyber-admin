@@ -1,7 +1,53 @@
 <template>
   <div class="px-2 py-6">
     <div><v-checkbox label="Show only private comments" /></div>
-    <div class="text-center py-8">No comments for this submission</div>
+
+    <section v-if="$fetchState.pending">
+      <v-skeleton-loader v-for="i in 3" :key="i" type="article" />
+    </section>
+
+    <section v-else-if="$fetchState.error">
+      <partials-empty-data caption="An error occured" />
+    </section>
+
+    <section v-else-if="!comments.length">
+      <partials-empty-data caption="No comments for this submission" />
+    </section>
+
+    <section v-else>
+      <div v-for="comment in comments" :key="comment._id" class="d-flex pb-4">
+        <v-card class="flex-grow-1 pa-3 rounded-tr-xl rounded-bl-xl">
+          <header class="d-sm-flex justify-space-between flex-grow-1">
+            <section class="d-flex align-center">
+              <v-avatar color="secondary" size="32">
+                <v-icon color="primary" size="28">mdi-account-circle</v-icon>
+              </v-avatar>
+              <div
+                class="subtitle-1 primary--text font-weight-bold ml-2"
+                v-text="comment.accountId"
+              />
+            </section>
+
+            <time
+              class="grey--text font-weight-medium"
+              v-text="new Date(comment.createdAt).toLocaleString()"
+            />
+          </header>
+
+          <article class="py-4" v-html="convertCommentHTML(comment.comment)" />
+
+          <footer class="text-right">
+            <span
+              class="accent--text font-weight-medium"
+              v-text="comment.status"
+            />
+            <v-icon small class="ml-2" color="accent">{{
+              comment.type == 'Public' ? 'mdi-eye' : 'mdi-eye-off'
+            }}</v-icon>
+          </footer>
+        </v-card>
+      </div>
+    </section>
 
     <v-form ref="commentForm">
       <div class="accent--text headline font-weight-bold py-4">
@@ -83,11 +129,13 @@
 
 <script>
 import showdown from 'showdown'
+import presetComments from '~/assets/presets/comments.json'
 
 export default {
   data() {
     return {
       FORM: {},
+      presetComments,
 
       actions: [
         'Post Comment',
@@ -101,41 +149,42 @@ export default {
         'New',
       ],
 
-      presetComments: [
-        {
-          title: 'Accepted > Resolved',
-          content:
-            'Hello,\nThanks to your findings, we were able to fix this vulnerability.\nYour report is now closed as Resolved.\n\nRegards',
-        },
-        {
-          title: 'Under Review > Duplicate',
-          content:
-            'Hello,\nThanks for your submission and for the time spent on that report.\nWe appreciate your help but another hunter already submitted the same bug.\nYour report is closed with status ‘Duplicate’, and for that you will receive 1 ranking point.\nWe hope that you will keep on participating in our program and we wish you better luck in your next findings.\n\nRegards.',
-        },
-        {
-          title: 'Under Review > Thanks',
-          content:
-            'Hello, \nThanks for your first submission on our program.\nUnfortunately, we cannot consider your report as valid, based on our program’s rules.\nYou report is closed with status ‘Thanks’, so that you don’t loose ranking points.\nWe hope that you will keep on participating in our program and we wish you better luck in your next findings.\n\nRegards.',
-        },
-        {
-          title: 'Asked For Fix Verify > Resolved',
-          content:
-            'Hello,\nThanks for your verification.\nThis report is now closed as Resolved.\n\nRegards.',
-        },
-        {
-          title: 'Under Review > Accepted',
-          content:
-            'Hello,\nWe were able to reproduce the PoC and we decided to accept your report.\nYour report is therefore eligible for a reward – stay tuned.\n\nCongrats/Cheers.',
-        },
-        {
-          title: 'New > Under Review',
-          content:
-            'Hello,\nThanks for your submission\nYour report will be reviewed by our team and updated in a timely manner.\n\nRegards.',
-        },
-      ],
       selectedPresetComment: null,
       commentPreview: null,
     }
+  },
+
+  async fetch() {
+    if (this.submission) {
+      const URLL = `/get-comments/${this.submission._id}`
+      // Make upload request to the API
+      await this.$axios
+        .$get(URLL, this.FORM)
+        .then((res) => {
+          this.comments = res.data
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+    }
+  },
+
+  computed: {
+    submission() {
+      return this.$store.state.submission.data
+    },
+  },
+
+  watch: {
+    submission() {
+      this.$fetch()
+    },
   },
 
   methods: {
