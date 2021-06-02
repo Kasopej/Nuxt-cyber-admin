@@ -54,7 +54,7 @@
       <v-row>
         <v-col>
           <v-autocomplete
-            v-model="FORM.status"
+            v-model="FORM.action"
             dense
             outlined
             label="Action"
@@ -108,7 +108,7 @@
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div
           v-if="commentPreview"
-          class="elevation-2 rounded px-2 py-4"
+          class="rounded px-2 py-4"
           v-html="commentPreview"
         />
         <v-textarea v-else v-model="FORM.comment" else outlined hide-details />
@@ -196,20 +196,28 @@ export default {
     },
 
     async postComment() {
-      const submissionId = this.$route.hash.replace('#!/', '')
+      if (this.$refs.commentForm.validate()) {
+        this.$nuxt.$loading.start()
 
-      if (this.$refs.commentForm.validate() && submissionId) {
+        const submissionId = this.submission._id
+        const PAYLOAD = { ...this.FORM, submissionId, status: 'Approved' }
+
+        console.log(PAYLOAD)
+
         const URLL = `/create-comment/${submissionId}`
         // Make upload request to the API
         await this.$axios
-          .$post(URLL, this.FORM)
+          .$post(URLL, PAYLOAD)
           .then(() => {
             this.FORM = {}
+            this.commentPreview = null
 
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
-              text: 'Invitation Sent Successfully',
+              text: 'Comment Submitted Successfully',
             })
+
+            this.$fetch()
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
@@ -221,7 +229,7 @@ export default {
             })
           })
           .finally(() => {
-            // Close the loader
+            this.$nuxt.$loading.finish()
           })
       }
     },
