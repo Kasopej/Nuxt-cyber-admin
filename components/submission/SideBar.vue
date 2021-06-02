@@ -105,12 +105,12 @@ export default {
   },
 
   async fetch() {
-    const URL = `/get-program-submissions/60ad6f7bcb3eee0022e219f1`
+    const URL = `/get-program-submissions/${this.$route.params.programId}`
     // Make upload request to the API
     await this.$axios
       .$get(URL, this.FORM)
       .then((res) => {
-        this.submmissions = res.data
+        this.submmissions = res.data.docs
 
         console.log(this.submmissions)
       })
