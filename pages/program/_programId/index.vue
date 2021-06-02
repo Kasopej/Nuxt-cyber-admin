@@ -48,9 +48,8 @@ export default {
           to: '/',
         },
         {
-          exact: true,
-          text: 'Submissions',
-          to: '..',
+          disabled: true,
+          text: 'program Details',
         },
       ],
     }
