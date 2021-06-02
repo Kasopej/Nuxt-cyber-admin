@@ -64,7 +64,7 @@ export default {
     [
       'nuxt-vuex-localstorage',
       {
-        localStorage: ['auth', 'localStorage'],
+        localStorage: ['auth', 'localStorage', 'program'],
       },
     ],
   ],
