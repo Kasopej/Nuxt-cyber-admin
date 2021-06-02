@@ -18,7 +18,11 @@
           <header class="d-sm-flex justify-space-between flex-grow-1">
             <section class="d-flex align-center">
               <v-avatar color="secondary" size="32">
-                <v-icon color="primary" size="28">mdi-account-circle</v-icon>
+                <v-icon color="primary" size="28">{{
+                  comment.accounttype == 'company'
+                    ? 'mdi-factory'
+                    : 'mdi-account-circle'
+                }}</v-icon>
               </v-avatar>
               <div
                 class="subtitle-1 primary--text font-weight-bold ml-2"
