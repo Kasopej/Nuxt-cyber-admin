@@ -1,7 +1,5 @@
 <template>
   <div class="px-2 py-6">
-    <div><v-checkbox label="Show only private comments" /></div>
-
     <section v-if="$fetchState.pending">
       <v-skeleton-loader v-for="i in 3" :key="i" type="article" />
     </section>
@@ -188,9 +186,13 @@ export default {
   },
 
   methods: {
-    previewComment() {
+    convertCommentHTML(val) {
       const converter = new showdown.Converter()
-      this.commentPreview = converter.makeHtml(this.FORM.comment)
+      return converter.makeHtml(val)
+    },
+
+    previewComment() {
+      this.commentPreview = this.convertCommentHTML(this.FORM.comment)
     },
 
     async postComment() {
