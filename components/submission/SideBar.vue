@@ -7,18 +7,23 @@
     <nav class="d-flex flex-column fill-height">
       <div class="grey lighten-5 pa-2 py-4">
         <v-text-field
+          v-model.trim="SEARCH.title"
           dense
           outlined
           label=" Search by or Title"
           no-details
-        ></v-text-field>
+          @blur="filterSubmission()"
+          @change="filterSubmission()"
+        />
         <div>
           <v-select
+            v-model="SEARCH.actionstate"
             dense
             outlined
-            :items="['All', 'New', 'Under Review', 'Accepted']"
             label="Filter"
-          ></v-select>
+            :items="['All', 'New', 'Pending', 'Under Review', 'Accepted']"
+            @change="filterSubmission()"
+          />
         </div>
       </div>
 
@@ -44,7 +49,7 @@
         <template v-else>
           <template v-if="submissions.length">
             <div
-              v-for="submission in submissions"
+              v-for="submission in filteredSubmissions"
               :key="submission._id"
               @click="openSubmission(submission)"
             >
@@ -97,7 +102,9 @@
 export default {
   data() {
     return {
+      SEARCH: {},
       submissions: [],
+      filteredSubmissions: null,
     }
   },
 
@@ -108,6 +115,7 @@ export default {
       .$get(URL, this.FORM)
       .then((res) => {
         this.submissions = res.data.docs
+        this.filteredSubmissions = this.submissions
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -125,6 +133,30 @@ export default {
       // Save data to Vuex store
       this.$store.commit('submission/SAVE_DATA', submission)
       // this.$forceUpdate()
+    },
+
+    filterSubmission() {
+      this.filteredSubmissions = this.submissions.filter((el) => {
+        let res = el
+        const title = this.SEARCH.title
+        const actionstate = this.SEARCH.actionstate
+
+        if (title) {
+          res = el.title.toLowerCase().includes(title.toLowerCase())
+        }
+
+        // eslint-disable-next-line eqeqeq
+        if (res && actionstate && actionstate != 'All') {
+          // eslint-disable-next-line eqeqeq
+          res = el.actionstate == actionstate.toLowerCase()
+        }
+
+        return !!res
+      })
+
+      if (!this.filteredSubmissions.length) {
+        this.filteredSubmissions = null
+      }
     },
   },
 }
