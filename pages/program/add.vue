@@ -212,7 +212,6 @@
                         v-model.trim="FORM.targetScope[index].webApplication"
                         block
                         outlined
-                        dark
                         label="Web Application"
                         placeholder="https://example.com"
                       />
@@ -278,7 +277,6 @@
                         v-model.trim="FORM.outScope[index].webApplication"
                         block
                         outlined
-                        dark
                         label="Web Application"
                         placeholder="https://example.com"
                       />
@@ -288,7 +286,6 @@
                         v-model.trim="FORM.outScope[index].api"
                         block
                         outlined
-                        dark
                         label="API"
                         placeholder="https://api.example.com/docs"
                       />
