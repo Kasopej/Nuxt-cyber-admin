@@ -212,7 +212,7 @@
                         v-model.trim="FORM.targetScope[index].webApplication"
                         block
                         outlined
-                        :rules="[...rules.required]"
+                        dark
                         label="Web Application"
                         placeholder="https://example.com"
                       />
@@ -222,7 +222,6 @@
                         v-model.trim="FORM.targetScope[index].api"
                         block
                         outlined
-                        :rules="[...rules.required]"
                         label="API"
                         placeholder="https://api.example.com/docs"
                       />
@@ -232,7 +231,6 @@
                         v-model.trim="FORM.targetScope[index].androidApp"
                         block
                         outlined
-                        :rules="[...rules.required]"
                         label="Android App"
                         placeholder="com.example.google"
                       />
@@ -242,7 +240,6 @@
                         v-model.trim="FORM.targetScope[index].playstoreId"
                         block
                         outlined
-                        :rules="[...rules.required]"
                         label="IOS Playstore"
                         placeholder="123456"
                       />
@@ -281,7 +278,7 @@
                         v-model.trim="FORM.outScope[index].webApplication"
                         block
                         outlined
-                        :rules="[...rules.required]"
+                        dark
                         label="Web Application"
                         placeholder="https://example.com"
                       />
@@ -291,7 +288,7 @@
                         v-model.trim="FORM.outScope[index].api"
                         block
                         outlined
-                        :rules="[...rules.required]"
+                        dark
                         label="API"
                         placeholder="https://api.example.com/docs"
                       />
@@ -301,7 +298,6 @@
                         v-model.trim="FORM.outScope[index].androidApp"
                         block
                         outlined
-                        :rules="[...rules.required]"
                         label="Android App"
                         placeholder="com.example.google"
                       />
@@ -311,7 +307,6 @@
                         v-model.trim="FORM.outScope[index].playstoreId"
                         block
                         outlined
-                        :rules="[...rules.required]"
                         label="IOS Playstore"
                         placeholder="123456"
                       />
