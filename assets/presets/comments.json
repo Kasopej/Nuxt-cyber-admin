@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Accepted > Resolved",
+    "content": "Hello,\n\nThanks to your findings, we were able to fix this vulnerability.\n\nYour report is now closed as Resolved.\n\nRegards"
+  },
+  {
+    "title": "Under Review > Duplicate",
+    "content": "Hello,\n\nThanks for your submission and for the time spent on that report.\nWe appreciate your help but another hunter already submitted the same bug.\nYour report is closed with status ‘Duplicate’, and for that you will receive 1 ranking point.\nWe hope that you will keep on participating in our program and we wish you better luck in your next findings.\n\nRegards."
+  },
+  {
+    "title": "Under Review > Thanks",
+    "content": "Hello,\n\nThanks for your first submission on our program.\nUnfortunately, we cannot consider your report as valid, based on our program’s rules.\nYou report is closed with status ‘Thanks’, so that you don’t loose ranking points.\nWe hope that you will keep on participating in our program and we wish you better luck in your next findings.\n\nRegards."
+  },
+  {
+    "title": "Asked For Fix Verify > Resolved",
+    "content": "Hello,\n\nnThanks for your verification.\nThis report is now closed as Resolved.\n\nRegards."
+  },
+  {
+    "title": "Under Review > Accepted",
+    "content": "Hello,\n\nWe were able to reproduce the PoC and we decided to accept your report.\n\nYour report is therefore eligible for a reward – stay tuned.\n\nCongrats/Cheers."
+  },
+  {
+    "title": "New > Under Review",
+    "content": "Hello,\n\nThanks for your submission\nYour report will be reviewed by our team and updated in a timely manner.\n\nRegards."
+  }
+]
