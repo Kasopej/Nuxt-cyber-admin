@@ -18,7 +18,7 @@
           v-model="FILE"
           class="d-none"
           accept="image/jpeg, image/png"
-          @change="uploadPhoto()"
+          @change="uploadPhoto($event)"
         />
       </label>
     </div>
@@ -78,7 +78,7 @@ export default {
   },
 
   methods: {
-    uploadPhoto() {
+    async uploadPhoto(event) {
       if (this.FILE) {
         this.labelText = 'Please wait...'
 
@@ -87,6 +87,30 @@ export default {
         formData.append('file', this.FILE)
         formData.append('userId', this.USER.id)
         this.FILE_BLOB = URL.createObjectURL(this.FILE)
+
+        const endpoint = '/update-profile-picture'
+        await this.$axios
+          .$patch(endpoint, this.FILE, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+          .then(() => {
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Picture changed Successfully',
+            })
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
 
         // const URLL = ``
         // // Make upload request to the API
