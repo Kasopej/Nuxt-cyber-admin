@@ -4,7 +4,9 @@
       <label class="pt-8">
         <v-avatar size="250">
           <v-img
-            :src="FILE_BLOB || USER.image || '/images/dummy.jpg'"
+            :src="
+              FILE_BLOB || USER.account.company[0].image || '/images/dummy.jpg'
+            "
             class="rounded"
             contain
           />
@@ -77,12 +79,18 @@ export default {
     }
   },
 
+  mounted() {
+    console.log(this.USER)
+  },
+
   methods: {
     async uploadPhoto(event) {
       if (this.FILE) {
         this.labelText = 'Please wait...'
 
         // Convert photo to base64 format (i.e data url)
+        // the image is from the user object from the login endpoint
+        // once the company details api is provided that will be used
         const formData = new FormData()
         formData.append('file', this.FILE)
         formData.append('userId', this.USER.id)
@@ -90,7 +98,7 @@ export default {
 
         const endpoint = '/update-profile-picture'
         await this.$axios
-          .$patch(endpoint, this.FILE, {
+          .$patch(endpoint, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           })
           .then(() => {
