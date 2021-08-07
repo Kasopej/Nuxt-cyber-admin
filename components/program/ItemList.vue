@@ -1,8 +1,5 @@
 <template>
-  <v-card
-    class="d-flex align-center mt-6 overflow-x-hidden"
-    @click="openDetails(program)"
-  >
+  <v-card class="d-flex align-center mt-6 overflow-x-hidden">
     <v-img
       src="/images/dummy.jpg"
       width="250"
@@ -26,6 +23,7 @@
       <div class="d-sm-flex justify-space-between">
         <header
           class="headline font-weight-medium accent--text"
+          @click="openDetails(program)"
           v-text="program.title"
         />
 
@@ -54,9 +52,19 @@
         ><strong v-text="program.submission || 0" />
         Submissions
       </div>
-      <div class="font-italic text-no-wrap">
-        <v-icon small class="mr-2">mdi-tag</v-icon>
-        <small v-text="program.type" />
+      <div class="d-flex justify-space-between align-center">
+        <div class="font-italic text-no-wrap">
+          <v-icon small class="mr-2">mdi-tag</v-icon>
+          <small v-text="program.type" />
+        </div>
+        <v-btn
+          small
+          class="float-right px-0"
+          depressed
+          color="primary"
+          @click="goEdit(program)"
+          >Edit</v-btn
+        >
       </div>
     </section>
   </v-card>
@@ -75,6 +83,11 @@ export default {
     openDetails(program) {
       this.$store.commit('program/SAVE_DATA', program)
       this.$router.push(`/program/${program._id}/`)
+    },
+
+    goEdit(program) {
+      this.$store.commit('program/SAVE_DATA', program)
+      this.$router.push(`/program/edit/${program._id}`)
     },
   },
 }

@@ -56,7 +56,7 @@ export default {
   ],
 
   eslint: {
-    fix: true
+    fix: true,
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -508,7 +508,7 @@ export default {
         this.$nuxt.$loading.start()
         console.log(this.FORM)
 
-        // here tried modifying the Ojbect keey to match key
+        // here tried modifying the Object key to match key
         // on swagger ui stil the out of scope and outofscope came back emepty
 
         const payload = Object.assign({}, this.FORM)
