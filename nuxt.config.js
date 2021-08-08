@@ -55,6 +55,10 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+  eslint: {
+    fix: true,
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -108,7 +112,14 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ],
+    },
+  },
 
   publicRuntimeConfig: {
     axiosTimeout: 3000,

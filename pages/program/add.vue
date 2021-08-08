@@ -508,10 +508,18 @@ export default {
         this.$nuxt.$loading.start()
         console.log(this.FORM)
 
+        // here tried modifying the Object key to match key
+        // on swagger ui stil the out of scope and outofscope came back emepty
+
+        const payload = Object.assign({}, this.FORM)
+        payload.outofscope = payload.outScope
+        delete payload.outScope
+        console.log(payload)
+
         const URL = `/create-program`
         // Make upload request to the API
         await this.$axios
-          .$post(URL, this.FORM)
+          .$post(URL, payload)
           .then(() => {
             this.FORM = {}
 
