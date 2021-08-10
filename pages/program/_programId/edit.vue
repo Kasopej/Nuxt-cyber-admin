@@ -17,11 +17,11 @@
             ></v-skeleton-loader>
           </section>
 
-          <section v-if="$fetchState.error" class="py-8">
+          <section v-if="Object.keys(program).length <= 0" class="py-8">
             <v-img src="/images/server-down.svg" max-height="420" contain />
             <div class="subtitle-1 text-center accent--text py-8">
               <div class="d-block">
-                Oops error occured but don't fret lets retry
+                Oops program not found or error occured lets retry
               </div>
               <div class="d-flex justify-center">
                 <v-btn class="px-7 mt-4" color="primary" @click="$fetch"
@@ -445,7 +445,7 @@ export default {
   },
 
   async fetch() {
-    const uri = `/get-program/${this.$route.params.programme}`
+    const uri = `/get-program/${this.$route.params.programId}`
     const setKeys = (prog) => {
       if (!Object.prototype.hasOwnProperty.call(prog, 'language')) {
         prog.language = ''
@@ -461,7 +461,6 @@ export default {
       .then((res) => {
         this.program = res.data
         setKeys(this.program)
-        console.log(this.program)
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -517,7 +516,6 @@ export default {
     async updateProgram() {
       if (this.$refs.updateProgramForm.validate()) {
         this.$nuxt.$loading.start()
-        console.log(this.program)
 
         const URL = `/update-program/${this.program._id}`
 

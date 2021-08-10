@@ -1,8 +1,5 @@
 <template>
-  <nav
-    class="d-flex justify-space-between align-center elevation-3"
-    style="z-index: 999"
-  >
+  <nav class="custom-navbar justify-space-between align-center elevation-3">
     <nuxt-link
       to="/"
       class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-2"
@@ -94,3 +91,21 @@ export default {
   },
 }
 </script>
+
+<style>
+.custom-navbar {
+  display: flex;
+  display: -ms-flexbox;
+  background-color: #fff;
+  border-width: 0 0 0.0625rem 0;
+  border-style: solid;
+  border-color: #e7eaf3;
+  /* height: 3.75rem; */
+  /* box-shadow: 0 0.05rem 0.5rem 0 rgba(33, 40, 50, 0.15) !important; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+</style>

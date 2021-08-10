@@ -1,7 +1,7 @@
 <template>
   <div class="py-6">
     <v-row>
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="12" lg="7">
         <v-row>
           <v-col class="font-weight-medium" cols="3">ACTION STATE</v-col>
           <v-col class="text-capitalize">{{ submission.actionstate }}</v-col>
@@ -77,7 +77,9 @@
         </v-row>
       </v-col>
 
-      <submission-severity-settings />
+      <v-col cols="12" md="12" lg="5">
+        <submission-severity-settings />
+      </v-col>
     </v-row>
   </div>
 </template>
