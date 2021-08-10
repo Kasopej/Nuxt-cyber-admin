@@ -22,7 +22,7 @@
     >
       <div class="d-sm-flex justify-space-between">
         <header
-          class="headline font-weight-medium accent--text"
+          class="headline font-weight-medium accent--text hover"
           @click="openDetails(program)"
           v-text="program.title"
         />
@@ -82,13 +82,19 @@ export default {
   methods: {
     openDetails(program) {
       this.$store.commit('program/SAVE_DATA', program)
-      this.$router.push(`/program/${program._id}/`)
+      this.$router.push(`/program/${program._id}/submissions`)
     },
 
     goEdit(program) {
       this.$store.commit('program/SAVE_DATA', program)
-      this.$router.push(`/program/edit/${program._id}`)
+      this.$router.push(`/program/${program._id}/edit`)
     },
   },
 }
 </script>
+
+<style scoped>
+.hover {
+  cursor: pointer;
+}
+</style>

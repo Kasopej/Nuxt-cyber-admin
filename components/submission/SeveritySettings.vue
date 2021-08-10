@@ -1,6 +1,6 @@
 <template>
-  <v-col cols="12" md="4" class="px-4">
-    <v-card class="px-4 py-8">
+  <div class="">
+    <v-card outlined class="px-4 py-8">
       <div class="d-flex justify-center">
         <div class="accent text-center white--text rounded px-8 py-2 mx-1">
           <div>CVSS Score</div>
@@ -135,7 +135,7 @@
         </v-col>
       </v-row>
     </v-card>
-  </v-col>
+  </div>
 </template>
 
 <script>

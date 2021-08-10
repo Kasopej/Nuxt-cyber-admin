@@ -506,7 +506,6 @@ export default {
     async addProgram() {
       if (this.$refs.form1.validate()) {
         this.$nuxt.$loading.start()
-        console.log(this.FORM)
 
         // here tried modifying the Object key to match key
         // on swagger ui stil the out of scope and outofscope came back emepty
@@ -514,7 +513,6 @@ export default {
         const payload = Object.assign({}, this.FORM)
         payload.outofscope = payload.outScope
         delete payload.outScope
-        console.log(payload)
 
         const URL = `/create-program`
         // Make upload request to the API

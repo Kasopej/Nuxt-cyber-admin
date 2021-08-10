@@ -4,7 +4,7 @@
 
     <v-main>
       <v-container>
-        <main class="white mt-n16 rounded-lg pa-4 pa-md-8 mx-1">
+        <main class="white mt-n16 rounded-lg pa-2 pa-md-8 mx-0 mx-sm-1">
           <div class="d-flex justify-space-between pb-4">
             <v-breadcrumbs
               large

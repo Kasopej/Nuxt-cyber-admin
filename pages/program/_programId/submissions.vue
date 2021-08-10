@@ -1,17 +1,34 @@
 <template>
-  <main>
-    <section v-if="!submission" class="pb-12">
-      <program-item-list :program="program" class="mb-12" />
-      <partials-empty-data caption="No Submmision Selected" />
-    </section>
+  <div>
+    <div class="pt-2">
+      <div class="headline text-capitalize d-flex align-center mb-3">
+        <v-icon large color="primary"> mdi-domain </v-icon>
+        <span class="ml-2">{{ program.title }}</span>
+      </div>
+      <v-divider></v-divider>
+    </div>
+    <div v-if="!submission" class="pb-12">
+      <partials-empty-data
+        :max-height="200"
+        class="mt-10"
+        caption="No Submmision Selected"
+      />
+    </div>
 
     <section v-else>
-      <v-breadcrumbs
-        large
-        divider="»"
-        :items="breadcrumbsItems"
-        class="pa-0 pb-2"
-      />
+      <div class="py-3">
+        <v-btn
+          outlined
+          small
+          color="primary"
+          class="white--text back-link"
+          @click="doBack()"
+        >
+          <v-icon left dark> mdi-arrow-left </v-icon>
+          Back
+        </v-btn>
+      </div>
+
       <v-tabs v-model="tab">
         <v-tab>Report Summary</v-tab>
         <v-tab>Bug Description</v-tab>
@@ -28,12 +45,12 @@
         </v-tabs-items>
       </v-tabs>
     </section>
-  </main>
+  </div>
 </template>
 
 <script>
 export default {
-  layout: 'submission',
+  layout: 'submissionLayout',
 
   data() {
     return {
@@ -65,5 +82,23 @@ export default {
     // Clear Vuex data on page load to avoid error
     this.$store.commit('submission/SAVE_DATA', null)
   },
+
+  methods: {
+    doBack() {
+      this.$store.commit('submission/SELECTED_BACK_CLICK', false)
+    },
+  },
 }
 </script>
+
+<style scoped>
+.back-link {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .back-link {
+    display: none;
+  }
+}
+</style>
