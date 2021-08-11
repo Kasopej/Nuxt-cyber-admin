@@ -91,6 +91,7 @@ export default {
     left: 0;
     bottom: 0;
     border-right: 1px solid rgba(223, 225, 231, 0.932);
+    overflow-y: auto;
   }
 }
 </style>
