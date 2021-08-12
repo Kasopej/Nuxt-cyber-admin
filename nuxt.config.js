@@ -23,6 +23,13 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: true
+    }
+  },
+
   loading: {
     color: '#6921b6',
     failedColor: 'red',
@@ -54,6 +61,10 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
   ],
+
+  eslint: {
+    fix: true,
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -108,7 +119,14 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    babel: {
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ],
+    },
+  },
 
   publicRuntimeConfig: {
     axiosTimeout: 3000,

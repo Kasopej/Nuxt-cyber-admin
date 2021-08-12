@@ -1,11 +1,7 @@
 <template>
-  <v-navigation-drawer
-    :width="$vuetify.breakpoint.mobile ? '100%' : '320px'"
-    style="height: 100vh; min-width: 320px"
-    permanent
-  >
+  <aside>
     <nav class="d-flex flex-column fill-height">
-      <div class="grey lighten-5 pa-2 py-4">
+      <div class="grey lighten-5 pa-2 py-4 mx-5 mx-sm-5 mx-md-4 rounded-lg">
         <v-text-field
           v-model.trim="SEARCH.title"
           dense
@@ -55,7 +51,7 @@
             >
               <v-hover v-slot="{ hover }">
                 <article
-                  class="pa-4"
+                  class="pa-4 d-flex align-center"
                   :class="
                     hover ||
                     ($store.state.submission.data &&
@@ -64,22 +60,32 @@
                       : ''
                   "
                 >
-                  <span
-                    class="
-                      pa-2
-                      grey
-                      caption
-                      lighten-4
-                      grey--text
-                      rounded-lg
-                      text-no-wrap text--darken-2
-                    "
-                  >
-                    #{{ submission.reference }}
-                  </span>
-                  <div class="subtitle-2 text-no-wrap overflow-x-hidden pt-2">
-                    {{ submission.title }}
+                  <div class="flex-grow-1">
+                    <span
+                      class="
+                        pa-2
+                        grey
+                        caption
+                        lighten-4
+                        grey--text
+                        rounded-lg
+                        text-no-wrap text--darken-2
+                      "
+                    >
+                      #{{ submission.reference }}
+                    </span>
+                    <div
+                      class="
+                        subtitle-1
+                        text-no-wrap text-capitalize
+                        overflow-x-hidden
+                        pt-2
+                      "
+                    >
+                      {{ submission.title }}
+                    </div>
                   </div>
+                  <div><v-icon color="primary"> mdi-arrow-right </v-icon></div>
                 </article>
               </v-hover>
               <v-divider />
@@ -95,7 +101,7 @@
         </template>
       </section>
     </nav>
-  </v-navigation-drawer>
+  </aside>
 </template>
 
 <script>
@@ -110,7 +116,7 @@ export default {
 
   async fetch() {
     const URL = `/get-program-submissions/${this.$route.params.programId}?limit=999`
-    // Make upload request to the API
+    // Make get request to the API
     await this.$axios
       .$get(URL, this.FORM)
       .then((res) => {
@@ -133,6 +139,7 @@ export default {
       // Save data to Vuex store
       this.$store.commit('submission/SAVE_DATA', submission)
       // this.$forceUpdate()
+      this.$store.commit('submission/SELECTED_BACK_CLICK', true)
     },
 
     filterSubmission() {

@@ -92,7 +92,7 @@
                 <v-col cols="12" md="6">
                   <v-switch
                     v-model="FORM.private"
-                    label="Make Program Private?"
+                    :label="`Program is ${FORM.private ? 'Private' : 'Public'}`"
                   ></v-switch>
                 </v-col>
                 <v-col cols="12" md="6">
@@ -202,14 +202,14 @@
               <header class="subtitle-1 py-4">Scope</header>
               <section>
                 <div
-                  v-for="(scope, index) in FORM.targetScope"
+                  v-for="(scope, index) in FORM.scope"
                   :key="index"
                   class="d-flex justify-space-between"
                 >
                   <v-row class="flex-grow-1">
                     <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope[index].webApplication"
+                        v-model.trim="FORM.scope[index].webApplication"
                         block
                         outlined
                         label="Web Application"
@@ -218,7 +218,7 @@
                     </v-col>
                     <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope[index].api"
+                        v-model.trim="FORM.scope[index].api"
                         block
                         outlined
                         label="API"
@@ -227,7 +227,7 @@
                     </v-col>
                     <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope[index].androidApp"
+                        v-model.trim="FORM.scope[index].androidApp"
                         block
                         outlined
                         label="Android App"
@@ -236,7 +236,7 @@
                     </v-col>
                     <v-col cols="12" md="3">
                       <v-text-field
-                        v-model.trim="FORM.targetScope[index].playstoreId"
+                        v-model.trim="FORM.scope[index].playstoreId"
                         block
                         outlined
                         label="IOS Playstore"
@@ -395,7 +395,7 @@
                   <v-btn
                     text
                     color="accent"
-                    @click="FORM = { rewardGrid: {}, targetScope: {} }"
+                    @click="FORM = { rewardGrid: {}, scope: {} }"
                     >Cancel</v-btn
                   > </v-col
                 ><v-col>
@@ -429,7 +429,7 @@ export default {
       presetDescriptions,
       descriptionPreview: null,
       selectedPresetDescription: null,
-      FORM: { rewardGrid: {}, targetScope: [{}], outScope: [{}] },
+      FORM: { rewardGrid: {}, scope: [{}], outScope: [{}] },
       tags: ['tag 1', 'sample tag', 'tag 3'],
       rewards: [
         'Bounty',
@@ -460,7 +460,7 @@ export default {
     addRow(type) {
       switch (type) {
         case 'target-scope':
-          this.FORM.targetScope.push({})
+          this.FORM.scope.push({})
           break
 
         case 'out-scope':
@@ -475,8 +475,8 @@ export default {
     deleteRow(type, index) {
       switch (type) {
         case 'target-scope':
-          if (this.FORM.targetScope.length > 1) {
-            this.FORM.targetScope.splice(index, 1)
+          if (this.FORM.scope.length > 1) {
+            this.FORM.scope.splice(index, 1)
           }
 
           break
@@ -506,12 +506,18 @@ export default {
     async addProgram() {
       if (this.$refs.form1.validate()) {
         this.$nuxt.$loading.start()
-        console.log(this.FORM)
+
+        // here tried modifying the Object key to match key
+        // on swagger ui stil the out of scope and outofscope came back emepty
+
+        const payload = Object.assign({}, this.FORM)
+        payload.outofscope = payload.outScope
+        delete payload.outScope
 
         const URL = `/create-program`
         // Make upload request to the API
         await this.$axios
-          .$post(URL, this.FORM)
+          .$post(URL, payload)
           .then(() => {
             this.FORM = {}
 

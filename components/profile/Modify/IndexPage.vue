@@ -4,7 +4,9 @@
       <label class="pt-8">
         <v-avatar size="250">
           <v-img
-            :src="FILE_BLOB || USER.image || '/images/dummy.jpg'"
+            :src="
+              FILE_BLOB || USER.account.company[0].image || '/images/dummy.jpg'
+            "
             class="rounded"
             contain
           />
@@ -18,7 +20,7 @@
           v-model="FILE"
           class="d-none"
           accept="image/jpeg, image/png"
-          @change="uploadPhoto()"
+          @change="uploadPhoto($event)"
         />
       </label>
     </div>
@@ -77,16 +79,46 @@ export default {
     }
   },
 
+  mounted() {
+    console.log(this.USER)
+  },
+
   methods: {
-    uploadPhoto() {
+    async uploadPhoto(event) {
       if (this.FILE) {
         this.labelText = 'Please wait...'
 
         // Convert photo to base64 format (i.e data url)
+        // the image is from the user object from the login endpoint
+        // once the company details api is provided that will be used
         const formData = new FormData()
         formData.append('file', this.FILE)
         formData.append('userId', this.USER.id)
         this.FILE_BLOB = URL.createObjectURL(this.FILE)
+
+        const endpoint = '/update-profile-picture'
+        await this.$axios
+          .$patch(endpoint, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          })
+          .then(() => {
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: 'Picture changed Successfully',
+            })
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
 
         // const URLL = ``
         // // Make upload request to the API
