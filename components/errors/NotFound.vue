@@ -20,7 +20,9 @@
           class="text-center text-sm-left pb-4 pb-sm-0"
         >
           <h1 class="error-title pb-2">{{ title }}</h1>
-          <h3 class="dark--text text--lighten-2">{{ description }}</h3>
+          <h3 class="dark--text text--lighten-2 error-desc">
+            {{ description }}
+          </h3>
           <div class="d-flex justify-center justify-sm-start align-center">
             <v-btn class="mr-3 mt-4" outlined color="primary">
               <NuxtLink class="text-primary text-capitalize" to="/">
@@ -44,11 +46,11 @@
 export default {
   props: {
     title: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
     description: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
   },
@@ -58,6 +60,10 @@ export default {
 <style scoped>
 .error-title {
   font-size: 3rem;
+}
+
+.error-desc {
+  font-weight: 500;
 }
 
 .w-60 {

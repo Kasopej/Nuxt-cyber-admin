@@ -51,6 +51,7 @@
 <script>
 export default {
   layout: 'submissionLayout',
+  middleware: 'auth',
 
   data() {
     return {

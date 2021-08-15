@@ -519,7 +519,7 @@ export default {
 
         const URL = `/update-program/${this.program._id}`
 
-        // prepair form
+        // prepare form
         const formData = new FormData()
 
         for (const field in this.program) {
