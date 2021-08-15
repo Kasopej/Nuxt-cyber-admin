@@ -48,6 +48,13 @@
           </span>
         </v-tab>
 
+        <v-tab class="text-capitalize">
+          <v-icon class="mr-3">mdi-lock-outline</v-icon>
+          <span>
+            Security <span class="d-none d-md-inline ml-2">settings</span>
+          </span>
+        </v-tab>
+
         <v-tabs-items v-model="profileEditTab" class="pt-8">
           <v-tab-item>
             <profile-modify-company-info />
@@ -57,6 +64,9 @@
           </v-tab-item>
           <v-tab-item>
             <profile-modify-billing-info />
+          </v-tab-item>
+          <v-tab-item>
+            <profile-modify-security />
           </v-tab-item>
         </v-tabs-items>
       </v-tabs>
@@ -77,10 +87,6 @@ export default {
 
       USER: this.$store.state.auth.user,
     }
-  },
-
-  mounted() {
-    console.log(this.USER)
   },
 
   methods: {
@@ -119,20 +125,6 @@ export default {
           .finally(() => {
             this.$nuxt.$loading.finish()
           })
-
-        // const URLL = ``
-        // // Make upload request to the API
-        // await this.$axios
-        //   .$put(URLL, formData)
-        //   .then(() => {
-        //     this.labelText = 'Photo changed successfully!'
-        //   })
-        //   .catch((e) => {
-        //     //
-        //   })
-        //   .finally(() => {
-        //     // Close the loader
-        //   })
       }
     },
 
@@ -151,3 +143,12 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)
+  > .v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes)
+  .v-slide-group__prev {
+  display: unset !important;
+  visibility: unset !important;
+}
+</style>

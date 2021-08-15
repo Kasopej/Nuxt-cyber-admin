@@ -3,6 +3,7 @@ export const strict = false
 export const state = () => ({
   user: null,
   loggedIn: false,
+  userAuthData: null,
 })
 
 export const mutations = {
@@ -15,6 +16,17 @@ export const mutations = {
   LOG_USER_IN(state, payload) {
     state.user = payload
     state.loggedIn = true
+  },
+
+  // Save 2FA data
+  KEEP_TFA(state, payload) {
+    state.userAuthData = payload
+  },
+
+  // change 2FA status this is work around since no api
+  // for fetching user info
+  SET_TWO_FACTOR_STATUS(state, payload) {
+    state.user.account.twoFactorAuth = payload
   },
 
   // Log user in
