@@ -12,7 +12,7 @@
               :items="[{ text: 'Dashboard', disabled: false, to: '/' }]"
               class="pa-0"
             />
-            <v-btn color="primary" to="/program/add/">Add Program</v-btn>
+            <v-btn color="primary" to="/program/new">Add Program</v-btn>
           </div>
 
           <section v-if="$fetchState.pending">
