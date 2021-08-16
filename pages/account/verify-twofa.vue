@@ -1,10 +1,10 @@
 <template>
-  <v-form ref="form" v-model="valid" class="pa-8 col-12" lazy-validation>
+  <div class="pa-8 col-12">
     <header class="headline font-weight-bold text-center py-4">
       Authenticate with Token
     </header>
 
-    <v-form ref="tokenForm">
+    <v-form ref="tokenForm" class="mb-5">
       <v-text-field
         v-model="form.token"
         dense
@@ -16,7 +16,13 @@
 
       <v-btn block color="primary" @click="verify()"> Authenticate </v-btn>
     </v-form>
-  </v-form>
+    <small class="text--grey" style="line-height: 1">
+      If you have lost your mobile device and want to reset your 2FA to retrieve
+      back your account, Kindlysend a message to
+      <a href="mailto:info@teklabspace.com">info@teklabspace.com</a> with lost
+      2FA as the subject. Thanks.
+    </small>
+  </div>
 </template>
 
 <script>
@@ -30,10 +36,6 @@ export default {
         token: null,
         temp2FAKey: null,
       },
-
-      valid: true,
-      showPassword: false,
-
       rules: {
         required: (value) => !!value || 'Required.',
       },
