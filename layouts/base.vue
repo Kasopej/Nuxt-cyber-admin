@@ -6,6 +6,7 @@
       <nuxt />
     </v-main>
     <partials-notification-toast />
+    <misc-go-twofa />
   </v-app>
 </template>
 

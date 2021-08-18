@@ -5,6 +5,7 @@
     <section style="height: 100vh" class="d-flex flex-column overflow-y-hidden">
       <partials-navigation-bar />
       <nuxt class="flex-grow-1 overflow-y-auto" />
+      <misc-go-twofa />
     </section>
 
     <partials-notification-toast />

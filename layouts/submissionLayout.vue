@@ -19,6 +19,7 @@
 
     <partials-notification-toast />
     <partials-mobile-navigation-drawer />
+    <misc-go-twofa />
   </v-app>
 </template>
 
