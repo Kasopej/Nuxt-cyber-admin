@@ -48,7 +48,7 @@
           </span>
         </v-tab>
 
-        <v-tab class="text-capitalize">
+        <v-tab ref="secureTab" class="text-capitalize">
           <v-icon class="mr-3">mdi-lock-outline</v-icon>
           <span>
             Security <span class="d-none d-md-inline ml-2">settings</span>
@@ -86,6 +86,12 @@ export default {
       FILE_BLOB: null,
 
       USER: this.$store.state.auth.user,
+    }
+  },
+
+  mounted() {
+    if (this.$store.state.misc.clickSecTab) {
+      this.$refs.secureTab.$el.click()
     }
   },
 
@@ -132,8 +138,6 @@ export default {
       if (this.FORM.readOnly) {
         this.FORM.readOnly = !this.FORM.readOnly
       } else {
-        console.log(JSON.stringify(this.FORM))
-
         this.$store.commit('notification/SHOW', {
           color: 'accent',
           text: 'Feature under construction',

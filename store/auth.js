@@ -2,6 +2,7 @@ export const strict = false
 
 export const state = () => ({
   user: null,
+  tempUser: null,
   loggedIn: false,
   userAuthData: null,
 })
@@ -21,6 +22,10 @@ export const mutations = {
   // Save 2FA data
   KEEP_TFA(state, payload) {
     state.userAuthData = payload
+  },
+
+  KEEP_USER_TMP(state, payload) {
+    state.tempUser = payload
   },
 
   // change 2FA status this is work around since no api

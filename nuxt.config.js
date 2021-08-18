@@ -30,6 +30,10 @@ export default {
     }
   },
 
+  router: {
+    middleware: 'checkTwoFactor'
+  },
+
   loading: {
     color: '#6921b6',
     failedColor: 'red',

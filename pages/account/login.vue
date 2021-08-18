@@ -87,7 +87,7 @@ export default {
             if (response.data.twoFactorAuth) {
               this.$store.commit('auth/KEEP_TFA', response.data)
               this.$router.replace('/account/verify-twofa')
-            } else {
+            } else if (!response.data.twoFactorAuth) {
               this.$store.commit('auth/LOG_USER_IN', response.data)
               this.$router.replace('/')
             }
