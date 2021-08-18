@@ -5,10 +5,10 @@
     </v-main>
 
     <partials-notification-toast />
+    <misc-go-twofa />
   </v-app>
 </template>
 
-//
 <script>
 // export default {
 //   data() {

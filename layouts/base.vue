@@ -1,19 +1,21 @@
 <template>
   <v-app>
     <partials-mobile-navigation-drawer />
-
-    <section style="height: 100vh" class="d-flex flex-column overflow-y-hidden">
+    <v-main>
       <partials-navigation-bar />
-      <nuxt class="flex-grow-1 overflow-y-auto" />
-      <misc-go-twofa />
-    </section>
-
+      <nuxt />
+    </v-main>
     <partials-notification-toast />
+    <misc-go-twofa />
   </v-app>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {}
+  },
+}
 </script>
 
 <style lang="scss">
