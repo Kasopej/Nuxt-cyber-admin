@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="signUpForm" v-model="valid" class="pa-8 col-12">
+  <v-form ref="signUpForm" v-model="valid" class="pa-3 pa-sm-4 col-12">
     <nav class="text-center pb-4">
       Already have an account?
       <nuxt-link to="/account/login/">Sign In</nuxt-link>
@@ -83,9 +83,9 @@
     </section>
 
     <div class="py-4">
-      <v-checkbox v-model="FORM.acceptTerms">
+      <v-checkbox v-model="FORM.acceptTerms" :rules="[...rules.required]">
         <template #label>
-          <div>
+          <small>
             By clicking sign up, you hereby are in agreement with our
             <a href="https://www.teklabspace.com/terms-condition"
               >Terms &amp; Conditions</a
@@ -94,7 +94,7 @@
             <a href="https://www.teklabspace.com/code-of-conduct"
               >Code of conduct</a
             >
-          </div>
+          </small>
         </template>
       </v-checkbox>
     </div>
@@ -168,7 +168,12 @@ export default {
         await this.$axios
           .post(URL, PAYLOAD)
           .then((response) => {
-            this.$router.replace('/')
+            this.$store.commit('notification/SHOW', {
+              icon: 'mdi-check',
+              text: `${response.data.message}.`,
+              timeout: 20000,
+            })
+            this.$router.replace('/account/login')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
