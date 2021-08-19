@@ -3,7 +3,10 @@
 export default ({ route, store, redirect }) => {
   if (store.state.auth.loggedIn) {
     if (store.state.auth.user.account.twoFactorAuth === false) {
-      if (route.name !== 'account-settings') {
+      if (
+        route.name !== 'account-settings' ||
+        route.name !== 'account-logout'
+      ) {
         store.commit('misc/SET_TWOFA_MODAL', true)
       }
     }
