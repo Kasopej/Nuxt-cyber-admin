@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="form" v-model="valid" class="pa-8 col-12" lazy-validation>
+  <v-form ref="form" v-model="valid" class="pa-3 pa-sm-7 col-12">
     <div class="text-center pb-4">
       Don’t have an account?
       <nuxt-link to="/account/register/">Sign Up</nuxt-link>
