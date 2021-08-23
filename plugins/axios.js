@@ -1,7 +1,6 @@
 export default function ({ $axios, $config, store, redirect }) {
   $axios.defaults.timeout = $config.axiosTimeout
-  // $axios.defaults.baseURL = $config.baseURL
-  $axios.defaults.baseURL = 'https://teklabspaceapi.herokuapp.com/company'
+  $axios.defaults.baseURL = $config.baseURL
 
   // Adds header: `Authorization: Bearer XXXX` to requests
   const accessToken = store.state.auth.accessToken
