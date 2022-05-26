@@ -19,7 +19,7 @@
       ></v-select>
 
       <v-text-field
-        v-model="FORM.email"
+        v-model="FORM.companyEmail"
         dense
         outlined
         :rules="[...rules.required]"
