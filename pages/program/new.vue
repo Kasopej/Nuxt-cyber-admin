@@ -89,7 +89,7 @@
                 <div class="d-flex mb-10">
                   <label class="mr-4 mr-sm-7">
                     <v-img
-                      :src="thumbnailBlob || '/images/dummy.jpg'"
+                      :src="form.thumbnail || '/images/dummy.jpg'"
                       class="rounded border"
                       width="125"
                       contain
@@ -98,16 +98,16 @@
                       Click to choose Thumbnail
                     </small>
                     <v-file-input
-                      v-model="form.thumbnail"
+                      v-model="thumbnailTemp"
                       class="d-none"
                       accept="image/jpeg, image/png"
-                      @change="setImageBlob('thumbnailBlob', 'thumbnail')"
+                      @change="setImageBlob('thumbnail', 'thumbnailTemp')"
                     />
                   </label>
 
                   <label>
                     <v-img
-                      :src="bannerBlob || '/images/dummy.jpg'"
+                      :src="form.banner || '/images/dummy.jpg'"
                       class="rounded border"
                       width="125"
                       contain
@@ -116,10 +116,10 @@
                       Click to choose Banner
                     </small>
                     <v-file-input
-                      v-model="form.banner"
+                      v-model="bannerTemp"
                       class="d-none"
                       accept="image/jpeg, image/png"
-                      @change="setImageBlob('bannerBlob', 'banner')"
+                      @change="setImageBlob('banner', 'bannerTemp')"
                     />
                   </label>
                 </div>
@@ -589,8 +589,8 @@ export default {
         thumbnail: null,
         banner: null,
       },
-      thumbnailBlob: null,
-      bannerBlob: null,
+      thumbnailTemp: null,
+      bannerTemp: null,
       tags: ['tag 1', 'sample tag', 'tag 3'],
       rewards: [
         'Bounty',
@@ -627,8 +627,11 @@ export default {
       }
     },
 
-    setImageBlob(fileBlob, field) {
-      this[fileBlob] = URL.createObjectURL(this.form[field])
+    setImageBlob(formKey, file) {
+      //   const reader = new FileReader()
+      //   reader.readAsDataURL(this[file])
+      //   reader.onload = () => (this.form[formKey] = reader.result)
+      this.form[formKey] = this[file]
     },
 
     addRow(type) {
@@ -684,7 +687,10 @@ export default {
           } else {
             formData.append(field, this.form[field])
           }
+          //   formData.append(field, this.form[field])
         }
+
+        // const payload = this.form
 
         await this.$axios
           .$post(URL, formData)
