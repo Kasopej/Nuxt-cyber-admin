@@ -89,7 +89,7 @@
                 <div class="d-flex mb-10">
                   <label class="mr-4 mr-sm-7">
                     <v-img
-                      :src="form.thumbnail || '/images/dummy.jpg'"
+                      :src="form.image || '/images/dummy.jpg'"
                       class="rounded border"
                       width="125"
                       contain
@@ -101,13 +101,13 @@
                       v-model="thumbnailTemp"
                       class="d-none"
                       accept="image/jpeg, image/png"
-                      @change="setImageBlob('thumbnail', 'thumbnailTemp')"
+                      @change="setImageBlob('image', 'thumbnailTemp')"
                     />
                   </label>
 
                   <label>
                     <v-img
-                      :src="form.banner || '/images/dummy.jpg'"
+                      :src="form.image2 || '/images/dummy.jpg'"
                       class="rounded border"
                       width="125"
                       contain
@@ -119,7 +119,7 @@
                       v-model="bannerTemp"
                       class="d-none"
                       accept="image/jpeg, image/png"
-                      @change="setImageBlob('banner', 'bannerTemp')"
+                      @change="setImageBlob('image2', 'bannerTemp')"
                     />
                   </label>
                 </div>
@@ -586,8 +586,8 @@ export default {
         tags: '',
         private: false,
         allowCollaborations: false,
-        thumbnail: null,
-        banner: null,
+        image: null,
+        image2: null,
       },
       thumbnailTemp: null,
       bannerTemp: null,
@@ -628,10 +628,10 @@ export default {
     },
 
     setImageBlob(formKey, file) {
-      //   const reader = new FileReader()
-      //   reader.readAsDataURL(this[file])
-      //   reader.onload = () => (this.form[formKey] = reader.result)
-      this.form[formKey] = this[file]
+      const reader = new FileReader()
+      reader.readAsDataURL(this[file])
+      reader.onload = () => (this.form[formKey] = reader.result)
+      // this.form[formKey] = this[file]
     },
 
     addRow(type) {
@@ -680,20 +680,10 @@ export default {
 
         const URL = `/create-program`
 
-        const formData = new FormData()
-        for (const field in this.form) {
-          if (field === 'scope' || field === 'outofscope') {
-            formData.append(field, JSON.stringify(this.form[field]))
-          } else {
-            formData.append(field, this.form[field])
-          }
-          //   formData.append(field, this.form[field])
-        }
-
-        // const payload = this.form
+        const payload = this.form
 
         await this.$axios
-          .$post(URL, formData)
+          .$post(URL, payload)
           .then(() => {
             this.form = {}
 
