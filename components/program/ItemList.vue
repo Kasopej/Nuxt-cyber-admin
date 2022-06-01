@@ -1,7 +1,7 @@
 <template>
   <v-card class="d-flex align-center mt-6 overflow-x-hidden">
     <v-img
-      src="/images/dummy.jpg"
+      :src="program.thumbnail || '/images/dummy.jpg'"
       width="250"
       height="200"
       :max-width="$vuetify.breakpoint.mobile ? '100px' : '250px'"
