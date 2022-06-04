@@ -631,7 +631,6 @@ export default {
       const reader = new FileReader()
       reader.readAsDataURL(this[file])
       reader.onload = () => (this.form[formKey] = reader.result)
-      // this.form[formKey] = this[file]
     },
 
     addRow(type) {
@@ -675,7 +674,6 @@ export default {
 
     async createProgram() {
       if (this.$refs.stepFormSix.validate()) {
-        console.log(this.form)
         this.$nuxt.$loading.start()
 
         const URL = `/create-program`
