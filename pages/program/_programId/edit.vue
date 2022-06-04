@@ -1,72 +1,130 @@
 <template>
   <div>
-    <header
-      class="primary py-16"
-      style="background: linear-gradient(to right, #c504da, #6921b6)"
-    ></header>
+    <v-container class="mt-16">
+      <v-main>
+        <v-breadcrumbs
+          large
+          divider="»"
+          :items="breadcrumbsItems"
+          class="px-0 pt-3"
+        />
 
-    <v-main>
-      <v-container>
-        <main class="white rounded-lg mt-n16 pa-4 pa-md-8 mx-0 mx-sm-1">
-          <section v-if="$fetchState.pending">
-            <v-skeleton-loader
-              v-for="h in 3"
-              :key="h"
-              type="article, actions"
-              class="py-2"
-            ></v-skeleton-loader>
-          </section>
+        <div v-if="$fetchState.pending">
+          <v-skeleton-loader
+            v-for="h in 3"
+            :key="h"
+            type="article, actions"
+            class="py-2"
+          ></v-skeleton-loader>
+        </div>
 
-          <section v-if="Object.keys(program).length <= 0" class="py-8">
-            <v-img src="/images/server-down.svg" max-height="420" contain />
-            <div class="subtitle-1 text-center accent--text py-8">
-              <div class="d-block">
-                Oops program not found or error occured lets retry
-              </div>
-              <div class="d-flex justify-center">
-                <v-btn class="px-7 mt-4" color="primary" @click="$fetch"
-                  >Retry</v-btn
-                >
-              </div>
+        <div v-if="Object.keys(program).length <= 0" class="py-8">
+          <v-img src="/images/server-down.svg" max-height="420" contain />
+          <div class="subtitle-1 text-center accent--text py-8">
+            <div class="d-block">
+              Oops program not found or error occured lets retry
             </div>
-          </section>
-
-          <section v-if="Object.keys(program).length > 0">
-            <div class="headline font-weight-bold text-capitalize text-center">
-              {{ program.title }}
+            <div class="d-flex justify-center">
+              <v-btn class="px-7 mt-4" color="primary" @click="$fetch"
+                >Retry</v-btn
+              >
             </div>
-            <v-form ref="updateProgramForm">
-              <template>
-                <div>
-                  <div class="headline py-8">Banner &amp; Thumbnail</div>
-                  <label>
+          </div>
+        </div>
+
+        <v-stepper
+          v-if="Object.keys(program).length > 0"
+          v-model="step"
+          class="step-reset"
+        >
+          <v-stepper-header class="step-header-reset rounded px-0 px-md-3">
+            <v-stepper-step class="ml-n4" :complete="step > 1" step="1">
+              Program details
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step :complete="step > 2" step="2">
+              Reward grid
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step :complete="step > 3" step="3"
+              >Requirement</v-stepper-step
+            >
+
+            <v-divider></v-divider>
+
+            <v-stepper-step :complete="step > 4" step="4"
+              >Target Scope</v-stepper-step
+            >
+
+            <v-divider></v-divider>
+
+            <v-stepper-step class="mr-n4" :complete="step > 5" step="5"
+              >Description</v-stepper-step
+            >
+          </v-stepper-header>
+
+          <v-stepper-items class="rounded mt-5">
+            <v-stepper-content step="1" class="pa-0">
+              <header class="head__line mb-2">Program Details</header>
+
+              <v-form ref="stepFormOne">
+                <div class="d-flex mb-10">
+                  <label class="mr-4 mr-sm-7">
                     <v-img
-                      :src="'/images/dummy.jpg'"
-                      class="rounded"
-                      width="250"
+                      :src="program.thumbnail"
+                      class="rounded border"
+                      width="125"
+                      height="125"
                       contain
                     />
-                    <small class="grey--text text-center pt-3">Thumbnail</small>
+                    <small class="grey--text text-left pt-2">
+                      Click to choose Thumbnail
+                    </small>
                     <v-file-input
-                      v-model="program.thumbnail"
+                      v-model="thumbnail"
                       class="d-none"
                       accept="image/jpeg, image/png"
+                      @change="setImageBlob('image', 'thumbnail')"
                     />
                   </label>
 
-                  <v-file-input
-                    v-model="program.banner"
-                    outlined
-                    :rules="[...rules.required]"
-                    class="pt-4"
-                    placeholder="Upload Banner"
-                    accept="image/jpeg, image/png"
-                  />
+                  <label>
+                    <v-img
+                      :src="program.banner"
+                      class="rounded border"
+                      width="125"
+                      height="125"
+                      contain
+                    />
+                    <small class="grey--text text-left pt-2">
+                      Click to choose Banner
+                    </small>
+                    <v-file-input
+                      v-model="banner"
+                      class="d-none"
+                      accept="image/jpeg, image/png"
+                      @change="setImageBlob('image2', 'banner')"
+                    />
+                  </label>
                 </div>
 
-                <header class="headline py-8">Program Details</header>
-                <v-row>
-                  <v-col cols="12">
+                <v-row align="center">
+                  <v-col class="d-flex" cols="12" sm="6">
+                    <v-select
+                      v-model="program.type"
+                      :items="programTypes"
+                      label="Program Type"
+                      item-text="title"
+                      item-value="value"
+                      :rules="[...rules.required]"
+                      outlined
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6">
                     <v-text-field
                       v-model.trim="program.title"
                       block
@@ -75,6 +133,9 @@
                       label="Program Title"
                     />
                   </v-col>
+                </v-row>
+
+                <v-row align="center">
                   <v-col cols="12" md="6">
                     <v-autocomplete
                       v-model.trim="program.language"
@@ -86,30 +147,6 @@
                     </v-autocomplete>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-switch
-                      v-model="program.private"
-                      :label="`Program is ${
-                        program.private ? 'Private' : 'Public'
-                      }`"
-                    ></v-switch>
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-autocomplete
-                      v-model.trim="program.reward"
-                      outlined
-                      :rules="[...rules.required]"
-                      label="Reward Type"
-                      :items="rewards"
-                    >
-                    </v-autocomplete>
-                  </v-col>
-                  <v-col cols="12" md="6">
-                    <v-switch
-                      v-model="program.allowCollaborations"
-                      label="Enable Report Collaborations?"
-                    ></v-switch>
-                  </v-col>
-                  <v-col cols="12">
                     <v-autocomplete
                       v-model.trim="program.tags"
                       :rules="[...rules.required]"
@@ -122,8 +159,52 @@
                   </v-col>
                 </v-row>
 
-                <header class="headline py-8">Reward Grid</header>
-                <v-row>
+                <v-row align="center">
+                  <v-col cols="12" md="6">
+                    <v-switch
+                      v-model="program.private"
+                      :label="`Program is ${
+                        program.private ? 'Private' : 'Public'
+                      }`"
+                    ></v-switch>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-switch
+                      v-model="program.allowCollaborations"
+                      label="Enable Report Collaborations?"
+                    ></v-switch>
+                  </v-col>
+                </v-row>
+              </v-form>
+
+              <div class="d-flex align-end justify-end">
+                <v-btn outlined color="primary" class="mt-3 mr-2">Back</v-btn>
+                <v-btn
+                  color="primary mt-3"
+                  @click="validateStep(2, 'stepFormOne')"
+                  >Next</v-btn
+                >
+              </div>
+            </v-stepper-content>
+
+            <v-stepper-content step="2" class="pa-0">
+              <header class="head__line mb-2">Reward Grid</header>
+
+              <v-form ref="stepFormTwo">
+                <v-row align="center">
+                  <v-col cols="12" md="6">
+                    <v-autocomplete
+                      v-model.trim="program.reward"
+                      outlined
+                      :rules="[...rules.required]"
+                      label="Reward Type"
+                      :items="rewards"
+                    >
+                    </v-autocomplete>
+                  </v-col>
+                </v-row>
+
+                <v-row align="center">
                   <v-col cols="12" md="6" lg="3">
                     <v-text-field
                       v-model.trim="program.rewardGrid.low"
@@ -161,8 +242,28 @@
                     />
                   </v-col>
                 </v-row>
+              </v-form>
 
-                <header class="headline py-8">Researcher's Requirement</header>
+              <div class="d-flex align-end justify-end">
+                <v-btn
+                  outlined
+                  color="primary"
+                  class="mt-3 mr-2"
+                  @click="step = 1"
+                  >Back</v-btn
+                >
+                <v-btn
+                  color="primary mt-3"
+                  @click="validateStep(3, 'stepFormTwo')"
+                  >Next</v-btn
+                >
+              </div>
+            </v-stepper-content>
+
+            <v-stepper-content step="3" class="pa-0">
+              <header class="head__line mb-2">Requirement</header>
+
+              <v-form ref="stepFormThree">
                 <v-row>
                   <v-col cols="12">
                     <v-text-field
@@ -195,220 +296,243 @@
                     />
                   </v-col>
                 </v-row>
+              </v-form>
 
-                <header class="headline pt-8">Target Scope</header>
+              <div class="d-flex align-end justify-end">
+                <v-btn
+                  outlined
+                  color="primary"
+                  class="mt-3 mr-2"
+                  @click="step = 2"
+                  >Back</v-btn
+                >
+                <v-btn
+                  color="primary mt-3"
+                  @click="validateStep(4, 'stepFormThree')"
+                  >Next</v-btn
+                >
+              </div>
+            </v-stepper-content>
+
+            <v-stepper-content step="4" class="pa-0">
+              <header class="head__line mb-2">Target scope</header>
+
+              <v-form ref="stepFormFour">
                 <header class="subtitle-1 py-4">Scope</header>
-                <section>
-                  <div
-                    v-for="(scope, index) in program.scope"
-                    :key="index"
-                    class="d-flex justify-space-between"
-                  >
-                    <v-row class="flex-grow-1">
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.scope[index].webApplication"
-                          block
-                          outlined
-                          label="Web Application"
-                          placeholder="https://example.com"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.scope[index].api"
-                          block
-                          outlined
-                          label="API"
-                          placeholder="https://api.example.com/docs"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.scope[index].androidApp"
-                          block
-                          outlined
-                          label="Android App"
-                          placeholder="com.example.google"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.scope[index].playstoreId"
-                          block
-                          outlined
-                          label="IOS Playstore"
-                          placeholder="123456"
-                        />
-                      </v-col>
-                    </v-row>
-
-                    <div class="px-2">
-                      <v-btn
-                        icon
-                        color="red"
-                        @click="deleteRow('scope', index)"
-                      >
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </div>
-                  </div>
-
-                  <div>
-                    <v-btn small color="primary" @click="addRow('scope')">
-                      <span class="mr-3">Add More</span>
-                      <v-icon small>mdi-plus</v-icon>
-                    </v-btn>
-                  </div>
-                </section>
-
-                <header class="subtitle-1 py-4">Out-Of-Scope</header>
-                <section>
-                  <div
-                    v-for="(scope, index) in program.outofscope"
-                    :key="index"
-                    class="d-flex justify-space-between"
-                  >
-                    <v-row class="flex-grow-1">
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="
-                            program.outofscope[index].webApplication
-                          "
-                          block
-                          outlined
-                          label="Web Application"
-                          placeholder="https://example.com"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.outofscope[index].api"
-                          block
-                          outlined
-                          label="API"
-                          placeholder="https://api.example.com/docs"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.outofscope[index].androidApp"
-                          block
-                          outlined
-                          label="Android App"
-                          placeholder="com.example.google"
-                        />
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field
-                          v-model.trim="program.outofscope[index].playstoreId"
-                          block
-                          outlined
-                          label="IOS Playstore"
-                          placeholder="123456"
-                        />
-                      </v-col>
-                    </v-row>
-
-                    <div class="px-2">
-                      <v-btn
-                        icon
-                        color="red"
-                        @click="deleteRow('out-of-scope', index)"
-                      >
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </div>
-                  </div>
-
-                  <div>
-                    <v-btn
-                      small
-                      color="primary"
-                      @click="addRow('out-of-scope')"
-                    >
-                      <span class="mr-3">Add More</span>
-                      <v-icon small>mdi-plus</v-icon>
-                    </v-btn>
-                  </div>
-                </section>
-
-                <header class="headline py-8">Program Description</header>
-                <section class="elevation-2 pa-4 rounded">
-                  <v-row>
-                    <v-col>
-                      <v-btn
-                        small
-                        :outlined="!!descriptionPreview"
-                        :rules="[...rules.required]"
-                        color="accent"
-                        @click="descriptionPreview = null"
-                        >Write
-                        <v-icon small class="ml-2">mdi-fountain-pen-tip</v-icon>
-                      </v-btn>
-
-                      <v-btn
-                        small
-                        :outlined="!descriptionPreview"
-                        color="accent"
-                        class="my-2 mx-md-3"
-                        @click="previewdescription()"
-                        >Preview
-                        <v-icon small class="ml-2">mdi-eye</v-icon>
-                      </v-btn>
-                    </v-col>
-
-                    <v-col>
-                      <v-autocomplete
-                        v-model.trim="selectedPresetDescription"
-                        dense
+                <div
+                  v-for="(scope, index) in program.scope"
+                  :key="index"
+                  class="d-flex justify-space-between"
+                >
+                  <v-row class="flex-grow-1">
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.scope[index].webApplication"
+                        block
                         outlined
-                        label="Comment Templates"
-                        :items="presetDescriptions"
-                        item-value="content"
-                        item-text="title"
-                        @change="
-                          program.description = selectedPresetDescription
-                        "
-                      >
-                      </v-autocomplete>
+                        label="Web Application"
+                        placeholder="https://example.com"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.scope[index].api"
+                        block
+                        outlined
+                        label="API"
+                        placeholder="https://api.example.com/docs"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.scope[index].androidApp"
+                        block
+                        outlined
+                        label="Android App"
+                        placeholder="com.example.google"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.scope[index].playstoreId"
+                        block
+                        outlined
+                        label="IOS Playstore"
+                        placeholder="123456"
+                      />
                     </v-col>
                   </v-row>
 
-                  <div
-                    v-if="descriptionPreview"
-                    class="elevation-2 rounded px-2 py-4"
-                    v-html="descriptionPreview"
-                  />
-                  <v-textarea
-                    v-else
-                    v-model.trim="program.description"
-                    else
-                    outlined
-                    :rules="[...rules.required]"
-                    hide-details
-                  />
-
-                  <div class="pt-2">
-                    <small class="grey--text darken-2"
-                      >Styling with MarkDown is supported</small
-                    >
+                  <div class="px-2">
+                    <v-btn icon color="red" @click="deleteRow('scope', index)">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
                   </div>
-                </section>
+                </div>
 
-                <v-row class="py-8">
-                  <v-col>
-                    <v-btn block color="primary" @click="updateProgram()"
-                      >Add Program</v-btn
-                    >
-                  </v-col></v-row
+                <div>
+                  <v-btn small color="primary" @click="addRow('scope')">
+                    <span class="mr-3">Add More</span>
+                    <v-icon small>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
+
+                <header class="subtitle-1 py-4">Out-Of-Scope</header>
+                <div
+                  v-for="(scope, index) in program.outofscope"
+                  :key="index"
+                  class="d-flex justify-space-between"
                 >
-              </template>
-            </v-form>
-          </section>
-        </main>
-      </v-container>
-    </v-main>
+                  <v-row class="flex-grow-1">
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.outofscope[index].webApplication"
+                        block
+                        outlined
+                        label="Web Application"
+                        placeholder="https://example.com"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.outofscope[index].api"
+                        block
+                        outlined
+                        label="API"
+                        placeholder="https://api.example.com/docs"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.outofscope[index].androidApp"
+                        block
+                        outlined
+                        label="Android App"
+                        placeholder="com.example.google"
+                      />
+                    </v-col>
+                    <v-col cols="12" md="3">
+                      <v-text-field
+                        v-model.trim="program.outofscope[index].playstoreId"
+                        block
+                        outlined
+                        label="IOS Playstore"
+                        placeholder="123456"
+                      />
+                    </v-col>
+                  </v-row>
+
+                  <div class="px-2">
+                    <v-btn
+                      icon
+                      color="red"
+                      @click="deleteRow('out-of-scope', index)"
+                    >
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </div>
+                </div>
+
+                <div>
+                  <v-btn small color="primary" @click="addRow('out-of-scope')">
+                    <span class="mr-3">Add More</span>
+                    <v-icon small>mdi-plus</v-icon>
+                  </v-btn>
+                </div>
+              </v-form>
+
+              <div class="d-flex align-end justify-end">
+                <v-btn
+                  outlined
+                  color="primary"
+                  class="mt-3 mr-2"
+                  @click="step = 4"
+                  >Back</v-btn
+                >
+                <v-btn
+                  color="primary mt-3"
+                  @click="validateStep(5, 'stepFormFour')"
+                  >Next</v-btn
+                >
+              </div>
+            </v-stepper-content>
+
+            <v-stepper-content step="5" class="pa-0">
+              <header class="head__line mb-2">Description</header>
+
+              <header class="headline py-8">Program Description</header>
+              <v-form ref="stepFormFive" class="elevation-2 pa-4 rounded">
+                <v-row>
+                  <v-col>
+                    <v-btn
+                      small
+                      :outlined="!!descriptionPreview"
+                      :rules="[...rules.required]"
+                      color="accent"
+                      @click="descriptionPreview = null"
+                      >Write
+                      <v-icon small class="ml-2">mdi-fountain-pen-tip</v-icon>
+                    </v-btn>
+
+                    <v-btn
+                      small
+                      :outlined="!descriptionPreview"
+                      color="accent"
+                      class="my-2 mx-md-3"
+                      @click="previewdescription()"
+                      >Preview
+                      <v-icon small class="ml-2">mdi-eye</v-icon>
+                    </v-btn>
+                  </v-col>
+
+                  <v-col>
+                    <v-autocomplete
+                      v-model.trim="selectedPresetDescription"
+                      dense
+                      outlined
+                      label="Comment Templates"
+                      :items="presetDescriptions"
+                      item-value="content"
+                      item-text="title"
+                      @change="program.description = selectedPresetDescription"
+                    >
+                    </v-autocomplete>
+                  </v-col>
+                </v-row>
+
+                <div
+                  v-if="descriptionPreview"
+                  class="elevation-2 rounded px-2 py-4"
+                  v-html="descriptionPreview"
+                />
+                <v-textarea
+                  v-else
+                  v-model.trim="program.description"
+                  else
+                  outlined
+                  :rules="[...rules.required]"
+                  hide-details
+                />
+
+                <div class="pt-2">
+                  <small class="grey--text darken-2"
+                    >Styling with MarkDown is supported</small
+                  >
+                </div>
+              </v-form>
+
+              <v-row class="py-8">
+                <v-col>
+                  <v-btn block color="primary" @click="updateProgram()"
+                    >Add Program</v-btn
+                  >
+                </v-col></v-row
+              >
+            </v-stepper-content>
+          </v-stepper-items>
+        </v-stepper>
+      </v-main>
+    </v-container>
   </div>
 </template>
 
@@ -419,13 +543,26 @@ import presetDescriptions from '~/assets/presets/descriptions.json'
 import programTypes from '~/assets/presets/programTypes.json'
 
 export default {
-  layout: 'dashboard',
+  layout: 'base',
   middleware: 'auth',
   data() {
     return {
       languages,
       programTypes,
       presetDescriptions,
+      breadcrumbsItems: [
+        {
+          text: 'Dashboard',
+          disabled: false,
+          to: '/',
+        },
+        {
+          text: 'Edit Program',
+          disabled: true,
+          to: '/prrogram/add/',
+        },
+      ],
+      step: 1,
       descriptionPreview: null,
       selectedPresetDescription: null,
       tags: ['tag 1', 'sample tag', 'tag 3'],
@@ -441,6 +578,8 @@ export default {
       },
       File: null,
       program: {},
+      thumbnail: '',
+      banner: '',
     }
   },
 
@@ -508,13 +647,25 @@ export default {
       }
     },
 
+    validateStep(nextStep, stepForm) {
+      if (this.$refs[stepForm].validate()) {
+        this.step = nextStep
+      }
+    },
+
+    setImageBlob(formKey, file) {
+      const reader = new FileReader()
+      reader.readAsDataURL(this[file])
+      reader.onload = () => (this.form[formKey] = reader.result)
+    },
+
     previewdescription() {
       const converter = new showdown.Converter()
       this.descriptionPreview = converter.makeHtml(this.program.description)
     },
 
     async updateProgram() {
-      if (this.$refs.updateProgramForm.validate()) {
+      if (this.$refs.stepFormFive.validate()) {
         this.$nuxt.$loading.start()
 
         const URL = `/update-program/${this.program._id}`
@@ -555,3 +706,21 @@ export default {
   },
 }
 </script>
+<style scoped>
+.border {
+  border: 1px solid #ccc;
+}
+
+.step-header-reset {
+  box-shadow: none !important;
+  border: 1px solid #ccc;
+}
+
+.step-reset {
+  box-shadow: none !important;
+}
+
+.head__line {
+  font-size: 18px;
+}
+</style>

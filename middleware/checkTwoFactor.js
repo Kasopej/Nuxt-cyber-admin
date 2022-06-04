@@ -7,7 +7,7 @@ export default ({ route, store, redirect }) => {
         route.name !== 'account-settings' ||
         route.name !== 'account-logout'
       ) {
-        store.commit('misc/SET_TWOFA_MODAL', true)
+        store.commit('misc/SAVE_TWOFA_MODAL', true)
       }
     }
   }
