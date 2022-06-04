@@ -26,10 +26,10 @@
         <v-list-item to="/account/settings/">
           <v-list-item-title>
             <div class="subtitle-1 text-capitalize font-weight-bold">
-              {{ USER.account.company[0].name }}
+              {{ USER.account.company[0].companyName }}
             </div>
             <div class="grey--text my-2">
-              {{ USER.account.company[0].email }}
+              {{ USER.account.company[0].companyEmail }}
             </div>
           </v-list-item-title>
         </v-list-item>
