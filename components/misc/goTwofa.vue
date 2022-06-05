@@ -31,6 +31,7 @@ export default {
   methods: {
     closeDialog() {
       this.$store.commit('misc/SAVE_TWOFA_MODAL', false)
+      this.dialog = false
     },
 
     proceed() {
