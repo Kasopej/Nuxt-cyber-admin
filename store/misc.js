@@ -3,6 +3,7 @@ export const strict = false
 export const state = () => ({
   clickSecTab: false,
   popTwoFactorModal: false,
+  laterTwoFactorModal: false,
 })
 
 export const mutations = {
@@ -13,5 +14,9 @@ export const mutations = {
 
   SAVE_TWOFA_MODAL(state, payload) {
     state.popTwoFactorModal = payload
+  },
+
+  SAVE_LATER_TWOFA_MODAL(state, payload) {
+    state.laterTwoFactorModal = payload
   },
 }

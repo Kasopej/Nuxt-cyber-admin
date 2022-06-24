@@ -14,11 +14,11 @@
       </v-col>
       <v-col cols="12" sm="6" class="py-0">
         <v-text-field
-          v-model="FORM.username"
+          v-model="FORM.email"
           block
           outlined
-          label="Username "
-          :rules="[...rules.username]"
+          label="Email"
+          :rules="[...rules.email]"
           placeholder="Username or e-mail@example.com"
         />
       </v-col>

@@ -72,7 +72,7 @@
                   <div class="d-flex mb-10">
                     <label class="mr-4 mr-sm-7">
                       <v-img
-                        :src="program.thumbnail"
+                        :src="thumbnail"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -81,16 +81,17 @@
                       <small class="grey--text text-left pt-2">
                         Click to choose Thumbnail
                       </small>
-                      <v-file-input
+                      <input
+                        type="file"
                         class="d-none"
                         accept="image/jpeg, image/png"
-                        @change="setImageBlob('image', 'thumbnail')"
+                        @change="setImageBlob($event, 'thumbnail')"
                       />
                     </label>
 
                     <label>
                       <v-img
-                        :src="program.banner"
+                        :src="banner"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -99,10 +100,11 @@
                       <small class="grey--text text-left pt-2">
                         Click to choose Banner
                       </small>
-                      <v-file-input
+                      <input
+                        type="file"
                         class="d-none"
                         accept="image/jpeg, image/png"
-                        @change="setImageBlob('image2', 'banner')"
+                        @change="setImageBlob($event, 'banner')"
                       />
                     </label>
                   </div>
@@ -593,21 +595,13 @@ export default {
 
   async fetch() {
     const uri = `/get-program/${this.$route.params.programId}`
-    const setKeys = (prog) => {
-      if (!Object.prototype.hasOwnProperty.call(prog, 'language')) {
-        prog.language = ''
-      }
-
-      if (!Object.prototype.hasOwnProperty.call(prog, 'banner')) {
-        prog.banner = ''
-      }
-    }
 
     await this.$axios
       .$get(uri, {})
       .then((res) => {
         this.program = res.data
-        setKeys(this.program)
+        this.thumbnail = this.program.thumbnail
+        this.banner = this.program.banner
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -661,10 +655,10 @@ export default {
       }
     },
 
-    setImageBlob(formKey, file) {
+    setImageBlob(event, previewKey) {
       const reader = new FileReader()
-      reader.readAsDataURL(this[file])
-      reader.onload = () => (this.form[formKey] = reader.result)
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = () => (this[previewKey] = reader.result)
     },
 
     previewdescription() {
@@ -677,24 +671,14 @@ export default {
         this.$nuxt.$loading.start()
 
         const URL = `/update-program/${this.program._id}`
-
-        // prepare form
-        const formData = new FormData()
-
-        for (const field in this.program) {
-          formData.append(field, this.program[field])
-        }
+        const payload = this.program
 
         await this.$axios
-          .$patch(URL, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
+          .$patch(URL, payload)
           .then(() => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
-              text: 'Program Created Successfully',
+              text: 'Program updated Successfully',
             })
           })
           .catch((error) => {
