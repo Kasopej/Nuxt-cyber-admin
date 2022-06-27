@@ -174,7 +174,7 @@ export default {
         const URL = `/update-profile`
         // Make upload request to the API
         await this.$axios
-          .$patch(URL, this.FORM)
+          .$put(URL, this.FORM)
           .then(() => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
