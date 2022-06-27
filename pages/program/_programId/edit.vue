@@ -72,7 +72,7 @@
                   <div class="d-flex mb-10">
                     <label class="mr-4 mr-sm-7">
                       <v-img
-                        :src="thumbnail"
+                        :src="image"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -91,14 +91,14 @@
 
                     <label>
                       <v-img
-                        :src="banner"
+                        :src="image2"
                         class="rounded border"
                         width="125"
                         height="125"
                         contain
                       />
                       <small class="grey--text text-left pt-2">
-                        Click to choose Banner
+                        {{ bannerMessage }}
                       </small>
                       <input
                         type="file"
@@ -588,8 +588,9 @@ export default {
       },
       File: null,
       program: {},
-      thumbnail: '',
-      banner: '',
+      image: '',
+      image2: '',
+      bannerMessage: 'Click to choose Banner',
     }
   },
 
@@ -600,8 +601,8 @@ export default {
       .$get(uri, {})
       .then((res) => {
         this.program = res.data
-        this.thumbnail = this.program.thumbnail
-        this.banner = this.program.banner
+        this.image = this.program.thumbnail
+        this.image2 = this.program.banner
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -655,10 +656,18 @@ export default {
       }
     },
 
-    setImageBlob(event, previewKey) {
+    setImageBlob(event, type) {
       const reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
-      reader.onload = () => (this[previewKey] = reader.result)
+      reader.onload = () => {
+        setTimeout(() => {
+          if (type === 'banner') {
+            this.updateBanner(reader.result)
+          } else {
+            this.updateThumbnail(reader.result)
+          }
+        }, 1500)
+      }
     },
 
     previewdescription() {
@@ -694,6 +703,64 @@ export default {
             this.$nuxt.$loading.finish()
           })
       }
+    },
+
+    async updateBanner(blob) {
+      const URL = `/update-program-banner/${this.program._id}`
+      const payload = {
+        image: blob,
+      }
+
+      await this.$axios
+        .$patch(URL, payload)
+        .then((res) => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Banner updated Successfully',
+          })
+          this.image2 = res.data.banner
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+    },
+
+    async updateThumbnail(blob) {
+      const URL = `/update-program-thumbnail/${this.program._id}`
+      const payload = {
+        image2: blob,
+      }
+
+      await this.$axios
+        .$patch(URL, payload)
+        .then((res) => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Thumbnail updated Successfully',
+          })
+          this.image = res.data.thumbnail
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
     },
   },
 }
