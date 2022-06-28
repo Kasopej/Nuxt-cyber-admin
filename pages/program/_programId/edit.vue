@@ -126,6 +126,7 @@
                         v-model.trim="program.title"
                         block
                         outlined
+                        :counter="60"
                         :rules="[...rules.required]"
                         label="Program Title"
                       />
@@ -207,6 +208,7 @@
                         v-model.trim="program.rewardGrid.low"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="Low"
                       />
@@ -216,6 +218,7 @@
                         v-model.trim="program.rewardGrid.medium"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="Medium"
                       />
@@ -225,6 +228,7 @@
                         v-model.trim="program.rewardGrid.high"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="High"
                       />
@@ -234,6 +238,7 @@
                         v-model.trim="program.rewardGrid.critical"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="Critical"
                       />
@@ -267,6 +272,7 @@
                         v-model.trim="program.accountCredentials"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="Account Credentials"
                         placeholder="Username &amp; Password"
@@ -277,6 +283,7 @@
                         v-model.trim="program.documentationLink"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="API Documentation Link"
                         placeholder="https://api.example.com/docs"
@@ -287,6 +294,7 @@
                         v-model.trim="program.vpnAccess"
                         block
                         outlined
+                        :counter="50"
                         :rules="[...rules.required]"
                         label="VPN Access"
                         placeholder="Username &amp; Password"
@@ -327,6 +335,7 @@
                           v-model.trim="program.scope[index].webApplication"
                           block
                           outlined
+                          :counter="50"
                           label="Web Application"
                           placeholder="https://example.com"
                         />
@@ -336,6 +345,7 @@
                           v-model.trim="program.scope[index].api"
                           block
                           outlined
+                          :counter="50"
                           label="API"
                           placeholder="https://api.example.com/docs"
                         />
@@ -345,6 +355,7 @@
                           v-model.trim="program.scope[index].androidApp"
                           block
                           outlined
+                          :counter="50"
                           label="Android App"
                           placeholder="com.example.google"
                         />
@@ -354,6 +365,7 @@
                           v-model.trim="program.scope[index].playstoreId"
                           block
                           outlined
+                          :counter="50"
                           label="IOS Playstore"
                           placeholder="123456"
                         />
@@ -392,6 +404,7 @@
                           "
                           block
                           outlined
+                          :counter="50"
                           label="Web Application"
                           placeholder="https://example.com"
                         />
@@ -410,6 +423,7 @@
                           v-model.trim="program.outofscope[index].androidApp"
                           block
                           outlined
+                          :counter="50"
                           label="Android App"
                           placeholder="com.example.google"
                         />
@@ -419,6 +433,7 @@
                           v-model.trim="program.outofscope[index].playstoreId"
                           block
                           outlined
+                          :counter="50"
                           label="IOS Playstore"
                           placeholder="123456"
                         />

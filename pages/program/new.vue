@@ -130,6 +130,7 @@
                       v-model.trim="form.title"
                       block
                       outlined
+                      :counter="60"
                       :rules="[...rules.required]"
                       label="Program Title"
                     />
@@ -207,6 +208,7 @@
                     <v-text-field
                       v-model.trim="form.rewardGrid.low"
                       block
+                      :counter="50"
                       outlined
                       :rules="[...rules.required]"
                       label="Low"
@@ -217,6 +219,7 @@
                       v-model.trim="form.rewardGrid.medium"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="Medium"
                     />
@@ -226,6 +229,7 @@
                       v-model.trim="form.rewardGrid.high"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="High"
                     />
@@ -235,6 +239,7 @@
                       v-model.trim="form.rewardGrid.critical"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="Critical"
                     />
@@ -268,6 +273,7 @@
                       v-model.trim="form.accountCredentials"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="Account Credentials"
                       placeholder="Username &amp; Password"
@@ -278,6 +284,7 @@
                       v-model.trim="form.api_doc"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="API Documentation Link"
                       placeholder="https://api.example.com/docs"
@@ -288,6 +295,7 @@
                       v-model.trim="form.vpn"
                       block
                       outlined
+                      :counter="50"
                       :rules="[...rules.required]"
                       label="VPN Access"
                       placeholder="Username &amp; Password"
@@ -330,6 +338,7 @@
                           v-model.trim="form.scope[index].webApplication"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="Web Application"
                           placeholder="https://example.com"
@@ -340,6 +349,7 @@
                           v-model.trim="form.scope[index].api"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="API"
                           placeholder="https://api.example.com/docs"
@@ -350,6 +360,7 @@
                           v-model.trim="form.scope[index].androidApp"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="Android App"
                           placeholder="com.example.google"
@@ -360,6 +371,7 @@
                           v-model.trim="form.scope[index].playstoreId"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="IOS Playstore"
                           placeholder="123456"
@@ -399,6 +411,7 @@
                           v-model.trim="form.outofscope[index].webApplication"
                           block
                           outlined
+                          :counter="75"
                           :rules="[...rules.required]"
                           label="Web Application"
                           placeholder="https://example.com"
@@ -409,6 +422,7 @@
                           v-model.trim="form.outofscope[index].api"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="API"
                           placeholder="https://api.example.com/docs"
@@ -419,6 +433,7 @@
                           v-model.trim="form.outofscope[index].androidApp"
                           block
                           outlined
+                          :counter="75"
                           :rules="[...rules.required]"
                           label="Android App"
                           placeholder="com.example.google"
@@ -429,6 +444,7 @@
                           v-model.trim="form.outofscope[index].playstoreId"
                           block
                           outlined
+                          :counter="50"
                           :rules="[...rules.required]"
                           label="IOS Playstore"
                           placeholder="123456"
