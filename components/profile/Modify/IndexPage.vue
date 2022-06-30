@@ -20,7 +20,7 @@
           v-model="FILE"
           class="d-none"
           accept="image/jpeg, image/png"
-          @change="uploadPhoto($event)"
+          @change="upload($event)"
         />
       </label>
     </div>
@@ -96,42 +96,50 @@ export default {
   },
 
   methods: {
-    async uploadPhoto(event) {
+    upload(event) {
       if (this.FILE) {
         this.labelText = 'Please wait...'
 
-        // Convert photo to base64 format (i.e data url)
-        // the image is from the user object from the login endpoint
-        // once the company details api is provided that will be used
-        const formData = new FormData()
-        formData.append('file', this.FILE)
-        formData.append('userId', this.USER.id)
         this.FILE_BLOB = URL.createObjectURL(this.FILE)
+        const payload = { image: '' }
 
-        const endpoint = '/update-profile-picture'
-        await this.$axios
-          .$patch(endpoint, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          })
-          .then(() => {
-            this.$store.commit('notification/SHOW', {
-              icon: 'mdi-check',
-              text: 'Picture changed Successfully',
-            })
-          })
-          .catch((error) => {
-            this.$store.commit('notification/SHOW', {
-              color: 'accent',
-              icon: 'mdi-alert-outline',
-              text: error.response
-                ? error.response.data.message
-                : "Sorry, that didn't work. Please try again",
-            })
-          })
-          .finally(() => {
-            this.$nuxt.$loading.finish()
-          })
+        const reader = new FileReader()
+        reader.readAsDataURL(this.FILE)
+        reader.onload = () => {
+          setTimeout(() => {
+            payload.image = reader.result
+            this.uploadPhoto(payload)
+          }, 3000)
+        }
       }
+    },
+
+    async uploadPhoto(payload) {
+      const endpoint = '/update-profile-picture'
+      await this.$axios
+        .$patch(endpoint, payload)
+        .then((res) => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Picture changed Successfully',
+          })
+
+          this.$store.commit('auth/SAVE_USER_PIC', res.data)
+
+          this.labelText = 'Click to change'
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
     },
 
     updateProfile() {

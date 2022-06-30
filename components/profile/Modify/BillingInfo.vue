@@ -21,32 +21,15 @@
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
-          <v-row no-gutters>
-            <v-col cols="4" class="py-0 pl-0 pr-1">
-              <v-autocomplete
-                v-model="FORM.phoneNumber.countryCode"
-                :item-text="(item) => `${item.flag} +${item.dial_code}`"
-                :rules="[...rules.required]"
-                :items="countryCodes"
-                item-value="dial_code"
-                label="Dial Code"
-                class="pa-0"
-                outlined
-              ></v-autocomplete>
-            </v-col>
-
-            <v-col cols="8" class="py-0 pl-0 pr-1">
-              <v-text-field
-                v-model="FORM.phoneNumber.phoneNumber"
-                :rules="[...rules.phone]"
-                placeholder="08012345603"
-                label="Phone Number"
-                type="number"
-                outlined
-                block
-              />
-            </v-col>
-          </v-row>
+          <v-text-field
+            v-model="FORM.phoneNumber"
+            :rules="[...rules.phone]"
+            placeholder="08012345603"
+            label="Phone Number"
+            type="number"
+            outlined
+            block
+          />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
@@ -148,7 +131,7 @@ export default {
 
   mounted() {
     this.FORM = { ...this.$store.state.auth.user.account.billing[0] }
-    this.FORM.phoneNumber = {}
+    // this.FORM.phoneNumber = {}
   },
 
   methods: {
@@ -158,8 +141,14 @@ export default {
 
         const URL = `/update-profile`
         // Make upload request to the API
+        const payload = {
+          company: this.$store.state.auth.user.account.company[0],
+          representative: this.$store.state.auth.user.account.representative[0],
+          billing: this.FORM,
+        }
+
         await this.$axios
-          .$patch(URL, this.FORM)
+          .$put(URL, payload)
           .then(() => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',

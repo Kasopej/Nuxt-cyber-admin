@@ -110,18 +110,7 @@
                   </div>
 
                   <v-row>
-                    <v-col class="d-flex" cols="12" sm="6">
-                      <v-select
-                        v-model="program.type"
-                        :items="programTypes"
-                        label="Program Type"
-                        item-text="title"
-                        item-value="value"
-                        :rules="[...rules.required]"
-                        outlined
-                      ></v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6">
+                    <v-col cols="12">
                       <v-text-field
                         v-model.trim="program.title"
                         block

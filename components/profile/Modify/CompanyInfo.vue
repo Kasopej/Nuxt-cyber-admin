@@ -4,11 +4,12 @@
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.companyName"
+            :value="FORM.companyName"
             :rules="[...rules.name]"
             placeholder="Company Name"
             label="Company Name"
             block
+            :disabled="true"
             outlined
           />
         </v-col>
@@ -94,9 +95,10 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.companyEmail"
+            :value="FORM.companyEmail"
             block
             outlined
+            :disabled="true"
             :rules="[...rules.email]"
             label="Company E-mail"
             placeholder="e-mail@example.com"
@@ -218,8 +220,8 @@ export default {
         // Make upload request to the API
         const payload = {
           company: this.FORM,
-          //   representative: this.$store.state.auth.user.account.representative,
-          //   billing: this.$store.state.auth.user.account.billing,
+          representative: this.$store.state.auth.user.account.representative[0],
+          billing: this.$store.state.auth.user.account.billing[0],
         }
 
         await this.$axios
