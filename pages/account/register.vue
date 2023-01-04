@@ -11,7 +11,7 @@
 
     <section>
       <v-text-field
-        v-model="FORM.name"
+        v-model="FORM.companyName"
         dense
         required
         outlined
@@ -30,7 +30,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="FORM.email"
+        v-model="FORM.companyEmail"
         dense
         required
         outlined
@@ -40,7 +40,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="FORM.website"
+        v-model="FORM.companyWebsite"
         dense
         required
         outlined

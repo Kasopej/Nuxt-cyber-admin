@@ -19,10 +19,10 @@
       ></v-select>
 
       <v-text-field
-        v-model="FORM.email"
+        v-model="FORM.companyEmail"
         dense
         outlined
-        :rules="[...rules.required]"
+        :rules="[rules.required]"
         label="E-mail"
         required
       ></v-text-field>
@@ -34,7 +34,7 @@
         outlined
         password
         label="Password"
-        :rules="[...rules.required]"
+        :rules="[rules.required]"
         :type="showPassword ? 'text' : 'password'"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="showPassword = !showPassword"
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       FORM: {
-        email: null,
+        companyEmail: null,
         password: null,
         persistent: true,
       },

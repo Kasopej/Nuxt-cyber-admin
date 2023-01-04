@@ -1,6 +1,7 @@
 export default function ({ $axios, $config, store, redirect }) {
   $axios.defaults.timeout = $config.axiosTimeout
-  $axios.defaults.baseURL = $config.baseURL
+  //   $axios.defaults.baseURL = $config.baseURL
+  $axios.defaults.baseURL = 'https://bewareofbugs.com/api/airforce101/'
 
   // Adds header: `Authorization: Bearer XXXX` to requests
   const accessToken = store.state.auth.accessToken

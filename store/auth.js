@@ -34,6 +34,16 @@ export const mutations = {
     state.user.account.twoFactorAuth = payload
   },
 
+  // update profile imagw url
+  CHANGE_USER_PIC(state, payload) {
+    state.user.user.profile[0].image = payload
+  },
+
+  // change user image ulr
+  SAVE_USER_PIC(state, payload) {
+    state.user.account.company[0].image = payload
+  },
+
   // Log user in
   UPDATE_USER_DATA(state, payload) {
     state.user.phone = payload.phone

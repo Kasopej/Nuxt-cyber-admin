@@ -1,10 +1,6 @@
 <template>
   <div class="text-center">
-    <v-dialog
-      v-model="$store.state.misc.popTwoFactorModal"
-      persistent
-      width="350"
-    >
+    <v-dialog v-model="dialog" persistent width="350">
       <v-card class="mt-4">
         <v-card-title class="text-h6 text-capitalize">
           Activate 2FA to continue using Teklabspace?
@@ -29,12 +25,14 @@
 export default {
   data() {
     return {
-      dialog: false,
+      dialog: this.$store.state.misc.popTwoFactorModal,
     }
   },
   methods: {
     closeDialog() {
-      this.$store.commit('misc/SET_TWOFA_MODAL', false)
+      this.$store.commit('misc/SAVE_TWOFA_MODAL', false)
+      this.dialog = false
+      this.$store.commit('misc/SAVE_LATER_TWOFA_MODAL', true)
     },
 
     proceed() {
