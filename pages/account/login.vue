@@ -78,7 +78,7 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
-        const URL = `/login`
+        const URL = `/company/login`
         const PAYLOAD = this.FORM
 
         await this.$axios
