@@ -9,14 +9,7 @@
   </v-app>
 </template>
 
-<script>
-// export default {
-//   data() {
-//     // variables
-//   },
-// }
-//
-</script>
+<script></script>
 
 <style lang="scss">
 //Import SCSS files importer

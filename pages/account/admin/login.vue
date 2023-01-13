@@ -1,0 +1,111 @@
+<template>
+  <v-form ref="form" v-model="valid" class="pa-3 pa-sm-7 col-12">
+    <div class="text-center pb-4">
+      Don’t have an account?
+      <nuxt-link to="/account/register/">Sign Up</nuxt-link>
+    </div>
+
+    <header class="headline font-weight-bold text-center py-4">
+      Welcome Back!
+    </header>
+
+    <v-form ref="loginForm">
+      <v-select
+        v-model="FORM.role"
+        dense
+        outlined
+        label="Who are you?"
+        :items="['Company Admin', 'Company Representative']"
+      ></v-select>
+
+      <v-text-field
+        v-model="FORM.companyEmail"
+        dense
+        outlined
+        :rules="[rules.required]"
+        label="E-mail"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="FORM.password"
+        dense
+        required
+        outlined
+        password
+        label="Password"
+        :rules="[rules.required]"
+        :type="showPassword ? 'text' : 'password'"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="showPassword = !showPassword"
+      ></v-text-field>
+
+      <v-btn block color="primary" @click="login()"> Sign in </v-btn>
+    </v-form>
+
+    <div class="d-flex align-center justify-space-between py-4">
+      <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
+      <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
+    </div>
+  </v-form>
+</template>
+
+<script>
+export default {
+  layout: 'account',
+  middleware: 'guest',
+
+  data() {
+    return {
+      FORM: {
+        companyEmail: null,
+        password: null,
+        persistent: true,
+      },
+
+      valid: true,
+      showPassword: false,
+
+      rules: {
+        required: (value) => !!value || 'Required.',
+      },
+    }
+  },
+  head: { title: 'Sign in' },
+
+  methods: {
+    async login() {
+      if (this.$refs.loginForm.validate()) {
+        this.$nuxt.$loading.start()
+
+        const URL = `/company/login`
+        const PAYLOAD = this.FORM
+
+        await this.$axios
+          .post(URL, PAYLOAD)
+          .then((response) => {
+            if (response.data.twoFactorAuth) {
+              this.$store.commit('auth/KEEP_TFA', response.data)
+              this.$router.replace('/account/verify-twofa')
+            } else if (!response.data.twoFactorAuth) {
+              this.$store.commit('auth/LOG_USER_IN', response.data)
+              this.$router.replace('/')
+            }
+          })
+          .catch((error) => {
+            this.$store.commit('notification/SHOW', {
+              color: 'accent',
+              icon: 'mdi-alert-outline',
+              text: error.response
+                ? error.response.data.message
+                : "Sorry, that didn't work. Please try again",
+            })
+          })
+          .finally(() => {
+            this.$nuxt.$loading.finish()
+          })
+      }
+    },
+  },
+}
+</script>
