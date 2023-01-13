@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container class="mt-2">
-      <v-row align="sm-center" class="contain my-sm-10">
+      <v-row align-sm="center" class="contain my-sm-10">
         <v-col cols="12" sm="6" class="">
           <div class="text-center text-sm-right mt-3 ml-sm-4 mb-2 mb-sm-0">
             <img

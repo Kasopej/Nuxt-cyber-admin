@@ -53,7 +53,7 @@
 <script>
 export default {
   layout: 'dashboard',
-  middleware: 'auth',
+  middleware: 'admin_auth',
 
   data() {
     return {

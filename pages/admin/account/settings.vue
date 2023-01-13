@@ -1,6 +1,6 @@
 <template>
   <div>
-    <partials-header :title="USER.account.company[0].companyName" />
+    <partials-header :title="USER.account.firstName" />
 
     <v-main>
       <v-container>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  layout: 'dashboard',
+  layout: 'adminLayout',
   middleware: 'auth',
 
   data() {
