@@ -78,10 +78,9 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
-        const URL = `/company/login`
+        const URL = `/login`
         const PAYLOAD = this.FORM
-
-        await this.$axios
+        await this.$adminApi
           .post(URL, PAYLOAD)
           .then((response) => {
             if (response.data.twoFactorAuth) {
