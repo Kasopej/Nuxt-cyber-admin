@@ -1,6 +1,6 @@
 <template>
   <div>
-    <partials-header :title="USER.account.company[0].companyName" />
+    <partials-header :title="profile.companyName" />
 
     <v-main>
       <v-container>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
   layout: 'dashboard',
   middleware: 'auth',
@@ -35,6 +37,9 @@ export default {
       tab: 0,
       USER: this.$store.state.auth.user,
     }
+  },
+  computed: {
+    ...mapGetters({ profile: 'getCompanyUserProfile' }),
   },
 }
 </script>

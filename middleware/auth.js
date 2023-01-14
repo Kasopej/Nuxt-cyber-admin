@@ -4,9 +4,9 @@ export default ({ $axios, store, redirect }) => {
   let authenticated = ''
 
   try {
-    authenticated = store.state.auth.loggedIn
+    authenticated = store.state.auth.companyAuth.loggedIn
     // Adds header: `Authorization: Bearer XXXX` to requests
-    $axios.setToken(store.state.auth.user.token, 'Bearer')
+    $axios.setToken(store.getters['auth/companyAuth/getToken'], 'Bearer')
   } catch {
     // do nothing
   }

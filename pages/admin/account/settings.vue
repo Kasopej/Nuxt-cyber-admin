@@ -1,6 +1,6 @@
 <template>
   <div>
-    <partials-header :title="USER.account.firstName" />
+    <partials-header :title="profile.firstName" />
 
     <v-main>
       <v-container>
@@ -26,15 +26,20 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
+
 export default {
   layout: 'adminLayout',
-  middleware: 'auth',
+  middleware: 'admin_auth',
 
   data() {
     return {
       tab: 0,
-      USER: this.$store.state.auth.user,
     }
+  },
+  computed: {
+    ...mapGetters({ profile: 'getAdminUserProfile' }),
   },
 }
 </script>

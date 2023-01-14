@@ -76,10 +76,16 @@ export default {
           .post(URL, PAYLOAD)
           .then((response) => {
             if (response.data.twoFactorAuth) {
-              this.$store.commit('auth/KEEP_TFA', response.data)
+              this.$store.commit(
+                'auth/adminAuth/KEEP_ADMIN_USER_TMP',
+                response.data
+              )
               this.$router.replace('/account/verify-twofa')
             } else if (!response.data.twoFactorAuth) {
-              this.$store.commit('auth/LOG_USER_IN', response.data)
+              this.$store.dispatch(
+                'auth/adminAuth/LOG_ADMIN_USER_IN',
+                response.data
+              )
               this.$router.replace('/admin/account/settings')
             }
           })

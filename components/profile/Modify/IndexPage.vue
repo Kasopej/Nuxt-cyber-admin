@@ -4,9 +4,7 @@
       <label class="pt-8">
         <v-avatar size="250">
           <v-img
-            :src="
-              FILE_BLOB || USER.account.company[0].image || '/images/dummy.jpg'
-            "
+            :src="FILE_BLOB || profile.image || '/images/dummy.jpg'"
             class="rounded"
             contain
           />
@@ -75,6 +73,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -84,9 +83,11 @@ export default {
       profileEditTab: 0,
       FILE: null,
       FILE_BLOB: null,
-
-      USER: this.$store.state.auth.user,
     }
+  },
+
+  computed: {
+    ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
   mounted() {

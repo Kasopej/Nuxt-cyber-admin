@@ -4,9 +4,9 @@ export default ({ $adminApi, store, redirect }) => {
   let authenticated = ''
 
   try {
-    authenticated = store.state.auth.loggedIn
+    authenticated = store.state.auth.adminAuth.loggedIn
     // Adds header: `Authorization: Bearer XXXX` to requests
-    $adminApi.setToken(store.state.auth.user.token, 'Bearer')
+    $adminApi.setToken(store.getters['auth/adminAuth/getToken'], 'Bearer')
   } catch {
     // do nothing
   }

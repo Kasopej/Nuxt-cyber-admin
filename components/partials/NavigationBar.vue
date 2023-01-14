@@ -26,10 +26,10 @@
         <v-list-item to="/account/settings/">
           <v-list-item-title>
             <div class="subtitle-1 text-capitalize font-weight-bold">
-              {{ USER.account.company[0].companyName }}
+              {{ profile.companyName }}
             </div>
             <div class="grey--text my-2">
-              {{ USER.account.company[0].companyEmail }}
+              {{ profile.companyEmail }}
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: {
     submission: {
@@ -82,6 +83,10 @@ export default {
     return {
       USER: this.$store.state.auth.user,
     }
+  },
+
+  computed: {
+    ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
   methods: {
