@@ -2,7 +2,7 @@
 
 export default ({ route, store, redirect }) => {
   if (store.getters['auth/isLoggedIn']) {
-    if (store.state.auth.user.account.twoFactorAuth === false) {
+    if (store.getters['auth/getUser2FAStatus'] === false) {
       if (
         route.name !== 'account-settings' ||
         route.name !== 'account-logout'

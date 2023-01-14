@@ -11,6 +11,9 @@ export const getters = {
   getCompanyUserProfile(state) {
     return state.data.account.company[0]
   },
+  getCompanyUser2FAStatus(state, getters, rootState, rootGetters) {
+    return state.data.account.twoFactorAuth
+  },
 }
 
 export const mutations = {

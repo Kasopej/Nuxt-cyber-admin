@@ -80,9 +80,7 @@ export default {
   },
 
   data() {
-    return {
-      USER: this.$store.state.auth.user,
-    }
+    return {}
   },
 
   computed: {

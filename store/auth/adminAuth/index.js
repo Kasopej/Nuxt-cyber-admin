@@ -5,11 +5,14 @@ export const state = () => ({
 })
 
 export const getters = {
-  getAdminUserToken(state, getters, rootState, rootGetters) {
+  getAdminUserToken(state, getters) {
     return state.data.token
   },
-  getAdminUserProfile(state, getters, rootState, rootGetters) {
+  getAdminUserProfile(state, getters) {
     return state.data.account
+  },
+  getAdminUser2FAStatus(state, getters) {
+    return state.data.account.twoFactorAuth
   },
 }
 

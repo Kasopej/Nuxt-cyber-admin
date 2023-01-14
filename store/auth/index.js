@@ -10,6 +10,11 @@ export const getters = {
       return getters['adminAuth/getAdminUserToken']
     else return getters['companyAuth/getCompanyUserToken']
   },
+  getUser2FAStatus(state, getters, rootState, rootGetters) {
+    if (state.authType === 'adminAuth')
+      return getters['adminAuth/getAdminUser2FAStatus']
+    else return getters['companyAuth/getCompanyUser2FAStatus']
+  },
   getUserProfile(state, getters, rootState, rootGetters) {
     if (state.authType === 'adminAuth')
       return getters['adminAuth/getAdminUserProfile']
