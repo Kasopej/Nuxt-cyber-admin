@@ -30,11 +30,8 @@
       </section>
 
       <footer class="px-3 py-4">
-        <nuxt-link
-          to="/account/logout/"
-          class="subtitle-1 font-weight-medium accent--text"
-          ><v-icon class="mr-3" color="accent">mdi-logout</v-icon>
-          Logout</nuxt-link
+        <a class="subtitle-1 font-weight-medium accent--text" @click="logout"
+          ><v-icon class="mr-3" color="accent">mdi-logout</v-icon> Logout</a
         >
       </footer>
     </nav>
@@ -42,6 +39,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -54,6 +52,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters('auth', ['isAdminAuth']),
     drawer: {
       get() {
         return this.$store.state.navigationDrawer.status
@@ -67,9 +66,12 @@ export default {
   methods: {
     gotoLink(slug) {
       this.drawer = false
-
-      console.log(this.drawer)
       this.$router.push(slug)
+    },
+    logout() {
+      this.$store.commit('auth/LOG_USER_OUT')
+      if (this.isAdminAuth) this.$router.push('/admin/account/login')
+      else this.$router.push('/account/login')
     },
   },
 }

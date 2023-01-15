@@ -53,7 +53,7 @@
 <script>
 export default {
   layout: 'dashboard',
-  middleware: 'auth',
+  middleware: 'admin_auth',
 
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
   },
 
   async fetch() {
-    const URL = `/company/load-programs`
+    const URL = `/load-programs`
     // Make upload request to the API
     await this.$axios
       .$get(URL, this.FORM)

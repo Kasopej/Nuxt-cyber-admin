@@ -10,19 +10,12 @@
     </header>
 
     <v-form ref="loginForm">
-      <v-select
-        v-model="FORM.role"
-        dense
-        outlined
-        label="Who are you?"
-        :items="['Company Admin', 'Company Representative']"
-      ></v-select>
-
       <v-text-field
-        v-model="FORM.companyEmail"
+        v-model="FORM.email"
         dense
         outlined
         :rules="[rules.required]"
+        type="email"
         label="E-mail"
         required
       ></v-text-field>
@@ -58,9 +51,8 @@ export default {
   data() {
     return {
       FORM: {
-        companyEmail: null,
+        email: null,
         password: null,
-        persistent: true,
       },
 
       valid: true,
@@ -84,11 +76,17 @@ export default {
           .post(URL, PAYLOAD)
           .then((response) => {
             if (response.data.twoFactorAuth) {
-              this.$store.commit('auth/KEEP_TFA', response.data)
+              this.$store.commit(
+                'auth/adminAuth/KEEP_ADMIN_USER_TMP',
+                response.data
+              )
               this.$router.replace('/account/verify-twofa')
             } else if (!response.data.twoFactorAuth) {
-              this.$store.commit('auth/LOG_USER_IN', response.data)
-              this.$router.replace('/')
+              this.$store.dispatch(
+                'auth/adminAuth/LOG_ADMIN_USER_IN',
+                response.data
+              )
+              this.$router.replace('/admin/account/settings')
             }
           })
           .catch((error) => {

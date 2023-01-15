@@ -10,6 +10,6 @@ export default ({ store, redirect }) => {
   }
 
   if (authenticated) {
-    // redirect('/')
+    redirect('/')
   }
 }

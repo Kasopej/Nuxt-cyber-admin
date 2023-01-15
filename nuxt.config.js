@@ -59,6 +59,7 @@ export default {
   plugins: [
     { src: '~/plugins/axios' },
     { src: '~/plugins/axios_admin' },
+    { src: '~/plugins/globalMixins' },
     // '~/plugins/mixins'
   ],
 

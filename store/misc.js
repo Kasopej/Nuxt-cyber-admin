@@ -12,7 +12,7 @@ export const mutations = {
     state.clickSecTab = payload
   },
 
-  SAVE_TWOFA_MODAL(state, payload) {
+  OPEN_TWOFA_MODAL(state, payload) {
     state.popTwoFactorModal = payload
   },
 

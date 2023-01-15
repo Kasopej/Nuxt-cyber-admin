@@ -14,7 +14,7 @@
         required
       ></v-text-field>
 
-      <v-btn block color="primary" @click="verify()"> Authenticate </v-btn>
+      <v-btn block color="primary" @click="verify"> Authenticate </v-btn>
     </v-form>
     <small class="text--grey" style="line-height: 1">
       If you have lost your mobile device and want to reset your 2FA to retrieve
@@ -54,7 +54,7 @@ export default {
       if (this.$refs.tokenForm.validate()) {
         this.$nuxt.$loading.start()
 
-        const userAuthData = this.$store.state.auth.userAuthData
+        const userAuthData = this.$store.getters['auth/getTempUserData']
         this.form.temp2FAKey = userAuthData.temp2FAKey
 
         const uri = `/verify-2fa-login/${userAuthData.userId}`
@@ -62,7 +62,7 @@ export default {
         await this.$axios
           .post(uri, this.form)
           .then((response) => {
-            this.$store.commit('auth/LOG_USER_IN', response.data)
+            this.$store.dispatch('auth/LOG_USER_IN', response.data)
             this.$router.replace('/')
           })
           .catch((error) => {

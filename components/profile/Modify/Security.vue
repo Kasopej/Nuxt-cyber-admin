@@ -79,19 +79,20 @@
           <small class="grey--text">Disable two factor authentication</small>
         </div>
 
-        <v-switch v-model="isTwoFactor" inset @change="disable()"></v-switch>
+        <v-switch v-model="isTwoFactor" inset @change="disable"></v-switch>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
       authInfo: null,
-      user: this.$store.state.auth.user,
-      isTwoFactor: this.$store.state.auth.user.account.twoFactorAuth,
+      isTwoFactor: this.$store.getters['auth/getUser2FAStatus'],
       form: {},
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -101,8 +102,8 @@ export default {
 
   async fetch() {
     if (!this.isTwoFactor) {
-      const uri = 'activate-2fa'
-      await this.$axios
+      const uri = this.isAdminAuth ? 'activate-2fa' : 'company/activate-2fa'
+      await this.getHTTPClient()
         .$post(uri, {})
         .then((res) => {
           this.authInfo = res
@@ -117,6 +118,13 @@ export default {
           })
         })
     }
+  },
+
+  computed: {
+    ...mapGetters('auth', {
+      profile: 'getUserProfile',
+      isAdminAuth: 'isAdminAuth',
+    }),
   },
 
   methods: {

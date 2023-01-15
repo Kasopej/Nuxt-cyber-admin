@@ -1,12 +1,12 @@
 // This is the middleware for pages that requires authentication
 
-export default ({ $axios, store, redirect }) => {
+export default ({ $adminApi, store, redirect }) => {
   let authenticated = ''
 
   try {
-    authenticated = store.state.auth.companyAuth.loggedIn
+    authenticated = store.state.auth.adminAuth.loggedIn
     // Adds header: `Authorization: Bearer XXXX` to requests
-    $axios.setToken(store.state.auth.companyAuth.data.token, 'Bearer')
+    $adminApi.setToken(store.store.state.auth.adminAuth.data.token, 'Bearer')
   } catch {
     // do nothing
   }
@@ -15,6 +15,6 @@ export default ({ $axios, store, redirect }) => {
     // Remove User's data from a perstisted Vuex store
     store.commit('auth/LOG_USER_OUT')
     //  Redirect to login page
-    return redirect('/account/login/')
+    return redirect('/admin/account/login/')
   }
 }
