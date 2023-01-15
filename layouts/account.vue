@@ -2,14 +2,7 @@
   <v-app>
     <div
       style="min-height: 100vh"
-      class="
-        d-flex
-        flex-column flex-md-row
-        justify-center
-        align-center
-        w-100
-        pa-4
-      "
+      class="d-flex flex-column flex-md-row justify-center align-center w-100 pa-4"
     >
       <section class="d-md-flex elevation-10 col-md-8 col-lg-6 pa-0 h-100">
         <aside
@@ -34,3 +27,9 @@
     <misc-go-twofa />
   </v-app>
 </template>
+
+<script>
+export default {
+  name: 'Account',
+}
+</script>

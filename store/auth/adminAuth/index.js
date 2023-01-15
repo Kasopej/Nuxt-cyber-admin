@@ -5,14 +5,17 @@ export const state = () => ({
 })
 
 export const getters = {
-  getAdminUserToken(state, getters) {
-    return state.data.token
+  getAdminUserToken(state) {
+    return state?.data.token
   },
-  getAdminUserProfile(state, getters) {
-    return state.data.account
+  getTempUserData(state) {
+    return state.tempUser
   },
-  getAdminUser2FAStatus(state, getters) {
-    return state.data.account.twoFactorAuth
+  getUserProfile(state) {
+    return state?.data.account
+  },
+  getUser2FAStatus(state) {
+    return state?.data.account.twoFactorAuth
   },
 }
 
@@ -25,15 +28,15 @@ export const mutations = {
     state.tempUser = payload
   },
 
-  CHANGE_ADMIN_USER_PIC(state, payload) {
+  CHANGE_USER_PIC(state, payload) {
     state.user.user.profile[0].image = payload
   },
 
-  SAVE_ADMIN_USER_PIC(state, payload) {
+  SAVE_USER_PIC(state, payload) {
     state.user.account.company[0].image = payload
   },
 
-  UPDATE_ADMIN_USER_PROFILE(state, payload) {
+  UPDATE_USER_PROFILE(state, payload) {
     state.user.phone = payload.phone
     state.user.user = payload.emailAddress
     state.user.lastName = payload.lastName
@@ -42,7 +45,7 @@ export const mutations = {
 }
 
 export const actions = {
-  LOG_ADMIN_USER_IN({ state, rootState, commit }, payload) {
+  LOG_ADMIN_USER_IN({ commit }, payload) {
     commit('COMMIT_ADMIN_LOG_IN', payload)
     commit('auth/SET_AUTH_TYPE', 'adminAuth', { root: true })
   },

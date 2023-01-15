@@ -5,7 +5,7 @@ export default function ({ $axios, store, redirect }, inject) {
   api.setBaseURL('https://teklabspace-live.herokuapp.com/airforce101/')
 
   // Adds header: `Authorization: Bearer XXXX` to requests
-  const accessToken = store.state.admin?.auth.accessToken
+  const accessToken = store.state.auth.adminAuth?.data.accessToken
   if (accessToken) {
     api.setToken(accessToken, 'Bearer')
   } else {

@@ -25,6 +25,7 @@
         :rules="[rules.required]"
         label="E-mail"
         required
+        autofocus
       ></v-text-field>
 
       <v-text-field
@@ -40,7 +41,7 @@
         @click:append="showPassword = !showPassword"
       ></v-text-field>
 
-      <v-btn block color="primary" @click="login()"> Sign in </v-btn>
+      <v-btn block color="primary" @click="login"> Sign in </v-btn>
     </v-form>
 
     <div class="d-flex align-center justify-space-between py-4">
@@ -82,17 +83,15 @@ export default {
         this.$nuxt.$loading.start()
 
         const URL = `/company/login`
-        const PAYLOAD = this.FORM
 
         await this.$axios
-          .post(URL, PAYLOAD)
+          .post(URL, this.FORM)
           .then((response) => {
             if (response.data.twoFactorAuth) {
               this.KEEP_COMPANY_USER_TMP(response.data)
               this.$router.replace('/account/verify-twofa')
             } else if (!response.data.twoFactorAuth) {
               this.LOG_COMPANY_USER_IN(response.data)
-              console.log('after')
               this.$router.replace('/account/settings')
             }
           })

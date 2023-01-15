@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ profile: 'getAdminUserProfile' }),
+    ...mapGetters({ profile: 'getUserProfile' }),
   },
 }
 </script>

@@ -6,13 +6,16 @@ export const state = () => ({
 
 export const getters = {
   getCompanyUserToken(state) {
-    return state.data.token
+    return state.data?.token
   },
-  getCompanyUserProfile(state) {
-    return state.data.account.company[0]
+  getTempUserData(state) {
+    return state.tempUser
   },
-  getCompanyUser2FAStatus(state, getters, rootState, rootGetters) {
-    return state.data.account.twoFactorAuth
+  getUserProfile(state) {
+    return state.data?.account.company[0]
+  },
+  getUser2FAStatus(state, getters, rootState, rootGetters) {
+    return state.data?.account.twoFactorAuth
   },
 }
 
@@ -25,25 +28,22 @@ export const mutations = {
     state.tempUser = payload
   },
 
-  CHANGE_COMPANY_USER_PIC(state, payload) {
-    state.user.user.profile[0].image = payload
+  CHANGE_USER_PIC(state, payload) {
+    state.data.profile[0].image = payload
   },
 
-  SAVE_COMPANY_USER_PIC(state, payload) {
-    state.user.account.company[0].image = payload
+  SAVE_USER_PIC(state, payload) {
+    state.data.account.company[0].image = payload
   },
 
-  UPDATE_COMPANY_USER_PROFILE(state, payload) {
-    state.user.phone = payload.phone
-    state.user.user = payload.emailAddress
-    state.user.lastName = payload.lastName
-    state.user.firstName = payload.firstName
+  UPDATE_USER_PROFILE(state, payload) {
+    const accountState = state.data.account.company[0]
+    state.data.account.company[0] = { ...accountState, ...payload }
   },
 }
 
 export const actions = {
-  LOG_COMPANY_USER_IN({ state, rootState, commit }, payload) {
-    console.log('before')
+  LOG_COMPANY_USER_IN({ commit }, payload) {
     commit('COMMIT_COMPANY_LOG_IN', payload)
     commit('auth/SET_AUTH_TYPE', 'companyAuth', { root: true })
   },
