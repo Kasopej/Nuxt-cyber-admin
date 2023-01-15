@@ -9,8 +9,6 @@ export const getters = {
     if (state.authType === 'adminAuth') return true
     else if (state.authType === 'companyAuth') return false
     else {
-      state.companyAuth = null
-      state.adminAuth = null
       localStorage.clear()
       throw new Error('Unknown Auth Type')
     }
@@ -44,8 +42,8 @@ export const mutations = {
   },
   LOG_USER_OUT(state) {
     if (!state[`${state.authType}`]) return
-    state[`${state.authType}`].data = null
-    state.loggedIn = false
+    state[`${state.authType}`].data = {}
+    state[`${state.authType}`].loggedIn = false
   },
 }
 
@@ -57,24 +55,19 @@ export const actions = {
       : commit('companyAuth/CHANGE_USER_PIC', payload)
   },
 
-  // change 2FA status this is work around since no api
-  // SET_TWO_FACTOR_STATUS({ state }, payload) {
-  //   state.user.account.twoFactorAuth = payload
-  // },
-
-  CHANGE_USER_PIC({ commit, state, getters }, payload) {
+  CHANGE_USER_PIC({ commit, getters }, payload) {
     getters.isAdminAuth
       ? commit('adminAuth/CHANGE_USER_PIC', payload)
       : commit('companyAuth/CHANGE_USER_PIC', payload)
   },
 
-  SAVE_USER_PIC({ commit, state, getters }, payload) {
+  SAVE_USER_PIC({ commit, getters }, payload) {
     getters.isAdminAuth
       ? commit('adminAuth/SAVE_USER_PIC', payload)
       : commit('companyAuth/SAVE_USER_PIC', payload)
   },
 
-  UPDATE_USER_PROFILE({ commit, state, getters }, payload) {
+  UPDATE_USER_PROFILE({ commit, getters }, payload) {
     getters.isAdminAuth
       ? commit('adminAuth/UPDATE_USER_PROFILE', payload)
       : commit('companyAuth/UPDATE_USER_PROFILE', payload)
