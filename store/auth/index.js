@@ -9,7 +9,6 @@ export const getters = {
     if (state.authType === 'adminAuth') return true
     else if (state.authType === 'companyAuth') return false
     else {
-      localStorage.clear()
       throw new Error('Unknown Auth Type')
     }
   },
@@ -48,13 +47,6 @@ export const mutations = {
 }
 
 export const actions = {
-  // Log user in
-  LOG_USER_IN({ commit, getters }, payload) {
-    getters.isAdminAuth
-      ? commit('adminAuth/CHANGE_USER_PIC', payload)
-      : commit('companyAuth/CHANGE_USER_PIC', payload)
-  },
-
   CHANGE_USER_PIC({ commit, getters }, payload) {
     getters.isAdminAuth
       ? commit('adminAuth/CHANGE_USER_PIC', payload)

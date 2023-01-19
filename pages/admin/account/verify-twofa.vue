@@ -9,7 +9,7 @@
         v-model="form.token"
         dense
         outlined
-        :rules="[rules.required]"
+        :rules="[...rules.required]"
         label="Token"
         required
       ></v-text-field>
@@ -27,7 +27,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('auth/companyAuth')
+const { mapActions } = createNamespacedHelpers('auth/adminAuth')
 export default {
   layout: 'account',
   middleware: 'guest',
@@ -47,27 +47,27 @@ export default {
 
   mounted() {
     if (this.$store.state.auth.userAuthData === null) {
-      this.$router.push('/login')
+      this.$router.push('/admin/login')
     }
   },
 
   methods: {
-    ...mapActions(['LOG_COMPANY_USER_IN']),
+    ...mapActions(['LOG_ADMIN_USER_IN']),
     async verify() {
       if (this.$refs.tokenForm.validate()) {
         this.$nuxt.$loading.start()
 
         const userAuthData =
-          this.$store.getters['auth/companyAuth/getTempUserData']
+          this.$store.getters['auth/adminAuth/getTempUserData']
         this.form.temp2FAKey = userAuthData.temp2FAKey
 
         const uri = `/verify-2fa-login/${userAuthData.userId}`
 
-        await this.$axios
+        await this.$adminApi
           .post(uri, this.form)
           .then((response) => {
-            this.LOG_COMPANY_USER_IN(response.data)
-            this.$router.replace('/')
+            this.LOG_ADMIN_USER_IN(response.data)
+            this.$router.replace(this.prependAdminRoute + '/account/settings')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

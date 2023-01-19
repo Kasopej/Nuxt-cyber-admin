@@ -2,9 +2,7 @@
   <v-form ref="form" v-model="valid" class="pa-3 pa-sm-7 col-12">
     <div class="text-center pb-4">
       Don’t have an account?
-      <nuxt-link :to="prependAdminRoute + '/account/register/'"
-        >Sign Up</nuxt-link
-      >
+      <nuxt-link to="/admin/account/register/">Sign Up</nuxt-link>
     </div>
 
     <header class="headline font-weight-bold text-center py-4">
@@ -40,7 +38,7 @@
 
     <div class="d-flex align-center justify-space-between py-4">
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
-      <nuxt-link :to="prependAdminRoute + '/account/forgot-password/'"
+      <nuxt-link to="/admin/account/forgot-password/"
         >Forgot Password?</nuxt-link
       >
     </div>
@@ -84,15 +82,13 @@ export default {
                 'auth/adminAuth/KEEP_ADMIN_USER_TMP',
                 response.data
               )
-              this.$router.replace(
-                this.prependAdminRoute + '/account/verify-twofa'
-              )
+              this.$router.replace('/admin/account/verify-twofa')
             } else if (!response.data.twoFactorAuth) {
               this.$store.dispatch(
                 'auth/adminAuth/LOG_ADMIN_USER_IN',
                 response.data
               )
-              this.$router.replace('/admin/account/settings')
+              this.$router.replace(this.prependAdminRoute + '/account/settings')
             }
           })
           .catch((error) => {

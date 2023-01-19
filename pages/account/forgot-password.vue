@@ -28,7 +28,7 @@
 
           <div class="text-center py-4">
             <nuxt-link
-              :to="prependAdminRoute + '/account/login/'"
+              to="/account/login/"
               class="font-weight-bold accent--text"
             >
               Or click here to login
@@ -75,7 +75,7 @@
               password
               label="Confirm Password"
               :rules="[
-                ...(value) =>
+                (value) =>
                   value === FORM.password ||
                   'The password confirmation does not match.',
               ]"
@@ -91,7 +91,7 @@
 
           <div class="text-center py-4">
             <nuxt-link
-              :to="prependAdminRoute + '/account/login/'"
+              to="/account/login/"
               class="font-weight-bold accent--text"
             >
               Or click here to login
@@ -153,9 +153,9 @@ export default {
         const URL = `/reset-password`
         const PAYLOAD = this.FORM
 
-        await this.getHTTPClient()
+        await this.$axios
           .post(URL, PAYLOAD)
-          .then((response) => {
+          .then(() => {
             this.step = 2
           })
           .catch((error) => {

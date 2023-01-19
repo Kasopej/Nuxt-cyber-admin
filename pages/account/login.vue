@@ -2,9 +2,7 @@
   <v-form ref="form" v-model="valid" class="pa-3 pa-sm-7 col-12">
     <div class="text-center pb-4">
       Don’t have an account?
-      <nuxt-link :to="prependAdminRoute + '/account/register/'"
-        >Sign Up</nuxt-link
-      >
+      <nuxt-link to="/account/register/">Sign Up</nuxt-link>
     </div>
 
     <header class="headline font-weight-bold text-center py-4">
@@ -48,16 +46,14 @@
 
     <div class="d-flex align-center justify-space-between py-4">
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
-      <nuxt-link :to="prependAdminRoute + '/account/forgot-password/'"
-        >Forgot Password?</nuxt-link
-      >
+      <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
     </div>
   </v-form>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('auth/companyAuth')
+const { mapActions, mapMutations } = createNamespacedHelpers('auth/companyAuth')
 export default {
   layout: 'account',
   middleware: 'guest',
@@ -81,21 +77,20 @@ export default {
   head: { title: 'Sign in' },
 
   methods: {
-    ...mapActions(['LOG_COMPANY_USER_IN', 'KEEP_COMPANY_USER_TMP']),
+    ...mapActions(['LOG_COMPANY_USER_IN']),
+    ...mapMutations(['KEEP_COMPANY_USER_TMP']),
     async login() {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
         const URL = `/login`
 
-        await this.getHTTPClient()
+        await this.$axios
           .post(URL, this.FORM)
           .then((response) => {
             if (response.data.twoFactorAuth) {
               this.KEEP_COMPANY_USER_TMP(response.data)
-              this.$router.replace(
-                this.prependAdminRoute + '/account/verify-twofa'
-              )
+              this.$router.replace('/account/verify-twofa')
             } else if (!response.data.twoFactorAuth) {
               this.LOG_COMPANY_USER_IN(response.data)
               this.$router.replace(this.prependAdminRoute + '/account/settings')
