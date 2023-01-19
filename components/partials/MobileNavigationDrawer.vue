@@ -39,14 +39,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {}
   },
 
   computed: {
-    ...mapGetters('auth', ['isAdminAuth']),
     links() {
       return [
         {
@@ -83,8 +81,7 @@ export default {
     },
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
-      if (this.isAdminAuth) this.$router.push('/admin/account/login')
-      else this.$router.push(this.prependAdminRoute + '/account/login')
+      this.$router.push(this.prependAdminRoute + '/account/login')
     },
   },
 }

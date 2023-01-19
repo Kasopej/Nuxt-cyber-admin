@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {}
@@ -30,7 +30,6 @@ export default {
   computed: {
     ...mapState('auth', ['authType']),
     ...mapState('misc', ['popTwoFactorModal']),
-    ...mapGetters('auth', ['isAdminAuth']),
   },
   methods: {
     closeDialog() {
@@ -42,8 +41,7 @@ export default {
     proceed() {
       this.$store.commit('misc/CLICK_SECURITY_TAB', true)
       this.closeDialog()
-      if (this.isAdminAuth) this.$router.push('/admin/account/settings')
-      else this.$router.push(this.prependAdminRoute + '/account/settings')
+      this.$router.push(this.prependAdminRoute + '/account/settings')
     },
   },
 }

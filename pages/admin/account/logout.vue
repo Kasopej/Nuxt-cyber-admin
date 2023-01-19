@@ -6,7 +6,7 @@
 export default {
   mounted() {
     this.$store.commit('auth/LOG_USER_OUT')
-    this.$router.replace(this.prependAdminRoute + '/account/login')
+    this.$router.replace('/admin/account/login')
   },
 }
 </script>
