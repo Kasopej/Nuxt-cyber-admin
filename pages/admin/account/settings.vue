@@ -30,7 +30,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 
 export default {
-  layout: 'adminLayout',
+  layout: 'dashboard',
   middleware: 'admin_auth',
 
   data() {
