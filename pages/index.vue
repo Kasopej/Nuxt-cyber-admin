@@ -68,7 +68,7 @@ export default {
   },
 
   async fetch() {
-    const URL = `/company/load-programs`
+    const URL = `/load-programs`
     // Make upload request to the API
     await this.$axios
       .$get(URL, this.FORM)

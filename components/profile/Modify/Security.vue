@@ -102,7 +102,7 @@ export default {
 
   async fetch() {
     if (!this.isTwoFactor) {
-      const uri = this.isAdminAuth ? 'activate-2fa' : 'company/activate-2fa'
+      const uri = 'activate-2fa'
       await this.getHTTPClient()
         .$post(uri, {})
         .then((res) => {

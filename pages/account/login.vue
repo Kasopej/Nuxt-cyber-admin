@@ -82,7 +82,7 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
-        const URL = `/company/login`
+        const URL = `/login`
 
         await this.$axios
           .post(URL, this.FORM)
