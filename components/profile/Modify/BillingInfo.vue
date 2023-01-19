@@ -147,7 +147,7 @@ export default {
           billing: this.FORM,
         }
 
-        await this.$axios
+        await this.getHTTPClient()
           .$put(URL, payload)
           .then(() => {
             this.$store.commit('notification/SHOW', {

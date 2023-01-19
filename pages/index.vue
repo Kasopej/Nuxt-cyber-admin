@@ -68,9 +68,9 @@ export default {
   },
 
   async fetch() {
-    const URL = `/company/load-programs`
+    const URL = `/load-programs`
     // Make upload request to the API
-    await this.$axios
+    await this.getHTTPClient()
       .$get(URL, this.FORM)
       .then((res) => {
         this.programs = res.data

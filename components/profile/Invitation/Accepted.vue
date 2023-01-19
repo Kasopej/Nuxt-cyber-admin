@@ -43,7 +43,7 @@ export default {
 
       const URL = `/revoke-member`
       // Make upload request to the API
-      await this.$axios
+      await this.getHTTPClient()
         .$post(URL, { email })
         .then(() => {
           this.$store.commit('notification/SHOW', {

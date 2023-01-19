@@ -62,25 +62,12 @@
                 >
                   <div class="flex-grow-1">
                     <span
-                      class="
-                        pa-2
-                        grey
-                        caption
-                        lighten-4
-                        grey--text
-                        rounded-lg
-                        text-no-wrap text--darken-2
-                      "
+                      class="pa-2 grey caption lighten-4 grey--text rounded-lg text-no-wrap text--darken-2"
                     >
                       #{{ submission.reference }}
                     </span>
                     <div
-                      class="
-                        subtitle-1
-                        text-no-wrap text-capitalize
-                        overflow-x-hidden
-                        pt-2
-                      "
+                      class="subtitle-1 text-no-wrap text-capitalize overflow-x-hidden pt-2"
                     >
                       {{ submission.title }}
                     </div>
@@ -117,7 +104,7 @@ export default {
   async fetch() {
     const URL = `/get-program-submissions/${this.$route.params.programId}?limit=999`
     // Make get request to the API
-    await this.$axios
+    await this.getHTTPClient()
       .$get(URL, this.FORM)
       .then((res) => {
         this.submissions = res.data.docs

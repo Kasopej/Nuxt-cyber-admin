@@ -170,7 +170,7 @@ export default {
     if (this.submission) {
       const URLL = `/get-comments/${this.submission._id}`
       // Make upload request to the API
-      await this.$axios
+      await this.getHTTPClient()
         .$get(URLL, this.FORM)
         .then((res) => {
           this.comments = res.data
@@ -220,7 +220,7 @@ export default {
 
         const URLL = `/create-comment/${submissionId}`
         // Make upload request to the API
-        await this.$axios
+        await this.getHTTPClient()
           .$post(URLL, PAYLOAD)
           .then(() => {
             this.FORM = {}

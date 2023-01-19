@@ -161,7 +161,7 @@ export default {
           representative: this.FORM,
           billing: this.$store.state.auth.user.account.billing[0],
         }
-        await this.$axios
+        await this.getHTTPClient()
           .$put(URL, payload)
           .then(() => {
             this.$store.commit('notification/SHOW', {

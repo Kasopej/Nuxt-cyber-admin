@@ -2,7 +2,9 @@
   <v-form ref="form" v-model="valid" class="pa-3 pa-sm-7 col-12">
     <div class="text-center pb-4">
       Don’t have an account?
-      <nuxt-link to="/account/register/">Sign Up</nuxt-link>
+      <nuxt-link :to="prependAdminRoute + '/account/register/'"
+        >Sign Up</nuxt-link
+      >
     </div>
 
     <header class="headline font-weight-bold text-center py-4">
@@ -46,7 +48,9 @@
 
     <div class="d-flex align-center justify-space-between py-4">
       <v-checkbox v-model="FORM.persistent" label="Remember me"></v-checkbox>
-      <nuxt-link to="/account/forgot-password/">Forgot Password?</nuxt-link>
+      <nuxt-link :to="prependAdminRoute + '/account/forgot-password/'"
+        >Forgot Password?</nuxt-link
+      >
     </div>
   </v-form>
 </template>
@@ -82,17 +86,19 @@ export default {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
 
-        const URL = `/company/login`
+        const URL = `/login`
 
-        await this.$axios
+        await this.getHTTPClient()
           .post(URL, this.FORM)
           .then((response) => {
             if (response.data.twoFactorAuth) {
               this.KEEP_COMPANY_USER_TMP(response.data)
-              this.$router.replace('/account/verify-twofa')
+              this.$router.replace(
+                this.prependAdminRoute + '/account/verify-twofa'
+              )
             } else if (!response.data.twoFactorAuth) {
               this.LOG_COMPANY_USER_IN(response.data)
-              this.$router.replace('/account/settings')
+              this.$router.replace(this.prependAdminRoute + '/account/settings')
             }
           })
           .catch((error) => {

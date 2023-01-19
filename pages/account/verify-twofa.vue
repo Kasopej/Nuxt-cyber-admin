@@ -59,7 +59,7 @@ export default {
 
         const uri = `/verify-2fa-login/${userAuthData.userId}`
 
-        await this.$axios
+        await this.getHTTPClient()
           .post(uri, this.form)
           .then((response) => {
             this.$store.dispatch('auth/LOG_USER_IN', response.data)

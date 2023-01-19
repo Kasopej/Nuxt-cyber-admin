@@ -2,7 +2,7 @@
   <v-form ref="signUpForm" v-model="valid" class="pa-3 pa-sm-4 col-12">
     <nav class="text-center pb-4">
       Already have an account?
-      <nuxt-link to="/account/login/">Sign In</nuxt-link>
+      <nuxt-link :to="prependAdminRoute + '/account/login/'">Sign In</nuxt-link>
     </nav>
 
     <header class="display-1 font-weight-bold text-center py-4">
@@ -165,7 +165,7 @@ export default {
         const URL = `/register`
         const PAYLOAD = this.FORM
 
-        await this.$axios
+        await this.getHTTPClient()
           .post(URL, PAYLOAD)
           .then((response) => {
             this.$store.commit('notification/SHOW', {
@@ -173,7 +173,7 @@ export default {
               text: `${response.data.message}.`,
               timeout: 20000,
             })
-            this.$router.replace('/account/login')
+            this.$router.replace(this.prependAdminRoute + '/account/login')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

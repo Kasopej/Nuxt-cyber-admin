@@ -47,7 +47,7 @@ export default {
 
       const URL = `/accept-member`
       // Make upload request to the API
-      await this.$axios
+      await this.getHTTPClient()
         .$post(URL, { username })
         .then(() => {
           this.$store.commit('notification/SHOW', {
@@ -74,7 +74,7 @@ export default {
 
       const URL = `/revoke-member`
       // Make upload request to the API
-      await this.$axios
+      await this.getHTTPClient()
         .$post(URL, { username })
         .then(() => {
           this.$store.commit('notification/SHOW', {

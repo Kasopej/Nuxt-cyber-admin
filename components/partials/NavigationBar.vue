@@ -23,7 +23,7 @@
       </template>
 
       <v-list>
-        <v-list-item to="/account/settings/">
+        <v-list-item :to="prependAdminRoute + '/account/settings/'">
           <v-list-item-title>
             <div class="subtitle-1 text-capitalize font-weight-bold">
               {{ profile.companyName }}
@@ -53,7 +53,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        <v-list-item to="/account/logout/">
+        <v-list-item :to="prependAdminRoute + '/account/logout/'">
           <v-list-item-title>
             <v-icon class="mr-3">mdi-logout</v-icon>
             <span>Sign out</span>

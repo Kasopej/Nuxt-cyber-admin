@@ -42,17 +42,30 @@
 import { mapGetters } from 'vuex'
 export default {
   data() {
-    return {
-      links: [
-        { title: 'Programs', icon: 'mdi-briefcase', slug: '/' },
-        { title: 'Submissions', icon: 'mdi-bookshelf', slug: '/submission/' },
-        { title: 'Profile', icon: 'mdi-account', slug: '/account/settings/' },
-      ],
-    }
+    return {}
   },
 
   computed: {
     ...mapGetters('auth', ['isAdminAuth']),
+    links() {
+      return [
+        {
+          title: 'Programs',
+          icon: 'mdi-briefcase',
+          slug: this.prependAdminRoute + '/',
+        },
+        {
+          title: 'Submissions',
+          icon: 'mdi-bookshelf',
+          slug: this.prependAdminRoute + '/submission/',
+        },
+        {
+          title: 'Profile',
+          icon: 'mdi-account',
+          slug: this.prependAdminRoute + '/account/settings/',
+        },
+      ]
+    },
     drawer: {
       get() {
         return this.$store.state.navigationDrawer.status
@@ -71,7 +84,7 @@ export default {
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
       if (this.isAdminAuth) this.$router.push('/admin/account/login')
-      else this.$router.push('/account/login')
+      else this.$router.push(this.prependAdminRoute + '/account/login')
     },
   },
 }

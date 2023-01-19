@@ -43,7 +43,7 @@ export default {
       this.$store.commit('misc/CLICK_SECURITY_TAB', true)
       this.closeDialog()
       if (this.isAdminAuth) this.$router.push('/admin/account/settings')
-      else this.$router.push('/account/settings')
+      else this.$router.push(this.prependAdminRoute + '/account/settings')
     },
   },
 }
