@@ -131,7 +131,7 @@ export default {
     async verify() {
       if (this.$refs.tokenForm.validate()) {
         const uri = '/verify-2fa'
-        await this.$axios
+        await this.getHTTPClient()
           .$post(uri, this.form)
           .then((res) => {
             this.$store.commit('notification/SHOW', {
@@ -155,7 +155,7 @@ export default {
 
     async disable() {
       const uri = '/disable-2fa'
-      await this.$axios
+      await this.getHTTPClient()
         .$post(uri, {})
         .then((res) => {
           this.$store.commit('notification/SHOW', {

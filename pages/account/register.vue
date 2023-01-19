@@ -165,7 +165,7 @@ export default {
         const URL = `/register`
         const PAYLOAD = this.FORM
 
-        await this.$axios
+        await this.getHTTPClient()
           .post(URL, PAYLOAD)
           .then((response) => {
             this.$store.commit('notification/SHOW', {

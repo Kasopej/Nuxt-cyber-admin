@@ -696,7 +696,7 @@ export default {
 
         const payload = this.form
 
-        await this.$axios
+        await this.getHTTPClient()
           .$post(URL, payload)
           .then(() => {
             this.form = {}

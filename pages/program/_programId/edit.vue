@@ -601,7 +601,7 @@ export default {
   async fetch() {
     const uri = `/get-program/${this.$route.params.programId}`
 
-    await this.$axios
+    await this.getHTTPClient()
       .$get(uri, {})
       .then((res) => {
         this.program = res.data
@@ -686,7 +686,7 @@ export default {
         const URL = `/update-program/${this.program._id}`
         const payload = this.program
 
-        await this.$axios
+        await this.getHTTPClient()
           .$patch(URL, payload)
           .then(() => {
             this.$store.commit('notification/SHOW', {
@@ -715,7 +715,7 @@ export default {
         image: blob,
       }
 
-      await this.$axios
+      await this.getHTTPClient()
         .$patch(URL, payload)
         .then((res) => {
           this.$store.commit('notification/SHOW', {
@@ -744,7 +744,7 @@ export default {
         image2: blob,
       }
 
-      await this.$axios
+      await this.getHTTPClient()
         .$patch(URL, payload)
         .then((res) => {
           this.$store.commit('notification/SHOW', {

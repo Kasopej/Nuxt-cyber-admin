@@ -53,7 +53,7 @@ export default {
       if (this.$refs.invitationForm.validate()) {
         const URLL = `/invite-member`
         // Make upload request to the API
-        await this.$axios
+        await this.getHTTPClient()
           .$post(URLL, this.FORM)
           .then(() => {
             this.FORM = {}

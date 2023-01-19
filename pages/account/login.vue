@@ -84,7 +84,7 @@ export default {
 
         const URL = `/login`
 
-        await this.$axios
+        await this.getHTTPClient()
           .post(URL, this.FORM)
           .then((response) => {
             if (response.data.twoFactorAuth) {

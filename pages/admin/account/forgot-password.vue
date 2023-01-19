@@ -75,7 +75,7 @@
               password
               label="Confirm Password"
               :rules="[
-                ...(value) =>
+                (value) =>
                   value === FORM.password ||
                   'The password confirmation does not match.',
               ]"
@@ -179,7 +179,7 @@ export default {
         const URL = `/reset-password`
         const PAYLOAD = this.FORM
 
-        await this.getHTTPClient()
+        await this.getHTTPClient
           .post(URL, PAYLOAD)
           .then((response) => {
             this.$router.replace('/')

@@ -117,7 +117,7 @@ export default {
 
     async uploadPhoto(payload) {
       const endpoint = '/update-profile-picture'
-      await this.$axios
+      await this.getHTTPClient()
         .$patch(endpoint, payload)
         .then((res) => {
           this.$store.commit('notification/SHOW', {
