@@ -139,7 +139,7 @@ export default {
               text: res.message,
             })
 
-            this.$router.push('/account/logout')
+            this.$router.push(this.prependAdminRoute + '/account/logout')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

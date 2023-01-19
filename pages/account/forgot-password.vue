@@ -28,7 +28,7 @@
 
           <div class="text-center py-4">
             <nuxt-link
-              to="/account/login/"
+              :to="prependAdminRoute + '/account/login/'"
               class="font-weight-bold accent--text"
             >
               Or click here to login
@@ -91,7 +91,7 @@
 
           <div class="text-center py-4">
             <nuxt-link
-              to="/account/login/"
+              :to="prependAdminRoute + '/account/login/'"
               class="font-weight-bold accent--text"
             >
               Or click here to login
