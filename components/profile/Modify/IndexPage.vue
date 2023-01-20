@@ -24,36 +24,53 @@
     </div>
 
     <section class="py-8">
-      <v-tabs v-model="profileEditTab" color="accent" grow>
-        <v-tab class="text-capitalize">
+      <v-tabs :value="profileEditTab" color="accent" grow>
+        <v-tab
+          class="text-capitalize"
+          :append="true"
+          :to="prependAdminRoute + '/account/settings#company'"
+        >
           <v-icon class="mr-3">mdi-contacts</v-icon>
           <span>
             Company
             <span class="d-none d-md-inline ml-2">Information</span></span
           >
         </v-tab>
-        <v-tab class="text-capitalize">
+        <v-tab
+          class="text-capitalize"
+          :append="true"
+          :to="prependAdminRoute + '/account/settings#represenative'"
+        >
           <v-icon class="mr-3">mdi-account-edit</v-icon>
           <span>
             Representative
             <span class="d-none d-md-inline ml-2">Information</span></span
           ></v-tab
         >
-        <v-tab class="text-capitalize">
+        <v-tab
+          class="text-capitalize"
+          :append="true"
+          :to="prependAdminRoute + '/account/settings#billing'"
+        >
           <v-icon class="mr-3">mdi-credit-card-settings</v-icon>
           <span>
             Billing <span class="d-none d-md-inline ml-2">Information</span>
           </span>
         </v-tab>
 
-        <v-tab ref="secureTab" class="text-capitalize">
+        <v-tab
+          ref="secureTab"
+          class="text-capitalize"
+          :append="true"
+          :to="prependAdminRoute + '/account/settings#security'"
+        >
           <v-icon class="mr-3">mdi-lock-outline</v-icon>
           <span>
             Security <span class="d-none d-md-inline ml-2">settings</span>
           </span>
         </v-tab>
 
-        <v-tabs-items v-model="profileEditTab" class="pt-8">
+        <v-tabs-items :value="profileEditTab" class="pt-8">
           <v-tab-item>
             <profile-modify-company-info />
           </v-tab-item>
@@ -75,6 +92,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  props: {
+    hash: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       labelText: 'Click to change',
@@ -88,6 +111,27 @@ export default {
 
   computed: {
     ...mapGetters('auth', { profile: 'getUserProfile' }),
+  },
+
+  watch: {
+    hash(val) {
+      switch (val) {
+        case '#company':
+          this.profileEditTab = 0
+          break
+        case '#represenative':
+          this.profileEditTab = 1
+          break
+        case '#billing':
+          this.profileEditTab = 2
+          break
+        case '#security':
+          this.profileEditTab = 3
+          break
+        default:
+          break
+      }
+    },
   },
 
   mounted() {

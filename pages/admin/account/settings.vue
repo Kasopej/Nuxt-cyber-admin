@@ -11,7 +11,7 @@
 
             <v-tabs-items v-model="tab">
               <v-tab-item>
-                <profile-modify-index-page />
+                <profile-modify-index-page :hash="hash" />
               </v-tab-item>
 
               <v-tab-item>
@@ -30,12 +30,22 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.hash = vm.$route.hash
+    })
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.hash = this.$route.hash
+    next()
+  },
   layout: 'dashboard',
   middleware: 'admin_auth',
 
   data() {
     return {
       tab: 0,
+      hash: '',
     }
   },
   computed: {
