@@ -12,10 +12,10 @@ export const getters = {
     return state.tempUser
   },
   getUserProfile(state) {
-    return state?.data.account
+    return state.data?.account
   },
   getUser2FAStatus(state) {
-    return state?.data.account.twoFactorAuth
+    return state.data?.account.twoFactorAuth
   },
 }
 
@@ -23,6 +23,7 @@ export const mutations = {
   COMMIT_ADMIN_LOG_IN(state, payload) {
     state.data = payload
     state.loggedIn = true
+    state.data.account.twoFactorAuth = false
   },
   KEEP_ADMIN_USER_TMP(state, payload) {
     state.tempUser = payload

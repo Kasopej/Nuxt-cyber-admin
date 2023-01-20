@@ -77,13 +77,13 @@ export default {
         await this.$adminApi
           .post(URL, PAYLOAD)
           .then((response) => {
-            if (response.data.twoFactorAuth) {
+            if (!response.data.account.twoFactorAuth) {
               this.$store.commit(
                 'auth/adminAuth/KEEP_ADMIN_USER_TMP',
                 response.data
               )
               this.$router.replace('/admin/account/verify-twofa')
-            } else if (!response.data.twoFactorAuth) {
+            } else {
               this.$store.dispatch(
                 'auth/adminAuth/LOG_ADMIN_USER_IN',
                 response.data

@@ -29,9 +29,9 @@ export const getters = {
     else return getters['companyAuth/getUserProfile']
   },
   isLoggedIn(state, getters) {
-    if (state.authType === 'adminAuth') return state['adminAuth/loggedIn']
-    else if (state.authType === 'companyAuth')
-      return state['companyAuth/loggedIn']
+    if (state.authType === 'adminAuth') return state.adminAuth.loggedIn
+    else if (state.authType === 'companyAuth') return state.companyAuth.loggedIn
+    return false
   },
 }
 

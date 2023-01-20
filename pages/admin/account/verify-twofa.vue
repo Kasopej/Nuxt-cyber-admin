@@ -9,7 +9,7 @@
         v-model="form.token"
         dense
         outlined
-        :rules="[...rules.required]"
+        :rules="[rules.required]"
         label="Token"
         required
       ></v-text-field>
@@ -59,9 +59,9 @@ export default {
 
         const userAuthData =
           this.$store.getters['auth/adminAuth/getTempUserData']
-        this.form.temp2FAKey = userAuthData.temp2FAKey
+        this.form.temp2FAKey = userAuthData.account.temp2FAKey
 
-        const uri = `/verify-2fa-login/${userAuthData.userId}`
+        const uri = `/verify-2fa-login/${userAuthData.account._id}`
 
         await this.$adminApi
           .post(uri, this.form)
