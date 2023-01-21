@@ -77,7 +77,7 @@ export default {
         await this.$adminApi
           .post(URL, PAYLOAD)
           .then((response) => {
-            if (!response.data.account.twoFactorAuth) {
+            if (response.data.account.twoFactorAuth) {
               this.$store.commit(
                 'auth/adminAuth/KEEP_ADMIN_USER_TMP',
                 response.data

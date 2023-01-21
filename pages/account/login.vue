@@ -91,7 +91,7 @@ export default {
             if (response.data.twoFactorAuth) {
               this.KEEP_COMPANY_USER_TMP(response.data)
               this.$router.replace('/account/verify-twofa')
-            } else if (!response.data.twoFactorAuth) {
+            } else {
               this.LOG_COMPANY_USER_IN(response.data)
               this.$router.replace(this.prependAdminRoute + '/account/settings')
             }
