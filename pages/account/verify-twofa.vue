@@ -27,7 +27,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions } = createNamespacedHelpers('auth/companyAuth')
+const { mapActions, mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
   layout: 'account',
   middleware: 'guest',
@@ -45,9 +45,13 @@ export default {
   },
   head: { title: 'verify 2FA' },
 
+  computed: {
+    ...mapGetters(['getTempUserData']),
+  },
+
   mounted() {
-    if (this.$store.state.auth.userAuthData === null) {
-      this.$router.push('/login')
+    if (this.getTempUserData === null) {
+      this.$router.push('/account/login')
     }
   },
 

@@ -22,6 +22,7 @@ export const getters = {
 export const mutations = {
   COMMIT_COMPANY_LOG_IN(state, payload) {
     state.data = payload
+    state.tempUser = null
     state.loggedIn = true
   },
   KEEP_COMPANY_USER_TMP(state, payload) {

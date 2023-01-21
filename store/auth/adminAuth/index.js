@@ -22,6 +22,7 @@ export const getters = {
 export const mutations = {
   COMMIT_ADMIN_LOG_IN(state, payload) {
     state.data = payload
+    state.tempUser = null
     state.loggedIn = true
     state.data.account.twoFactorAuth = false
   },
