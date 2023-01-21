@@ -1,6 +1,10 @@
+import { resolve } from 'path'
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  alias: {
+    PageBases: resolve(__dirname, './components/pages_base_definitions'),
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
