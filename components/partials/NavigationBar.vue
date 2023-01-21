@@ -53,7 +53,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        <v-list-item :to="prependAdminRoute + '/account/logout/'">
+        <v-list-item :to="prependAdminRoute + '/account/logout'">
           <v-list-item-title>
             <v-icon class="mr-3">mdi-logout</v-icon>
             <span>Sign out</span>
