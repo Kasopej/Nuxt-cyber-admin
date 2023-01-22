@@ -24,7 +24,6 @@ export const mutations = {
     state.data = payload
     state.tempUser = null
     state.loggedIn = true
-    state.data.account.twoFactorAuth = false
   },
   KEEP_ADMIN_USER_TMP(state, payload) {
     state.tempUser = payload
