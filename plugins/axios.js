@@ -1,7 +1,4 @@
 export default function ({ $axios, $config, store, redirect }) {
-  $axios.defaults.timeout = $config.axiosTimeout
-  $axios.defaults.baseURL = 'https://teklabspace-live.herokuapp.com/company'
-
   const accessToken = store.state.auth.companyAuth.data?.accessToken
   if (accessToken) {
     $axios.setToken(accessToken, 'Bearer')

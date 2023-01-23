@@ -26,28 +26,14 @@
 </template>
 
 <script>
+import AccountsBaseDef from 'PageBases/AccountSettings'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 
 export default {
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.hash = vm.$route.hash
-    })
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.hash = this.$route.hash
-    next()
-  },
+  extends: AccountsBaseDef,
   layout: 'dashboard',
   middleware: 'admin_auth',
-
-  data() {
-    return {
-      tab: 0,
-      hash: '',
-    }
-  },
   computed: {
     ...mapGetters({ profile: 'getUserProfile' }),
   },

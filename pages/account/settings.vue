@@ -26,28 +26,13 @@
 </template>
 
 <script>
+import AccountsBaseDef from 'PageBases/AccountSettings'
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      vm.hash = vm.$route.hash
-    })
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.hash = this.$route.hash
-    next()
-  },
+  extends: AccountsBaseDef,
   layout: 'dashboard',
   middleware: 'auth',
-
-  data() {
-    return {
-      tab: 0,
-      USER: this.$store.state.auth.user,
-      hash: '',
-    }
-  },
   computed: {
     ...mapGetters({ profile: 'getUserProfile' }),
   },
