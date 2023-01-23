@@ -70,6 +70,10 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  env: {
+    baseUrl: process.env.BASEURL,
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
@@ -98,7 +102,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    timeout: 60000,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -153,8 +159,8 @@ export default {
   },
 
   publicRuntimeConfig: {
-    axiosTimeout: 60000,
-    baseURL: process.env.BASE_URL,
+    axios: { baseURL: process.env.BASEURL },
+    altBaseUrl: process.env.ADMINURL,
   },
 
   generate: {
