@@ -213,17 +213,8 @@ export default {
   },
 
   mounted() {
-    // strip "+" from number
-    const numberWithoutPlus = this.profile.company[0].phoneNumber.substring(1)
-
-    const companyCountryCode = countryCodesJSON.find((countryCodeObj) => {
-      return numberWithoutPlus.startsWith(countryCodeObj.dial_code)
-    }).dial_code
-    const beginningOfActualNumber =
-      numberWithoutPlus.indexOf(companyCountryCode) + companyCountryCode.length
-    const companyActualNumber = numberWithoutPlus.substring(
-      beginningOfActualNumber
-    )
+    const { companyActualNumber, companyCountryCode } =
+      this.formatReceivedPhone()
     this.FORM = {
       ...this.profile.company[0],
       phoneNumber: {
@@ -234,6 +225,22 @@ export default {
   },
 
   methods: {
+    formatReceivedPhone() {
+      // strip "+" from number
+      const numberWithoutPlus = this.profile.company[0].phoneNumber.substring(1)
+
+      const companyCountryCode = countryCodesJSON.find((countryCodeObj) => {
+        return numberWithoutPlus.startsWith(countryCodeObj.dial_code)
+      }).dial_code
+      const beginningOfActualNumber =
+        numberWithoutPlus.indexOf(companyCountryCode) +
+        companyCountryCode.length
+      const companyActualNumber = numberWithoutPlus.substring(
+        beginningOfActualNumber
+      )
+
+      return { companyActualNumber, companyCountryCode }
+    },
     async updateProfile() {
       if (this.$refs.formCompanyInfo.validate()) {
         this.$nuxt.$loading.finish()
