@@ -4,20 +4,26 @@
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.currency"
+            :value="FORM.currency"
             block
             outlined
+            :solo="!!FORM.currency"
+            :disabled="!!FORM.currency"
             label="Wallet Currency"
             :rules="[...rules.required]"
+            @change="selectField('currency', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.accounting"
+            :value="FORM.accounting"
             block
             outlined
+            :solo="!!FORM.accounting"
+            :disabled="!!FORM.accounting"
             label="Accounting"
             :rules="[...rules.required]"
+            @change="selectField('currency', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -33,52 +39,67 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.email"
+            :value="FORM.email"
             :rules="[...rules.email]"
             label="Email"
             type="email"
             outlined
+            :solo="!!FORM.email"
+            :disabled="!!FORM.email"
             block
+            @change="selectField('email', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.country"
+            :value="FORM.country"
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
             outlined
+            :solo="!!FORM.country"
+            :disabled="!!FORM.country"
             block
+            @change="selectField('country', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.city"
+            :value="FORM.city"
             :rules="[...rules.required]"
             placeholder="Lagos"
             label="City"
             outlined
+            :solo="!!FORM.city"
+            :disabled="!!FORM.city"
             block
+            @change="selectField('city', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.address"
+            :value="FORM.address"
             block
             outlined
             :rules="[...rules.required]"
             placeholder="123, Ikorodu Road"
+            :solo="!!FORM.address"
+            :disabled="!!FORM.address"
             label="Address"
+            @change="selectField('address', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.postalCode"
+            :value="FORM.postalCode"
             :rules="[...rules.required]"
             placeholder="optional"
             label="Postal Code"
             outlined
+            :solo="!!FORM.postalCode"
+            :disabled="!!FORM.postalCode"
             block
+            @change="selectField('postalCode', $event.trim())"
           />
         </v-col>
       </v-row>
