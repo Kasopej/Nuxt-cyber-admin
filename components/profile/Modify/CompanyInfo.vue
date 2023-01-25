@@ -9,9 +9,10 @@
             placeholder="Company Name"
             label="Company Name"
             block
-            solo
-            :disabled="true"
+            :solo="!!FORM.companyName"
+            :disabled="!!FORM.companyName"
             outlined
+            @change="selectField('companyName', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -26,23 +27,29 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.vatNumber"
+            :value="FORM.vatNumber"
             :rules="[...rules.required]"
+            :solo="!!FORM.vatNumber"
+            :disabled="!!FORM.vatNumber"
             placeholder="0123456789"
             label="VAT Number"
             type="number"
             outlined
             block
+            @change="selectField('vatNumber', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.registrationNumber"
+            :value="FORM.registrationNumber"
+            :solo="!!FORM.registrationNumber"
+            :disabled="!!FORM.registrationNumber"
             block
             outlined
             :rules="[...rules.required]"
             label="Registration Number"
             placeholder="1234567890"
+            @change="selectField('registrationNumber', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -99,12 +106,13 @@
             :value="FORM.companyEmail"
             block
             outlined
-            solo
-            :disabled="true"
+            :solo="!!FORM.companyEmail"
+            :disabled="!!FORM.companyEmail"
             :rules="[...rules.email]"
             label="Company E-mail"
             placeholder="e-mail@example.com"
             type="email"
+            @change="selectField('companyEmail', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -120,12 +128,15 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.country"
+            :value="FORM.country"
+            :solo="!!FORM.country"
+            :disabled="!!FORM.country"
             block
             outlined
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
+            @change="selectField('country', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -180,7 +191,7 @@ export default {
       industries: industriesJSON,
       countryCodes: countryCodesJSON,
 
-      FORM: { phoneNumber: {} },
+      FORM: {},
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -212,7 +223,7 @@ export default {
     ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
-  mounted() {
+  beforeMount() {
     const { companyActualNumber, companyCountryCode } =
       this.formatReceivedPhone()
     this.FORM = {
@@ -246,6 +257,10 @@ export default {
       )
 
       return { companyActualNumber, companyCountryCode }
+    },
+    selectField(field, value) {
+      if (this.FORM[field]) return
+      this.FORM[field] = value
     },
     updateProfile() {
       if (this.$refs.formCompanyInfo.validate()) {
