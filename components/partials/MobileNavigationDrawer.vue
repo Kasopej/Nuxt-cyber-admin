@@ -40,30 +40,16 @@
 
 <script>
 export default {
+  props: {
+    links: {
+      type: Array,
+    },
+  },
   data() {
     return {}
   },
 
   computed: {
-    links() {
-      return [
-        {
-          title: 'Programs',
-          icon: 'mdi-briefcase',
-          slug: this.prependAdminRoute + '/',
-        },
-        {
-          title: 'Submissions',
-          icon: 'mdi-bookshelf',
-          slug: this.prependAdminRoute + '/submission/',
-        },
-        {
-          title: 'Profile',
-          icon: 'mdi-account',
-          slug: this.prependAdminRoute + '/account/settings/',
-        },
-      ]
-    },
     drawer: {
       get() {
         return this.$store.state.navigationDrawer.status
