@@ -147,18 +147,19 @@ export default {
         const URL = `/update-profile`
         // Make upload request to the API
         const payload = {
-          company: this.$store.state.auth.user.account.company[0],
-          representative: this.$store.state.auth.user.account.representative[0],
+          company: this.profile.company[0],
+          representative: this.profile.representative[0],
           billing: this.FORM,
         }
 
         await this.getHTTPClient()
           .$put(URL, payload)
-          .then(() => {
+          .then((response) => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

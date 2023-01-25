@@ -168,11 +168,12 @@ export default {
         }
         await this.getHTTPClient()
           .$put(URL, payload)
-          .then(() => {
+          .then((response) => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
