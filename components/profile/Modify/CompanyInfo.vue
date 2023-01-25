@@ -9,7 +9,7 @@
             placeholder="Company Name"
             label="Company Name"
             block
-            :solo="!!FORM.companyName"
+            :filled="!!FORM.companyName"
             :disabled="!!FORM.companyName"
             outlined
             @change="selectField('companyName', $event)"
@@ -29,7 +29,7 @@
           <v-text-field
             :value="FORM.vatNumber"
             :rules="[...rules.required]"
-            :solo="!!FORM.vatNumber"
+            :filled="!!FORM.vatNumber"
             :disabled="!!FORM.vatNumber"
             placeholder="0123456789"
             label="VAT Number"
@@ -42,7 +42,7 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
             :value="FORM.registrationNumber"
-            :solo="!!FORM.registrationNumber"
+            :filled="!!FORM.registrationNumber"
             :disabled="!!FORM.registrationNumber"
             block
             outlined
@@ -106,7 +106,7 @@
             :value="FORM.companyEmail"
             block
             outlined
-            :solo="!!FORM.companyEmail"
+            :filled="!!FORM.companyEmail"
             :disabled="!!FORM.companyEmail"
             :rules="[...rules.email]"
             label="Company E-mail"
@@ -129,7 +129,7 @@
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
             :value="FORM.country"
-            :solo="!!FORM.country"
+            :filled="!!FORM.country"
             :disabled="!!FORM.country"
             block
             outlined
@@ -281,7 +281,7 @@ export default {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
-            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response.data)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

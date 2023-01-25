@@ -4,20 +4,26 @@
       <v-row>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.currency"
+            :value="FORM.currency"
             block
             outlined
+            :filled="!!FORM.currency"
+            :disabled="!!FORM.currency"
             label="Wallet Currency"
             :rules="[...rules.required]"
+            @change="selectField('currency', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.accounting"
+            :value="FORM.accounting"
             block
             outlined
+            :filled="!!FORM.accounting"
+            :disabled="!!FORM.accounting"
             label="Accounting"
             :rules="[...rules.required]"
+            @change="selectField('currency', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -33,52 +39,67 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.email"
+            :value="FORM.email"
             :rules="[...rules.email]"
             label="Email"
             type="email"
             outlined
+            :filled="!!FORM.email"
+            :disabled="!!FORM.email"
             block
+            @change="selectField('email', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.country"
+            :value="FORM.country"
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
             outlined
+            :filled="!!FORM.country"
+            :disabled="!!FORM.country"
             block
+            @change="selectField('country', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.city"
+            :value="FORM.city"
             :rules="[...rules.required]"
             placeholder="Lagos"
             label="City"
             outlined
+            :filled="!!FORM.city"
+            :disabled="!!FORM.city"
             block
+            @change="selectField('city', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.address"
+            :value="FORM.address"
             block
             outlined
             :rules="[...rules.required]"
             placeholder="123, Ikorodu Road"
+            :filled="!!FORM.address"
+            :disabled="!!FORM.address"
             label="Address"
+            @change="selectField('address', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.postalCode"
+            :value="FORM.postalCode"
             :rules="[...rules.required]"
             placeholder="optional"
             label="Postal Code"
             outlined
+            :filled="!!FORM.postalCode"
+            :disabled="!!FORM.postalCode"
             block
+            @change="selectField('postalCode', $event.trim())"
           />
         </v-col>
       </v-row>
@@ -147,18 +168,19 @@ export default {
         const URL = `/update-profile`
         // Make upload request to the API
         const payload = {
-          company: this.$store.state.auth.user.account.company[0],
-          representative: this.$store.state.auth.user.account.representative[0],
+          company: this.profile.company[0],
+          representative: this.profile.representative[0],
           billing: this.FORM,
         }
 
         await this.getHTTPClient()
           .$put(URL, payload)
-          .then(() => {
+          .then((response) => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response.data)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
