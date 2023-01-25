@@ -97,13 +97,14 @@
       </v-row>
 
       <div>
-        <v-btn color="primary" @click="updateProfile()"> Save Changes </v-btn>
+        <v-btn color="primary" @click="updateProfile"> Save Changes </v-btn>
       </div>
     </v-form>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import countriesJSON from '~/assets/json/countries.json'
 import industriesJSON from '~/assets/json/industries.json'
 import countryCodesJSON from '~/assets/json/countryCodes.json'
@@ -115,7 +116,7 @@ export default {
       industries: industriesJSON,
       countryCodes: countryCodesJSON,
 
-      FORM: { phoneNumber: {} },
+      FORM: {},
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -144,8 +145,12 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters('auth', { profile: 'getUserProfile' }),
+  },
+
   mounted() {
-    this.FORM = { ...this.$store.state.auth.user.account.representative[0] }
+    this.FORM = { ...this.profile.representative[0] }
     // this.FORM.phoneNumber = {}
   },
 
@@ -157,9 +162,9 @@ export default {
         const URL = `/update-profile`
         // Make upload request to the API
         const payload = {
-          company: this.$store.state.auth.user.account.company[0],
+          company: this.profile.company[0],
           representative: this.FORM,
-          billing: this.$store.state.auth.user.account.billing[0],
+          billing: this.profile.billing[0],
         }
         await this.getHTTPClient()
           .$put(URL, payload)
