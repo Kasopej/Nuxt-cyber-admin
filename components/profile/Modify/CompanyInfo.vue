@@ -226,12 +226,18 @@ export default {
 
   methods: {
     formatReceivedPhone() {
+      if (typeof this.profile.company[0].phoneNumber !== 'string')
+        return {
+          companyActualNumber: this.profile.company[0].phoneNumber.phoneNumber,
+          companyCountryCode: this.profile.company[0].phoneNumber.countryCode,
+        }
+
       // strip "+" from number
       const numberWithoutPlus = this.profile.company[0].phoneNumber.substring(1)
-
       const companyCountryCode = countryCodesJSON.find((countryCodeObj) => {
         return numberWithoutPlus.startsWith(countryCodeObj.dial_code)
       }).dial_code
+
       const beginningOfActualNumber =
         numberWithoutPlus.indexOf(companyCountryCode) +
         companyCountryCode.length
