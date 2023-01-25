@@ -9,6 +9,7 @@
             placeholder="Company Name"
             label="Company Name"
             block
+            solo
             :disabled="true"
             outlined
           />
@@ -88,7 +89,7 @@
                 :rules="[...rules.phone]"
                 placeholder="08012345603"
                 label="Phone Number"
-                type="number"
+                type="tel"
               />
             </v-col>
           </v-row>
@@ -98,6 +99,7 @@
             :value="FORM.companyEmail"
             block
             outlined
+            solo
             :disabled="true"
             :rules="[...rules.email]"
             label="Company E-mail"
@@ -190,17 +192,16 @@ export default {
         phone: [
           (v) => !!v || 'Phone number is required',
           (v) =>
-            !v ||
-            /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
-              v
-            ) ||
+            (!!v &&
+              /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+                v
+              )) ||
             'Invalid Phone number',
         ],
         email: [
           (v) => !!v || 'E-mail is required',
           (v) =>
-            !v ||
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+            (!!v && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)) ||
             'E-mail must be valid',
         ],
       },
@@ -212,8 +213,24 @@ export default {
   },
 
   mounted() {
-    this.FORM = { ...this.profile }
-    this.FORM.phoneNumber = {}
+    // strip "+" from number
+    const numberWithoutPlus = this.profile.company[0].phoneNumber.substring(1)
+
+    const companyCountryCode = countryCodesJSON.find((countryCodeObj) => {
+      return numberWithoutPlus.startsWith(countryCodeObj.dial_code)
+    }).dial_code
+    const beginningOfActualNumber =
+      numberWithoutPlus.indexOf(companyCountryCode) + companyCountryCode.length
+    const companyActualNumber = numberWithoutPlus.substring(
+      beginningOfActualNumber
+    )
+    this.FORM = {
+      ...this.profile.company[0],
+      phoneNumber: {
+        phoneNumber: companyActualNumber,
+        countryCode: companyCountryCode,
+      },
+    }
   },
 
   methods: {
@@ -225,8 +242,8 @@ export default {
         // Make upload request to the API
         const payload = {
           company: this.FORM,
-          representative: this.$store.state.auth.user.account.representative[0],
-          billing: this.$store.state.auth.user.account.billing[0],
+          representative: this.profile.representative[0],
+          billing: this.profile.billing[0],
         }
 
         await this.getHTTPClient()
