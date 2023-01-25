@@ -133,24 +133,6 @@ export default {
           break
       }
     },
-    activateSecurityTab: {
-      handler(bool) {
-        if (bool) {
-          this.$refs.secureTab.$el.click()
-        }
-      },
-    },
-  },
-
-  mounted() {
-    if (this.activateSecurityTab) {
-      this.$refs.secureTab.$el.click()
-    }
-  },
-  updated() {
-    if (this.activateSecurityTab) {
-      this.$refs.secureTab.$el.click()
-    }
   },
 
   methods: {
