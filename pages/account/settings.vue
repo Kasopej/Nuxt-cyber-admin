@@ -11,7 +11,7 @@
 
             <v-tabs-items v-model="tab">
               <v-tab-item>
-                <profile-modify-index-page :hash="hash" />
+                <profile-modify :hash="hash" />
               </v-tab-item>
 
               <v-tab-item>
