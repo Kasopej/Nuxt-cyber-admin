@@ -161,7 +161,7 @@
       </v-row>
 
       <div>
-        <v-btn color="primary" @click="updateProfile()"> Save Changes </v-btn>
+        <v-btn color="primary" @click="updateProfile"> Save Changes </v-btn>
       </div>
     </v-form>
   </div>
@@ -241,7 +241,7 @@ export default {
 
       return { companyActualNumber, companyCountryCode }
     },
-    async updateProfile() {
+    updateProfile() {
       if (this.$refs.formCompanyInfo.validate()) {
         this.$nuxt.$loading.finish()
 
@@ -253,13 +253,14 @@ export default {
           billing: this.profile.billing[0],
         }
 
-        await this.getHTTPClient()
+        this.getHTTPClient()
           .$put(URL, payload)
-          .then(() => {
+          .then((response) => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

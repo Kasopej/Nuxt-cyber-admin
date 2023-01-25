@@ -38,10 +38,7 @@ export const mutations = {
   },
 
   UPDATE_USER_PROFILE(state, payload) {
-    state.user.phone = payload.phone
-    state.user.user = payload.emailAddress
-    state.user.lastName = payload.lastName
-    state.user.firstName = payload.firstName
+    Object.assign(state.data.account.company[0], payload)
   },
 }
 

@@ -38,8 +38,7 @@ export const mutations = {
   },
 
   UPDATE_USER_PROFILE(state, payload) {
-    const accountState = state.data.account.company[0]
-    state.data.account.company[0] = { ...accountState, ...payload }
+    Object.assign(state.data.account.company[0], payload)
   },
 }
 
