@@ -7,7 +7,7 @@
             :value="FORM.currency"
             block
             outlined
-            :solo="!!FORM.currency"
+            :filled="!!FORM.currency"
             :disabled="!!FORM.currency"
             label="Wallet Currency"
             :rules="[...rules.required]"
@@ -19,7 +19,7 @@
             :value="FORM.accounting"
             block
             outlined
-            :solo="!!FORM.accounting"
+            :filled="!!FORM.accounting"
             :disabled="!!FORM.accounting"
             label="Accounting"
             :rules="[...rules.required]"
@@ -44,7 +44,7 @@
             label="Email"
             type="email"
             outlined
-            :solo="!!FORM.email"
+            :filled="!!FORM.email"
             :disabled="!!FORM.email"
             block
             @change="selectField('email', $event)"
@@ -57,7 +57,7 @@
             :items="countries"
             label="Country"
             outlined
-            :solo="!!FORM.country"
+            :filled="!!FORM.country"
             :disabled="!!FORM.country"
             block
             @change="selectField('country', $event)"
@@ -70,7 +70,7 @@
             placeholder="Lagos"
             label="City"
             outlined
-            :solo="!!FORM.city"
+            :filled="!!FORM.city"
             :disabled="!!FORM.city"
             block
             @change="selectField('city', $event.trim())"
@@ -83,7 +83,7 @@
             outlined
             :rules="[...rules.required]"
             placeholder="123, Ikorodu Road"
-            :solo="!!FORM.address"
+            :filled="!!FORM.address"
             :disabled="!!FORM.address"
             label="Address"
             @change="selectField('address', $event.trim())"
@@ -96,7 +96,7 @@
             placeholder="optional"
             label="Postal Code"
             outlined
-            :solo="!!FORM.postalCode"
+            :filled="!!FORM.postalCode"
             :disabled="!!FORM.postalCode"
             block
             @change="selectField('postalCode', $event.trim())"
@@ -180,7 +180,7 @@ export default {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
-            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response.data)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

@@ -40,7 +40,7 @@
             :rules="[...rules.phone]"
             placeholder="2348012345603"
             label="Phone Number"
-            type="number"
+            type="tel"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -173,7 +173,7 @@ export default {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
-            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response.data)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
