@@ -12,7 +12,7 @@ export const getters = {
     return state.tempUser
   },
   getUserProfile(state) {
-    return state.data?.account.company[0]
+    return state.data?.account
   },
   getUser2FAStatus(state, getters, rootState, rootGetters) {
     return state.data?.account.twoFactorAuth
@@ -38,8 +38,7 @@ export const mutations = {
   },
 
   UPDATE_USER_PROFILE(state, payload) {
-    const accountState = state.data.account.company[0]
-    state.data.account.company[0] = { ...accountState, ...payload }
+    Object.assign(state.data.account.company[0], payload)
   },
 }
 

@@ -4,7 +4,7 @@
       <label class="pt-8">
         <v-avatar size="250">
           <v-img
-            :src="FILE_BLOB || profile.image || '/images/dummy.jpg'"
+            :src="FILE_BLOB || profile.company[0].image || '/images/dummy.jpg'"
             class="rounded"
             contain
           />
@@ -23,8 +23,8 @@
       </label>
     </div>
 
-    <section class="py-8">
-      <v-tabs :value="profileEditTab" color="accent" grow>
+    <section class="py-8 text-center">
+      <v-tabs :value="profileEditTab" color="accent" grow show-arrows>
         <v-tab
           class="text-capitalize"
           :append="true"

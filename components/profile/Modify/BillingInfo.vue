@@ -26,7 +26,7 @@
             :rules="[...rules.phone]"
             placeholder="08012345603"
             label="Phone Number"
-            type="number"
+            type="tel"
             outlined
             block
           />
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import countriesJSON from '~/assets/json/countries.json'
 import countryCodesJSON from '~/assets/json/countryCodes.json'
 
@@ -100,7 +101,7 @@ export default {
       countries: countriesJSON,
       countryCodes: countryCodesJSON,
 
-      FORM: { phoneNumber: {} },
+      FORM: {},
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -112,7 +113,7 @@ export default {
         phone: [
           (v) => !!v || 'Phone number is required',
           (v) =>
-            !v ||
+            !!v ||
             /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
               v
             ) ||
@@ -129,8 +130,12 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters('auth', { profile: 'getUserProfile' }),
+  },
+
   mounted() {
-    this.FORM = { ...this.$store.state.auth.user.account.billing[0] }
+    this.FORM = { ...this.profile.billing[0] }
     // this.FORM.phoneNumber = {}
   },
 

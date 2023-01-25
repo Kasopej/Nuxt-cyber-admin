@@ -1,17 +1,26 @@
 <template>
   <div>
-    <partials-header :title="profile.companyName" />
+    <!-- <div
+      class="primary pt-10"
+      style="background: linear-gradient(to right, #c504da, #6921b6)"
+    ></div> -->
 
-    <v-main>
+    <v-main
+      class="primary pt-60"
+      style="
+        background: linear-gradient(to right, #c504da, #6921b6);
+        padding-top: 8rem;
+      "
+    >
       <v-container>
-        <div class="white mt-n16 rounded-lg pa-2 pa-md-4 pa-md-8 mx-1">
-          <v-tabs v-model="tab" grow>
-            <v-tab class="text-capitalize">Profile</v-tab>
-            <v-tab class="text-capitalize">Researcher Management</v-tab>
+        <div class="white settings-main rounded-lg pa-2 pa-md-4 pa-md-8 mx-1">
+          <v-tabs v-model="tab" class="settings-tabs" grow>
+            <v-tab class="text-capitalize">Manage Profile</v-tab>
+            <v-tab class="text-capitalize">Manage Hunters</v-tab>
 
             <v-tabs-items v-model="tab">
               <v-tab-item>
-                <profile-modify-index-page :hash="hash" />
+                <profile-modify :hash="hash" />
               </v-tab-item>
 
               <v-tab-item>
@@ -38,3 +47,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* .settings-main {
+  margin-top: -150px;
+} */
+</style>

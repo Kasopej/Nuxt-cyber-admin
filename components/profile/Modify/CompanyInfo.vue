@@ -9,8 +9,10 @@
             placeholder="Company Name"
             label="Company Name"
             block
-            :disabled="true"
+            :solo="!!FORM.companyName"
+            :disabled="!!FORM.companyName"
             outlined
+            @change="selectField('companyName', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -25,23 +27,29 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model="FORM.vatNumber"
+            :value="FORM.vatNumber"
             :rules="[...rules.required]"
+            :solo="!!FORM.vatNumber"
+            :disabled="!!FORM.vatNumber"
             placeholder="0123456789"
             label="VAT Number"
             type="number"
             outlined
             block
+            @change="selectField('vatNumber', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-text-field
-            v-model.trim="FORM.registrationNumber"
+            :value="FORM.registrationNumber"
+            :solo="!!FORM.registrationNumber"
+            :disabled="!!FORM.registrationNumber"
             block
             outlined
             :rules="[...rules.required]"
             label="Registration Number"
             placeholder="1234567890"
+            @change="selectField('registrationNumber', $event.trim())"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -88,7 +96,7 @@
                 :rules="[...rules.phone]"
                 placeholder="08012345603"
                 label="Phone Number"
-                type="number"
+                type="tel"
               />
             </v-col>
           </v-row>
@@ -98,11 +106,13 @@
             :value="FORM.companyEmail"
             block
             outlined
-            :disabled="true"
+            :solo="!!FORM.companyEmail"
+            :disabled="!!FORM.companyEmail"
             :rules="[...rules.email]"
             label="Company E-mail"
             placeholder="e-mail@example.com"
             type="email"
+            @change="selectField('companyEmail', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -118,12 +128,15 @@
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
           <v-autocomplete
-            v-model="FORM.country"
+            :value="FORM.country"
+            :solo="!!FORM.country"
+            :disabled="!!FORM.country"
             block
             outlined
             :rules="[...rules.required]"
             :items="countries"
             label="Country"
+            @change="selectField('country', $event)"
           />
         </v-col>
         <v-col cols="12" sm="6" class="py-0">
@@ -159,7 +172,7 @@
       </v-row>
 
       <div>
-        <v-btn color="primary" @click="updateProfile()"> Save Changes </v-btn>
+        <v-btn color="primary" @click="updateProfile"> Save Changes </v-btn>
       </div>
     </v-form>
   </div>
@@ -178,7 +191,7 @@ export default {
       industries: industriesJSON,
       countryCodes: countryCodesJSON,
 
-      FORM: { phoneNumber: {} },
+      FORM: {},
 
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
@@ -190,17 +203,16 @@ export default {
         phone: [
           (v) => !!v || 'Phone number is required',
           (v) =>
-            !v ||
-            /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
-              v
-            ) ||
+            (!!v &&
+              /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+                v
+              )) ||
             'Invalid Phone number',
         ],
         email: [
           (v) => !!v || 'E-mail is required',
           (v) =>
-            !v ||
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+            (!!v && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v)) ||
             'E-mail must be valid',
         ],
       },
@@ -211,13 +223,46 @@ export default {
     ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
-  mounted() {
-    this.FORM = { ...this.profile }
-    this.FORM.phoneNumber = {}
+  beforeMount() {
+    const { companyActualNumber, companyCountryCode } =
+      this.formatReceivedPhone()
+    this.FORM = {
+      ...this.profile.company[0],
+      phoneNumber: {
+        phoneNumber: companyActualNumber,
+        countryCode: companyCountryCode,
+      },
+    }
   },
 
   methods: {
-    async updateProfile() {
+    formatReceivedPhone() {
+      if (typeof this.profile.company[0].phoneNumber !== 'string')
+        return {
+          companyActualNumber: this.profile.company[0].phoneNumber.phoneNumber,
+          companyCountryCode: this.profile.company[0].phoneNumber.countryCode,
+        }
+
+      // strip "+" from number
+      const numberWithoutPlus = this.profile.company[0].phoneNumber.substring(1)
+      const companyCountryCode = countryCodesJSON.find((countryCodeObj) => {
+        return numberWithoutPlus.startsWith(countryCodeObj.dial_code)
+      }).dial_code
+
+      const beginningOfActualNumber =
+        numberWithoutPlus.indexOf(companyCountryCode) +
+        companyCountryCode.length
+      const companyActualNumber = numberWithoutPlus.substring(
+        beginningOfActualNumber
+      )
+
+      return { companyActualNumber, companyCountryCode }
+    },
+    selectField(field, value) {
+      if (this.FORM[field]) return
+      this.FORM[field] = value
+    },
+    updateProfile() {
       if (this.$refs.formCompanyInfo.validate()) {
         this.$nuxt.$loading.finish()
 
@@ -225,17 +270,18 @@ export default {
         // Make upload request to the API
         const payload = {
           company: this.FORM,
-          representative: this.$store.state.auth.user.account.representative[0],
-          billing: this.$store.state.auth.user.account.billing[0],
+          representative: this.profile.representative[0],
+          billing: this.profile.billing[0],
         }
 
-        await this.getHTTPClient()
+        this.getHTTPClient()
           .$put(URL, payload)
-          .then(() => {
+          .then((response) => {
             this.$store.commit('notification/SHOW', {
               icon: 'mdi-check',
               text: 'Profile Updated',
             })
+            this.$store.dispatch('auth/UPDATE_USER_PROFILE', response)
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {
