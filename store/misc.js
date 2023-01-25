@@ -1,22 +1,17 @@
 export const strict = false
 
 export const state = () => ({
-  clickSecTab: false,
+  activateSecurityTab: false,
   popTwoFactorModal: false,
-  laterTwoFactorModal: false,
+  twoFactorModalCanceled: false,
 })
 
 export const mutations = {
-  // Save accessToken
-  CLICK_SECURITY_TAB(state, payload) {
-    state.clickSecTab = payload
-  },
-
-  OPEN_TWOFA_MODAL(state, payload) {
+  TOGGLE_TWOFA_MODAL(state, payload) {
     state.popTwoFactorModal = payload
   },
 
-  SAVE_LATER_TWOFA_MODAL(state, payload) {
-    state.laterTwoFactorModal = payload
+  CANCEL_TWOFA_MODAL(state, payload) {
+    state.twoFactorModalCanceled = payload
   },
 }

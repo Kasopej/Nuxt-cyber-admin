@@ -14,11 +14,14 @@ export default ({ route, store, redirect }) => {
       }
     } else if (
       // if company user, just prompt/remind about 2FA
-      route.name !== 'account-settings' ||
+      route.name !== 'account-settings' &&
       route.name !== 'account-logout'
     ) {
-      if (store.state.misc.popTwoFactorModal === false) {
-        store.commit('misc/OPEN_TWOFA_MODAL', true)
+      if (
+        !store.state.misc.popTwoFactorModal &&
+        !store.state.misc.twoFactorModalCanceled
+      ) {
+        store.commit('misc/TOGGLE_TWOFA_MODAL', true)
       }
     }
   }

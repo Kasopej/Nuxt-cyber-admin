@@ -13,7 +13,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="closeDialog"> No later </v-btn>
+          <v-btn color="primary" text @click="reject"> No later </v-btn>
           <v-btn color="primary" text @click="proceed"> Proceed </v-btn>
         </v-card-actions>
       </v-card>
@@ -33,15 +33,17 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$store.commit('misc/OPEN_TWOFA_MODAL', false)
-      this.dialog = false
-      this.$store.commit('misc/SAVE_LATER_TWOFA_MODAL', true)
+      this.$store.commit('misc/TOGGLE_TWOFA_MODAL', false)
+    },
+
+    reject() {
+      this.closeDialog()
+      this.$store.commit('misc/CANCEL_TWOFA_MODAL', true)
     },
 
     proceed() {
-      this.$store.commit('misc/CLICK_SECURITY_TAB', true)
       this.closeDialog()
-      this.$router.push(this.prependAdminRoute + '/account/settings')
+      this.$router.push(this.prependAdminRoute + '/account/settings#security')
     },
   },
 }

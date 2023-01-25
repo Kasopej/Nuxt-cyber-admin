@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   props: {
     hash: {
@@ -111,6 +111,7 @@ export default {
 
   computed: {
     ...mapGetters('auth', { profile: 'getUserProfile' }),
+    ...mapState('misc', ['activateSecurityTab']),
   },
 
   watch: {
@@ -132,10 +133,22 @@ export default {
           break
       }
     },
+    activateSecurityTab: {
+      handler(bool) {
+        if (bool) {
+          this.$refs.secureTab.$el.click()
+        }
+      },
+    },
   },
 
   mounted() {
-    if (this.$store.state.misc.clickSecTab) {
+    if (this.activateSecurityTab) {
+      this.$refs.secureTab.$el.click()
+    }
+  },
+  updated() {
+    if (this.activateSecurityTab) {
       this.$refs.secureTab.$el.click()
     }
   },
