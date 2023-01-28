@@ -1,7 +1,7 @@
 <template>
   <div class="pa-md-4">
     <div class="d-flex">
-      <label class="pt-8">
+      <label class="pt-8 cursor-pointer">
         <v-avatar size="250">
           <v-img
             :src="FILE_BLOB || profile.company[0].image || '/images/dummy.jpg'"
@@ -10,7 +10,7 @@
           />
         </v-avatar>
         <small
-          class="d-block grey--text text-center pt-3"
+          class="d-block text-gray-400 hover:text-accent text-center pt-3"
           style="width: 250px"
           >{{ labelText }}</small
         >
@@ -18,7 +18,7 @@
           v-model="FILE"
           class="d-none"
           accept="image/jpeg, image/png"
-          @change="upload($event)"
+          @change="upload"
         />
       </label>
     </div>
@@ -136,7 +136,7 @@ export default {
   },
 
   methods: {
-    upload(event) {
+    upload() {
       if (this.FILE) {
         this.labelText = 'Please wait...'
 
