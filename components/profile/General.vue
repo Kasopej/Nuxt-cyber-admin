@@ -72,16 +72,16 @@
 
         <v-tabs-items :value="profileEditTab" class="pt-8">
           <v-tab-item>
-            <profile-modify-company-info />
+            <profile-company-info />
           </v-tab-item>
           <v-tab-item>
-            <profile-modify-representative-info />
+            <profile-representative-info />
           </v-tab-item>
           <v-tab-item>
-            <profile-modify-billing-info />
+            <profile-billing-info />
           </v-tab-item>
           <v-tab-item>
-            <profile-modify-security />
+            <profile-security />
           </v-tab-item>
         </v-tabs-items>
       </v-tabs>

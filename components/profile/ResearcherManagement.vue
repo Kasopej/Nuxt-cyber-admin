@@ -14,8 +14,8 @@
       </v-tabs>
 
       <v-tabs-items v-model="tabInvitation" class="pt-4">
-        <v-tab-item> <profile-invitation-invite-new /></v-tab-item>
-        <v-tab-item> <profile-invitation-invite-group /> </v-tab-item>
+        <v-tab-item> <invitation-invite-new /></v-tab-item>
+        <v-tab-item> <invitation-invite-group /> </v-tab-item>
       </v-tabs-items>
     </div>
 
@@ -40,9 +40,9 @@
       </v-tabs>
 
       <v-tabs-items v-model="tabInvitations">
-        <v-tab-item> <profile-invitation-pending /> </v-tab-item>
-        <v-tab-item> <profile-invitation-accepted /> </v-tab-item>
-        <v-tab-item> <profile-invitation-revoked /> </v-tab-item
+        <v-tab-item> <invitation-pending /> </v-tab-item>
+        <v-tab-item> <invitation-accepted /> </v-tab-item>
+        <v-tab-item> <invitation-revoked /> </v-tab-item
       ></v-tabs-items>
     </div>
   </div>

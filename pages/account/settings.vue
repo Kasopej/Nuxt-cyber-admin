@@ -20,7 +20,7 @@
 
             <v-tabs-items v-model="tab">
               <v-tab-item>
-                <profile-modify :hash="hash" />
+                <profile-general :hash="hash" />
               </v-tab-item>
 
               <v-tab-item>
