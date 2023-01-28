@@ -11,14 +11,14 @@
       >
         <v-img src="/images/logo-app-bar.png" />
       </nuxt-link>
-      <div class="pl-10 d-none sm:block">
+      <div class="pl-10 none sm:block">
         <nuxt-link
           v-for="link in links"
           :key="link.title"
           :to="link.slug"
           exact
-          exact-active-class="primary--text"
-          class="px-2 black--text"
+          exact-active-class="primary--text hover:border-none"
+          class="px-2 black--text hover:border-solid hover:border-b border-primary"
           >{{ link.title }}</nuxt-link
         >
       </div>
