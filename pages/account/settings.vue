@@ -25,7 +25,7 @@
               :append="true"
               :to="prependAdminRoute + '/account/settings#researchers'"
               class="text-capitalize"
-              >Manage Hunters</v-tab
+              >Manage Members</v-tab
             >
 
             <v-tabs-items :value="settingsTab">
