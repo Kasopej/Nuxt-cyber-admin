@@ -1,7 +1,6 @@
 export const strict = false
 
 export const state = () => ({
-  activateSecurityTab: false,
   popTwoFactorModal: false,
   twoFactorModalCanceled: false,
 })
