@@ -1,89 +1,72 @@
 <template>
-  <div>
-    <partials-header title="Programs" />
-
-    <v-main>
-      <v-container>
-        <main class="white mt-n16 rounded-lg pa-2 pa-md-8 mx-0 mx-sm-1">
-          <div class="d-flex justify-space-between pb-4">
-            <v-breadcrumbs
-              large
-              divider="»"
-              :items="[{ text: 'Dashboard', disabled: false, to: '/' }]"
-              class="pa-0"
-            />
-            <v-btn color="primary" to="/program/new">Add Program</v-btn>
+  <v-main
+    class="primary pt-60 px-4"
+    style="
+      background: linear-gradient(to right, #c504da, #6921b6);
+      padding-top: 8rem;
+    "
+  >
+    <v-row>
+      <!-- Main section containing programs list -->
+      <v-col cols="12" class="px-4">
+        <v-container class="white rounded-lg pa-2 pa-md-8">
+          <h2 class="text-center text-2xl text-accent">Manage Programs</h2>
+          <!-- Sort & Program count -->
+          <div class="d-flex px-2">
+            <p class="inline-block col-6">
+              {{ programs.length }} programs found
+            </p>
           </div>
 
-          <section v-if="$fetchState.pending">
-            <v-skeleton-loader
-              v-for="h in 3"
-              :key="h"
-              type="article, actions"
-              class="py-2"
-            ></v-skeleton-loader>
-          </section>
-
-          <section v-else-if="$fetchState.error" class="py-8">
-            <v-img src="/images/server-down.svg" max-height="420" contain />
-            <div
-              class="subtitle-1 text-center accent--text font-weight-bold py-8"
-            >
-              Something Occured
+          <!-- Programs List -->
+          <v-card class="pa-3 mx-1">
+            <!-- Add new Program Action -->
+            <div class="d-flex pb-4">
+              <v-btn color="primary" to="/program/new">Add Program</v-btn>
             </div>
-          </section>
 
-          <template v-else>
-            <template v-if="programs.length">
-              <program-item-list
-                v-for="program in programs"
-                :key="program.id"
-                :program="program"
-              />
-            </template>
+            <section v-if="$fetchState.pending">
+              <v-skeleton-loader
+                v-for="h in 3"
+                :key="h"
+                type="article, actions"
+                class="py-2"
+              ></v-skeleton-loader>
+            </section>
 
-            <partials-empty-data v-else caption="No Submmision Selected" />
-          </template>
-        </main>
-      </v-container>
-    </v-main>
-  </div>
+            <section v-else-if="$fetchState.error" class="py-8">
+              <v-img src="/images/server-down.svg" max-height="420" contain />
+              <div
+                class="subtitle-1 text-center accent--text font-weight-bold py-8"
+              >
+                Something Occured
+              </div>
+            </section>
+
+            <v-row v-else>
+              <template v-if="programs.length" class="row d-flex mx-auto">
+                <v-col
+                  v-for="program in programs"
+                  :key="program._id"
+                  cols="12"
+                  md="4"
+                >
+                  <program-item-card :program="program" />
+                </v-col>
+              </template>
+
+              <partials-empty-data v-else caption="No Programs Available" />
+            </v-row>
+          </v-card>
+        </v-container>
+      </v-col>
+    </v-row>
+  </v-main>
 </template>
 
 <script>
+import ProgramsIndexBase from '~/components/pages_base_definitions/ProgramsIndex'
 export default {
-  layout: 'dashboard',
-  middleware: 'auth',
-
-  data() {
-    return {
-      programs: [],
-
-      programTypes: {
-        compliance: 'Premuim Pen Test',
-        VDP: 'Vulnerability Disclosure Program',
-        'Bug Bounty': 'Bug Bounty Program',
-      },
-    }
-  },
-
-  async fetch() {
-    const URL = `/load-programs`
-    // Make upload request to the API
-    await this.getHTTPClient()
-      .$get(URL, this.FORM)
-      .then((res) => {
-        this.programs = res.data
-      })
-      .catch((error) => {
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          icon: 'mdi-alert-outline',
-          text: error.response
-            ? error.response.data.message
-            : 'Something occured. Please try again',
-        })
-      })
-  },
+  extends: ProgramsIndexBase,
 }
 </script>

@@ -51,39 +51,8 @@
 </template>
 
 <script>
+import ProgramsIndexBase from '~/components/pages_base_definitions/ProgramsIndex'
 export default {
-  layout: 'dashboard',
-  middleware: 'admin_auth',
-
-  data() {
-    return {
-      programs: [],
-
-      programTypes: {
-        compliance: 'Premuim Pen Test',
-        VDP: 'Vulnerability Disclosure Program',
-        'Bug Bounty': 'Bug Bounty Program',
-      },
-    }
-  },
-
-  async fetch() {
-    const URL = `/load-programs`
-    // Make upload request to the API
-    await this.$adminApi
-      .$get(URL, this.FORM)
-      .then((res) => {
-        this.programs = res.data
-      })
-      .catch((error) => {
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          icon: 'mdi-alert-outline',
-          text: error.response
-            ? error.response.data.message
-            : 'Something occured. Please try again',
-        })
-      })
-  },
+  extends: ProgramsIndexBase,
 }
 </script>
