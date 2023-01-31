@@ -5,6 +5,12 @@ export const state = () => ({
   payload: {},
 })
 
+export const getters = {
+  getPrograms(state) {
+    return state.data
+  },
+}
+
 export const mutations = {
   SAVE_PAYLOAD(state, payload) {
     state.payload = payload
