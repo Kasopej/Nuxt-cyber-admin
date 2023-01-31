@@ -72,11 +72,10 @@
               </div>
 
               <div class="d-flex align-end justify-end">
-                <v-btn outlined color="primary" class="mt-3 mr-2">Back</v-btn>
                 <v-btn
                   color="primary mt-3"
                   :disabled="form.type === ''"
-                  @click="step = 2"
+                  @click="step++"
                   >Next</v-btn
                 >
               </div>
@@ -178,12 +177,12 @@
                   outlined
                   color="primary"
                   class="mt-3 mr-2"
-                  @click="step = 1"
+                  @click="step--"
                   >Back</v-btn
                 >
                 <v-btn
                   color="primary mt-3"
-                  @click="validateStep(3, 'stepFormTwo')"
+                  @click="validateStep(step + 1, 'stepFormTwo')"
                   >Next</v-btn
                 >
               </div>
@@ -252,12 +251,12 @@
                   outlined
                   color="primary"
                   class="mt-3 mr-2"
-                  @click="step = 2"
+                  @click="step--"
                   >Back</v-btn
                 >
                 <v-btn
                   color="primary mt-3"
-                  @click="validateStep(4, 'stepFormThree')"
+                  @click="validateStep(step + 1, 'stepFormThree')"
                   >Next</v-btn
                 >
               </div>
@@ -309,12 +308,12 @@
                   outlined
                   color="primary"
                   class="mt-3 mr-2"
-                  @click="step = 3"
+                  @click="step--"
                   >Back</v-btn
                 >
                 <v-btn
                   color="primary mt-3"
-                  @click="validateStep(5, 'stepFormFour')"
+                  @click="validateStep(step + 1, 'stepFormFour')"
                   >Next</v-btn
                 >
               </div>
@@ -379,7 +378,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="form.scope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
@@ -452,7 +451,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="form.outofscope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
@@ -481,12 +480,12 @@
                   outlined
                   color="primary"
                   class="mt-3 mr-2"
-                  @click="step = 4"
+                  @click="step--"
                   >Back</v-btn
                 >
                 <v-btn
                   color="primary mt-3"
-                  @click="validateStep(6, 'stepFormFive')"
+                  @click="validateStep(step + 1, 'stepFormFive')"
                   >Next</v-btn
                 >
               </div>
