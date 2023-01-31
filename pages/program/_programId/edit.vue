@@ -360,7 +360,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="program.scope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
@@ -428,7 +428,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="program.outofscope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
