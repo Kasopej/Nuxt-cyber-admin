@@ -18,7 +18,7 @@
           ></v-skeleton-loader>
         </div>
 
-        <div v-if="Object.keys(program).length <= 0" class="py-8">
+        <div v-if="!program" class="py-8">
           <v-img src="/images/server-down.svg" max-height="420" contain />
           <div class="subtitle-1 text-center accent--text py-8">
             <div class="d-block">
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <section v-if="Object.keys(program).length > 0">
+        <section v-else>
           <v-stepper v-model="step" class="step-reset">
             <v-stepper-header class="step-header-reset rounded px-0 px-md-3">
               <v-stepper-step class="ml-n4" :complete="step > 1" step="1">
@@ -72,7 +72,7 @@
                   <div class="d-flex mb-10">
                     <label class="mr-4 mr-sm-7">
                       <v-img
-                        :src="image"
+                        :src="thumbnail"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -91,7 +91,7 @@
 
                     <label>
                       <v-img
-                        :src="image2"
+                        :src="banner"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -165,10 +165,9 @@
                 </v-form>
 
                 <div class="d-flex align-end justify-end">
-                  <v-btn outlined color="primary" class="mt-3 mr-2">Back</v-btn>
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(2, 'stepFormOne')"
+                    @click="validateStep(step + 1, 'stepFormOne')"
                     >Next</v-btn
                   >
                 </div>
@@ -240,12 +239,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 1"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(3, 'stepFormTwo')"
+                    @click="validateStep(step + 1, 'stepFormTwo')"
                     >Next</v-btn
                   >
                 </div>
@@ -297,12 +296,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 2"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(4, 'stepFormThree')"
+                    @click="validateStep(step + 1, 'stepFormThree')"
                     >Next</v-btn
                   >
                 </div>
@@ -457,12 +456,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 4"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(5, 'stepFormFour')"
+                    @click="validateStep(step + 1, 'stepFormFour')"
                     >Next</v-btn
                   >
                 </div>
@@ -535,8 +534,19 @@
                 </v-form>
 
                 <v-row class="py-8">
-                  <v-col>
-                    <v-btn block color="primary" @click="updateProgram()"
+                  <v-col class="d-flex">
+                    <v-btn
+                      outlined
+                      color="primary"
+                      class="ml-0 w-1/6"
+                      @click="step--"
+                      >Back</v-btn
+                    >
+                    <v-btn
+                      color="primary"
+                      style="margin-left: 22%"
+                      class="w-1/4"
+                      @click="updateProgram"
                       >Update Program</v-btn
                     >
                   </v-col></v-row
@@ -591,9 +601,9 @@ export default {
         required: [(value) => !!value || 'This Field Is Required'],
       },
       File: null,
-      program: {},
-      image: '',
-      image2: '',
+      program: null,
+      thumbnail: '',
+      banner: '',
       bannerMessage: 'Click to choose Banner',
     }
   },
@@ -605,8 +615,8 @@ export default {
       .$get(uri, {})
       .then((res) => {
         this.program = res.data
-        this.image = this.program.thumbnail
-        this.image2 = this.program.banner
+        this.thumbnail = this.program.thumbnail
+        this.banner = this.program.banner
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -722,7 +732,7 @@ export default {
             icon: 'mdi-check',
             text: 'Banner updated Successfully',
           })
-          this.image2 = res.data.banner
+          this.banner = res.data.banner
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {
@@ -741,7 +751,7 @@ export default {
     async updateThumbnail(blob) {
       const URL = `/update-program-thumbnail/${this.program._id}`
       const payload = {
-        image2: blob,
+        thmb: blob,
       }
 
       await this.getHTTPClient()
@@ -751,7 +761,7 @@ export default {
             icon: 'mdi-check',
             text: 'Thumbnail updated Successfully',
           })
-          this.image = res.data.thumbnail
+          this.thumbnail = res.data.thumbnail
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {
