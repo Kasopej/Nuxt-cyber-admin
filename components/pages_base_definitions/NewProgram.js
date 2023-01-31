@@ -116,7 +116,7 @@ export default {
 
     async createProgram() {
       if (this.$refs.stepFormSix.validate()) {
-        if (this.programsCount >= 1) {
+        if (this.programsCount >= 3) {
           this.$store.commit('notification/SHOW', {
             color: 'accent',
             icon: 'mdi-alert-outline',
