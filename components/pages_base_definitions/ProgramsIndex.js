@@ -18,7 +18,7 @@ export default {
     const URL = `/load-programs`
     // Make upload request to the API
     await this.getHTTPClient()
-      .$get(URL, this.FORM)
+      .$get(URL)
       .then((res) => {
         this.programs = [
           ...res.data,

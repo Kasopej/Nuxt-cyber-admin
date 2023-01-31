@@ -16,8 +16,10 @@
 </template>
 
 <script>
+import BaseLayout from './base.vue'
 export default {
   name: 'Dashboard',
+  extends: BaseLayout,
   computed: {
     links() {
       return [

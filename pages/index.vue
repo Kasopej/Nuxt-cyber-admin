@@ -21,7 +21,12 @@
           <!-- Programs List -->
           <v-card class="pa-3 mx-1">
             <!-- Add new Program Action -->
-            <div class="d-flex pb-4">
+            <div
+              v-if="
+                !$fetchState.pending && $fetchState.error && programs.length < 3
+              "
+              class="d-flex pb-4"
+            >
               <v-btn color="primary" to="/program/new">Add Program</v-btn>
             </div>
 
