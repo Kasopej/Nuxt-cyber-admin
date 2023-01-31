@@ -11,6 +11,21 @@ export default {
         VDP: 'Vulnerability Disclosure Program',
         'Bug Bounty': 'Bug Bounty Program',
       },
+      pagination: {
+        page: 1,
+        length: 1,
+      },
+      pageLimit: 16,
+      filterOptions: {
+        visibility: {
+          public: false,
+          private: false,
+        },
+        type: {
+          compliance: false,
+        },
+      },
+      sortBy: null,
     }
   },
 
@@ -38,5 +53,29 @@ export default {
             : 'Something occured. Please try again',
         })
       })
+  },
+
+  methods: {
+    getPrograms() {
+      this.$fetch()
+    },
+    clickSelect() {
+      document.getElementById('v-select-sorting').click()
+    },
+    sortPrograms(val) {
+      if (val === 'newest') {
+        this.programs.sort((a, b) => {
+          return (
+            new Date(a.updatedAt).valueOf() - new Date(b.updatedAt).valueOf()
+          )
+        })
+      } else if (val === 'oldest') {
+        this.programs.sort((a, b) => {
+          return (
+            new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf()
+          )
+        })
+      }
+    },
   },
 }
