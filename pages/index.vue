@@ -10,6 +10,7 @@
       <!-- Main section containing programs list -->
       <v-col cols="12" class="px-4">
         <v-container class="white rounded-lg pa-2 pa-md-8">
+          <h2 class="text-center text-2xl text-accent">Manage Programs</h2>
           <!-- Sort & Program count -->
           <div class="d-flex px-2">
             <p class="inline-block col-6">
@@ -18,7 +19,7 @@
           </div>
 
           <!-- Programs List -->
-          <main class="pa-2 mx-1">
+          <v-card class="pa-3 mx-1">
             <!-- Add new Program Action -->
             <div class="d-flex pb-4">
               <v-btn color="primary" to="/program/new">Add Program</v-btn>
@@ -56,7 +57,7 @@
 
               <partials-empty-data v-else caption="No Programs Available" />
             </v-row>
-          </main>
+          </v-card>
         </v-container>
       </v-col>
     </v-row>
