@@ -4,12 +4,12 @@
       <partials-navigation-bar submission />
 
       <div class="pg-root mt-1">
-        <div class="pg-sidebar" :class="{ 'has-content': hasContent }">
+        <div class="pg-sidebar" :class="{ 'has-content': submissionSelected }">
           <div class="pg-sidebar-content">
             <submission-sub-sidelist />
           </div>
         </div>
-        <div class="pg-info" :class="{ 'has-content': hasContent }">
+        <div class="pg-info" :class="{ 'has-content': submissionSelected }">
           <div class="pg-info-content px-4">
             <nuxt />
           </div>
@@ -24,15 +24,15 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('submission')
 export default {
   data() {
     return {}
   },
 
   computed: {
-    hasContent() {
-      return this.$store.state.submission.hasBackClick
-    },
+    ...mapState(['submissionSelected']),
   },
 }
 </script>

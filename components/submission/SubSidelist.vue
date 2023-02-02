@@ -8,8 +8,8 @@
           outlined
           label=" Search by title or reference"
           no-details
-          @blur="filterSubmission()"
-          @change="filterSubmission()"
+          @blur="filterSubmission"
+          @change="filterSubmission"
         />
         <div>
           <v-select
@@ -18,7 +18,7 @@
             outlined
             label="Filter"
             :items="['All', 'New', 'Pending', 'Under Review', 'Accepted']"
-            @change="filterSubmission()"
+            @change="filterSubmission"
           />
         </div>
       </div>
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import submissions from '~/assets/json/submissions.json'
 export default {
   data() {
     return {
@@ -107,7 +108,10 @@ export default {
     await this.getHTTPClient()
       .$get(URL, this.FORM)
       .then((res) => {
-        this.submissions = res.data.docs
+        const getSubmissions = res.data.docs.length
+          ? res.data.docs
+          : submissions
+        this.submissions = getSubmissions
         this.filteredSubmissions = this.submissions
       })
       .catch((error) => {
@@ -124,9 +128,8 @@ export default {
   methods: {
     openSubmission(submission) {
       // Save data to Vuex store
-      this.$store.commit('submission/SAVE_DATA', submission)
-      // this.$forceUpdate()
-      this.$store.commit('submission/SELECTED_BACK_CLICK', true)
+      this.$store.commit('submission/SAVE_SUBMISSION', submission)
+      this.$store.commit('submission/SUBMISSION_SELECTED', true)
     },
 
     filterSubmission() {
