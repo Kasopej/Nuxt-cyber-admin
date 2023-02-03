@@ -81,6 +81,11 @@ export default {
     ...mapState({ submission: 'data' }),
   },
 
+  created() {
+    //  clear stored submission. Fresh submission will be stored via mutataion trigger in selection component
+    this.$store.commit('submission/SAVE_SUBMISSION', null)
+  },
+
   methods: {
     clearSelectedSubmission() {
       this.$store.commit('submission/SUBMISSION_SELECTED', false)
