@@ -4,8 +4,6 @@ import presetDescriptions from '~/assets/presets/descriptions.json'
 import programTypes from '~/assets/presets/programTypes.json'
 
 export default {
-  layout: 'base',
-  middleware: 'auth',
   data() {
     return {
       languages,

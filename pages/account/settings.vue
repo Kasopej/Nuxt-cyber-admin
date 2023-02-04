@@ -40,7 +40,6 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
   extends: AccountsBaseDef,
-  layout: 'dashboard',
   middleware: 'auth',
   computed: {
     ...mapGetters({ profile: 'getUserProfile' }),

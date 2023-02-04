@@ -32,7 +32,6 @@ const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 
 export default {
   extends: AccountsBaseDef,
-  layout: 'dashboard',
   middleware: 'admin_auth',
   computed: {
     ...mapGetters({ profile: 'getUserProfile' }),

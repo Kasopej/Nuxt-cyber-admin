@@ -1,6 +1,6 @@
 // This is the middleware for pages that requires authentication
 
-export default ({ $axios, store, redirect }) => {
+export default ({ $axios, store, route, redirect }) => {
   let authenticated = ''
 
   try {
@@ -16,5 +16,8 @@ export default ({ $axios, store, redirect }) => {
     store.commit('auth/LOG_USER_OUT')
     //  Redirect to login page
     return redirect('/account/login/')
+  } else if (route.path === '' || route.path === '/') {
+    console.log('home')
+    redirect('/home')
   }
 }

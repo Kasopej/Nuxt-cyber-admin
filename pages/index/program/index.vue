@@ -73,5 +73,6 @@
 import ProgramsIndexBase from '~/components/pages_base_definitions/ProgramsIndex'
 export default {
   extends: ProgramsIndexBase,
+  middleware: 'auth',
 }
 </script>

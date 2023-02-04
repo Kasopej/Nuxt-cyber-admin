@@ -565,6 +565,7 @@ import EditProgramBase from '~/components/pages_base_definitions/EditProgram'
 
 export default {
   extends: EditProgramBase,
+  middleware: 'auth',
 }
 </script>
 <style scoped>

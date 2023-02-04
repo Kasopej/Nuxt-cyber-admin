@@ -1,26 +1,16 @@
 <template>
-  <v-app>
-    <div class="" style="height: 100%">
-      <partials-navigation-bar submission />
-
-      <div class="pg-root mt-1">
-        <div class="pg-sidebar" :class="{ 'has-content': submissionSelected }">
-          <div class="pg-sidebar-content">
-            <submission-sub-sidelist />
-          </div>
-        </div>
-        <div class="pg-info" :class="{ 'has-content': submissionSelected }">
-          <div class="pg-info-content px-4">
-            <nuxt />
-          </div>
-        </div>
+  <div class="pg-root mt-1">
+    <div class="pg-sidebar" :class="{ 'has-content': submissionSelected }">
+      <div class="pg-sidebar-content">
+        <submission-sub-sidelist />
       </div>
     </div>
-
-    <partials-notification-toast />
-    <partials-mobile-navigation-drawer />
-    <misc-go-twofa />
-  </v-app>
+    <div class="pg-info" :class="{ 'has-content': submissionSelected }">
+      <div class="pg-info-content px-4">
+        <nuxt />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
