@@ -28,7 +28,6 @@
         :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
         class="rounded mt-1 cursor-pointer"
         @mouseenter="reveal = true"
-        @click="viewSubmissions(program)"
       />
       <section class="mt-2">
         <v-chip small> {{ program.type }} </v-chip>
@@ -42,7 +41,7 @@
           dense
           @click="viewSubmissions(program)"
         >
-          {{ 'View Submissions' }}
+          View Submissions
         </v-alert>
       </section>
     </v-card-text>
