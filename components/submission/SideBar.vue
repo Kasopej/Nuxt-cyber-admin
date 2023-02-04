@@ -43,9 +43,9 @@
         </section>
 
         <template v-else>
-          <template v-if="submissions.length">
+          <div v-if="submissions.length">
             <div
-              v-for="submission in filteredSubmissions"
+              v-for="submission in submissions"
               :key="submission._id"
               @click="openSubmission(submission)"
             >
@@ -77,7 +77,14 @@
               </v-hover>
               <v-divider />
             </div>
-          </template>
+            <partials-pagination
+              v-if="submissions.length > 1"
+              v-model="pagination.page"
+              :length="pagination.length"
+              :page-limit="10"
+              @input="$fetch"
+            ></partials-pagination>
+          </div>
 
           <section
             v-else
@@ -92,27 +99,28 @@
 </template>
 
 <script>
-import submissions from '~/assets/json/submissions.json'
+import { paginationMixin } from '~/plugins/mixins'
 export default {
+  mixins: [paginationMixin],
   data() {
     return {
       SEARCH: {},
       submissions: [],
       filteredSubmissions: null,
+      filtersSet: false,
     }
   },
 
   async fetch() {
-    const URL = `/get-program-submissions/${this.$route.params.programId}?limit=999`
+    const URL = `/get-program-submissions/${
+      this.$route.params.programId
+    }?page=${1}&limit=10${this.filterURLParams}`
     // Make get request to the API
     await this.getHTTPClient()
       .$get(URL, this.FORM)
       .then((res) => {
-        const getSubmissions = res.data.docs.length
-          ? res.data.docs
-          : submissions
-        this.submissions = getSubmissions
-        this.filteredSubmissions = this.submissions
+        this.submissions = res.data.docs
+        this.pagination.length = res.data.totalPages
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -123,6 +131,19 @@ export default {
             : 'Something occured. Please try again',
         })
       })
+  },
+
+  computed: {
+    filterURLParams() {
+      if (!this.filtersSet) return ''
+      return `&status=${this.SEARCH.actionstate}&title=${this.SEARCH.title}`
+    },
+  },
+
+  watch: {
+    SEARCH() {
+      this.filtersSet = true
+    },
   },
 
   methods: {
