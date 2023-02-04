@@ -104,7 +104,9 @@ export default {
   mixins: [paginationMixin],
   data() {
     return {
-      SEARCH: {},
+      SEARCH: {
+        actionstate: 'All',
+      },
       submissions: [],
       filteredSubmissions: null,
       filtersSet: false,
@@ -136,13 +138,16 @@ export default {
   computed: {
     filterURLParams() {
       if (!this.filtersSet) return ''
-      return `&status=${this.SEARCH.actionstate}&title=${this.SEARCH.title}`
+      return `&status=${this.SEARCH.actionstate ?? ''}&title=${
+        this.SEARCH.title ?? ''
+      }`
     },
   },
 
   watch: {
     SEARCH() {
       this.filtersSet = true
+      this.$fetch()
     },
   },
 
