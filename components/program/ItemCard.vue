@@ -27,12 +27,21 @@
         :src="program.banner || '/img/dummy.jpg'"
         :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
         class="rounded mt-1 cursor-pointer"
-        @click="openDetails(program)"
+        @mouseenter="reveal = true"
       />
-      <section class="mt-2" @mouseenter="reveal = true">
+      <section class="mt-2">
         <v-chip small> {{ program.type }} </v-chip>
-        <v-alert class="fit-content mt-2 text-white" color="info" dense>
-          {{ displayReward(program.reward) }}
+        <p class="my-2">
+          <span class="text-black">Reward: </span>
+          <span class="text-primary">{{ displayReward(program.reward) }}</span>
+        </p>
+        <v-alert
+          class="fit-content mt-2 white--text text-center cursor-pointer"
+          color="info"
+          dense
+          @click="viewSubmissions(program)"
+        >
+          View Submissions
         </v-alert>
       </section>
     </v-card-text>
@@ -97,7 +106,7 @@ export default {
   },
 
   methods: {
-    openDetails(program) {
+    viewSubmissions(program) {
       this.$router.push(`/program/${program._id}/submissions`)
     },
 

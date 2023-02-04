@@ -7,8 +7,6 @@ import programTypes from '~/assets/presets/programTypes.json'
 const { mapGetters } = createNamespacedHelpers('program')
 
 export default {
-  layout: 'base',
-  middleware: 'auth',
   data() {
     return {
       programTypes,

@@ -3,7 +3,7 @@ export const strict = false
 export const state = () => ({
   data: null,
   payload: {},
-  hasBackClick: false,
+  submissionSelected: false,
 })
 
 export const mutations = {
@@ -11,11 +11,11 @@ export const mutations = {
     state.payload = payload
   },
 
-  SAVE_DATA(state, payload) {
+  SAVE_SUBMISSION(state, payload) {
     state.data = payload
   },
 
-  SELECTED_BACK_CLICK(state, payload) {
-    state.hasBackClick = payload
+  SUBMISSION_SELECTED(state, payload) {
+    state.submissionSelected = payload
   },
 }

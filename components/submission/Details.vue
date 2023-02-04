@@ -22,9 +22,9 @@
           small
           color="primary"
           class="white--text back-link"
-          @click="doBack()"
+          @click="clearSelectedSubmission"
         >
-          <v-icon left dark> mdi-arrow-left </v-icon>
+          <v-icon dark> mdi-arrow-left </v-icon>
           Back
         </v-btn>
       </div>
@@ -41,7 +41,9 @@
           <v-tab-item>
             <submission-description-tab :submission="submission" />
           </v-tab-item>
-          <v-tab-item> <submission-comment-tab /> </v-tab-item>
+          <v-tab-item>
+            <submission-comment-tab :submission="submission" />
+          </v-tab-item>
         </v-tabs-items>
       </v-tabs>
     </section>
@@ -49,6 +51,8 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('submission')
 export default {
   layout: 'submissionLayout',
   middleware: 'auth',
@@ -74,19 +78,18 @@ export default {
   },
 
   computed: {
-    submission() {
-      return this.$store.state.submission.data
-    },
+    ...mapState({ submission: 'data' }),
   },
 
-  mounted() {
-    // Clear Vuex data on page load to avoid error
-    this.$store.commit('submission/SAVE_DATA', null)
+  created() {
+    //  clear stored submission. Fresh submission will be stored via mutataion trigger in selection component
+    this.$store.commit('submission/SAVE_SUBMISSION', null)
   },
 
   methods: {
-    doBack() {
-      this.$store.commit('submission/SELECTED_BACK_CLICK', false)
+    clearSelectedSubmission() {
+      this.$store.commit('submission/SUBMISSION_SELECTED', false)
+      this.$store.commit('submission/SAVE_SUBMISSION', null)
     },
   },
 }
