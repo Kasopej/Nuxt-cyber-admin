@@ -81,7 +81,10 @@
       </v-col>
 
       <v-col cols="12" lg="5">
-        <submission-severity-settings />
+        <submission-severity-settings
+          :severity="submission.severity"
+          :cve-score="submission.cveScore"
+        />
       </v-col>
     </v-row>
   </div>
