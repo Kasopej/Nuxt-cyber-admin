@@ -113,8 +113,7 @@ export default {
       lang: 'en',
     },
     icon: {
-      source: '/favicon.ico',
-      fileName: '/favicon.ico',
+      source: resolve(__dirname, '/static', '/favicon.ico'),
     },
   },
 
