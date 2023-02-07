@@ -114,6 +114,7 @@ export default {
     },
     icon: {
       source: '/favicon.ico',
+      fileName: '/favicon.ico',
     },
   },
 
