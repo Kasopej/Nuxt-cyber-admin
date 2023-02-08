@@ -59,7 +59,6 @@
         </v-tab>
 
         <v-tab
-          ref="secureTab"
           class="text-capitalize"
           :append="true"
           :to="prependAdminRoute + '/account/settings#security'"

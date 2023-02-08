@@ -14,9 +14,19 @@
     >
       <v-container>
         <div class="white settings-main rounded-lg pa-2 pa-md-8 mx-1">
-          <v-tabs v-model="tab" class="settings-tabs" grow>
-            <v-tab class="text-capitalize">Manage Profile</v-tab>
-            <v-tab class="text-capitalize">Manage Hunters</v-tab>
+          <v-tabs :value="settingsTab" class="settings-tabs" grow>
+            <v-tab
+              class="text-capitalize"
+              :append="true"
+              :to="prependAdminRoute + '/account/settings#general'"
+              >Manage Profile</v-tab
+            >
+            <v-tab
+              class="text-capitalize"
+              :append="true"
+              :to="prependAdminRoute + '/account/settings#researchers'"
+              >Manage Team</v-tab
+            >
 
             <v-tabs-items :value="settingsTab">
               <v-tab-item>
