@@ -2,7 +2,10 @@
   <v-app>
     <partials-mobile-navigation-drawer :links="links" />
 
-    <section style="height: 100vh" class="d-flex flex-column overflow-y-hidden">
+    <section
+      style="min-height: 100vh"
+      class="d-flex flex-column overflow-y-hidden"
+    >
       <partials-navigation-bar :links="links" />
       <nuxt class="flex-grow-1 overflow-y-auto" />
     </section>
@@ -14,14 +17,13 @@
 
 <script>
 export default {
-  name: 'Dashboard',
   computed: {
     links() {
       return [
         {
           title: 'Programs',
           icon: 'mdi-briefcase',
-          slug: this.prependAdminRoute + '/',
+          slug: this.prependAdminRoute + '/program/',
         },
         {
           title: 'Submissions',

@@ -2,28 +2,21 @@
   <div class="pg-root mt-1">
     <div class="pg-sidebar" :class="{ 'has-content': submissionSelected }">
       <div class="pg-sidebar-content">
-        <submission-sub-sidelist />
+        <submission-side-bar />
       </div>
     </div>
     <div class="pg-info" :class="{ 'has-content': submissionSelected }">
       <div class="pg-info-content px-4">
-        <nuxt />
+        <submission-details></submission-details>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState } = createNamespacedHelpers('submission')
+import ProgramSubmissions from '~/components/pages_base_definitions/ProgramSubmissions'
 export default {
-  data() {
-    return {}
-  },
-
-  computed: {
-    ...mapState(['submissionSelected']),
-  },
+  extends: ProgramSubmissions,
 }
 </script>
 

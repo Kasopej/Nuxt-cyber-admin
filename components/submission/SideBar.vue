@@ -8,8 +8,8 @@
           outlined
           label=" Search by title or reference"
           no-details
-          @blur="filterSubmission()"
-          @change="filterSubmission()"
+          @blur="filterSubmission"
+          @change="filterSubmission"
         />
         <div>
           <v-select
@@ -18,7 +18,7 @@
             outlined
             label="Filter"
             :items="['All', 'New', 'Pending', 'Under Review', 'Accepted']"
-            @change="filterSubmission()"
+            @change="filterSubmission"
           />
         </div>
       </div>
@@ -43,9 +43,9 @@
         </section>
 
         <template v-else>
-          <template v-if="submissions.length">
+          <div v-if="submissions.length">
             <div
-              v-for="submission in filteredSubmissions"
+              v-for="submission in submissions"
               :key="submission._id"
               @click="openSubmission(submission)"
             >
@@ -77,7 +77,14 @@
               </v-hover>
               <v-divider />
             </div>
-          </template>
+            <partials-pagination
+              v-if="submissions.length > 1"
+              v-model="pagination.page"
+              :length="pagination.length"
+              :page-limit="10"
+              @input="$fetch"
+            ></partials-pagination>
+          </div>
 
           <section
             v-else
@@ -92,23 +99,30 @@
 </template>
 
 <script>
+import { paginationMixin } from '~/plugins/mixins'
 export default {
+  mixins: [paginationMixin],
   data() {
     return {
-      SEARCH: {},
+      SEARCH: {
+        actionstate: 'All',
+      },
       submissions: [],
       filteredSubmissions: null,
+      filtersSet: false,
     }
   },
 
   async fetch() {
-    const URL = `/get-program-submissions/${this.$route.params.programId}?limit=999`
+    const URL = `/get-program-submissions/${
+      this.$route.params.programId
+    }?page=${1}&limit=10${this.filterURLParams}`
     // Make get request to the API
     await this.getHTTPClient()
       .$get(URL, this.FORM)
       .then((res) => {
         this.submissions = res.data.docs
-        this.filteredSubmissions = this.submissions
+        this.pagination.length = res.data.totalPages
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -121,12 +135,27 @@ export default {
       })
   },
 
+  computed: {
+    filterURLParams() {
+      if (!this.filtersSet) return ''
+      return `&status=${this.SEARCH.actionstate ?? ''}&title=${
+        this.SEARCH.title ?? ''
+      }`
+    },
+  },
+
+  watch: {
+    SEARCH() {
+      this.filtersSet = true
+      this.$fetch()
+    },
+  },
+
   methods: {
     openSubmission(submission) {
       // Save data to Vuex store
-      this.$store.commit('submission/SAVE_DATA', submission)
-      // this.$forceUpdate()
-      this.$store.commit('submission/SELECTED_BACK_CLICK', true)
+      this.$store.commit('submission/SAVE_SUBMISSION', submission)
+      this.$store.commit('submission/SUBMISSION_SELECTED', true)
     },
 
     filterSubmission() {

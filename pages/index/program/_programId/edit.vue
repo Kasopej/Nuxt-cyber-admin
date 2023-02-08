@@ -18,7 +18,7 @@
           ></v-skeleton-loader>
         </div>
 
-        <div v-if="Object.keys(program).length <= 0" class="py-8">
+        <div v-if="!program" class="py-8">
           <v-img src="/images/server-down.svg" max-height="420" contain />
           <div class="subtitle-1 text-center accent--text py-8">
             <div class="d-block">
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <section v-if="Object.keys(program).length > 0">
+        <section v-else>
           <v-stepper v-model="step" class="step-reset">
             <v-stepper-header class="step-header-reset rounded px-0 px-md-3">
               <v-stepper-step class="ml-n4" :complete="step > 1" step="1">
@@ -72,7 +72,7 @@
                   <div class="d-flex mb-10">
                     <label class="mr-4 mr-sm-7">
                       <v-img
-                        :src="image"
+                        :src="thumbnail"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -91,7 +91,7 @@
 
                     <label>
                       <v-img
-                        :src="image2"
+                        :src="banner"
                         class="rounded border"
                         width="125"
                         height="125"
@@ -165,10 +165,9 @@
                 </v-form>
 
                 <div class="d-flex align-end justify-end">
-                  <v-btn outlined color="primary" class="mt-3 mr-2">Back</v-btn>
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(2, 'stepFormOne')"
+                    @click="validateStep(step + 1, 'stepFormOne')"
                     >Next</v-btn
                   >
                 </div>
@@ -240,12 +239,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 1"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(3, 'stepFormTwo')"
+                    @click="validateStep(step + 1, 'stepFormTwo')"
                     >Next</v-btn
                   >
                 </div>
@@ -297,12 +296,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 2"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(4, 'stepFormThree')"
+                    @click="validateStep(step + 1, 'stepFormThree')"
                     >Next</v-btn
                   >
                 </div>
@@ -361,7 +360,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="program.scope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
@@ -429,7 +428,7 @@
                       </v-col>
                     </v-row>
 
-                    <div class="px-2">
+                    <div v-if="program.outofscope.length > 1" class="px-2">
                       <v-btn
                         icon
                         color="red"
@@ -457,12 +456,12 @@
                     outlined
                     color="primary"
                     class="mt-3 mr-2"
-                    @click="step = 4"
+                    @click="step--"
                     >Back</v-btn
                   >
                   <v-btn
                     color="primary mt-3"
-                    @click="validateStep(5, 'stepFormFour')"
+                    @click="validateStep(step + 1, 'stepFormFour')"
                     >Next</v-btn
                   >
                 </div>
@@ -535,8 +534,19 @@
                 </v-form>
 
                 <v-row class="py-8">
-                  <v-col>
-                    <v-btn block color="primary" @click="updateProgram()"
+                  <v-col class="d-flex">
+                    <v-btn
+                      outlined
+                      color="primary"
+                      class="ml-0 w-1/6"
+                      @click="step--"
+                      >Back</v-btn
+                    >
+                    <v-btn
+                      color="primary"
+                      style="margin-left: 22%"
+                      class="w-1/4"
+                      @click="updateProgram"
                       >Update Program</v-btn
                     >
                   </v-col></v-row
@@ -551,222 +561,11 @@
 </template>
 
 <script>
-import showdown from 'showdown'
-import languages from '~/assets/json/languages.json'
-import presetDescriptions from '~/assets/presets/descriptions.json'
-import programTypes from '~/assets/presets/programTypes.json'
+import EditProgramBase from '~/components/pages_base_definitions/EditProgram'
 
 export default {
-  layout: 'base',
+  extends: EditProgramBase,
   middleware: 'auth',
-  data() {
-    return {
-      languages,
-      programTypes,
-      presetDescriptions,
-      breadcrumbsItems: [
-        {
-          text: 'Dashboard',
-          disabled: false,
-          to: '/',
-        },
-        {
-          text: 'Edit Program',
-          disabled: true,
-          to: '/prrogram/add/',
-        },
-      ],
-      step: 1,
-      descriptionPreview: null,
-      selectedPresetDescription: null,
-      tags: ['tag 1', 'sample tag', 'tag 3'],
-      rewards: [
-        'Bounty',
-        'Gifts',
-        'Hall Of Fame',
-        'Letter Of Invitation',
-        'Swag',
-      ],
-      rules: {
-        required: [(value) => !!value || 'This Field Is Required'],
-      },
-      File: null,
-      program: {},
-      image: '',
-      image2: '',
-      bannerMessage: 'Click to choose Banner',
-    }
-  },
-
-  async fetch() {
-    const uri = `/get-program/${this.$route.params.programId}`
-
-    await this.getHTTPClient()
-      .$get(uri, {})
-      .then((res) => {
-        this.program = res.data
-        this.image = this.program.thumbnail
-        this.image2 = this.program.banner
-      })
-      .catch((error) => {
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          icon: 'mdi-alert-outline',
-          text: error.response
-            ? error.response.data.message
-            : 'Oops! programme not found',
-        })
-      })
-  },
-
-  methods: {
-    addRow(type) {
-      switch (type) {
-        case 'scope':
-          this.program.scope.push({})
-          break
-
-        case 'out-of-scope':
-          this.program.outofscope.push({})
-          break
-
-        default:
-          break
-      }
-    },
-
-    deleteRow(type, index) {
-      switch (type) {
-        case 'scope':
-          if (this.program.scope.length > 1) {
-            this.program.scope.splice(index, 1)
-          }
-          break
-
-        case 'out-of-scope':
-          if (this.program.outofscope.length > 1) {
-            this.program.outofscope.splice(index, 1)
-          }
-          break
-
-        default:
-          break
-      }
-    },
-
-    validateStep(nextStep, stepForm) {
-      if (this.$refs[stepForm].validate()) {
-        this.step = nextStep
-      }
-    },
-
-    setImageBlob(event, type) {
-      const reader = new FileReader()
-      reader.readAsDataURL(event.target.files[0])
-      reader.onload = () => {
-        setTimeout(() => {
-          if (type === 'banner') {
-            this.updateBanner(reader.result)
-          } else {
-            this.updateThumbnail(reader.result)
-          }
-        }, 1500)
-      }
-    },
-
-    previewdescription() {
-      const converter = new showdown.Converter()
-      this.descriptionPreview = converter.makeHtml(this.program.description)
-    },
-
-    async updateProgram() {
-      if (this.$refs.stepFormFive.validate()) {
-        this.$nuxt.$loading.start()
-
-        const URL = `/update-program/${this.program._id}`
-        const payload = this.program
-
-        await this.getHTTPClient()
-          .$patch(URL, payload)
-          .then(() => {
-            this.$store.commit('notification/SHOW', {
-              icon: 'mdi-check',
-              text: 'Program updated Successfully',
-            })
-          })
-          .catch((error) => {
-            this.$store.commit('notification/SHOW', {
-              color: 'accent',
-              icon: 'mdi-alert-outline',
-              text: error.response
-                ? error.response.data.message
-                : "Sorry, that didn't work. Please try again",
-            })
-          })
-          .finally(() => {
-            this.$nuxt.$loading.finish()
-          })
-      }
-    },
-
-    async updateBanner(blob) {
-      const URL = `/update-program-banner/${this.program._id}`
-      const payload = {
-        image: blob,
-      }
-
-      await this.getHTTPClient()
-        .$patch(URL, payload)
-        .then((res) => {
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Banner updated Successfully',
-          })
-          this.image2 = res.data.banner
-        })
-        .catch((error) => {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: error.response
-              ? error.response.data.message
-              : "Sorry, that didn't work. Please try again",
-          })
-        })
-        .finally(() => {
-          this.$nuxt.$loading.finish()
-        })
-    },
-
-    async updateThumbnail(blob) {
-      const URL = `/update-program-thumbnail/${this.program._id}`
-      const payload = {
-        image2: blob,
-      }
-
-      await this.getHTTPClient()
-        .$patch(URL, payload)
-        .then((res) => {
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Thumbnail updated Successfully',
-          })
-          this.image = res.data.thumbnail
-        })
-        .catch((error) => {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: error.response
-              ? error.response.data.message
-              : "Sorry, that didn't work. Please try again",
-          })
-        })
-        .finally(() => {
-          this.$nuxt.$loading.finish()
-        })
-    },
-  },
 }
 </script>
 <style scoped>

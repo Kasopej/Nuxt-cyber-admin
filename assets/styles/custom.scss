@@ -31,3 +31,15 @@ html {
 a {
   text-decoration: none;
 }
+
+.v-card--reveal {
+  bottom: 0;
+  opacity: 1 !important;
+  position: absolute !important;
+  width: 100%;
+}
+
+.fit-content {
+  width: fit-content !important;
+  max-width: fit-content !important;
+}

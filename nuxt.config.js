@@ -26,6 +26,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Open+Sans',
@@ -96,7 +97,7 @@ export default {
     [
       'nuxt-vuex-localstorage',
       {
-        localStorage: ['auth', 'program', 'submission'],
+        localStorage: ['auth', 'program'],
       },
     ],
   ],
@@ -110,6 +111,9 @@ export default {
   pwa: {
     manifest: {
       lang: 'en',
+    },
+    icon: {
+      source: resolve(__dirname, '/static', '/favicon.ico'),
     },
   },
 

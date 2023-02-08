@@ -1,9 +1,18 @@
 export const strict = false
 
 export const state = () => ({
-  data: {},
+  data: [{}],
   payload: {},
 })
+
+export const getters = {
+  getPrograms(state) {
+    return state.data
+  },
+  getProgramsCount(state) {
+    return state.data.length
+  },
+}
 
 export const mutations = {
   SAVE_PAYLOAD(state, payload) {
