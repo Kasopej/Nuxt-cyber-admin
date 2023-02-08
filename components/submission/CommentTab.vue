@@ -59,6 +59,9 @@
           </v-card>
         </v-timeline-item>
       </v-timeline>
+      <div>
+        <v-btn color="primary" class="ml-auto d-block">Close Report</v-btn>
+      </div>
     </section>
 
     <div class="text-center mt-8">
