@@ -1,4 +1,5 @@
 export default {
+  layout: 'dashboard',
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       vm.hash = vm.$route.hash
