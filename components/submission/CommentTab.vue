@@ -30,7 +30,7 @@
           </template>
           <v-card>
             <v-card-title
-              class="flex px-3 py-2 text-body-2 secondary lighten-8"
+              class="d-flex px-3 py-2 text-body-2 secondary lighten-8"
             >
               <v-tooltip top nudge-bottom="20" class="px-1 py-1">
                 <template #activator="{ on, attrs }">
@@ -42,11 +42,6 @@
                 </template>
                 <span class="text-xs">100 points</span>
               </v-tooltip>
-              <!-- <span>{{
-                comment.hunterId
-                  ? comment.hunterId.profile[0].username
-                  : comment.accountId.company[0].name
-              }}</span> -->
               <v-chip dense class="ml-1 px-2 py-1" small>{{
                 comment.accountType
               }}</v-chip>
@@ -66,7 +61,7 @@
       </v-timeline>
     </section>
 
-    <!-- <div class="text-center mt-8">
+    <div class="text-center mt-8">
       <v-btn
         v-if="pagination.page < pagination.length"
         color="primary"
@@ -78,9 +73,9 @@
       >
         Add More
       </v-btn>
-    </div> -->
+    </div>
 
-    <!-- <p v-if="loadingMore" class="text-end mt-4">Adding to list...</p> -->
+    <p v-if="loadingMore" class="text-end mt-4">Adding to list...</p>
 
     <v-form ref="commentForm">
       <div class="accent--text headline font-weight-bold py-4">
@@ -154,8 +149,10 @@
 <script>
 import showdown from 'showdown'
 import presetComments from '~/assets/presets/comments.json'
+import { paginationMixin } from '~/plugins/mixins'
 
 export default {
+  mixins: [paginationMixin],
   data() {
     return {
       FORM: {
@@ -189,9 +186,10 @@ export default {
       const URLL = `/get-comments/${this.submission._id}`
       // Make upload request to the API
       await this.getHTTPClient()
-        .$get(URLL, this.FORM)
+        .$get(URLL)
         .then((res) => {
           this.comments = res.data
+          this.pagination.length = res.data.totalPages
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {
@@ -237,14 +235,12 @@ export default {
         const submissionId = this.submission._id
         const PAYLOAD = { ...this.FORM, submissionId, status: 'Approved' }
 
-        console.log(PAYLOAD)
-
         const URLL = `/create-comment/${submissionId}`
         // Make upload request to the API
         await this.getHTTPClient()
           .$post(URLL, PAYLOAD)
           .then(() => {
-            this.FORM = {}
+            this.FORM = { comment: '' }
             this.commentPreview = null
 
             this.$store.commit('notification/SHOW', {
@@ -267,6 +263,21 @@ export default {
             this.$nuxt.$loading.finish()
           })
       }
+    },
+    async loadMoreComments() {
+      this.loadingMore = true
+      ++this.pagination.page
+
+      const URL = `/get-comments/${this.submission._id}?page=${this.pagination.page}&limit=${this.pageLimit}`
+
+      try {
+        const response = await this.$axios.$get(URL)
+        this.comments.push(...response.data.docs)
+      } catch (e) {
+        --this.pagination.page
+        this.$store.dispatch('notification/failureSnackbar', e)
+      }
+      this.loadingMore = false
     },
   },
 }
