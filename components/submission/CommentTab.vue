@@ -86,7 +86,7 @@
       </div>
 
       <v-card class="pa-4" elevation="3">
-        <div>
+        <div class="flex">
           <v-btn
             small
             :outlined="!!commentPreview"
@@ -99,10 +99,22 @@
             small
             :outlined="!commentPreview"
             color="accent"
-            class="my-2 mx-md-3"
+            class="mx-2 md:mx-3 inline-block"
             @click="commentPreview = convertCommentHTML(FORM.comment)"
             >Preview <v-icon small class="ml-2">mdi-eye</v-icon></v-btn
           >
+          <v-autocomplete
+            v-model="selectedPresetComment"
+            class="ml-auto fit-content"
+            dense
+            outlined
+            label="Comment Templates"
+            :items="presetComments"
+            item-value="content"
+            item-text="title"
+            @change="FORM.comment = selectedPresetComment"
+          >
+          </v-autocomplete>
         </div>
         <article class="flex">
           <v-avatar size="50" class="col-1 py-0 px-0">
