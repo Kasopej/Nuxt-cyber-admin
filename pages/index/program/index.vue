@@ -23,7 +23,8 @@
             <!-- Add new Program Action -->
             <div
               v-if="
-                !$fetchState.pending && $fetchState.error && programs.length < 3
+                !($fetchState.pending && $fetchState.error) &&
+                programs.length < 3
               "
               class="d-flex pb-4"
             >
