@@ -26,57 +26,33 @@
 </template>
 
 <script>
+import InviteComponentBase from '../component_base_definitions/InviteComponentBase'
 export default {
+  mixins: [InviteComponentBase],
   props: {
     pendingInvites: {
       type: Array,
       default: () => [],
     },
-  },
-  data() {
-    return {}
+    revokeUrl: {
+      type: String,
+      default: '',
+    },
   },
 
   methods: {
-    async acceptUser(username) {
-      this.$nuxt.$loading.finish()
-
-      const URL = `/accept-member`
-      // Make upload request to the API
-      await this.getHTTPClient()
-        .$post(URL, { username })
-        .then(() => {
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Invitation Accepted',
-          })
-        })
-        .catch((error) => {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: error.response
-              ? error.response.data.message
-              : "Sorry, that didn't work. Please try again",
-          })
-        })
-        .finally(() => {
-          this.$nuxt.$loading.finish()
-        })
-    },
-
     async revokeUser(username) {
-      this.$nuxt.$loading.finish()
+      this.$nuxt.$loading.start()
 
-      const URL = `/revoke-member`
       // Make upload request to the API
       await this.getHTTPClient()
-        .$post(URL, { username })
+        .$post(this.revokeUrl, { username })
         .then(() => {
           this.$store.commit('notification/SHOW', {
             icon: 'mdi-check',
             text: 'Invitation Revoked',
           })
+          this.$emit('mount-invite-tab', this.$options.name)
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {

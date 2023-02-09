@@ -35,10 +35,25 @@
 
       <v-tabs-items v-model="tabInvitations">
         <v-tab-item>
-          <invitation-pending :pending-invites="pendingInvites" />
+          <invitation-pending
+            :pending-invites="pendingInvites"
+            :revoke-url="revokeURL"
+            @mount-invite-tab="loadInvites"
+          />
         </v-tab-item>
-        <v-tab-item> <invitation-accepted /> </v-tab-item>
-        <v-tab-item> <invitation-revoked /> </v-tab-item
+        <v-tab-item>
+          <invitation-accepted
+            :accepted-invites="acceptedInvites"
+            :revoke-url="revokeURL"
+            @mount-invite-tab="loadInvites"
+          />
+        </v-tab-item>
+        <v-tab-item>
+          <invitation-revoked
+            :revoked-invites="revokedInvites"
+            :invite-url="inviteURL"
+            @mount-invite-tab="loadInvites"
+          /> </v-tab-item
       ></v-tabs-items>
     </div>
   </div>
@@ -52,6 +67,15 @@ export default {
   mixins: [InviteManagementBase],
   computed: {
     ...mapState({ program: 'data' }),
+    programId() {
+      return this.$route.params.programId
+    },
+    revokeURL() {
+      return `/remove-from-private-program/${this.programId}`
+    },
+    inviteURL() {
+      return `/invite-to-private-program/${this.programId}`
+    },
   },
   methods: {
     async loadPendingInvites() {
@@ -63,31 +87,21 @@ export default {
         { id: 3, username: 'xyz.lvvjxb.punpi' },
       ])
     },
-    async revokeUser(username) {
-      this.$nuxt.$loading.start()
-
-      const URL = `/remove-from-private-program/${this.program._id}`
-      // Make upload request to the API
-      await this.getHTTPClient()
-        .$post(URL, { username })
-        .then(() => {
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Invitation Revoked',
-          })
-        })
-        .catch((error) => {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: error.response
-              ? error.response.data.message
-              : "Sorry, that didn't work. Please try again",
-          })
-        })
-        .finally(() => {
-          this.$nuxt.$loading.finish()
-        })
+    async loadRevokedInvites() {
+      // need endpoint to get revoked invites
+      this.revokedInvites = await Promise.resolve([
+        { id: 0, username: 'lvvjxbpunpi' },
+        { id: 1, username: 'olajide.a.hammed' },
+        { id: 2, username: 'xyz.lvvjxb.punpi' },
+      ])
+    },
+    async loadAcceptedInvites() {
+      // need endpoint to get accepted invites
+      this.acceptedInvites = await Promise.resolve([
+        { id: 0, email: 'olajide.a.hammed' },
+        { id: 1, email: 'lvvjxbpunpi' },
+        { id: 2, email: 'xyz.lvvjxb.punpi' },
+      ])
     },
   },
 }
