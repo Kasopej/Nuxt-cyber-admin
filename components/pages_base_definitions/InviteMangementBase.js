@@ -3,35 +3,27 @@ export default {
     return {
       tabInvitation: 0,
       tabInvitations: 0,
-      shouldLoadPendingInvites: true,
-      shouldLoadRevokedInvites: false,
-      shouldLoadAcceptedInvites: false,
       pendingInvites: [],
+      revokedInvites: [],
+      acceptedInvites: [],
     }
   },
-  watch: {
-    tabInvitations(tabIndex) {
-      switch (tabIndex) {
-        case 1:
-          this.shouldLoadAcceptedInvites = true
+  methods: {
+    loadInvites(inviteTab) {
+      switch (inviteTab) {
+        case 'InvitationPending':
+          this.loadPendingInvites()
           break
-
-        case 2:
-          this.shouldLoadRevokedInvites = true
+        case 'InvitationRevoked':
+          this.loadRevokedInvites()
+          break
+        case 'InvitationAccepted':
+          this.loadAcceptedInvites()
           break
 
         default:
           break
       }
     },
-    shouldLoadRevokedInvites(boolVal) {
-      if (boolVal) this.loadRevokedInvites?.()
-    },
-    shouldLoadAcceptedInvites(boolVal) {
-      if (boolVal) this.loadAcceptedInvites?.()
-    },
-  },
-  mounted() {
-    this.loadPendingInvites?.()
   },
 }
