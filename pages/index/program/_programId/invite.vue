@@ -1,21 +1,15 @@
 <template>
-  <div>
+  <div class="pa-2 pa-md-8 mt-16 mx-1">
     <div class="pt-8">
       <v-tabs v-model="tabInvitation">
         <v-tab class="text-capitalize"
-          ><v-icon class="mr-3">mdi-account-plus</v-icon>Invite
-          <span class="d-none d-md-inline mx-2">New</span> Members</v-tab
-        >
-        <v-tab class="text-capitalize"
-          ><v-icon class="mr-3">mdi-account-multiple-plus</v-icon>Invite
-          <span class="d-none d-md-inline mx-2">Members</span> From the
-          Group</v-tab
+          ><v-icon class="mr-3">mdi-account-plus</v-icon>Manage Program
+          Hunters</v-tab
         >
       </v-tabs>
 
       <v-tabs-items v-model="tabInvitation" class="pt-4">
         <v-tab-item> <invitation-invite-new /></v-tab-item>
-        <v-tab-item> <invitation-invite-group /> </v-tab-item>
       </v-tabs-items>
     </div>
 

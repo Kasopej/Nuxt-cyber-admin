@@ -18,8 +18,8 @@
         <v-icon
           color="primary"
           class="ml-auto cursor-pointer"
-          @click="goEdit(program)"
-          >mdi-pencil</v-icon
+          @click="goToProgramInvite(program)"
+          >mdi-account-plus</v-icon
         >
       </div>
       <small class="text-accent">{{ program.status }}</small>
@@ -27,7 +27,7 @@
         :src="program.banner || '/img/dummy.jpg'"
         :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
         class="rounded mt-1 cursor-pointer"
-        @mouseenter="reveal = true"
+        @click="goEdit(program)"
       />
       <section class="mt-2">
         <v-chip small> {{ program.type }} </v-chip>
@@ -35,14 +35,24 @@
           <span class="text-black">Reward: </span>
           <span class="text-primary">{{ displayReward(program.reward) }}</span>
         </p>
-        <v-alert
-          class="fit-content mt-2 white--text text-center cursor-pointer"
-          color="info"
-          dense
-          @click="viewSubmissions(program)"
-        >
-          View Submissions
-        </v-alert>
+        <div>
+          <v-alert
+            class="fit-content d-inline-block mt-2 white--text text-center cursor-pointer"
+            color="accent"
+            dense
+            @click="viewSubmissions(program)"
+          >
+            View Submissions
+          </v-alert>
+          <v-alert
+            class="fit-content d-inline-block mt-2 ml-auto white--text text-center cursor-pointer"
+            color="info"
+            dense
+            @mouseenter="reveal = true"
+          >
+            Quick View
+          </v-alert>
+        </div>
       </section>
     </v-card-text>
     <v-expand-transition>
@@ -112,6 +122,9 @@ export default {
 
     goEdit(program) {
       this.$router.push(`/program/${program._id}/edit`)
+    },
+    goToProgramInvite(program) {
+      this.$router.push(`/program/${program._id}/invite`)
     },
     displayReward(rawReward) {
       if (isNaN(+rawReward)) return rawReward
