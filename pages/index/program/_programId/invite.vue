@@ -34,7 +34,9 @@
       </v-tabs>
 
       <v-tabs-items v-model="tabInvitations">
-        <v-tab-item> <invitation-pending /> </v-tab-item>
+        <v-tab-item>
+          <invitation-pending :pending-invites="pendingInvites" />
+        </v-tab-item>
         <v-tab-item> <invitation-accepted /> </v-tab-item>
         <v-tab-item> <invitation-revoked /> </v-tab-item
       ></v-tabs-items>
@@ -43,8 +45,50 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
 import InviteManagementBase from '~/components/pages_base_definitions/InviteMangementBase'
+const { mapState } = createNamespacedHelpers('program')
 export default {
   mixins: [InviteManagementBase],
+  computed: {
+    ...mapState({ program: 'data' }),
+  },
+  methods: {
+    async loadPendingInvites() {
+      // need endpoint to get pending invites
+      this.pendingInvites = await Promise.resolve([
+        { id: 0, username: 'ogbeni.hmmd' },
+        { id: 1, username: 'abc.lvvjxbpunpi' },
+        { id: 2, username: 'olajide.a.hammed' },
+        { id: 3, username: 'xyz.lvvjxb.punpi' },
+      ])
+    },
+    async revokeUser(username) {
+      this.$nuxt.$loading.start()
+
+      const URL = `/remove-from-private-program/${this.program._id}`
+      // Make upload request to the API
+      await this.getHTTPClient()
+        .$post(URL, { username })
+        .then(() => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Invitation Revoked',
+          })
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+    },
+  },
 }
 </script>

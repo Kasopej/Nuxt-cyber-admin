@@ -16,6 +16,7 @@
           allowCollaborationsIcon
         }}</v-icon>
         <v-icon
+          v-if="program.private"
           color="primary"
           class="ml-auto cursor-pointer"
           @click="goToProgramInvite(program)"
