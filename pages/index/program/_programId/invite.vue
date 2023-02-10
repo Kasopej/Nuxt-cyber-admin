@@ -9,7 +9,11 @@
       </v-tabs>
 
       <v-tabs-items v-model="tabInvitation" class="pt-4">
-        <v-tab-item> <invitation-invite-new /></v-tab-item>
+        <v-tab-item>
+          <invitation-invite-new
+            :invite-url="inviteURL"
+            @invitation-made="loadPendingInvites"
+        /></v-tab-item>
       </v-tabs-items>
     </div>
 
