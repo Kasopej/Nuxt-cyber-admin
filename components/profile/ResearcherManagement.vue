@@ -49,12 +49,8 @@
 </template>
 
 <script>
+import InviteManagementBase from '~/components/pages_base_definitions/InviteMangementBase'
 export default {
-  data() {
-    return {
-      tabInvitation: 0,
-      tabInvitations: 0,
-    }
-  },
+  mixins: [InviteManagementBase],
 }
 </script>

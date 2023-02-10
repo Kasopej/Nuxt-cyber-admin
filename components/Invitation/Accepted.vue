@@ -1,18 +1,18 @@
 <template>
   <main class="py-8">
-    <template v-if="revokedUsers.length > 1">
-      <section v-for="user in revokedUsers" :key="user.id">
+    <template v-if="acceptedInvites.length">
+      <section v-for="user in acceptedInvites" :key="user.id">
         <div
           class="d-flex flex-wrap justify-space-between align-center w-100 py-3"
         >
-          <div>{{ user.email }}</div>
+          <div>{{ user.username }}</div>
           <div>
             <v-btn
               small
               color="red"
               outlined
               class="text-capitalize"
-              @click="revokeUser(user.email)"
+              @click="revokeUser(user.username)"
               >Revoke <v-icon small class="ml-3">mdi-cancel</v-icon></v-btn
             >
           </div>
@@ -26,30 +26,32 @@
 </template>
 
 <script>
+import InviteComponentBase from '../component_base_definitions/InviteComponentBase'
 export default {
-  data() {
-    return {
-      revokedUsers: [
-        { id: 0, email: 'olajide.a.hammed' },
-        { id: 1, email: 'lvvjxbpunpi' },
-        { id: 2, email: 'xyz.lvvjxb.punpi' },
-      ],
-    }
+  mixins: [InviteComponentBase],
+  props: {
+    acceptedInvites: {
+      type: Array,
+      default: () => [],
+    },
+    revokeUrl: {
+      type: String,
+      default: '',
+    },
   },
-
   methods: {
-    async revokeUser(email) {
-      this.$nuxt.$loading.finish()
+    async revokeUser(username) {
+      this.$nuxt.$loading.start()
 
-      const URL = `/revoke-member`
       // Make upload request to the API
       await this.getHTTPClient()
-        .$post(URL, { email })
+        .$post(this.revokeUrl, { username })
         .then(() => {
           this.$store.commit('notification/SHOW', {
             icon: 'mdi-check',
             text: 'Invitation Revoked',
           })
+          this.$emit('mount-invite-tab', this.$options.name)
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {

@@ -11,7 +11,7 @@ export default {
   },
   data() {
     return {
-      tab: 0,
+      settingsTab: 0,
       hash: '',
     }
   },

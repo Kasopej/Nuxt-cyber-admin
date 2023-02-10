@@ -1,15 +1,12 @@
 <template>
   <main class="py-8">
-    <template v-if="revokedUsers.length > 1">
-      <section v-for="user in revokedUsers" :key="user.id">
+    <template v-if="pendingInvites.length">
+      <section v-for="user in pendingInvites" :key="user.id">
         <div
           class="d-flex flex-wrap justify-space-between align-center w-100 py-3"
         >
           <div>{{ user.username }}</div>
           <div>
-            <v-btn small color="accent" class="text-capitalize mr-4"
-              >Accept<v-icon small class="ml-3">mdi-check-all</v-icon></v-btn
-            >
             <v-btn
               small
               color="red"
@@ -29,58 +26,33 @@
 </template>
 
 <script>
+import InviteComponentBase from '../component_base_definitions/InviteComponentBase'
 export default {
-  data() {
-    return {
-      revokedUsers: [
-        { id: 0, username: 'ogbeni.hmmd' },
-        { id: 1, username: 'abc.lvvjxbpunpi' },
-        { id: 2, username: 'olajide.a.hammed' },
-        { id: 3, username: 'xyz.lvvjxb.punpi' },
-      ],
-    }
+  mixins: [InviteComponentBase],
+  props: {
+    pendingInvites: {
+      type: Array,
+      default: () => [],
+    },
+    revokeUrl: {
+      type: String,
+      default: '',
+    },
   },
 
   methods: {
-    async acceptUser(username) {
-      this.$nuxt.$loading.finish()
-
-      const URL = `/accept-member`
-      // Make upload request to the API
-      await this.getHTTPClient()
-        .$post(URL, { username })
-        .then(() => {
-          this.$store.commit('notification/SHOW', {
-            icon: 'mdi-check',
-            text: 'Invitation Accepted',
-          })
-        })
-        .catch((error) => {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: error.response
-              ? error.response.data.message
-              : "Sorry, that didn't work. Please try again",
-          })
-        })
-        .finally(() => {
-          this.$nuxt.$loading.finish()
-        })
-    },
-
     async revokeUser(username) {
-      this.$nuxt.$loading.finish()
+      this.$nuxt.$loading.start()
 
-      const URL = `/revoke-member`
       // Make upload request to the API
       await this.getHTTPClient()
-        .$post(URL, { username })
+        .$post(this.revokeUrl, { username })
         .then(() => {
           this.$store.commit('notification/SHOW', {
             icon: 'mdi-check',
             text: 'Invitation Revoked',
           })
+          this.$emit('mount-invite-tab', this.$options.name)
         })
         .catch((error) => {
           this.$store.commit('notification/SHOW', {

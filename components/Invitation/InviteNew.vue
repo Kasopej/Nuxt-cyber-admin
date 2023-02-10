@@ -30,20 +30,21 @@
 </template>
 
 <script>
+import { emailFieldValidator, requiredFieldValidator } from '~/plugins/utils'
 export default {
+  props: {
+    inviteUrl: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       roles: ['Report Auditor', 'Report Viewer', 'Report Contributor'],
       FORM: {},
       rules: {
-        required: [(value) => !!value || 'This field is required'],
-        email: [
-          (v) => !!v || 'E-mail is required',
-          (v) =>
-            !v ||
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-            'E-mail must be valid',
-        ],
+        required: requiredFieldValidator,
+        email: emailFieldValidator,
       },
     }
   },
@@ -51,10 +52,9 @@ export default {
   methods: {
     async sendInvitation() {
       if (this.$refs.invitationForm.validate()) {
-        const URLL = `/invite-member`
         // Make upload request to the API
         await this.getHTTPClient()
-          .$post(URLL, this.FORM)
+          .$post(this.inviteUrl, this.FORM)
           .then(() => {
             this.FORM = {}
 
@@ -62,6 +62,7 @@ export default {
               icon: 'mdi-check',
               text: 'Invitation Sent Successfully',
             })
+            this.$emit('invitation-made')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

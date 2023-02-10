@@ -59,7 +59,6 @@
         </v-tab>
 
         <v-tab
-          ref="secureTab"
           class="text-capitalize"
           :append="true"
           :to="prependAdminRoute + '/account/settings#security'"
@@ -90,7 +89,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   props: {
     hash: {
@@ -111,7 +110,6 @@ export default {
 
   computed: {
     ...mapGetters('auth', { profile: 'getUserProfile' }),
-    ...mapState('misc', ['activateSecurityTab']),
   },
 
   watch: {

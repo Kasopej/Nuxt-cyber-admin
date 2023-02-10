@@ -1,17 +1,18 @@
 <template>
   <main class="py-8">
-    <template v-if="revokedUsers.length > 1">
-      <section v-for="user in revokedUsers" :key="user.id">
+    <template v-if="revokedInvites.length">
+      <section v-for="user in revokedInvites" :key="user.id">
         <div
           class="d-flex flex-wrap justify-space-between align-center w-100 py-3"
         >
           <div>{{ user.username }}</div>
           <div>
-            <v-btn small color="accent" class="text-capitalize mr-4"
-              >Accept<v-icon small class="ml-3">mdi-check</v-icon></v-btn
-            >
-            <v-btn small color="red" outlined class="text-capitalize"
-              >Delete <v-icon small class="ml-3">mdi-delete</v-icon></v-btn
+            <v-btn
+              small
+              color="accent"
+              class="text-capitalize mr-4"
+              @click="inviteUser(user.username)"
+              >Add<v-icon small class="ml-3">mdi-check</v-icon></v-btn
             >
           </div>
         </div>
@@ -24,15 +25,46 @@
 </template>
 
 <script>
+import InviteComponentBase from '../component_base_definitions/InviteComponentBase'
 export default {
-  data() {
-    return {
-      revokedUsers: [
-        { id: 0, username: 'lvvjxbpunpi' },
-        { id: 1, username: 'olajide.a.hammed' },
-        { id: 2, username: 'xyz.lvvjxb.punpi' },
-      ],
-    }
+  mixins: [InviteComponentBase],
+  props: {
+    revokedInvites: {
+      type: Array,
+      default: () => [],
+    },
+    inviteUrl: {
+      type: String,
+      default: '',
+    },
+  },
+  methods: {
+    async inviteUser(username) {
+      this.$nuxt.$loading.start()
+
+      // Make upload request to the API
+      await this.getHTTPClient()
+        .$post(this.inviteUrl, { username })
+        .then(() => {
+          this.$store.commit('notification/SHOW', {
+            icon: 'mdi-check',
+            text: 'Invitation Accepted',
+          })
+          this.$emit('mount-invite-tab', this.$options.name)
+        })
+        .catch((error) => {
+          this.$store.commit('notification/SHOW', {
+            color: 'accent',
+            icon: 'mdi-alert-outline',
+            text: error.response
+              ? error.response.data.message
+              : "Sorry, that didn't work. Please try again",
+          })
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+    },
   },
 }
 </script>
