@@ -4,7 +4,7 @@
       Authenticate with Token
     </header>
 
-    <v-form ref="tokenForm" class="mb-5">
+    <v-form ref="tokenForm" class="mb-5" @submit.prevent="verify">
       <v-text-field
         v-model="form.token"
         dense
@@ -13,8 +13,11 @@
         label="Token"
         required
       ></v-text-field>
-
-      <v-btn block color="primary" @click="verify"> Authenticate </v-btn>
+      <partials-form-submit-btn
+        color="primary"
+        type="submit"
+        :progress="submittingForm"
+      />
     </v-form>
     <small class="text--grey" style="line-height: 1">
       If you have lost your mobile device and want to reset your 2FA to retrieve
@@ -38,6 +41,7 @@ export default {
         token: null,
         temp2FAKey: null,
       },
+      submittingForm: false,
       rules: {
         required: (value) => !!value || 'Required.',
       },
@@ -60,6 +64,7 @@ export default {
     async verify() {
       if (this.$refs.tokenForm.validate()) {
         this.$nuxt.$loading.start()
+        this.submittingForm = true
 
         const userAuthData =
           this.$store.getters['auth/companyAuth/getTempUserData']
@@ -74,6 +79,7 @@ export default {
             this.$router.replace('/')
           })
           .catch((error) => {
+            this.submittingForm = false
             this.$store.commit('notification/SHOW', {
               color: 'accent',
               icon: 'mdi-alert-outline',

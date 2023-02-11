@@ -4,7 +4,7 @@
       Authenticate with Token
     </header>
 
-    <v-form ref="tokenForm" class="mb-5">
+    <v-form ref="tokenForm" class="mb-5" @submit.prevent="verify">
       <v-text-field
         v-model="form.token"
         dense
@@ -14,7 +14,11 @@
         required
       ></v-text-field>
 
-      <v-btn block color="primary" @click="verify"> Authenticate </v-btn>
+      <partials-form-submit-btn
+        color="primary"
+        type="submit"
+        :progress="submittingForm"
+      />
     </v-form>
     <small class="text--grey" style="line-height: 1">
       If you have lost your mobile device and want to reset your 2FA to retrieve
@@ -71,7 +75,7 @@ export default {
           .post(uri, this.form)
           .then((response) => {
             this.LOG_ADMIN_USER_IN(response.data)
-            this.$router.replace(this.prependAdminRoute + '/account/settings')
+            this.$router.replace(this.prependAdminRoute + '/')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

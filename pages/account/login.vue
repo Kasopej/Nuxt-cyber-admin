@@ -9,7 +9,7 @@
       Welcome Back!
     </header>
 
-    <v-form ref="loginForm">
+    <v-form ref="loginForm" @submit.prevent="login">
       <v-select
         v-model="FORM.role"
         dense
@@ -41,7 +41,11 @@
         @click:append="showPassword = !showPassword"
       ></v-text-field>
 
-      <v-btn block color="primary" @click="login"> Sign in </v-btn>
+      <partials-form-submit-btn
+        color="primary"
+        type="submit"
+        :progress="submittingForm"
+      />
     </v-form>
 
     <div class="d-flex align-center justify-space-between py-4">
@@ -68,6 +72,7 @@ export default {
 
       valid: true,
       showPassword: false,
+      submittingForm: false,
 
       rules: {
         required: (value) => !!value || 'Required.',
@@ -82,6 +87,7 @@ export default {
     async login() {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
+        this.submittingForm = true
 
         const URL = `/login`
 
@@ -97,6 +103,7 @@ export default {
             }
           })
           .catch((error) => {
+            this.submittingForm = false
             this.$store.commit('notification/SHOW', {
               color: 'accent',
               icon: 'mdi-alert-outline',
