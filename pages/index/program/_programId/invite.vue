@@ -64,21 +64,20 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
 import InviteManagementBase from '~/components/pages_base_definitions/InviteMangementBase'
-const { mapState } = createNamespacedHelpers('program')
+import { needsProgramDataOnLoad } from '~/plugins/mixins'
 export default {
-  mixins: [InviteManagementBase],
+  extends: InviteManagementBase,
+  mixins: [needsProgramDataOnLoad],
   computed: {
-    ...mapState({ program: 'data' }),
-    programId() {
+    programID() {
       return this.$route.params.programId
     },
     revokeURL() {
-      return `/remove-from-private-program/${this.programId}`
+      return `/remove-from-private-program/${this.programID}`
     },
     inviteURL() {
-      return `/invite-to-private-program/${this.programId}`
+      return `/invite-to-private-program/${this.programID}`
     },
   },
   methods: {

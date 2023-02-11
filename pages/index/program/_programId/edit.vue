@@ -18,7 +18,7 @@
           ></v-skeleton-loader>
         </div>
 
-        <div v-if="!program" class="py-8">
+        <div v-else-if="$fetchState.error" class="py-8">
           <v-img src="/images/server-down.svg" max-height="420" contain />
           <div class="subtitle-1 text-center accent--text py-8">
             <div class="d-block">

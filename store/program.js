@@ -1,25 +1,17 @@
 export const strict = false
 
 export const state = () => ({
-  data: [{}],
-  payload: {},
+  programsCount: null,
 })
 
 export const getters = {
-  getPrograms(state) {
-    return state.data
-  },
   getProgramsCount(state) {
-    return state.data.length
+    return state.programsCount
   },
 }
 
 export const mutations = {
-  SAVE_PAYLOAD(state, payload) {
-    state.payload = payload
-  },
-
-  SAVE_DATA(state, payload) {
-    state.data = payload
+  updateProgramsCount(state, count) {
+    state.programsCount = count
   },
 }

@@ -2,8 +2,10 @@ import showdown from 'showdown'
 import languages from '~/assets/json/languages.json'
 import presetDescriptions from '~/assets/presets/descriptions.json'
 import programTypes from '~/assets/presets/programTypes.json'
+import { needsProgramDataOnLoad } from '~/plugins/mixins'
 
 export default {
+  mixins: [needsProgramDataOnLoad],
   data() {
     return {
       languages,
@@ -36,32 +38,18 @@ export default {
         required: [(value) => !!value || 'This Field Is Required'],
       },
       File: null,
-      program: null,
-      thumbnail: '',
-      banner: '',
+      program: {},
       bannerMessage: 'Click to choose Banner',
     }
   },
 
-  async fetch() {
-    const uri = `/get-program/${this.$route.params.programId}`
-
-    await this.getHTTPClient()
-      .$get(uri, {})
-      .then((res) => {
-        this.program = res.data
-        this.thumbnail = this.program.thumbnail
-        this.banner = this.program.banner
-      })
-      .catch((error) => {
-        this.$store.commit('notification/SHOW', {
-          color: 'accent',
-          icon: 'mdi-alert-outline',
-          text: error.response
-            ? error.response.data.message
-            : 'Oops! programme not found',
-        })
-      })
+  computed: {
+    thumbnail() {
+      return this.program.thumbnail
+    },
+    banner() {
+      return this.program.banner
+    },
   },
 
   methods: {
