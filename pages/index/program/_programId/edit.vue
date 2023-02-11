@@ -514,7 +514,7 @@
 
                   <div
                     v-if="descriptionPreview"
-                    class="elevation-2 rounded px-2 py-4"
+                    class="elevation-2 longform-content rounded px-2 py-4"
                     v-html="descriptionPreview"
                   />
                   <v-textarea
