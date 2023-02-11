@@ -16,7 +16,7 @@
                 'text--lighten-3': $vuetify.theme.dark,
               }"
             >
-              <p class="text-sm px-2" v-html="description"></p>
+              <p class="text-base px-2" v-html="description"></p>
             </v-expansion-panel-content>
           </v-expansion-panel>
           <!--  -->
