@@ -49,27 +49,27 @@
               <v-col class="pl-2 py-1 py-sm-2 py-md-3">
                 <div class="d-flex justify-space-around">
                   <div
-                    v-for="reward in rewards"
-                    :key="reward.severtity"
+                    v-for="(reward, severity) in rewards"
+                    :key="severity"
                     class="text-center mx-1 mx-sm-2"
                   >
                     <div class="grey--text darken-3">
-                      {{ reward.severtity }}
+                      {{ severity.toUpperCase() }}
                     </div>
                     <div>
                       <v-btn
                         :color="
-                          submission.severity == reward.severtity
+                          submission.severity == severity.toUpperCase()
                             ? 'accent'
                             : 'secondary'
                         "
                         :class="
-                          submission.severity == reward.severtity
+                          submission.severity == severity.toUpperCase()
                             ? 'white--text'
                             : 'primary--text'
                         "
                       >
-                        ${{ reward.price }}
+                        ${{ reward }}
                       </v-btn>
                     </div>
                   </div>
@@ -117,16 +117,14 @@ export default {
   mixins: [{ methods: { getCompoundField } }],
   props: {
     submission: { type: Object, default: () => {} },
+    rewards: {
+      type: Object,
+      default: () => {},
+    },
   },
 
   data() {
     return {
-      rewards: [
-        { severtity: 'LOW', price: '0' },
-        { severtity: 'MEDIUM', price: '0' },
-        { severtity: 'HIGH', price: '0' },
-        { severtity: 'CRITICAL', price: '0' },
-      ],
       SubmissionSummaryFieldsObj,
     }
   },
