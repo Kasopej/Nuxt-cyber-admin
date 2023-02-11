@@ -99,7 +99,10 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
 import { paginationMixin } from '~/plugins/mixins'
+const { mapMutations } = createNamespacedHelpers('submission')
+
 export default {
   mixins: [paginationMixin],
   data() {
@@ -152,10 +155,11 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['SAVE_SUBMISSION', 'SUBMISSION_SELECTED']),
     openSubmission(submission) {
       // Save data to Vuex store
-      this.$store.commit('submission/SAVE_SUBMISSION', submission)
-      this.$store.commit('submission/SUBMISSION_SELECTED', true)
+      this.SAVE_SUBMISSION(submission)
+      this.SUBMISSION_SELECTED(true)
     },
 
     filterSubmission() {

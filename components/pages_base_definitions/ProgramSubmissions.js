@@ -6,5 +6,6 @@ export default {
   },
   computed: {
     ...mapState(['submissionSelected']),
+    ...mapState({ submission: 'data' }),
   },
 }

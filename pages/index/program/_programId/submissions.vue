@@ -7,16 +7,16 @@
     </div>
     <div class="pg-info" :class="{ 'has-content': submissionSelected }">
       <div class="pg-info-content px-4">
-        <submission-details></submission-details>
+        <submission-details :submission="submission"></submission-details>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProgramSubmissions from '~/components/pages_base_definitions/ProgramSubmissions'
+import ProgramSubmissionsBase from '~/components/pages_base_definitions/ProgramSubmissions'
 export default {
-  extends: ProgramSubmissions,
+  extends: ProgramSubmissionsBase,
 }
 </script>
 
