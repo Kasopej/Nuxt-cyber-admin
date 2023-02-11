@@ -49,7 +49,10 @@
               />
             </v-tab-item>
             <v-tab-item>
-              <submission-description-tab :submission="submission" />
+              <submission-description-tab
+                :submission="submission"
+                :submission-attachments="submissionAttachments"
+              />
             </v-tab-item>
             <v-tab-item>
               <submission-comment-tab :submission="submission" />
@@ -92,7 +95,15 @@ export default {
           text: 'program Details',
         },
       ],
+      submissionAttachments: [],
     }
+  },
+
+  watch: {
+    submission() {
+      this.getSubmissionAttachments()
+      this.$fetch()
+    },
   },
 
   created() {
@@ -105,6 +116,17 @@ export default {
     clearSelectedSubmission() {
       this.SUBMISSION_SELECTED(false)
       this.SAVE_SUBMISSION(null)
+    },
+    async getSubmissionAttachments() {
+      const attachmentURL = `/get-submission-attachments/${this.submission._id}`
+      await this.getHTTPClient()
+        .$get(attachmentURL)
+        .then((res) => {
+          this.submissionAttachments = res.data
+        })
+        .catch((error) => {
+          this.$store.dispatch('notification/failureSnackbar', error)
+        })
     },
   },
 }
