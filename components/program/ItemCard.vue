@@ -1,13 +1,13 @@
 <template>
-  <v-card>
-    <v-card-title primary-title class="flex">
+  <v-card class="!flex flex-col justify-start">
+    <v-card-title primary-title class="flex flex-col !items-start">
       <v-img
         :src="program.thumbnail || '/img/dummy.jpg'"
         width="30"
         max-height="30px"
         max-width="30px"
       />
-      <span class="ml-auto">{{ program.title }}</span>
+      <span>{{ program.title }}</span>
     </v-card-title>
     <v-card-text>
       <div class="flex mb-2">
@@ -43,9 +43,9 @@
           <span class="text-black">Reward: </span>
           <span class="text-primary">{{ displayReward(program.reward) }}</span>
         </p>
-        <div>
+        <div class="flex">
           <v-alert
-            class="fit-content d-inline-block mt-2 white--text text-center cursor-pointer"
+            class="fit-content d-inline-block !p-2 mt-2 mb-1 !text-sm white--text text-center cursor-pointer"
             color="accent"
             dense
             @click="viewSubmissions(program)"
@@ -53,7 +53,7 @@
             View Submissions
           </v-alert>
           <v-alert
-            class="fit-content d-inline-block mt-2 ml-auto white--text text-center cursor-pointer"
+            class="fit-content d-inline-block !p-2 mt-2 mb-1 ml-auto !text-sm white--text text-center cursor-pointer"
             color="info"
             dense
             @mouseenter="reveal = true"

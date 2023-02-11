@@ -56,6 +56,7 @@
                   :key="program._id"
                   cols="12"
                   md="4"
+                  class="!flex"
                 >
                   <program-item-card :program="program" />
                 </v-col>
