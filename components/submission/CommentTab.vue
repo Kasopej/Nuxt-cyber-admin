@@ -163,8 +163,11 @@
 
 <script>
 import showdown from 'showdown'
+import { createNamespacedHelpers } from 'vuex'
 import presetComments from '~/assets/presets/comments.json'
 import { paginationMixin } from '~/plugins/mixins'
+
+const { mapState } = createNamespacedHelpers('submission')
 
 export default {
   mixins: [paginationMixin],
@@ -219,17 +222,10 @@ export default {
   },
 
   computed: {
-    submission() {
-      return this.$store.state.submission.data
-    },
+    ...mapState({
+      submission: 'data',
+    }),
   },
-
-  watch: {
-    submission() {
-      this.$fetch()
-    },
-  },
-
   methods: {
     visibilityIcon(comment) {
       return comment.type === 'Public' ? 'mdi-eye' : 'mdi-eye-off'
