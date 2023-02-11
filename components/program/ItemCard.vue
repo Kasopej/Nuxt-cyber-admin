@@ -24,12 +24,19 @@
         >
       </div>
       <small class="text-accent">{{ program.status }}</small>
-      <v-img
-        :src="program.banner || '/img/dummy.jpg'"
-        :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
-        class="rounded mt-1 cursor-pointer"
-        @click="goEdit(program)"
-      />
+      <v-hover>
+        <template #default="{ hover }">
+          <v-img
+            :src="program.banner || '/img/dummy.jpg'"
+            :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
+            class="rounded mt-1 cursor-pointer"
+            :class="{ 'img-on-hover': hover }"
+            @click="goEdit(program)"
+          >
+            <span class="img-text px-2"> Click image to edit </span>
+          </v-img>
+        </template>
+      </v-hover>
       <section class="mt-2">
         <v-chip small> {{ program.type }} </v-chip>
         <p class="my-2">
@@ -71,16 +78,6 @@
         </v-card-text>
       </v-card>
     </v-expand-transition>
-    <!-- <v-card-title primary-title class="d-flex">
-    </v-card-title>
-    <v-card-text>
-      <section class="d-flex mb-2">
-        <v-icon color="primary" class="ml-auto" @click="toggleFavorite">{{
-            favoriteIcon
-          }}</v-icon>
-      </section>
-    </v-card-text> -->
-    <!--  -->
   </v-card>
 </template>
 
@@ -135,8 +132,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .hover {
   cursor: pointer;
+}
+.v-image {
+  opacity: 0.8;
+}
+.img-text {
+  display: none;
+}
+.img-on-hover {
+  opacity: 1;
+  span {
+    display: initial;
+  }
 }
 </style>
