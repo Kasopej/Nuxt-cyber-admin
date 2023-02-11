@@ -15,3 +15,31 @@ export const paginationMixin = {
     }
   },
 }
+
+export const needsProgramDataOnLoad = {
+  async fetch() {
+    const uri = `/get-program/${
+      this.$route.params.programId ?? this.submission.programId
+    }`
+
+    await this.getHTTPClient()
+      .$get(uri, {})
+      .then((res) => {
+        this.program = res.data
+      })
+      .catch((error) => {
+        this.$store.commit('notification/SHOW', {
+          color: 'accent',
+          icon: 'mdi-alert-outline',
+          text: error.response
+            ? error.response.data.message
+            : 'Oops! programme not found',
+        })
+      })
+  },
+  data() {
+    return {
+      program: null,
+    }
+  },
+}
