@@ -1,13 +1,19 @@
 <template>
-  <v-card class="!flex flex-col justify-start">
-    <v-card-title primary-title class="flex flex-col !items-start">
+  <v-card class="!flex flex-col justify-start w-full">
+    <v-card-title
+      primary-title
+      class="flex !items-start"
+      :class="{ 'flex-col': $vuetify.breakpoint.mdAndUp }"
+    >
       <v-img
         :src="program.thumbnail || '/img/dummy.jpg'"
         width="30"
         max-height="30px"
         max-width="30px"
       />
-      <span>{{ program.title }}</span>
+      <span :class="{ 'ml-auto': $vuetify.breakpoint.smAndDown }">{{
+        program.title
+      }}</span>
     </v-card-title>
     <v-card-text>
       <div class="flex mb-2">
