@@ -16,8 +16,37 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters, mapActions } = createNamespacedHelpers('auth')
 export default {
+  data() {
+    return {
+      userSessionRunning: false,
+    }
+  },
+  async fetch() {
+    const URL = this.isAdminAuth ? `/viewProfile` : '/viewProfile'
+    // Make upload request to the API
+    await this.getHTTPClient()
+      .$get(URL)
+      .then((res) => {
+        this.UPDATE_USER_PROFILE(res.user).then(() => {
+          this.userSessionRunning = true
+        })
+      })
+      .catch((error) => {
+        this.$store.commit('notification/SHOW', {
+          color: 'accent',
+          icon: 'mdi-alert-outline',
+          text: error.response
+            ? error.response.data.message
+            : 'Session Expired. Please log in',
+        })
+        this.$router.replace(this.prependAdminRoute + '/account/login')
+      })
+  },
   computed: {
+    ...mapGetters(['isAdminAuth']),
     links() {
       return [
         {
@@ -37,6 +66,9 @@ export default {
         },
       ]
     },
+  },
+  methods: {
+    ...mapActions(['UPDATE_USER_PROFILE']),
   },
 }
 </script>
