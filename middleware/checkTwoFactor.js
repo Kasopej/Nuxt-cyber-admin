@@ -3,6 +3,10 @@
 export default ({ route, store, redirect }) => {
   if (!store.getters['auth/isLoggedIn']) return
 
+  if (route.path === '' || route.path === '/') {
+    return redirect('/home')
+  }
+
   if (!store.getters['auth/getUser2FAStatus']) {
     // if user is admin, prevent navigation until user activates 2FA
     if (store.getters['auth/isAdminAuth']) {
