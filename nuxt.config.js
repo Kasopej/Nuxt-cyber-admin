@@ -43,10 +43,6 @@ export default {
 
   router: {
     middleware: 'checkTwoFactor',
-    scrollBehavior(to, from, savedPosition) {
-      // always scroll to top
-      return { x: 0, y: 0 }
-    },
   },
 
   loading: {
