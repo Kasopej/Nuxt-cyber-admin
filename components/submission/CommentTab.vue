@@ -51,6 +51,10 @@
                 <v-icon color="primary" class="-mt-0.5 ml-1">{{
                   visibilityIcon(comment)
                 }}</v-icon>
+                <span
+                  class="ml-1 text-accent text-caption font-weight-medium"
+                  v-text="comment.status"
+                ></span>
               </div>
             </v-card-title>
             <v-card-text class="px-3 py-3">
@@ -80,8 +84,23 @@
 
     <p v-if="loadingMore" class="text-end mt-4">Adding to list...</p>
 
-    <v-form ref="commentForm">
-      <div class="accent--text headline font-weight-bold py-4">
+    <v-form ref="commentForm" @submit.prevent="postComment">
+      <div class="flex flex-wrap mb-2 items-center">
+        <v-autocomplete
+          v-model="FORM.action"
+          dense
+          outlined
+          label="Action"
+          :items="actions"
+        >
+        </v-autocomplete>
+        <!-- <v-switch
+          v-model="FORM.private"
+          :label="FORM.private ? 'Open Report?' : 'Close Report?'"
+          class="ml-2 mt-0 self-start"
+        ></v-switch> -->
+      </div>
+      <div class="text-accent headline font-weight-bold py-4">
         Post A Response
       </div>
 
@@ -139,21 +158,11 @@
                 >Styling with MarkDown is supported</small
               >
             </div>
-
-            <v-btn
-              color="primary"
-              :disabled="!FORM.comment.length || formSubmitting"
-              @click="postComment"
-              >Post Response
-              <v-progress-circular
-                v-if="formSubmitting"
-                class="ml-3"
-                :size="23"
-                :width="2"
-                indeterminate
-                color="primary"
-              ></v-progress-circular>
-            </v-btn>
+            <partials-form-submit-btn
+              :disabled="!formChanged"
+              :progress="formSubmitting"
+              text="Submit"
+            />
           </div>
         </article>
       </v-card>
@@ -194,6 +203,7 @@ export default {
       selectedPresetComment: null,
       commentPreview: null,
       formSubmitting: false,
+      formChanged: false,
       pagination: { page: 1, length: 0 },
       loadingMore: false,
     }
@@ -226,6 +236,22 @@ export default {
       submission: 'data',
     }),
   },
+  watch: {
+    FORM: {
+      handler(form) {
+        this.formChanged = !this.testObjectEqualityWithJSON(
+          form,
+          this.emptyForm
+        )
+      },
+      deep: true,
+    },
+  },
+
+  created() {
+    this.emptyForm = Object.freeze(this.cloneObjectWithJSON(this.FORM))
+  },
+
   methods: {
     visibilityIcon(comment) {
       return comment.type === 'Public' ? 'mdi-eye' : 'mdi-eye-off'
@@ -240,7 +266,7 @@ export default {
     },
 
     async postComment() {
-      if (this.$refs.commentForm.validate()) {
+      if (this.$refs.commentForm.validate() && this.formChanged) {
         this.$nuxt.$loading.start()
 
         const submissionId = this.submission._id
@@ -289,6 +315,12 @@ export default {
         this.$store.dispatch('notification/failureSnackbar', e)
       }
       this.loadingMore = false
+    },
+    cloneObjectWithJSON(obj) {
+      return JSON.parse(JSON.stringify(obj))
+    },
+    testObjectEqualityWithJSON(obj1 = {}, obj2 = {}) {
+      return JSON.stringify(obj1) === JSON.stringify(obj2)
     },
   },
 }

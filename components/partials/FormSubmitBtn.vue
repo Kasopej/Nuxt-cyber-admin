@@ -1,6 +1,6 @@
 <template>
-  <v-btn block color="primary" type="submit" :disabled="progress">
-    Authenticate
+  <v-btn block color="primary" type="submit" :disabled="disabled || progress">
+    {{ text }}
     <v-progress-circular
       v-if="progress"
       class="ml-5"
@@ -16,8 +16,13 @@
 export default {
   props: {
     color: String,
+    text: {
+      type: String,
+      default: 'Authenticate',
+    },
     type: String,
     progress: Boolean,
+    disabled: Boolean,
   },
 }
 </script>
