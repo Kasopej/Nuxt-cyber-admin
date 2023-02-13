@@ -57,7 +57,7 @@ export default {
         {
           title: 'Submissions',
           icon: 'mdi-bookshelf',
-          slug: this.prependAdminRoute + '/submission/',
+          slug: this.prependAdminRoute + '/submissions/',
         },
         {
           title: 'Profile',
