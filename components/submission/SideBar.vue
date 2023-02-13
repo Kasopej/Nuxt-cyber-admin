@@ -49,7 +49,7 @@
               :key="submission._id"
               @click="openSubmission(submission)"
             >
-              <v-hover v-slot="{ hover }">
+              <!-- <v-hover v-slot="{ hover }">
                 <article
                   class="pa-4 d-flex align-center"
                   :class="
@@ -74,7 +74,8 @@
                   </div>
                   <div><v-icon color="primary"> mdi-arrow-right </v-icon></div>
                 </article>
-              </v-hover>
+              </v-hover> -->
+              <SubmissionItemCard :submission="submission" />
               <v-divider />
             </div>
             <partials-pagination

@@ -118,7 +118,7 @@
         </div>
         <article class="flex">
           <v-avatar size="50" class="col-1 py-0 px-0">
-            <img src="/img/dummy.jpg" alt="user profile image" />
+            <img src="/images/dummy.jpg" alt="user profile image" />
           </v-avatar>
           <div class="col-11 py-0 px-1">
             <div

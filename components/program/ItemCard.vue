@@ -6,7 +6,7 @@
       :class="{ 'flex-col': $vuetify.breakpoint.mdAndUp }"
     >
       <v-img
-        :src="program.thumbnail || '/img/dummy.jpg'"
+        :src="program.thumbnail || '/images/dummy.jpg'"
         width="30"
         max-height="30px"
         max-width="30px"
@@ -33,7 +33,7 @@
       <v-hover>
         <template #default="{ hover }">
           <v-img
-            :src="program.banner || '/img/dummy.jpg'"
+            :src="program.banner || '/images/dummy.jpg'"
             :max-width="$vuetify.breakpoint.mobile ? '100%' : '100%'"
             class="rounded mt-1 cursor-pointer"
             :class="{ 'img-on-hover': hover }"
