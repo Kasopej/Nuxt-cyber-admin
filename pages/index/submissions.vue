@@ -24,12 +24,6 @@ export default {
 //Import SCSS files importer
 @import '~~/assets/styles/custom.scss';
 
-.pg-root {
-  display: flex;
-  position: relative;
-  height: 100vh;
-}
-
 .pg-root .pg-sidebar .pg-sidebar-content,
 .pg-root .pg-info .pg-info-content {
   margin-top: 6rem;
