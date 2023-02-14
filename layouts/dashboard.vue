@@ -73,7 +73,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 //Import SCSS files importer
 @import '~~/assets/styles/custom.scss';
+
+.pg-root {
+  display: flex;
+  position: relative;
+  min-height: 100vh;
+}
+.min-full-height {
+  min-height: 100vh;
+}
 </style>
