@@ -116,7 +116,7 @@ export default {
       // Do nothing
     },
     logout() {
-      this.store.commit('auth/LOG_USER_OUT')
+      this.$store.commit('auth/LOG_USER_OUT')
       this.$router.replace(this.prependAdminRoute + '/account/logout')
     },
   },
