@@ -76,7 +76,7 @@
         </v-list-item>
 
         <v-divider></v-divider>
-        <v-list-item :to="prependAdminRoute + '/account/logout'">
+        <v-list-item @click="logout">
           <v-list-item-title>
             <v-icon class="mr-3">mdi-logout</v-icon>
             <span>Sign out</span>
@@ -114,6 +114,10 @@ export default {
   methods: {
     toggleDarkMode() {
       // Do nothing
+    },
+    logout() {
+      this.store.commit('auth/LOG_USER_OUT')
+      this.$router.replace(this.prependAdminRoute + '/account/logout')
     },
   },
 }
