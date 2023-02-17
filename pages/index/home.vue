@@ -1,5 +1,5 @@
 <template>
-  <main class="min-full-height mt-20 w-screen">
+  <main class="min-full-height mt-20 w-screen p-4">
     <v-skeleton-loader
       v-if="$fetchState.pending"
       type="card"
