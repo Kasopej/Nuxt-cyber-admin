@@ -17,7 +17,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, mapActions } = createNamespacedHelpers('auth')
+const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
 export default {
   data() {
     return {
@@ -42,7 +42,8 @@ export default {
             ? error.response.data.message
             : 'Session Expired. Please log in',
         })
-        this.$router.replace(this.prependAdminRoute + '/account/login')
+        this.LOG_USER_OUT()
+        this.$router.replace(this.prependAdminRoute + '/account/logout')
       })
   },
   computed: {
@@ -69,6 +70,7 @@ export default {
   },
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
+    ...mapMutations(['LOG_USER_OUT']),
   },
 }
 </script>
