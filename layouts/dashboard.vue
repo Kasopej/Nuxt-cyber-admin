@@ -1,17 +1,29 @@
 <template>
   <v-app>
-    <partials-mobile-navigation-drawer :links="links" />
+    <template v-if="$fetchState.pending">
+      <section class="h-screen flex justify-center items-center">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          size="70"
+          width="8"
+        ></v-progress-circular>
+      </section>
+    </template>
+    <template v-else>
+      <partials-mobile-navigation-drawer :links="links" />
 
-    <section
-      style="min-height: 100vh"
-      class="d-flex flex-column overflow-y-hidden"
-    >
-      <partials-navigation-bar :links="links" />
-      <nuxt class="flex-grow-1 overflow-y-auto" />
-    </section>
+      <section
+        style="min-height: 100vh"
+        class="d-flex flex-column overflow-y-hidden"
+      >
+        <partials-navigation-bar :links="links" />
+        <nuxt class="flex-grow-1 overflow-y-auto" />
+      </section>
 
-    <partials-notification-toast />
-    <misc-go-twofa />
+      <partials-notification-toast />
+      <misc-go-twofa />
+    </template>
   </v-app>
 </template>
 
