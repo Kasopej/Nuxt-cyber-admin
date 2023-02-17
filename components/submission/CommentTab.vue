@@ -64,7 +64,16 @@
         </v-timeline-item>
       </v-timeline>
       <div>
-        <v-btn color="primary" class="ml-auto d-block">Close Report</v-btn>
+        <v-btn
+          v-if="submission.actionstate !== 'closed'"
+          color="primary"
+          class="ml-auto d-block"
+          >Close Report</v-btn
+        >
+        <template v-else>
+          <v-btn color="primary" class="ml-auto d-block">Reopen</v-btn>
+          <v-btn color="primary" class="ml-auto d-block">Pay Reward</v-btn>
+        </template>
       </div>
     </section>
 
@@ -100,11 +109,14 @@
           class="ml-2 mt-0 self-start"
         ></v-switch> -->
       </div>
-      <div class="text-accent headline font-weight-bold py-4">
+      <div
+        v-show="showCommentSection"
+        class="text-accent headline font-weight-bold py-4"
+      >
         Post A Response
       </div>
 
-      <v-card class="pa-4" elevation="3">
+      <v-card v-show="showCommentSection" class="pa-4" elevation="3">
         <div class="flex">
           <v-btn
             small
@@ -158,14 +170,14 @@
                 >Styling with MarkDown is supported</small
               >
             </div>
-            <partials-form-submit-btn
-              :disabled="!formChanged"
-              :progress="formSubmitting"
-              text="Submit"
-            />
           </div>
         </article>
       </v-card>
+      <partials-form-submit-btn
+        :disabled="!formChanged"
+        :progress="formSubmitting"
+        text="Submit"
+      />
     </v-form>
   </main>
 </template>
@@ -235,6 +247,9 @@ export default {
     ...mapState({
       submission: 'data',
     }),
+    showCommentSection() {
+      return this.FORM.action === 'Post Comment'
+    },
   },
   watch: {
     FORM: {
