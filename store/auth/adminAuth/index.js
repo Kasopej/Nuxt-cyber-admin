@@ -12,7 +12,7 @@ export const getters = {
     return state.tempUser
   },
   getUserProfile(state) {
-    return state.data?.account
+    return state.data?.account ?? {}
   },
   getUser2FAStatus(state) {
     return state.data?.account.twoFactorAuth

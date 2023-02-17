@@ -98,8 +98,9 @@ export default {
               this.KEEP_COMPANY_USER_TMP(response.data)
               this.$router.replace('/account/verify-twofa')
             } else {
-              this.LOG_COMPANY_USER_IN(response.data)
-              this.$router.replace(this.prependAdminRoute + '/')
+              this.LOG_COMPANY_USER_IN(response.data).then(() => {
+                this.$router.replace(this.prependAdminRoute + '/')
+              })
             }
           })
           .catch((error) => {
