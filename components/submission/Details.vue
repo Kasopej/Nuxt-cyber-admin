@@ -39,7 +39,7 @@
         <v-tabs v-model="tab">
           <v-tab>Report Summary</v-tab>
           <v-tab>Bug Description</v-tab>
-          <v-tab>Comments</v-tab>
+          <v-tab>Actions</v-tab>
 
           <v-tabs-items v-model="tab">
             <v-tab-item>
