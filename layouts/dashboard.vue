@@ -23,6 +23,7 @@
 
       <partials-notification-toast />
       <misc-go-twofa />
+      <misc-payment-dialog />
     </template>
   </v-app>
 </template>
