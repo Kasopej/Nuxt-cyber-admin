@@ -2,6 +2,7 @@ export const state = () => ({
   data: null,
   tempUser: null,
   loggedIn: false,
+  userSessionConfirmed: false,
 })
 
 export const getters = {
@@ -39,6 +40,9 @@ export const mutations = {
 
   UPDATE_USER_PROFILE(state, payload) {
     Object.assign(state.data.account, payload)
+  },
+  CONFIRM_USER_SESSION(state) {
+    state.userSessionConfirmed = true
   },
 }
 

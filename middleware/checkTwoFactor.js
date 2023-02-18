@@ -7,7 +7,10 @@ export default ({ route, store, redirect }) => {
     return redirect('/home')
   }
 
-  if (!store.getters['auth/getUser2FAStatus']) {
+  if (
+    store.getters['auth/userSessionConfirmed'] &&
+    !store.getters['auth/getUser2FAStatus']
+  ) {
     // if user is admin, prevent navigation until user activates 2FA
     if (store.getters['auth/isAdminAuth']) {
       if (
@@ -22,10 +25,7 @@ export default ({ route, store, redirect }) => {
       route.name !== 'account-logout'
     ) {
       console.log(route.name)
-      if (
-        !store.state.misc.popTwoFactorModal &&
-        !store.state.misc.twoFactorModalCanceled
-      ) {
+      if (!store.state.misc.twoFactorModalCanceled) {
         store.commit('misc/TOGGLE_TWOFA_MODAL', true)
       }
     }
