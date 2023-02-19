@@ -21,12 +21,12 @@ export const getters = {
 }
 
 export const mutations = {
-  COMMIT_ADMIN_LOG_IN(state, payload) {
+  COMMIT_LOG_IN(state, payload) {
     state.data = payload
     state.tempUser = null
     state.loggedIn = true
   },
-  KEEP_ADMIN_USER_TMP(state, payload) {
+  KEEP_USER_TMP(state, payload) {
     state.tempUser = payload
   },
 
@@ -40,15 +40,5 @@ export const mutations = {
 
   UPDATE_USER_PROFILE(state, payload) {
     Object.assign(state.data.account, payload)
-  },
-  CONFIRM_USER_SESSION(state) {
-    state.userAuthSessionConfirmed = true
-  },
-}
-
-export const actions = {
-  LOG_ADMIN_USER_IN({ commit }, payload) {
-    commit('COMMIT_ADMIN_LOG_IN', payload)
-    commit('auth/SET_AUTH_TYPE', 'adminAuth', { root: true })
   },
 }

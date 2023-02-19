@@ -10,7 +10,7 @@
         ></v-progress-circular>
       </section>
     </template>
-    <template v-else-if="userAuthSessionConfirmed">
+    <template v-else>
       <partials-mobile-navigation-drawer :links="links" />
 
       <section

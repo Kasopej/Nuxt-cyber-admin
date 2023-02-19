@@ -33,22 +33,17 @@ export const getters = {
     else if (state.authType === 'companyAuth') return state.companyAuth.loggedIn
     return false
   },
-  userAuthSessionConfirmed(state) {
-    if (state.authType === 'adminAuth')
-      return state.adminAuth.userAuthSessionConfirmed
-    else if (state.authType === 'companyAuth')
-      return state.companyAuth.userAuthSessionConfirmed
-  },
 }
 
 export const mutations = {
   SET_AUTH_TYPE(state, type) {
     state.authType = type
   },
-  LOG_USER_OUT(state) {
-    if (!state[`${state.authType}`]) return
-    state[`${state.authType}`].data = {}
-    state[`${state.authType}`].loggedIn = false
+  LOG_USER_OUT(state, authTypePassed) {
+    const authType = authTypePassed ?? state.authType
+    if (!state[`${authType}`]) return
+    state[`${authType}`].data = {}
+    state[`${authType}`].loggedIn = false
   },
 }
 
@@ -68,10 +63,19 @@ export const actions = {
   UPDATE_USER_PROFILE({ commit, getters }, payload) {
     if (getters.isAdminAuth) {
       commit('adminAuth/UPDATE_USER_PROFILE', payload)
-      commit('adminAuth/CONFIRM_USER_SESSION')
     } else {
       commit('companyAuth/UPDATE_USER_PROFILE', payload)
-      commit('companyAuth/CONFIRM_USER_SESSION')
     }
+  },
+  LOG_IN({ commit }, payload) {
+    if (payload.appAuthType === 'adminAuth') {
+      commit(`adminAuth/COMMIT_LOG_IN`, payload)
+      commit('SET_AUTH_TYPE', 'adminAuth')
+      commit('LOG_USER_OUT', 'companyAuth')
+    } else if (payload.appAuthType === 'companyAuth') {
+      commit(`companyAuth/COMMIT_LOG_IN`, payload)
+      commit('SET_AUTH_TYPE', 'companyAuth')
+      commit('LOG_USER_OUT', 'adminAuth')
+    } else throw new Error('Unknown Auth Type')
   },
 }

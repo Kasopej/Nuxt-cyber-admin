@@ -57,7 +57,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions, mapMutations } = createNamespacedHelpers('auth/companyAuth')
+const { mapActions, mapMutations } = createNamespacedHelpers('auth')
 export default {
   layout: 'account',
 
@@ -81,8 +81,8 @@ export default {
   head: { title: 'Sign in' },
 
   methods: {
-    ...mapActions(['LOG_COMPANY_USER_IN']),
-    ...mapMutations(['KEEP_COMPANY_USER_TMP']),
+    ...mapActions(['LOG_IN']),
+    ...mapMutations(['companyAuth/KEEP_USER_TMP']),
     async login() {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
@@ -93,11 +93,12 @@ export default {
         await this.$axios
           .post(URL, this.FORM)
           .then((response) => {
+            response.data.appAuthType = 'companyAuth'
             if (response.data.twoFactorAuth) {
-              this.KEEP_COMPANY_USER_TMP(response.data)
+              this['companyAuth/KEEP_USER_TMP'](response.data)
               this.$router.replace('/account/verify-twofa')
             } else {
-              this.LOG_COMPANY_USER_IN(response.data).then(() => {
+              this.LOG_IN(response.data).then(() => {
                 this.$router.replace(this.prependAdminRoute + '/')
               })
             }
