@@ -10,7 +10,7 @@
         ></v-progress-circular>
       </section>
     </template>
-    <template v-else-if="userSessionConfirmed">
+    <template v-else-if="userAuthSessionConfirmed">
       <partials-mobile-navigation-drawer :links="links" />
 
       <section
@@ -52,7 +52,7 @@ export default {
       })
   },
   computed: {
-    ...mapGetters(['isAdminAuth', 'userSessionConfirmed']),
+    ...mapGetters(['isAdminAuth', 'userAuthSessionConfirmed']),
     links() {
       return [
         {
