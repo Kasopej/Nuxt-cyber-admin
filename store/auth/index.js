@@ -33,12 +33,6 @@ export const getters = {
     else if (state.authType === 'companyAuth') return state.companyAuth.loggedIn
     return false
   },
-  userAuthSessionConfirmed(state) {
-    if (state.authType === 'adminAuth')
-      return state.adminAuth.userAuthSessionConfirmed
-    else if (state.authType === 'companyAuth')
-      return state.companyAuth.userAuthSessionConfirmed
-  },
 }
 
 export const mutations = {
