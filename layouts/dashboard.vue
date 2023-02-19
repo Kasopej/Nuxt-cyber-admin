@@ -24,6 +24,7 @@
       <partials-notification-toast />
       <misc-go-twofa />
       <misc-payment-dialog />
+      <misc-subscription-expiry-dialog />
     </template>
   </v-app>
 </template>

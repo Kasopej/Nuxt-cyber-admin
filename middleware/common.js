@@ -7,17 +7,30 @@ export default ({ route, store, redirect }) => {
     return redirect('/home')
   }
 
-  if (!store.getters['auth/getUser2FAStatus']) {
-    // if user is admin, prevent navigation until user activates 2FA
-    if (store.getters['auth/isAdminAuth']) {
+  // if user is admin, prevent navigation until user activates 2FA
+  if (store.getters['auth/isAdminAuth']) {
+    if (!store.getters['auth/getUser2FAStatus']) {
       if (
         route.fullPath !== '/admin/account/settings#security' &&
         route.path !== '/admin/account/logout'
       ) {
         redirect('/admin/account/settings#security')
       }
-    } else if (
-      // if company user, just prompt/remind about 2FA
+    }
+  } else {
+    // if company user
+    // must update payment
+    if (
+      store.getters['auth/isUserSubscribed'] &&
+      route.name !== 'account-settings' &&
+      route.name !== 'account-logout'
+    ) {
+      store.commit('payment/TOGGLE_SUBSCRIPTION_ALERT', true)
+      return redirect('/account/settings#billing')
+    }
+    if (
+      // just prompt/remind about 2FA
+      !store.getters['auth/getUser2FAStatus'] &&
       route.name !== 'account-settings' &&
       route.name !== 'account-logout'
     ) {

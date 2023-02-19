@@ -15,6 +15,9 @@ export const getters = {
   getUserProfile(state) {
     return state.data?.account ?? {}
   },
+  isUserSubscribed(state, getters) {
+    return getters.getUserProfile.status
+  },
   getUser2FAStatus(state, getters, rootState, rootGetters) {
     return state.data?.account.twoFactorAuth
   },

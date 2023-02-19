@@ -42,7 +42,7 @@ export default {
   },
 
   router: {
-    middleware: 'checkTwoFactor',
+    middleware: 'common',
   },
 
   loading: {
