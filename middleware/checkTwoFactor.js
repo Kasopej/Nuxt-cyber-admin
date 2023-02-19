@@ -24,7 +24,6 @@ export default ({ route, store, redirect }) => {
       route.name !== 'account-settings' &&
       route.name !== 'account-logout'
     ) {
-      console.log(route.name)
       if (!store.state.misc.twoFactorModalCanceled) {
         store.commit('misc/TOGGLE_TWOFA_MODAL', true)
       }

@@ -60,7 +60,6 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapActions, mapMutations } = createNamespacedHelpers('auth/companyAuth')
 export default {
   layout: 'account',
-  middleware: 'guest',
 
   data() {
     return {
