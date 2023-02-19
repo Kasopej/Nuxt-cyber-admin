@@ -31,5 +31,6 @@
 <script>
 export default {
   name: 'Account',
+  middleware: 'guest',
 }
 </script>

@@ -106,7 +106,6 @@
 <script>
 export default {
   layout: 'account',
-  middleware: 'guest',
 
   data() {
     return {
