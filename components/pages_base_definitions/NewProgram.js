@@ -7,6 +7,13 @@ import programTypes from '~/assets/presets/programTypes.json'
 const { mapGetters } = createNamespacedHelpers('program')
 
 export default {
+  middleware({ store, redirect }) {
+    console.log('router')
+    if (store.getters['program/getProgramsCount'] >= '3') {
+      store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)
+      redirect('/')
+    }
+  },
   data() {
     return {
       programTypes,
@@ -154,5 +161,12 @@ export default {
           })
       }
     },
+  },
+  created() {
+    console.log('created')
+    if (this.$store.getters['program/getProgramsCount'] === 3) {
+      this.$store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)
+      this.$router.replace(this.prependAdminRoute + '/')
+    }
   },
 }

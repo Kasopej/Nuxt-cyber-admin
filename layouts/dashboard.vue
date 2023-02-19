@@ -58,6 +58,15 @@ export default {
       .then((res) => {
         this.UPDATE_USER_PROFILE(res.user)
       })
+      .then(() => {
+        // load programs count
+        const PROGRAMS_URL = `/load-programs`
+        return this.getHTTPClient()
+          .$get(PROGRAMS_URL)
+          .then((res) => {
+            this.$store.commit('program/UPDATE_PROGRAMS_COUNT', res.data.length)
+          })
+      })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
           color: 'accent',

@@ -2,6 +2,7 @@ export const strict = false
 
 export const state = () => ({
   programsCount: null,
+  popProgramLimitModal: false,
 })
 
 export const getters = {
@@ -11,7 +12,10 @@ export const getters = {
 }
 
 export const mutations = {
-  updateProgramsCount(state, count) {
+  UPDATE_PROGRAMS_COUNT(state, count) {
     state.programsCount = count
+  },
+  TOGGLE_PROGRAM_LIMIT_ALERT(state, value) {
+    state.popProgramLimitModal = value
   },
 }
