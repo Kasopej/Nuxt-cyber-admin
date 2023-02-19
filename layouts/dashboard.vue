@@ -22,17 +22,19 @@
       </section>
 
       <partials-notification-toast />
-      <misc-go-twofa />
-      <misc-payment-dialog />
-      <misc-subscription-expiry-dialog />
+      <dialog-go-twofa />
+      <dialog-payment />
+      <dialog-subscription-expiry />
+      <dialog-programs-limit />
     </template>
   </v-app>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapState } from 'vuex'
 import { debounce } from '~/plugins/utils'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
+const mapRootState = mapState
 
 const debouncedWake = debounce(wake, 5000)
 function wake({ newState }) {
@@ -56,6 +58,15 @@ export default {
       .then((res) => {
         this.UPDATE_USER_PROFILE(res.user)
       })
+      .then(() => {
+        // load programs count
+        const PROGRAMS_URL = `/load-programs`
+        return this.getHTTPClient()
+          .$get(PROGRAMS_URL)
+          .then((res) => {
+            this.$store.commit('program/UPDATE_PROGRAMS_COUNT', res.data.length)
+          })
+      })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
           color: 'accent',
@@ -70,6 +81,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isAdminAuth', 'userAuthSessionConfirmed']),
+    ...mapRootState('preferences', ['darkMode']),
     links() {
       return [
         {
@@ -88,6 +100,17 @@ export default {
           slug: this.prependAdminRoute + '/account/settings/',
         },
       ]
+    },
+    themeBinding() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
+  },
+  watch: {
+    darkMode: {
+      handler(val) {
+        this.$vuetify.theme.dark = val
+      },
+      immediate: true,
     },
   },
   mounted() {

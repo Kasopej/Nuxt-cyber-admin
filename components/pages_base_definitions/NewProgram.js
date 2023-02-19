@@ -155,4 +155,10 @@ export default {
       }
     },
   },
+  created() {
+    if (this.$store.getters['program/getProgramsCount'] === 3) {
+      this.$store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)
+      this.$router.replace(this.prependAdminRoute + '/')
+    }
+  },
 }

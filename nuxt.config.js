@@ -98,7 +98,7 @@ export default {
     [
       'nuxt-vuex-localstorage',
       {
-        localStorage: ['auth'],
+        localStorage: ['auth', 'preferences'],
       },
     ],
   ],
@@ -126,6 +126,7 @@ export default {
       dark: false,
       themes: {
         light: {
+          contrast: colors.shades.black,
           primary: '#c504da',
           accent: '#6921b6',
           secondary: '#f9eded',
@@ -133,15 +134,18 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: '#10b988',
+          anchor: '#c504da',
         },
         dark: {
-          primary: colors.blue.darken2,
+          contrast: colors.shades.white,
+          primary: '#c504da',
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
+          secondary: '#f9eded',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
+          anchor: '#c504da',
         },
       },
     },

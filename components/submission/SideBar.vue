@@ -1,7 +1,10 @@
 <template>
   <aside>
     <nav class="d-flex flex-column fill-height">
-      <div class="grey lighten-5 pa-2 py-4 mx-5 mx-sm-5 mx-md-4 rounded-lg">
+      <div
+        class="grey pa-2 py-4 mx-5 mx-sm-5 mx-md-4 mb-3 rounded-lg"
+        :class="$vuetify.theme.dark ? 'darken-5' : 'lighten-5'"
+      >
         <v-text-field
           v-model.trim="SEARCH.title"
           dense
@@ -76,7 +79,7 @@
                 </article>
               </v-hover> -->
               <SubmissionItemCard :submission="submission" />
-              <v-divider />
+              <v-divider :[oppThemeBinding]="true" />
             </div>
             <partials-pagination
               v-if="submissions.length > 1"
@@ -145,6 +148,9 @@ export default {
       return `&status=${this.SEARCH.actionstate ?? ''}&title=${
         this.SEARCH.title ?? ''
       }`
+    },
+    oppThemeBinding() {
+      return !this.$vuetify.theme.dark ? 'dark' : 'light'
     },
   },
 

@@ -9,7 +9,10 @@
     <v-row>
       <!-- Main section containing programs list -->
       <v-col cols="12" class="px-4">
-        <v-container class="white rounded-lg pa-2 pa-md-8">
+        <v-container
+          class="rounded-lg pa-2 pa-md-8"
+          :class="$vuetify.theme.dark ? 'black' : 'white'"
+        >
           <h2 class="text-center text-2xl text-accent">Manage Programs</h2>
           <!-- Sort & Program count -->
           <div class="d-flex px-2">
@@ -23,8 +26,7 @@
             <!-- Add new Program Action -->
             <div
               v-if="
-                !($fetchState.pending && $fetchState.error) &&
-                programs.length < 3
+                !($fetchState.pending && $fetchState.error) && programsCount < 3
               "
               class="d-flex pb-4"
             >

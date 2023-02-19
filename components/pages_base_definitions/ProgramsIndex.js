@@ -1,3 +1,5 @@
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('program')
 export default {
   data() {
     return {
@@ -17,14 +19,11 @@ export default {
     await this.getHTTPClient()
       .$get(URL)
       .then((res) => {
-        this.programs = [
-          ...res.data,
-          // ...res.data.map((program) => {
-          //   const programClone = { ...program }
-          //   programClone._id += 'abc'
-          //   return programClone
-          // }),
-        ]
+        this.programs = [...res.data]
+        this.$store.commit(
+          'program/UPDATE_PROGRAMS_COUNT',
+          this.programs.length
+        )
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -35,5 +34,11 @@ export default {
             : 'Something occured. Please try again',
         })
       })
+  },
+  computed: {
+    ...mapGetters({ programsCount: 'getProgramsCount' }),
+    themeBinding() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
   },
 }
