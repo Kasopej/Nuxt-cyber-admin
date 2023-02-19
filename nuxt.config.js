@@ -65,6 +65,7 @@ export default {
     { src: '~/plugins/axios' },
     { src: '~/plugins/axios_admin' },
     { src: '~/plugins/globalMixins' },
+    { src: '~/plugins/lifecycle.client' },
     // '~/plugins/mixins'
   ],
 
