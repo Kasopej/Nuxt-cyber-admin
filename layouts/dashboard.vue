@@ -10,7 +10,7 @@
         ></v-progress-circular>
       </section>
     </template>
-    <template v-else>
+    <template v-else-if="userSessionConfirmed">
       <partials-mobile-navigation-drawer :links="links" />
 
       <section
@@ -31,20 +31,13 @@
 import { createNamespacedHelpers } from 'vuex'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
 export default {
-  data() {
-    return {
-      userSessionRunning: false,
-    }
-  },
   async fetch() {
     const URL = this.isAdminAuth ? `/viewProfile` : '/viewProfile'
     // Make upload request to the API
     await this.getHTTPClient()
       .$get(URL)
       .then((res) => {
-        this.UPDATE_USER_PROFILE(res.user).then(() => {
-          this.userSessionRunning = true
-        })
+        this.UPDATE_USER_PROFILE(res.user)
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -59,7 +52,7 @@ export default {
       })
   },
   computed: {
-    ...mapGetters(['isAdminAuth']),
+    ...mapGetters(['isAdminAuth', 'userSessionConfirmed']),
     links() {
       return [
         {
@@ -82,7 +75,7 @@ export default {
   },
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
-    ...mapMutations(['LOG_USER_OUT']),
+    ...mapMutations(['LOG_USER_OUT', 'CONFIRM_USER_SESSION']),
   },
 }
 </script>

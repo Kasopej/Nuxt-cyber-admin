@@ -33,6 +33,12 @@ export const getters = {
     else if (state.authType === 'companyAuth') return state.companyAuth.loggedIn
     return false
   },
+  userSessionConfirmed(state) {
+    if (state.authType === 'adminAuth')
+      return state.adminAuth.userSessionConfirmed
+    else if (state.authType === 'companyAuth')
+      return state.companyAuth.userSessionConfirmed
+  },
 }
 
 export const mutations = {
@@ -60,8 +66,12 @@ export const actions = {
   },
 
   UPDATE_USER_PROFILE({ commit, getters }, payload) {
-    getters.isAdminAuth
-      ? commit('adminAuth/UPDATE_USER_PROFILE', payload)
-      : commit('companyAuth/UPDATE_USER_PROFILE', payload)
+    if (getters.isAdminAuth) {
+      commit('adminAuth/UPDATE_USER_PROFILE', payload)
+      commit('adminAuth/CONFIRM_USER_SESSION')
+    } else {
+      commit('companyAuth/UPDATE_USER_PROFILE', payload)
+      commit('companyAuth/CONFIRM_USER_SESSION')
+    }
   },
 }
