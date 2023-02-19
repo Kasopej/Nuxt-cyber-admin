@@ -33,11 +33,11 @@ export const getters = {
     else if (state.authType === 'companyAuth') return state.companyAuth.loggedIn
     return false
   },
-  userSessionConfirmed(state) {
+  userAuthSessionConfirmed(state) {
     if (state.authType === 'adminAuth')
-      return state.adminAuth.userSessionConfirmed
+      return state.adminAuth.userAuthSessionConfirmed
     else if (state.authType === 'companyAuth')
-      return state.companyAuth.userSessionConfirmed
+      return state.companyAuth.userAuthSessionConfirmed
   },
 }
 
