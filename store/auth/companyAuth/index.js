@@ -21,12 +21,12 @@ export const getters = {
 }
 
 export const mutations = {
-  COMMIT_COMPANY_LOG_IN(state, payload) {
+  COMMIT_LOG_IN(state, payload) {
     state.data = payload
     state.tempUser = null
     state.loggedIn = true
   },
-  KEEP_COMPANY_USER_TMP(state, payload) {
+  KEEP_USER_TMP(state, payload) {
     state.tempUser = payload
   },
 
@@ -40,9 +40,6 @@ export const mutations = {
 
   UPDATE_USER_PROFILE(state, payload) {
     Object.assign(state.data.account, payload)
-  },
-  CONFIRM_USER_SESSION(state) {
-    state.userAuthSessionConfirmed = true
   },
 }
 
