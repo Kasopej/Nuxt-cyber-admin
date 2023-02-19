@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapActions, mapMutations } = createNamespacedHelpers('auth')
 export default {
   layout: 'account',
   middleware: 'guest',
@@ -73,6 +75,8 @@ export default {
   head: { title: 'Sign in' },
 
   methods: {
+    ...mapActions(['LOG_IN']),
+    ...mapMutations(['adminAuth/KEEP_USER_TMP']),
     async login() {
       if (this.$refs.loginForm.validate()) {
         this.$nuxt.$loading.start()
@@ -83,18 +87,14 @@ export default {
         await this.$adminApi
           .post(URL, PAYLOAD)
           .then((response) => {
+            response.data.appAuthType = 'adminAuth'
             if (response.data.account.twoFactorAuth) {
-              this.$store.commit(
-                'auth/adminAuth/KEEP_ADMIN_USER_TMP',
-                response.data
-              )
+              this['adminAuth/KEEP_USER_TMP'](response.data)
               this.$router.replace('/admin/account/verify-twofa')
             } else {
-              this.$store.dispatch(
-                'auth/adminAuth/LOG_ADMIN_USER_IN',
-                response.data
-              )
-              this.$router.replace(this.prependAdminRoute + '/')
+              this.LOG_IN(response.data).then(() => {
+                this.$router.replace(this.prependAdminRoute + '/')
+              })
             }
           })
           .catch((error) => {

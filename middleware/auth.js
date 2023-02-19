@@ -17,7 +17,6 @@ export default ({ $axios, store, route, redirect }) => {
     //  Redirect to login page
     return redirect('/account/login/')
   } else if (route.path === '' || route.path === '/') {
-    console.log('home')
     redirect('/home')
   }
 }
