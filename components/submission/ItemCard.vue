@@ -37,7 +37,7 @@
             >
               #{{ submission.reference }}
             </span>
-            <div class="flex">
+            <div class="flex mt-2">
               <span>Status: {{ submission.actionstate }}</span>
               <div class="ml-auto flex severity-indicator-wrapper items-center">
                 <v-progress-linear

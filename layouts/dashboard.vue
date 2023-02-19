@@ -1,5 +1,5 @@
 <template>
-  <v-app :[themeBinding]="true">
+  <v-app>
     <template v-if="$fetchState.pending">
       <section class="h-screen flex justify-center items-center">
         <v-progress-circular
@@ -22,9 +22,10 @@
       </section>
 
       <partials-notification-toast />
-      <misc-go-twofa />
-      <misc-payment-dialog />
-      <misc-subscription-expiry-dialog />
+      <dialog-go-twofa />
+      <dialog-payment />
+      <dialog-subscription-expiry />
+      <dialog-programs-limit />
     </template>
   </v-app>
 </template>
