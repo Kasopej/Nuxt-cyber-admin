@@ -21,7 +21,7 @@ export default ({ route, store, redirect }) => {
     // if company user
     // must update payment
     if (
-      store.getters['auth/isUserSubscribed'] &&
+      !store.getters['auth/isUserSubscribed'] &&
       route.name !== 'account-settings' &&
       route.name !== 'account-logout'
     ) {
