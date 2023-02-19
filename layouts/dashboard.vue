@@ -23,14 +23,31 @@
 
       <partials-notification-toast />
       <misc-go-twofa />
+      <misc-payment-dialog />
+      <misc-subscription-expiry-dialog />
     </template>
   </v-app>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import { debounce } from '~/plugins/utils'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
+
+const debouncedWake = debounce(wake, 5000)
+function wake({ newState }) {
+  if (newState === 'active') {
+    if (new Date().valueOf() > this.startTime.valueOf() + 3600000) this.$fetch()
+    else this.startTime = new Date()
+  }
+}
+
 export default {
+  data() {
+    return {
+      startTime: new Date(),
+    }
+  },
   async fetch() {
     const URL = this.isAdminAuth ? `/viewProfile` : '/viewProfile'
     // Make upload request to the API
@@ -72,6 +89,12 @@ export default {
         },
       ]
     },
+  },
+  mounted() {
+    window.lifecycle.addEventListener('statechange', debouncedWake.bind(this))
+  },
+  destroyed() {
+    clearTimeout(this.refreshTimer)
   },
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),

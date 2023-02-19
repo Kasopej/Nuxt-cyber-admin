@@ -28,7 +28,6 @@ export default {
     return {}
   },
   computed: {
-    ...mapState('auth', ['authType']),
     ...mapState('misc', ['popTwoFactorModal']),
   },
   methods: {

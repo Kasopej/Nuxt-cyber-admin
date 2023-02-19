@@ -12,6 +12,10 @@ export const getters = {
       throw new Error('Unknown Auth Type')
     }
   },
+  isUserSubscribed(state, getters) {
+    if (getters.isAdminAuth) return getters['adminAuth/isUserSubscribed']
+    else return getters['companyAuth/isUserSubscribed']
+  },
   getToken(state, getters) {
     if (getters.isAdminAuth) return getters['adminAuth/getAdminUserToken']
     else return getters['companyAuth/getCompanyUserToken']

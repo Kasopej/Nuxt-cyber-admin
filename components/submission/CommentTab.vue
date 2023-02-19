@@ -12,7 +12,7 @@
       <partials-empty-data caption="No comments for this submission" />
     </section>
 
-    <section v-else>
+    <section v-else class="comments-section">
       <v-timeline dense align-top>
         <v-timeline-item v-for="comment in comments" :key="comment._id">
           <template #icon>
@@ -63,122 +63,125 @@
           </v-card>
         </v-timeline-item>
       </v-timeline>
-      <div>
+    </section>
+
+    <section class="actions-section">
+      <div class="flex justify-end">
         <v-btn
           v-if="submission.actionstate !== 'closed'"
           color="primary"
-          class="ml-auto d-block"
+          @click="localInitiatePaymentAction"
           >Close Report</v-btn
         >
         <template v-else>
-          <v-btn color="primary" class="ml-auto d-block">Reopen</v-btn>
-          <v-btn color="primary" class="ml-auto d-block">Pay Reward</v-btn>
+          <v-btn color="primary">Reopen</v-btn>
+          <v-btn color="primary ml-2" @click="makePayment">Pay Reward</v-btn>
         </template>
       </div>
-    </section>
 
-    <div class="text-center mt-8">
-      <v-btn
-        v-if="pagination.page < pagination.length"
-        color="primary"
-        elevation="2"
-        :loading="loadingMore"
-        small
-        rounded
-        @click="loadMoreComments"
-      >
-        Add More
-      </v-btn>
-    </div>
-
-    <p v-if="loadingMore" class="text-end mt-4">Adding to list...</p>
-
-    <v-form ref="commentForm" @submit.prevent="postComment">
-      <div class="flex flex-wrap mb-2 items-center">
-        <v-autocomplete
-          v-model="FORM.action"
-          dense
-          outlined
-          label="Action"
-          :items="actions"
+      <div class="text-center mt-8">
+        <v-btn
+          v-if="pagination.page < pagination.length"
+          color="primary"
+          elevation="2"
+          :loading="loadingMore"
+          small
+          rounded
+          @click="loadMoreComments"
         >
-        </v-autocomplete>
-        <!-- <v-switch
+          Add More
+        </v-btn>
+      </div>
+
+      <p v-if="loadingMore" class="text-end mt-4">Adding to list...</p>
+
+      <v-form ref="commentForm" @submit.prevent="postComment">
+        <div class="flex flex-wrap mb-2 items-center">
+          <v-autocomplete
+            v-model="FORM.action"
+            dense
+            outlined
+            label="Action"
+            :items="actions"
+          >
+          </v-autocomplete>
+          <!-- <v-switch
           v-model="FORM.private"
           :label="FORM.private ? 'Open Report?' : 'Close Report?'"
           class="ml-2 mt-0 self-start"
         ></v-switch> -->
-      </div>
-      <div
-        v-show="showCommentSection"
-        class="text-accent headline font-weight-bold py-4"
-      >
-        Post A Response
-      </div>
-
-      <v-card v-show="showCommentSection" class="pa-4" elevation="3">
-        <div class="flex">
-          <v-btn
-            small
-            :outlined="!!commentPreview"
-            color="accent"
-            @click="commentPreview = null"
-            >Write
-            <v-icon small class="ml-2">mdi-fountain-pen-tip</v-icon></v-btn
-          >
-          <v-btn
-            small
-            :outlined="!commentPreview"
-            color="accent"
-            class="mx-2 md:mx-3 inline-block"
-            @click="commentPreview = convertCommentHTML(FORM.comment)"
-            >Preview <v-icon small class="ml-2">mdi-eye</v-icon></v-btn
-          >
-          <v-autocomplete
-            v-model="selectedPresetComment"
-            class="ml-auto fit-content"
-            dense
-            outlined
-            label="Comment Templates"
-            :items="presetComments"
-            item-value="content"
-            item-text="title"
-            @change="FORM.comment = selectedPresetComment"
-          >
-          </v-autocomplete>
         </div>
-        <article class="flex">
-          <v-avatar size="50" class="col-1 py-0 px-0">
-            <img src="/images/dummy.jpg" alt="user profile image" />
-          </v-avatar>
-          <div class="col-11 py-0 px-1">
-            <div
-              v-if="commentPreview"
-              class="elevation-2 relative comment-preview rounded px-2 py-4"
-              v-html="commentPreview"
-            />
-            <v-textarea
-              v-else
-              v-model="FORM.comment"
-              else
-              outlined
-              hide-details
-            />
+        <div
+          v-show="showCommentSection"
+          class="text-accent headline font-weight-bold py-4"
+        >
+          Post A Response
+        </div>
 
-            <div class="pb-4">
-              <small class="grey--text darken-2"
-                >Styling with MarkDown is supported</small
-              >
-            </div>
+        <v-card v-show="showCommentSection" class="pa-4" elevation="3">
+          <div class="flex">
+            <v-btn
+              small
+              :outlined="!!commentPreview"
+              color="accent"
+              @click="commentPreview = null"
+              >Write
+              <v-icon small class="ml-2">mdi-fountain-pen-tip</v-icon></v-btn
+            >
+            <v-btn
+              small
+              :outlined="!commentPreview"
+              color="accent"
+              class="mx-2 md:mx-3 inline-block"
+              @click="commentPreview = convertCommentHTML(FORM.comment)"
+              >Preview <v-icon small class="ml-2">mdi-eye</v-icon></v-btn
+            >
+            <v-autocomplete
+              v-model="selectedPresetComment"
+              class="ml-auto fit-content"
+              dense
+              outlined
+              label="Comment Templates"
+              :items="presetComments"
+              item-value="content"
+              item-text="title"
+              @change="FORM.comment = selectedPresetComment"
+            >
+            </v-autocomplete>
           </div>
-        </article>
-      </v-card>
-      <partials-form-submit-btn
-        :disabled="!formChanged"
-        :progress="formSubmitting"
-        text="Submit"
-      />
-    </v-form>
+          <article class="flex">
+            <v-avatar size="50" class="col-1 py-0 px-0">
+              <img src="/images/dummy.jpg" alt="user profile image" />
+            </v-avatar>
+            <div class="col-11 py-0 px-1">
+              <div
+                v-if="commentPreview"
+                class="elevation-2 relative comment-preview rounded px-2 py-4"
+                v-html="commentPreview"
+              />
+              <v-textarea
+                v-else
+                v-model="FORM.comment"
+                else
+                outlined
+                hide-details
+              />
+
+              <div class="pb-4">
+                <small class="grey--text darken-2"
+                  >Styling with MarkDown is supported</small
+                >
+              </div>
+            </div>
+          </article>
+        </v-card>
+        <partials-form-submit-btn
+          :disabled="!formChanged"
+          :progress="formSubmitting"
+          text="Submit"
+        />
+      </v-form>
+    </section>
   </main>
 </template>
 
@@ -275,11 +278,9 @@ export default {
       const converter = new showdown.Converter()
       return converter.makeHtml(val)
     },
-
     previewComment() {
       this.commentPreview = this.convertCommentHTML(this.FORM.comment)
     },
-
     async postComment() {
       if (this.$refs.commentForm.validate() && this.formChanged) {
         this.$nuxt.$loading.start()
@@ -336,6 +337,16 @@ export default {
     },
     testObjectEqualityWithJSON(obj1 = {}, obj2 = {}) {
       return JSON.stringify(obj1) === JSON.stringify(obj2)
+    },
+    localInitiatePaymentAction() {
+      // temporary
+      const localSubmissionClone = { ...this.submission }
+      localSubmissionClone.actionstate = 'closed'
+      this.$store.commit('submission/SAVE_SUBMISSION', localSubmissionClone)
+    },
+    makePayment() {
+      // make sure payment has not been made already, maybe a field?
+      this.$store.commit('payment/TOGGLE_PAYMENT_MODAL', true)
     },
   },
 }
