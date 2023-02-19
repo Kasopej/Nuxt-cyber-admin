@@ -1,5 +1,10 @@
 <template>
-  <nav class="custom-navbar justify-space-between items-center elevation-3">
+  <nav
+    class="custom-navbar bg justify-space-between items-center elevation-3"
+    :class="
+      $vuetify.theme.dark ? 'bg-black border-black' : 'bg-white border-white'
+    "
+  >
     <div class="flex items-center">
       <v-app-bar-nav-icon
         class="d-sm-none mr-2"
@@ -18,7 +23,8 @@
           :to="link.slug"
           exact
           exact-active-class="primary--text hover:border-none"
-          class="px-2 black--text hover:border-solid hover:border-b border-primary"
+          class="px-2 hover:border-solid hover:border-b border-primary"
+          :class="$vuetify.theme.dark ? 'white--text' : 'black--text'"
           >{{ link.title }}</nuxt-link
         >
       </div>
@@ -109,11 +115,14 @@ export default {
     companyProfile() {
       return this.profile.company[0]
     },
+    themeBinding() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
   },
 
   methods: {
     toggleDarkMode() {
-      // Do nothing
+      this.$store.commit('preferences/TOGGLE_DARK_MODE')
     },
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
@@ -127,10 +136,8 @@ export default {
 .custom-navbar {
   display: flex;
   display: -ms-flexbox;
-  background-color: #fff;
   border-width: 0 0 0.0625rem 0;
   border-style: solid;
-  border-color: #e7eaf3;
   /* height: 3.75rem; */
   /* box-shadow: 0 0.05rem 0.5rem 0 rgba(33, 40, 50, 0.15) !important; */
   position: fixed;

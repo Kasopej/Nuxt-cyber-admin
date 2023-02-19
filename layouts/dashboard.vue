@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :[themeBinding]="true">
     <template v-if="$fetchState.pending">
       <section class="h-screen flex justify-center items-center">
         <v-progress-circular
@@ -30,9 +30,10 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapState } from 'vuex'
 import { debounce } from '~/plugins/utils'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
+const mapRootState = mapState
 
 const debouncedWake = debounce(wake, 5000)
 function wake({ newState }) {
@@ -70,6 +71,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isAdminAuth', 'userAuthSessionConfirmed']),
+    ...mapRootState('preferences', ['darkMode']),
     links() {
       return [
         {
@@ -88,6 +90,17 @@ export default {
           slug: this.prependAdminRoute + '/account/settings/',
         },
       ]
+    },
+    themeBinding() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
+  },
+  watch: {
+    darkMode: {
+      handler(val) {
+        this.$vuetify.theme.dark = val
+      },
+      immediate: true,
     },
   },
   mounted() {

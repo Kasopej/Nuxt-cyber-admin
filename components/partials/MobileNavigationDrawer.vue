@@ -15,17 +15,20 @@
         </nuxt-link>
 
         <div class="subtitle-1">
-          <div
+          <nuxt-link
             v-for="link in links"
             :key="link.title"
-            class="d-block subtitle-1 accent--text px-3 py-2 my-2"
-            @click.stop="gotoLink(link.slug)"
+            exact
+            :to="link.slug"
+            exact-active-class="primary--text hover:border-none"
+            class="px-3 py-2 my-2 d-block subtitle-1 hover:border-solid hover:border-b border-primary"
+            :class="$vuetify.theme.dark ? 'white--text' : 'black--text'"
           >
             <v-icon class="mr-3" color="accent">{{ link.icon }}</v-icon>
             <span>
               {{ link.title }}
             </span>
-          </div>
+          </nuxt-link>
         </div>
       </section>
 
