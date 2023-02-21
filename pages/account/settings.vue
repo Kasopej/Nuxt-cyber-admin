@@ -50,23 +50,10 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
   extends: AccountsBaseDef,
+  layout: 'dashboard',
   middleware: 'auth',
   computed: {
-    ...mapGetters({ profile: 'getUserProfile' }),
-  },
-  watch: {
-    hash(val) {
-      switch (val) {
-        case '#general':
-          this.settingsTab = 0
-          break
-        case '#researchers':
-          this.settingsTab = 1
-          break
-        default:
-          break
-      }
-    },
+    ...mapGetters({ profile: 'getAccount' }),
   },
 }
 </script>

@@ -12,11 +12,11 @@ export const getters = {
   getTempUserData(state) {
     return state.tempUser
   },
-  getUserProfile(state) {
+  getUserAccount(state) {
     return state.data?.account ?? {}
   },
   isUserSubscribed(state, getters) {
-    return getters.getUserProfile.status
+    return getters.getAccount.status
   },
   getUser2FAStatus(state, getters, rootState, rootGetters) {
     return state.data?.account.twoFactorAuth

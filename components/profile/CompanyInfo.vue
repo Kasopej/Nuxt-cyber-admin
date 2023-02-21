@@ -220,7 +220,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('auth', { profile: 'getUserProfile' }),
+    ...mapGetters('auth', { profile: 'getAccount' }),
   },
 
   beforeMount() {

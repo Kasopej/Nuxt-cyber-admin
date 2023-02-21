@@ -4,6 +4,7 @@ export default ({ route, store, redirect }) => {
   if (!store.getters['auth/isLoggedIn']) return
 
   if (route.path === '' || route.path === '/') {
+    console.log('route')
     return redirect('/home')
   }
 

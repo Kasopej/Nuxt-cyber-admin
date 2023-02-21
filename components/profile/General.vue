@@ -4,7 +4,7 @@
       <label class="pt-8 cursor-pointer">
         <v-avatar size="250">
           <v-img
-            :src="FILE_BLOB || profile.company[0].image || '/images/dummy.jpg'"
+            :src="FILE_BLOB || basicProfile.image || '/images/dummy.jpg'"
             class="rounded"
             contain
           />
@@ -102,34 +102,41 @@ export default {
       labelText: 'Click to change',
       FORM: { readOnly: true, company: {}, representative: {}, billing: {} },
 
-      profileEditTab: 0,
+      profileEditTab: null,
       FILE: null,
       FILE_BLOB: null,
     }
   },
 
   computed: {
-    ...mapGetters('auth', { profile: 'getUserProfile' }),
+    ...mapGetters('auth', {
+      profile: 'getAccount',
+      basicProfile: 'getBasicProfile',
+    }),
   },
 
   watch: {
-    hash(val) {
-      switch (val) {
-        case '#company':
-          this.profileEditTab = 0
-          break
-        case '#represenative':
-          this.profileEditTab = 1
-          break
-        case '#billing':
-          this.profileEditTab = 2
-          break
-        case '#security':
-          this.profileEditTab = 3
-          break
-        default:
-          break
-      }
+    hash: {
+      handler(val) {
+        switch (val) {
+          case '#company':
+            this.profileEditTab = 0
+            break
+          case '#represenative':
+            this.profileEditTab = 1
+            break
+          case '#billing':
+            this.profileEditTab = 2
+            break
+          case '#security':
+            this.profileEditTab = 3
+            break
+          default:
+            this.profileEditTab = 0
+            break
+        }
+      },
+      immediate: true,
     },
   },
 

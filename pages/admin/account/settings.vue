@@ -1,17 +1,36 @@
 <template>
   <div>
-    <partials-header :title="profile.firstName" />
+    <!-- <div
+      class="primary pt-10"
+      style="background: linear-gradient(to right, #c504da, #6921b6)"
+    ></div> -->
 
-    <v-main>
+    <v-main
+      class="primary pt-60"
+      style="
+        background: linear-gradient(to right, #c504da, #6921b6);
+        padding-top: 8rem;
+      "
+    >
       <v-container>
-        <div class="white mt-n16 rounded-lg pa-2 pa-md-4 pa-md-8 mx-1">
-          <v-tabs v-model="tab" grow>
-            <v-tab class="text-capitalize">Profile</v-tab>
-            <v-tab class="text-capitalize">Researcher Management</v-tab>
+        <div class="white settings-main rounded-lg pa-2 pa-md-8 mx-1">
+          <v-tabs :value="settingsTab" class="settings-tabs" grow>
+            <v-tab
+              class="text-capitalize"
+              :append="true"
+              :to="prependAdminRoute + '/account/settings#general'"
+              >Manage Profile</v-tab
+            >
+            <v-tab
+              class="text-capitalize"
+              :append="true"
+              :to="prependAdminRoute + '/account/settings#researchers'"
+              >Manage Team</v-tab
+            >
 
-            <v-tabs-items v-model="tab">
+            <v-tabs-items :value="settingsTab">
               <v-tab-item>
-                <profile-modify-index-page :hash="hash" />
+                <profile-general :hash="hash" />
               </v-tab-item>
 
               <v-tab-item>
@@ -32,9 +51,10 @@ const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 
 export default {
   extends: AccountsBaseDef,
+  layout: 'adminDashboard',
   middleware: 'admin_auth',
   computed: {
-    ...mapGetters({ profile: 'getUserProfile' }),
+    ...mapGetters({ profile: 'getAccount' }),
   },
 }
 </script>

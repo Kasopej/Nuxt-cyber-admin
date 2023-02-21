@@ -1,6 +1,7 @@
 // This is the middleware for pages that requires authentication
 
 export default ({ $axios, store, route, redirect }) => {
+  console.log('should not call auth')
   let authenticated = ''
 
   try {

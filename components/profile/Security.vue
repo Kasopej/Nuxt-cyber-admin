@@ -114,7 +114,7 @@ export default {
             icon: 'mdi-alert-outline',
             text: error.response
               ? error.response.data.message
-              : 'Oops! programme not found',
+              : 'Oops! 2FA registration not successful',
           })
         })
     }
@@ -122,7 +122,7 @@ export default {
 
   computed: {
     ...mapGetters('auth', {
-      profile: 'getUserProfile',
+      profile: 'getAccount',
       isAdminAuth: 'isAdminAuth',
     }),
   },
