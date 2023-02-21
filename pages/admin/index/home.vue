@@ -25,7 +25,7 @@
             <div class="cursor" @click="() => $router.push('/submissions')">
               <h3 class="w-max">My Hunters</h3>
               <span class="fit-content mx-auto text-h3">{{
-                submissionsNumber
+                huntersNumber
               }}</span>
             </div>
           </v-col>
@@ -53,7 +53,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      totalPrivateProgramsNumber: 0,
+      huntersNumber: 0,
       submissionsNumber: 0,
       badgesNumber: null,
       bounty: null,
@@ -71,15 +71,19 @@ export default {
   methods: {
     async getNumberOfPrivatePrograms() {
       const URL = `get-private-submission`
-      await this.$axios.$get(URL).then((res) => {
-        this.totalPrivateProgramsNumber = res.data
-      })
+      await this.getHTTPClient()
+        .$get(URL)
+        .then((res) => {
+          this.submissionsNumber = res.data
+        })
     },
     async getNumberOfSubmissions() {
-      const URL = `get-all-submissions/all?page=1&limit=1000`
-      await this.$axios.$get(URL).then(({ data: { docs = [] } }) => {
-        this.submissionsNumber = docs.length
-      })
+      const URL = `countAllHunters`
+      await this.getHTTPClient()
+        .$get(URL)
+        .then(({ hunters }) => {
+          this.huntersNumber = hunters
+        })
     },
   },
 }

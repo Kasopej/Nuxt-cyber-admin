@@ -25,9 +25,7 @@
           <v-card class="pa-3 mx-1">
             <!-- Add new Program Action -->
             <div
-              v-if="
-                !($fetchState.pending && $fetchState.error) && programsCount < 3
-              "
+              v-if="!($fetchState.pending && $fetchState.error)"
               class="d-flex pb-4"
             >
               <v-btn color="primary" to="/program/new">Add Program</v-btn>
@@ -77,6 +75,6 @@
 import ProgramsIndexBase from '~/components/pages_base_definitions/ProgramsIndex'
 export default {
   extends: ProgramsIndexBase,
-  middleware: 'auth',
+  middleware: 'admin_auth',
 }
 </script>

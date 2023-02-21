@@ -580,7 +580,7 @@
 import NewProgramBase from '~/components/pages_base_definitions/NewProgram'
 export default {
   extends: NewProgramBase,
-  middleware: 'auth',
+  middleware: 'admin_auth',
 }
 </script>
 

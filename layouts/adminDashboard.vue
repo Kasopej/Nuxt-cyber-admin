@@ -18,7 +18,7 @@
         class="d-flex flex-column overflow-y-hidden"
       >
         <partials-navigation-bar :links="links" />
-        <main class="flex-grow-1 overflow-y-auto mt-28">
+        <main class="flex-grow-1 mt-32">
           <v-select
             class="w-1/2 sm:w-1/4"
             outlined
@@ -31,7 +31,7 @@
             @input="SELECT_COMPANY_ACCOUNT"
           ></v-select>
           <template v-if="managedCompany">
-            <nuxt />
+            <nuxt class="overflow-y-auto" />
           </template>
         </main>
       </section>
@@ -122,6 +122,9 @@ export default {
         this.$vuetify.theme.dark = val
       },
       immediate: true,
+    },
+    managedCompany() {
+      this.$fetch()
     },
   },
   created() {
