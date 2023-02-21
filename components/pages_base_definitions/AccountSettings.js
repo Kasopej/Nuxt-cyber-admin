@@ -1,3 +1,6 @@
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
+
 export default {
   beforeRouteEnter(to, from, next) {
     next((vm) => {
@@ -13,6 +16,9 @@ export default {
       settingsTab: null,
       hash: '',
     }
+  },
+  computed: {
+    ...mapGetters({ profile: 'getAccount' }),
   },
   watch: {
     hash: {

@@ -185,6 +185,13 @@ import countryCodesJSON from '~/assets/json/countryCodes.json'
 import industriesJSON from '~/assets/json/industries.json'
 
 export default {
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
+  },
+
   data() {
     return {
       countries: countriesJSON,

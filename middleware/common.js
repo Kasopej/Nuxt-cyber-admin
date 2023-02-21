@@ -4,8 +4,10 @@ export default ({ route, store, redirect }) => {
   if (!store.getters['auth/isLoggedIn']) return
 
   if (route.path === '' || route.path === '/') {
-    console.log('route')
     return redirect('/home')
+  }
+  if (route.path === '/admin') {
+    return redirect('/admin/home')
   }
 
   // if user is admin, prevent navigation until user activates 2FA
@@ -15,7 +17,8 @@ export default ({ route, store, redirect }) => {
         route.fullPath !== '/admin/account/settings#security' &&
         route.path !== '/admin/account/logout'
       ) {
-        redirect('/admin/account/settings#security')
+        // redirect('/admin/account/settings#security')
+        store.commit('misc/TOGGLE_TWOFA_MODAL', true)
       }
     }
   } else {

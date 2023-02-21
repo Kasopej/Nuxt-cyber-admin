@@ -4,7 +4,7 @@
       <label class="pt-8 cursor-pointer">
         <v-avatar size="250">
           <v-img
-            :src="FILE_BLOB || basicProfile.image || '/images/dummy.jpg'"
+            :src="FILE_BLOB || profile.company[0].image || '/images/dummy.jpg'"
             class="rounded"
             contain
           />
@@ -71,13 +71,13 @@
 
         <v-tabs-items :value="profileEditTab" class="pt-8">
           <v-tab-item>
-            <profile-company-info />
+            <profile-company-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
-            <profile-representative-info />
+            <profile-representative-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
-            <profile-billing-info />
+            <profile-billing-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
             <profile-security />
@@ -89,12 +89,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: {
     hash: {
       type: String,
       default: '',
+    },
+    profile: {
+      type: Object,
+      required: true,
     },
   },
   data() {
@@ -108,35 +111,25 @@ export default {
     }
   },
 
-  computed: {
-    ...mapGetters('auth', {
-      profile: 'getAccount',
-      basicProfile: 'getBasicProfile',
-    }),
-  },
-
   watch: {
-    hash: {
-      handler(val) {
-        switch (val) {
-          case '#company':
-            this.profileEditTab = 0
-            break
-          case '#represenative':
-            this.profileEditTab = 1
-            break
-          case '#billing':
-            this.profileEditTab = 2
-            break
-          case '#security':
-            this.profileEditTab = 3
-            break
-          default:
-            this.profileEditTab = 0
-            break
-        }
-      },
-      immediate: true,
+    hash(val) {
+      switch (val) {
+        case '#company':
+          this.profileEditTab = 0
+          break
+        case '#represenative':
+          this.profileEditTab = 1
+          break
+        case '#billing':
+          this.profileEditTab = 2
+          break
+        case '#security':
+          this.profileEditTab = 3
+          break
+        default:
+          this.profileEditTab = 0
+          break
+      }
     },
   },
 

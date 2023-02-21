@@ -30,7 +30,7 @@
 
             <v-tabs-items :value="settingsTab">
               <v-tab-item>
-                <profile-general :hash="hash" />
+                <profile-general :hash="hash" :profile="profile" />
               </v-tab-item>
 
               <v-tab-item>
@@ -46,15 +46,10 @@
 
 <script>
 import AccountsBaseDef from 'PageBases/AccountSettings'
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
   extends: AccountsBaseDef,
   layout: 'dashboard',
   middleware: 'auth',
-  computed: {
-    ...mapGetters({ profile: 'getAccount' }),
-  },
 }
 </script>
 
