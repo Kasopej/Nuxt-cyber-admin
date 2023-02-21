@@ -50,6 +50,8 @@ export const mutations = {
     Object.assign(state.data.account, payload)
   },
   SELECT_COMPANY_ACCOUNT(state, payload) {
+    console.log(payload)
+    state.data.company = null
     state.data.company = {} // cannot Object.assign to undefined/null
     state.data.company = Object.assign(state.data.company, payload)
   },

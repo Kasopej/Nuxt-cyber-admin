@@ -65,7 +65,7 @@ export default {
     { src: '~/plugins/axios_admin' },
     { src: '~/plugins/globalMixins' },
     { src: '~/plugins/lifecycle.client' },
-    // '~/plugins/mixins'
+    { src: '~/plugins/vueBus' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

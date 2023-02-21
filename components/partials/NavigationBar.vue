@@ -107,13 +107,15 @@ export default {
   },
 
   data() {
-    return {}
+    return {
+      companyAccount: {},
+    }
   },
 
   computed: {
     ...mapGetters('auth', {
-      profile: 'getAccount',
       basicProfile: 'getBasicProfile',
+      isAdmin: 'isAdminAuth',
     }),
     themeBinding() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'

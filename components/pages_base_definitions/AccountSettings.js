@@ -18,7 +18,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ profile: 'getAccount' }),
+    ...mapGetters({
+      userAccount: 'companyAuth/getUserAccount',
+      isAdmin: 'isAdminAuth',
+    }),
+    companyAccount() {
+      return this.$vueBus.companyAccount
+    },
+    profile() {
+      return this.isAdmin ? this.companyAccount : this.userAccount
+    },
   },
   watch: {
     hash: {
