@@ -76,11 +76,11 @@ export default {
             : 'Session Expired. Please log in',
         })
         this.LOG_USER_OUT()
-        this.$router.replace(this.prependAdminRoute + '/account/logout')
+        this.$router.replace(this.prependAdminRoute + '/account/login')
       })
   },
   computed: {
-    ...mapGetters(['isAdminAuth', 'userAuthSessionConfirmed']),
+    ...mapGetters(['isAdminAuth']),
     ...mapRootState('preferences', ['darkMode']),
     links() {
       return [
@@ -116,12 +116,9 @@ export default {
   mounted() {
     window.lifecycle.addEventListener('statechange', debouncedWake.bind(this))
   },
-  destroyed() {
-    clearTimeout(this.refreshTimer)
-  },
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
-    ...mapMutations(['LOG_USER_OUT', 'CONFIRM_USER_SESSION']),
+    ...mapMutations(['LOG_USER_OUT']),
   },
 }
 </script>

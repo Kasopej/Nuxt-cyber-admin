@@ -39,15 +39,15 @@ export const getters = {
       : getters['companyAuth/getUserAccount'].company?.[0] ?? {}
 
     // format to basic profile format
-    return basicProfile.company?.[0]
+    return getters.isAdminAuth
       ? {
-          email: basicProfile.companyEmail,
-          name: basicProfile.companyName,
+          email: basicProfile.email,
+          name: basicProfile.firstName,
           image: basicProfile.image,
         }
       : {
-          email: basicProfile.email,
-          name: basicProfile.firstName,
+          email: basicProfile.companyEmail,
+          name: basicProfile.companyName,
           image: basicProfile.image,
         }
   },

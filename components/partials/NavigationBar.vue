@@ -11,7 +11,7 @@
         @click.stop="$store.commit('navigationDrawer/TOGGLE_STATE')"
       />
       <nuxt-link
-        to="/"
+        :to="prependAdminRoute + '/'"
         class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-2"
       >
         <v-img src="/images/logo-app-bar.png" />
@@ -126,7 +126,7 @@ export default {
     },
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
-      this.$router.replace(this.prependAdminRoute + '/account/logout')
+      this.$router.replace(this.prependAdminRoute + '/account/login')
     },
   },
 }

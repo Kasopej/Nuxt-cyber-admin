@@ -105,7 +105,7 @@ export default {
       labelText: 'Click to change',
       FORM: { readOnly: true, company: {}, representative: {}, billing: {} },
 
-      profileEditTab: null,
+      profileEditTab: 0,
       FILE: null,
       FILE_BLOB: null,
     }

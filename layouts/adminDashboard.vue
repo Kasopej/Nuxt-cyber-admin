@@ -18,7 +18,7 @@
         class="d-flex flex-column overflow-y-hidden"
       >
         <partials-navigation-bar :links="links" />
-        <main class="flex-grow-1 overflow-y-auto mt-24">
+        <main class="flex-grow-1 overflow-y-auto mt-28">
           <v-select
             class="w-1/2 sm:w-1/4"
             outlined
@@ -30,7 +30,9 @@
             label="Select a Company"
             @input="SELECT_COMPANY_ACCOUNT"
           ></v-select>
-          <nuxt v-if="managedCompany" />
+          <template v-if="managedCompany">
+            <nuxt />
+          </template>
         </main>
       </section>
 
@@ -44,9 +46,10 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapState } from 'vuex'
 import { debounce } from '~/plugins/utils'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
+const mapRootState = mapState
 
 const debouncedWake = debounce(wake, 5000)
 function wake({ newState }) {
@@ -80,12 +83,16 @@ export default {
             : 'Session Expired. Please log in',
         })
         this.LOG_USER_OUT()
-        this.$router.replace(this.prependAdminRoute + '/account/logout')
+        this.$router.replace(this.prependAdminRoute + '/account/login')
       })
   },
   computed: {
-    ...mapGetters(['isAdminAuth', 'userAuthSessionConfirmed']),
+    ...mapGetters(['isAdminAuth']),
     ...mapGetters({ managedCompany: 'adminAuth/managedCompanyAccount' }),
+    ...mapRootState('preferences', ['darkMode']),
+    // ...mapRootState('auth/adminAuth', {
+    //   managedCompany: (state) => state.data.company,
+    // }),
     links() {
       return [
         {
@@ -123,12 +130,9 @@ export default {
   mounted() {
     window.lifecycle.addEventListener('statechange', debouncedWake.bind(this))
   },
-  destroyed() {
-    clearTimeout(this.refreshTimer)
-  },
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
-    ...mapMutations(['LOG_USER_OUT', 'CONFIRM_USER_SESSION']),
+    ...mapMutations(['LOG_USER_OUT']),
     ...mapMutations({
       SELECT_COMPANY_ACCOUNT: 'adminAuth/SELECT_COMPANY_ACCOUNT',
       UNSELECT_COMPANY_ACCOUNT: 'adminAuth/UNSELECT_COMPANY_ACCOUNT',

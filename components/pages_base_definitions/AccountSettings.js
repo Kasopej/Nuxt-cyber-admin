@@ -13,7 +13,7 @@ export default {
   },
   data() {
     return {
-      settingsTab: null,
+      settingsTab: 0,
       hash: '',
     }
   },

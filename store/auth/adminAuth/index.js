@@ -2,7 +2,6 @@ export const state = () => ({
   data: null,
   tempUser: null,
   loggedIn: false,
-  userAuthSessionConfirmed: false,
 })
 
 export const getters = {
@@ -52,7 +51,7 @@ export const mutations = {
   },
   SELECT_COMPANY_ACCOUNT(state, payload) {
     state.data.company = {} // cannot Object.assign to undefined/null
-    Object.assign(state.data.company, payload)
+    state.data.company = Object.assign(state.data.company, payload)
   },
   UNSELECT_COMPANY_ACCOUNT(state, payload) {
     state.data.company = null
