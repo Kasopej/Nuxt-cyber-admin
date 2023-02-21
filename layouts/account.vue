@@ -24,7 +24,7 @@
     </div>
 
     <partials-notification-toast />
-    <misc-go-twofa />
+    <dialog-go-twofa />
   </v-app>
 </template>
 

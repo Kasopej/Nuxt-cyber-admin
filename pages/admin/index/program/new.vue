@@ -580,13 +580,7 @@
 import NewProgramBase from '~/components/pages_base_definitions/NewProgram'
 export default {
   extends: NewProgramBase,
-  middleware: 'auth',
-  created() {
-    if (this.$store.getters['program/getProgramsCount'] === 3) {
-      this.$store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)
-      this.$router.replace(this.prependAdminRoute + '/')
-    }
-  },
+  middleware: 'admin_auth',
 }
 </script>
 

@@ -71,13 +71,13 @@
 
         <v-tabs-items :value="profileEditTab" class="pt-8">
           <v-tab-item>
-            <profile-company-info />
+            <profile-company-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
-            <profile-representative-info />
+            <profile-representative-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
-            <profile-billing-info />
+            <profile-billing-info :profile="profile" />
           </v-tab-item>
           <v-tab-item>
             <profile-security />
@@ -89,12 +89,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   props: {
     hash: {
       type: String,
       default: '',
+    },
+    profile: {
+      type: Object,
+      required: true,
     },
   },
   data() {
@@ -106,10 +109,6 @@ export default {
       FILE: null,
       FILE_BLOB: null,
     }
-  },
-
-  computed: {
-    ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
   watch: {
@@ -128,6 +127,7 @@ export default {
           this.profileEditTab = 3
           break
         default:
+          this.profileEditTab = 0
           break
       }
     },

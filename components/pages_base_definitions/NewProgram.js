@@ -114,14 +114,6 @@ export default {
 
     async createProgram() {
       if (this.$refs.stepFormSix.validate()) {
-        if (this.programsCount >= 3) {
-          this.$store.commit('notification/SHOW', {
-            color: 'accent',
-            icon: 'mdi-alert-outline',
-            text: 'You cannot create more than 3 programs',
-          })
-          return
-        }
         this.$nuxt.$loading.start()
 
         const URL = `/create-program`
@@ -154,11 +146,5 @@ export default {
           })
       }
     },
-  },
-  created() {
-    if (this.$store.getters['program/getProgramsCount'] === 3) {
-      this.$store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)
-      this.$router.replace(this.prependAdminRoute + '/')
-    }
   },
 }

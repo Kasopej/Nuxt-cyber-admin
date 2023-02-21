@@ -18,7 +18,22 @@
         class="d-flex flex-column overflow-y-hidden"
       >
         <partials-navigation-bar :links="links" />
-        <nuxt class="flex-grow-1 overflow-y-auto" />
+        <main class="flex-grow-1 mt-32">
+          <v-select
+            class="w-1/2 sm:w-1/4"
+            outlined
+            :value="managedCompany"
+            :items="allCompanies"
+            :item-text="(item) => item.company[0].companyName"
+            item-value="_id"
+            return-object
+            label="Select a Company"
+            @input="SELECT_COMPANY_ACCOUNT"
+          ></v-select>
+          <template v-if="managedCompany">
+            <nuxt class="overflow-y-auto" />
+          </template>
+        </main>
       </section>
 
       <partials-notification-toast />
@@ -48,24 +63,16 @@ export default {
   data() {
     return {
       startTime: new Date(),
+      allCompanies: [],
     }
   },
   async fetch() {
-    const URL = this.isAdminAuth ? `/viewProfile` : '/viewProfile'
+    const URL = '/getAllCompanies'
     // Make upload request to the API
     await this.getHTTPClient()
       .$get(URL)
       .then((res) => {
-        this.UPDATE_USER_PROFILE(res.user)
-      })
-      .then(() => {
-        // load programs count
-        const PROGRAMS_URL = `/load-programs`
-        return this.getHTTPClient()
-          .$get(PROGRAMS_URL)
-          .then((res) => {
-            this.$store.commit('program/UPDATE_PROGRAMS_COUNT', res.data.length)
-          })
+        this.allCompanies = res.companies
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -81,7 +88,11 @@ export default {
   },
   computed: {
     ...mapGetters(['isAdminAuth']),
+    ...mapGetters({ managedCompany: 'adminAuth/managedCompanyAccount' }),
     ...mapRootState('preferences', ['darkMode']),
+    // ...mapRootState('auth/adminAuth', {
+    //   managedCompany: (state) => state.data.company,
+    // }),
     links() {
       return [
         {
@@ -112,6 +123,12 @@ export default {
       },
       immediate: true,
     },
+    managedCompany() {
+      this.$fetch()
+    },
+  },
+  created() {
+    this.UNSELECT_COMPANY_ACCOUNT()
   },
   mounted() {
     window.lifecycle.addEventListener('statechange', debouncedWake.bind(this))
@@ -119,6 +136,10 @@ export default {
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
     ...mapMutations(['LOG_USER_OUT']),
+    ...mapMutations({
+      SELECT_COMPANY_ACCOUNT: 'adminAuth/SELECT_COMPANY_ACCOUNT',
+      UNSELECT_COMPANY_ACCOUNT: 'adminAuth/UNSELECT_COMPANY_ACCOUNT',
+    }),
   },
 }
 </script>

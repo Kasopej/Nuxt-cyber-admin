@@ -28,9 +28,28 @@ export const getters = {
     if (getters.isAdminAuth) return getters['adminAuth/getUser2FAStatus']
     else return getters['companyAuth/getUser2FAStatus']
   },
-  getUserProfile(state, getters) {
-    if (getters.isAdminAuth) return getters['adminAuth/getUserProfile']
-    else return getters['companyAuth/getUserProfile']
+  getAccount(state, getters) {
+    if (getters.isAdminAuth)
+      return getters['adminAuth/getManagedCompanyAccount']
+    else return getters['companyAuth/getUserAccount']
+  },
+  getBasicProfile(state, getters) {
+    const basicProfile = getters.isAdminAuth
+      ? getters['adminAuth/getUserAccount']
+      : getters['companyAuth/getUserAccount'].company?.[0] ?? {}
+
+    // format to basic profile format
+    return getters.isAdminAuth
+      ? {
+          email: basicProfile.email,
+          name: basicProfile.firstName,
+          image: basicProfile.image,
+        }
+      : {
+          email: basicProfile.companyEmail,
+          name: basicProfile.companyName,
+          image: basicProfile.image,
+        }
   },
   isLoggedIn(state, getters) {
     if (state.authType === 'adminAuth') return state.adminAuth.loggedIn

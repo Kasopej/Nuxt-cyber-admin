@@ -112,11 +112,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import countriesJSON from '~/assets/json/countries.json'
 import countryCodesJSON from '~/assets/json/countryCodes.json'
 
 export default {
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       countries: countriesJSON,
@@ -149,10 +154,6 @@ export default {
         ],
       },
     }
-  },
-
-  computed: {
-    ...mapGetters('auth', { profile: 'getUserProfile' }),
   },
 
   mounted() {

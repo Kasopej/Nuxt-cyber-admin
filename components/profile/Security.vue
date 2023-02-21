@@ -86,8 +86,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   data() {
     return {
@@ -114,17 +112,10 @@ export default {
             icon: 'mdi-alert-outline',
             text: error.response
               ? error.response.data.message
-              : 'Oops! programme not found',
+              : 'Oops! 2FA registration not successful',
           })
         })
     }
-  },
-
-  computed: {
-    ...mapGetters('auth', {
-      profile: 'getUserProfile',
-      isAdminAuth: 'isAdminAuth',
-    }),
   },
 
   methods: {
@@ -138,8 +129,8 @@ export default {
               icon: 'mdi-check',
               text: res.message,
             })
-
-            this.$router.push(this.prependAdminRoute + '/account/logout')
+            this.$store.commit('auth/LOG_USER_OUT')
+            this.$router.push(this.prependAdminRoute + '/account/login')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

@@ -11,7 +11,7 @@
         @click.stop="$store.commit('navigationDrawer/TOGGLE_STATE')"
       />
       <nuxt-link
-        to="/"
+        :to="prependAdminRoute + '/'"
         class="fill-height d-flex align-center grey lighten-3 px-4 px-lg-16 py-2"
       >
         <v-img src="/images/logo-app-bar.png" />
@@ -41,9 +41,9 @@
         <v-btn icon class="mx-8" v-bind="attrs" v-on="on">
           <v-avatar color="secondary">
             <v-img
-              v-if="companyProfile.image"
+              v-if="basicProfile.image"
               cover
-              :src="companyProfile.image"
+              :src="basicProfile.image"
               alt="Profile"
             />
             <v-icon v-else color="primary" size="50">mdi-account-circle</v-icon>
@@ -55,10 +55,10 @@
         <v-list-item :to="prependAdminRoute + '/account/settings/'">
           <v-list-item-title>
             <div class="subtitle-1 text-capitalize font-weight-bold">
-              {{ companyProfile.companyName }}
+              {{ basicProfile.name }}
             </div>
             <div class="grey--text my-2">
-              {{ companyProfile.companyEmail }}
+              {{ basicProfile.email }}
             </div>
           </v-list-item-title>
         </v-list-item>
@@ -111,10 +111,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters('auth', { profile: 'getUserProfile' }),
-    companyProfile() {
-      return this.profile.company[0]
-    },
+    ...mapGetters('auth', {
+      profile: 'getAccount',
+      basicProfile: 'getBasicProfile',
+    }),
     themeBinding() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'
     },
@@ -126,7 +126,7 @@ export default {
     },
     logout() {
       this.$store.commit('auth/LOG_USER_OUT')
-      this.$router.replace(this.prependAdminRoute + '/account/logout')
+      this.$router.replace(this.prependAdminRoute + '/account/login')
     },
   },
 }

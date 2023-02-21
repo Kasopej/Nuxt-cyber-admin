@@ -1,5 +1,5 @@
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters } = createNamespacedHelpers('program')
+import { createNamespacedHelpers, mapGetters } from 'vuex'
+const { mapGetters: mapProgramGetters } = createNamespacedHelpers('program')
 export default {
   data() {
     return {
@@ -14,12 +14,12 @@ export default {
   },
 
   async fetch() {
-    const URL = `/load-programs`
+    const URL = this.isAdminAuth ? `/getAllPrograms` : `/load-programs`
     // Make upload request to the API
     await this.getHTTPClient()
       .$get(URL)
       .then((res) => {
-        this.programs = [...res.data]
+        this.programs = [...(res.data ?? res.programs.docs)]
         this.$store.commit(
           'program/UPDATE_PROGRAMS_COUNT',
           this.programs.length
@@ -36,7 +36,8 @@ export default {
       })
   },
   computed: {
-    ...mapGetters({ programsCount: 'getProgramsCount' }),
+    ...mapProgramGetters({ programsCount: 'getProgramsCount' }),
+    ...mapGetters('auth', ['isAdminAuth']),
     themeBinding() {
       return this.$vuetify.theme.dark ? 'dark' : 'light'
     },
