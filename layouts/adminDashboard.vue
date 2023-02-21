@@ -33,6 +33,7 @@
           <template v-if="managedCompany">
             <nuxt class="overflow-y-auto" />
           </template>
+          <partials-empty-data v-else caption="You must select a company" />
         </main>
       </section>
 
