@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -64,9 +63,6 @@ export default {
       this.getNumberOfPrivatePrograms(),
       this.getNumberOfSubmissions(),
     ])
-  },
-  computed: {
-    ...mapGetters('auth', { USER: 'getAccount' }),
   },
   methods: {
     async getNumberOfPrivatePrograms() {

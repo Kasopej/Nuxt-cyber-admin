@@ -64,6 +64,7 @@ export default {
     return {
       startTime: new Date(),
       allCompanies: [],
+      managedCompany: null,
     }
   },
   async fetch() {
@@ -88,7 +89,7 @@ export default {
   },
   computed: {
     ...mapGetters(['isAdminAuth']),
-    ...mapGetters({ managedCompany: 'adminAuth/managedCompanyAccount' }),
+    // ...mapGetters({ managedCompany: 'adminAuth/managedCompanyAccount' }),
     ...mapRootState('preferences', ['darkMode']),
     // ...mapRootState('auth/adminAuth', {
     //   managedCompany: (state) => state.data.company,
@@ -136,10 +137,19 @@ export default {
   methods: {
     ...mapActions(['UPDATE_USER_PROFILE']),
     ...mapMutations(['LOG_USER_OUT']),
-    ...mapMutations({
-      SELECT_COMPANY_ACCOUNT: 'adminAuth/SELECT_COMPANY_ACCOUNT',
-      UNSELECT_COMPANY_ACCOUNT: 'adminAuth/UNSELECT_COMPANY_ACCOUNT',
-    }),
+    // ...mapMutations({
+    //   SELECT_COMPANY_ACCOUNT: 'adminAuth/SELECT_COMPANY_ACCOUNT',
+    //   UNSELECT_COMPANY_ACCOUNT: 'adminAuth/UNSELECT_COMPANY_ACCOUNT',
+    // }),
+    SELECT_COMPANY_ACCOUNT(companyObject) {
+      this.$vueBus.$emit('company-selected', companyObject)
+      this.managedCompany = companyObject
+      this.$vueBus.companyAccount = companyObject
+    },
+    UNSELECT_COMPANY_ACCOUNT() {
+      this.$vueBus.$emit('company-unselected')
+      this.$vueBus.companyAccount = {}
+    },
   },
 }
 </script>
