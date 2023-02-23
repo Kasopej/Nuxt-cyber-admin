@@ -10,7 +10,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="closeDialog">Close</v-btn>
+          <v-btn color="primary" text @click="closeDialog">Pay</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,7 +28,28 @@ export default {
   },
   methods: {
     closeDialog() {
-      this.$store.commit('payment/TOGGLE_SUBSCRIPTION_ALERT', false)
+      // this.$store.commit('payment/TOGGLE_SUBSCRIPTION_ALERT', false)
+      // const paymentForm = document.getElementById('paymentForm')
+      // paymentForm.addEventListener('submit', payWithPaystack, false)
+      function payWithPaystack() {
+        const handler = window.PaystackPop.setup({
+          key: 'pk_test_5a18ef95bd93c6b9679b47c88c3ad15cfcbba0a2', // Replace with your public key
+          email: 'kasope@getMaxListeners.com',
+          amount: 100,
+          ref: '' + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+          // label: "Optional string that replaces customer email"
+          onClose() {
+            alert('Window closed.')
+          },
+          callback(response) {
+            const message = 'Payment complete! Reference: ' + response.reference
+            alert(message)
+          },
+        })
+
+        handler.openIframe()
+      }
+      payWithPaystack()
     },
   },
 }

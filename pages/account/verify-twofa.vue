@@ -30,10 +30,11 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions, mapGetters } = createNamespacedHelpers('auth/companyAuth')
+import LoginBase from '~/components/pages_base_definitions/Login'
+const { mapActions } = createNamespacedHelpers('auth')
+const { mapGetters } = createNamespacedHelpers('auth/companyAuth')
 export default {
-  layout: 'account',
-
+  extends: LoginBase,
   data() {
     return {
       form: {
@@ -49,7 +50,7 @@ export default {
   head: { title: 'verify 2FA' },
 
   computed: {
-    ...mapGetters(['getTempUserData']),
+    ...mapGetters({ tempUserData: 'getTempUserData' }),
   },
 
   mounted() {
@@ -59,23 +60,22 @@ export default {
   },
 
   methods: {
-    ...mapActions(['LOG_COMPANY_USER_IN']),
+    ...mapActions(['LOG_IN']),
     async verify() {
       if (this.$refs.tokenForm.validate()) {
         this.$nuxt.$loading.start()
         this.submittingForm = true
+        this.form.temp2FAKey = this.tempUserData.temp2FAKey
 
-        const userAuthData =
-          this.$store.getters['auth/companyAuth/getTempUserData']
-        this.form.temp2FAKey = userAuthData.temp2FAKey
-
-        const uri = `/verify-2fa-login/${userAuthData.userId}`
+        const uri = `/verify-2fa-login/${this.tempUserData.userId}`
 
         await this.$axios
           .post(uri, this.form)
           .then((response) => {
-            this.LOG_COMPANY_USER_IN(response.data)
-            this.$router.replace('/')
+            response.data.appAuthType = 'companyAuth'
+            this.LOG_IN(response.data).then(() => {
+              this.$router.replace(this.prependAdminRoute + '/')
+            })
           })
           .catch((error) => {
             this.submittingForm = false

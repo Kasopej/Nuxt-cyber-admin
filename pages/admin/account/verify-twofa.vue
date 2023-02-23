@@ -31,11 +31,11 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapActions, mapGetters } = createNamespacedHelpers('auth/adminAuth')
+import LoginBase from '~/components/pages_base_definitions/Login'
+const { mapActions } = createNamespacedHelpers('auth')
+const { mapGetters } = createNamespacedHelpers('auth/adminAuth')
 export default {
-  layout: 'account',
-  middleware: 'guest',
-
+  extends: LoginBase,
   data() {
     return {
       form: {
@@ -50,32 +50,31 @@ export default {
   head: { title: 'verify 2FA' },
 
   computed: {
-    ...mapGetters(['getTempUserData']),
+    ...mapGetters({ tempUserData: 'getTempUserData' }),
   },
 
   mounted() {
-    if (this.getTempUserData === null) {
+    if (this.tempUserData === null) {
       this.$router.push('/admin/account/login')
     }
   },
 
   methods: {
-    ...mapActions(['LOG_ADMIN_USER_IN']),
+    ...mapActions(['LOG_IN']),
     async verify() {
       if (this.$refs.tokenForm.validate()) {
         this.$nuxt.$loading.start()
+        this.form.temp2FAKey = this.tempUserData.account.temp2FAKey
 
-        const userAuthData =
-          this.$store.getters['auth/adminAuth/getTempUserData']
-        this.form.temp2FAKey = userAuthData.account.temp2FAKey
-
-        const uri = `/verify-2fa-login/${userAuthData.account._id}`
+        const uri = `/verify-2fa-login/${this.tempUserData.account.userId}`
 
         await this.$adminApi
           .post(uri, this.form)
           .then((response) => {
-            this.LOG_ADMIN_USER_IN(response.data)
-            this.$router.replace(this.prependAdminRoute + '/')
+            response.data.appAuthType = 'adminAuth'
+            this.LOG_IN(response.data).then(() => {
+              this.$router.replace(this.prependAdminRoute + '/')
+            })
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

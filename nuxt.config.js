@@ -32,6 +32,12 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Open+Sans',
       },
     ],
+    script: [
+      {
+        src: 'https://js.paystack.co/v1/inline.js',
+        body: true,
+      },
+    ],
   },
 
   vue: {

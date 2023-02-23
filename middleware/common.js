@@ -1,7 +1,7 @@
 // This is the middleware to check if user has enabled 2FA
 
 export default ({ route, store, redirect }) => {
-  if (!store.getters['auth/isLoggedIn']) return
+  if (!store.getters['auth/isLoggedIn']) return // below getters will fail if auth not set
 
   if (route.path === '' || route.path === '/') {
     return redirect('/home')

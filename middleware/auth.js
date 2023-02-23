@@ -4,7 +4,7 @@ export default ({ $axios, store, route, redirect }) => {
   let authenticated = ''
 
   try {
-    authenticated = store.state.auth.companyAuth.loggedIn
+    authenticated = store.getters['auth/isLoggedIn']
     // Adds header: `Authorization: Bearer XXXX` to requests
     $axios.setToken(store.state.auth.companyAuth.data.token, 'Bearer')
   } catch {
@@ -16,7 +16,5 @@ export default ({ $axios, store, route, redirect }) => {
     store.commit('auth/LOG_USER_OUT')
     //  Redirect to login page
     return redirect('/account/login/')
-  } else if (route.path === '' || route.path === '/') {
-    redirect('/home')
   }
 }
