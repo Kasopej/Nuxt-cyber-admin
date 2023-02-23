@@ -28,10 +28,10 @@
                 {{ convertUnderscoredStringToSpaced(key) }}
               </v-col>
               <v-col class="pl-2 py-1 py-sm-3">
-                <a
+                <nuxt-link
                   v-if="summaryFieldDescriptor.type == 'link'"
-                  :href="summaryFieldDescriptor.href"
-                  >{{ displayField(summaryFieldDescriptor) }}</a
+                  :to="prependAdminRoute + summaryFieldDescriptor.href"
+                  >{{ displayField(summaryFieldDescriptor) }}</nuxt-link
                 >
                 <span v-else-if="summaryFieldDescriptor.name === 'visibility'">
                   {{ displayField(summaryFieldDescriptor) }}
@@ -100,7 +100,7 @@ import { getCompoundField } from '~/plugins/utils'
 const SubmissionSummaryFieldsObj = {
   action_state: { name: 'actionstate' },
   scope: { name: 'scope' },
-  reported_by: { name: 'hunterId.profile.username', type: 'link', href: '' },
+  reported_by: { name: 'hunterId.profile.username', href: '' },
   reported_to: { name: 'reportedto', type: 'link', href: '' },
   reported_at: { name: 'reportedat', type: 'date' },
   reference: { name: 'reference' },
@@ -141,25 +141,25 @@ export default {
     convertUnderscoredStringToSpaced(string = '') {
       return string.split('_').join(' ')
     },
-    displayField(fieldDescriptor = {}, obj = this.submission) {
-      if (!this.getCompoundField(obj, fieldDescriptor.name))
+    displayField(fieldDescriptor = {}, record = this.submission) {
+      if (!this.getCompoundField(record, fieldDescriptor.name))
         return fieldDescriptor.fallback
       if (fieldDescriptor.type === 'date')
         return new Date(
-          this.getCompoundField(obj, fieldDescriptor.name)
+          this.getCompoundField(record, fieldDescriptor.name)
         ).toLocaleString()
       if (fieldDescriptor.type === 'link') {
         if (fieldDescriptor.name === 'reportedto') {
-          fieldDescriptor.href = `/program/${obj.programId}`
+          fieldDescriptor.href = `/program/${record.programId._id}/invite`
         }
         if (fieldDescriptor.name === 'hunterId.profile.username') {
           fieldDescriptor.href = `/user/${this.getCompoundField(
-            obj,
+            record,
             fieldDescriptor.name
           )}`
         }
       }
-      return this.getCompoundField(obj, fieldDescriptor.name)
+      return this.getCompoundField(record, fieldDescriptor.name)
     },
   },
 }

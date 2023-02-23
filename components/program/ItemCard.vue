@@ -121,14 +121,18 @@ export default {
 
   methods: {
     viewSubmissions(program) {
-      this.$router.push(`/program/${program._id}/submissions`)
+      this.$router.push(
+        this.prependAdminRoute + `/program/${program._id}/submissions`
+      )
     },
 
     goEdit(program) {
-      this.$router.push(`/program/${program._id}/edit`)
+      this.$router.push(this.prependAdminRoute + `/program/${program._id}/edit`)
     },
     goToProgramInvite(program) {
-      this.$router.push(`/program/${program._id}/invite`)
+      this.$router.push(
+        this.prependAdminRoute + `/program/${program._id}/invite`
+      )
     },
     displayReward(rawReward) {
       if (isNaN(+rawReward)) return rawReward

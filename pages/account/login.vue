@@ -57,10 +57,10 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import LoginBase from '~/components/pages_base_definitions/Login'
 const { mapActions, mapMutations } = createNamespacedHelpers('auth')
 export default {
-  layout: 'account',
-
+  extends: LoginBase,
   data() {
     return {
       FORM: {
@@ -79,7 +79,6 @@ export default {
     }
   },
   head: { title: 'Sign in' },
-
   methods: {
     ...mapActions(['LOG_IN']),
     ...mapMutations(['companyAuth/KEEP_USER_TMP']),
