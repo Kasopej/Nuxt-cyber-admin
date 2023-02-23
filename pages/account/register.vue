@@ -17,6 +17,7 @@
     <section>
       <v-text-field
         v-model="FORM.companyName"
+        autofocus
         dense
         required
         outlined

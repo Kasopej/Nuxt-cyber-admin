@@ -13,6 +13,7 @@
       <v-text-field
         v-model="FORM.email"
         dense
+        autofocus
         outlined
         :rules="[rules.required]"
         type="email"
