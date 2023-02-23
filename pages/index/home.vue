@@ -12,8 +12,11 @@
         >
         <v-card-text class="d-flex">
           <v-col cols="6" md="4" class="d-flex align-start">
-            <v-icon color="accent" left>mdi-shield-lock</v-icon>
-            <div class="cursor" @click="() => $router.push('/program')">
+            <v-icon color="accent" left>mdi-file-document</v-icon>
+            <div
+              class="cursor"
+              @click="() => $router.push(prependAdminRoute + '/submissions')"
+            >
               <h3 class="w-max">Submissions Made</h3>
               <span class="max-content mx-auto text-h3">{{
                 submissionsNumber
@@ -21,8 +24,8 @@
             </div>
           </v-col>
           <v-col cols="6" md="4" class="d-flex align-start">
-            <v-icon color="accent" left>mdi-shield-link-variant</v-icon>
-            <div class="cursor" @click="() => $router.push('/submissions')">
+            <v-icon color="accent" left>mdi-account-group</v-icon>
+            <div class="cursor">
               <h3 class="w-max">My Hunters</h3>
               <span class="fit-content mx-auto text-h3">{{
                 submissionsNumber

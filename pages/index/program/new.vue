@@ -581,6 +581,21 @@ import NewProgramBase from '~/components/pages_base_definitions/NewProgram'
 export default {
   extends: NewProgramBase,
   middleware: 'auth',
+  data() {
+    return {
+      form: {
+        type: '',
+        rewardGrid: {},
+        scope: [{}],
+        outofscope: [{}],
+        tags: '',
+        private: false,
+        allowCollaborations: false,
+        image: null,
+        image2: null,
+      },
+    }
+  },
   created() {
     if (this.$store.getters['program/getProgramsCount'] === 3) {
       this.$store.commit('program/TOGGLE_PROGRAM_LIMIT_ALERT', true)

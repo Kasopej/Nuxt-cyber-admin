@@ -51,5 +51,10 @@ export default {
   extends: AccountsBaseDef,
   layout: 'adminDashboard',
   middleware: 'admin_auth',
+  computed: {
+    companyAccount() {
+      return this.$vueBus.companyAccount
+    },
+  },
 }
 </script>

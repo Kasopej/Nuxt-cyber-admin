@@ -2,6 +2,6 @@
 
 export default ({ store, redirect }) => {
   if (store.getters['auth/isLoggedIn']) {
-    redirect('/')
+    redirect(store.getters['auth/isAdminAuth'] ? 'admin/' : '/')
   }
 }

@@ -181,8 +181,8 @@ export default {
 
         await this.getHTTPClient
           .post(URL, PAYLOAD)
-          .then((response) => {
-            this.$router.replace('/')
+          .then(() => {
+            this.$router.replace(this.prependAdminRoute + '/')
           })
           .catch((error) => {
             this.$store.commit('notification/SHOW', {

@@ -6,7 +6,7 @@ export default ({ route, store, redirect }) => {
   if (route.path === '' || route.path === '/') {
     return redirect('/home')
   }
-  if (route.path === '/admin/') {
+  if (route.path === '/admin/' || route.path === '/admin') {
     return redirect('/admin/home')
   }
 

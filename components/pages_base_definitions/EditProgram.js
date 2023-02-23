@@ -20,7 +20,7 @@ export default {
         {
           text: 'Edit Program',
           disabled: true,
-          to: '/prrogram/add/',
+          to: '/program/add/',
         },
       ],
       step: 1,
