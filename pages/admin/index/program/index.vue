@@ -28,7 +28,9 @@
               v-if="!($fetchState.pending && $fetchState.error)"
               class="d-flex pb-4"
             >
-              <v-btn color="primary" to="/program/new">Add Program</v-btn>
+              <v-btn color="primary" :to="prependAdminRoute + '/program/new'"
+                >Add Program</v-btn
+              >
             </div>
 
             <section v-if="$fetchState.pending">

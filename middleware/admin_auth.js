@@ -15,7 +15,6 @@ export default ({ $adminApi, store, route, redirect }) => {
     store.commit('auth/LOG_USER_OUT')
     return redirect('/admin/account/login/')
   } else if (route.path === '' || route.path === '/') {
-    console.log('redirect admin home')
     redirect('/admin/home')
   }
 }

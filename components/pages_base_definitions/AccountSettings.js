@@ -22,9 +22,6 @@ export default {
       userAccount: 'companyAuth/getUserAccount',
       isAdmin: 'isAdminAuth',
     }),
-    companyAccount() {
-      return this.$vueBus.companyAccount
-    },
     profile() {
       return this.isAdmin ? this.companyAccount : this.userAccount
     },

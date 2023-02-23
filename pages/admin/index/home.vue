@@ -11,21 +11,36 @@
           Programs and Submissions</v-card-title
         >
         <v-card-text class="d-flex">
-          <v-col cols="6" md="4" class="d-flex align-start">
-            <v-icon color="accent" left>mdi-shield-lock</v-icon>
-            <div class="cursor" @click="() => $router.push('/program')">
-              <h3 class="w-max">Submissions Made</h3>
+          <v-col md="4" cols="6" class="d-flex align-start">
+            <v-icon color="accent" left>mdi-file-document</v-icon>
+            <div
+              class="cursor"
+              @click="() => $router.push(prependAdminRoute + '/submissions')"
+            >
+              <h3 class="w-max">Total Submissions</h3>
               <span class="max-content mx-auto text-h3">{{
                 submissionsNumber
               }}</span>
             </div>
           </v-col>
-          <v-col cols="6" md="4" class="d-flex align-start">
-            <v-icon color="accent" left>mdi-shield-link-variant</v-icon>
-            <div class="cursor" @click="() => $router.push('/submissions')">
-              <h3 class="w-max">My Hunters</h3>
+          <v-col md="4" cols="6" class="d-flex align-start">
+            <v-icon color="accent" left>mdi-account-group</v-icon>
+            <div class="cursor">
+              <h3 class="w-max">Total Hunters</h3>
               <span class="fit-content mx-auto text-h3">{{
                 huntersNumber
+              }}</span>
+            </div>
+          </v-col>
+          <v-col md="4" cols="6" class="d-flex align-start">
+            <v-icon color="accent" left>mdi-shield-bug</v-icon>
+            <div
+              class="cursor"
+              @click="() => $router.push(prependAdminRoute + '/program')"
+            >
+              <h3 class="w-max">Total Programs</h3>
+              <span class="fit-content mx-auto text-h3">{{
+                programsNumber
               }}</span>
             </div>
           </v-col>
@@ -54,6 +69,7 @@ export default {
     return {
       huntersNumber: 0,
       submissionsNumber: 0,
+      programsNumber: 0,
       badgesNumber: null,
       bounty: null,
     }
@@ -62,6 +78,7 @@ export default {
     await Promise.all([
       this.getNumberOfPrivatePrograms(),
       this.getNumberOfSubmissions(),
+      this.getNumberOfPrograms(),
     ])
   },
   methods: {
@@ -79,6 +96,14 @@ export default {
         .$get(URL)
         .then(({ hunters }) => {
           this.huntersNumber = hunters
+        })
+    },
+    async getNumberOfPrograms() {
+      const URL = `countAllPrograms`
+      await this.getHTTPClient()
+        .$get(URL)
+        .then(({ programs }) => {
+          this.programsNumber = programs
         })
     },
   },

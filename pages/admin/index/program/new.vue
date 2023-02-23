@@ -581,6 +581,30 @@ import NewProgramBase from '~/components/pages_base_definitions/NewProgram'
 export default {
   extends: NewProgramBase,
   middleware: 'admin_auth',
+  data() {
+    return {
+      form: {
+        type: '',
+        rewardGrid: {},
+        scope: [{}],
+        outofscope: [{}],
+        tags: '',
+        private: false,
+        allowCollaborations: false,
+        image: null,
+        image2: null,
+        company: null,
+      },
+    }
+  },
+  computed: {
+    companyAccount() {
+      return this.$vueBus.companyAccount
+    },
+  },
+  created() {
+    this.form.company = this.companyAccount._id
+  },
 }
 </script>
 
