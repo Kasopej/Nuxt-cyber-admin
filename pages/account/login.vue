@@ -44,6 +44,7 @@
       <partials-form-submit-btn
         color="primary"
         type="submit"
+        text="Login"
         :progress="submittingForm"
       />
     </v-form>

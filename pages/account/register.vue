@@ -1,5 +1,10 @@
 <template>
-  <v-form ref="signUpForm" v-model="valid" class="pa-3 pa-sm-4 col-12">
+  <v-form
+    ref="signUpForm"
+    v-model="valid"
+    class="pa-3 pa-sm-4 col-12"
+    @submit.prevent="signUp"
+  >
     <nav class="text-center pb-4">
       Already have an account?
       <nuxt-link to="/account/login/">Sign In</nuxt-link>
@@ -79,7 +84,12 @@
         @click:append="showConfirmPassword = !showConfirmPassword"
       ></v-text-field>
 
-      <v-btn block color="primary" @click="signUp"> Sign Up </v-btn>
+      <partials-form-submit-btn
+        color="primary"
+        type="submit"
+        text="Register"
+        :progress="submittingForm"
+      />
     </section>
 
     <div class="py-4">
@@ -114,6 +124,7 @@ export default {
       },
 
       valid: true,
+      submittingForm: false,
       showPassword: false,
       showConfirmPassword: false,
 
@@ -160,6 +171,7 @@ export default {
     async signUp() {
       if (this.$refs.signUpForm.validate() && this.FORM.acceptTerms) {
         this.$nuxt.$loading.start()
+        this.submittingForm = true
 
         const URL = `/register`
         const PAYLOAD = this.FORM
@@ -175,6 +187,7 @@ export default {
             this.$router.replace('/account/login')
           })
           .catch((error) => {
+            this.submittingForm = false
             this.$store.commit('notification/SHOW', {
               color: 'accent',
               text: error.response
