@@ -5,6 +5,5 @@
 <script>
 export default {
   layout: 'adminDashboard',
-  middleware: 'admin_auth',
 }
 </script>

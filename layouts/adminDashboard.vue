@@ -61,6 +61,7 @@ function wake({ newState }) {
 }
 
 export default {
+  middleware: 'admin_auth',
   data() {
     return {
       startTime: new Date(),
