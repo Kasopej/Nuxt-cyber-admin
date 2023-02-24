@@ -65,6 +65,7 @@
 
 <script>
 export default {
+  middleware: 'admin_auth',
   data() {
     return {
       huntersNumber: 0,
