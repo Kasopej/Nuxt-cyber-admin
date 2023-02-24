@@ -1,10 +1,12 @@
 // This is the middleware for pages that requires authentication
 
-export default ({ $axios, store, route, redirect }) => {
-  let authenticated = ''
+export default ({ $axios, store, redirect }) => {
+  let authenticated = false
 
   try {
-    authenticated = store.getters['auth/isLoggedIn']
+    authenticated =
+      store.state.auth.companyAuth.loggedIn &&
+      !store.getters['auth/isAdminAuth']
     // Adds header: `Authorization: Bearer XXXX` to requests
     $axios.setToken(store.state.auth.companyAuth.data.token, 'Bearer')
   } catch {
