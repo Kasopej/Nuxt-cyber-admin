@@ -33,11 +33,7 @@ export default {
     proceed() {
       this.closeDialog()
       // make Paystack Payment
-      const paymentForm = document.getElementById('paymentForm')
-      paymentForm.addEventListener('submit', payWithPaystack, false)
-      function payWithPaystack(e) {
-        e.preventDefault()
-
+      function payWithPaystack() {
         const handler = window.PaystackPop.setup({
           key: 'pk_test_5a18ef95bd93c6b9679b47c88c3ad15cfcbba0a2', // Replace with your public key
           email: document.getElementById('email-address').value,
@@ -55,6 +51,7 @@ export default {
 
         handler.openIframe()
       }
+      payWithPaystack()
     },
   },
 }
