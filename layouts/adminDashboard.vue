@@ -69,13 +69,14 @@ export default {
       managedCompany: null,
     }
   },
-  async fetch() {
+  async fetch(getStoredCompany = true) {
     const URL = '/getAllCompanies'
     // Make upload request to the API
     await this.getHTTPClient()
       .$get(URL)
       .then((res) => {
         this.allCompanies = res.companies
+        if (getStoredCompany) this.getLastSelectedCompany()
       })
       .catch((error) => {
         this.$store.commit('notification/SHOW', {
@@ -126,12 +127,18 @@ export default {
       },
       immediate: true,
     },
-    managedCompany() {
-      this.$fetch()
+    managedCompany(value) {
+      if (!value) return
+      if (
+        !this.allCompanies.some(
+          (companyData) =>
+            companyData.company[0].companyName === value.company[0].companyName
+        )
+      ) {
+        this.managedCompany = null
+      }
+      this.$fetch(false)
     },
-  },
-  created() {
-    this.UNSELECT_COMPANY_ACCOUNT()
   },
   mounted() {
     window.lifecycle.addEventListener('statechange', debouncedWake.bind(this))
@@ -147,10 +154,22 @@ export default {
       this.$vueBus.$emit('company-selected', companyObject)
       this.managedCompany = companyObject
       this.$vueBus.companyAccount = companyObject
+      localStorage.setItem('managedCompany', JSON.stringify(companyObject))
     },
     UNSELECT_COMPANY_ACCOUNT() {
       this.$vueBus.$emit('company-unselected')
       this.$vueBus.companyAccount = {}
+    },
+    getLastSelectedCompany() {
+      let retrievedCompany
+      try {
+        retrievedCompany = JSON.parse(localStorage.getItem('managedCompany'))
+      } catch (error) {
+        retrievedCompany = null
+      }
+      this.$vueBus.$emit('company-selected', retrievedCompany)
+      this.managedCompany = retrievedCompany
+      this.$vueBus.companyAccount = retrievedCompany
     },
   },
 }
