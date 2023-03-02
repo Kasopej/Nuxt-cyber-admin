@@ -37,8 +37,18 @@ export default {
           to: '/prrogram/add/',
         },
       ],
+      maxSizes: {
+        banner: 140000, // 140kb
+        thumbnail: 140000, // 140kb
+      },
       rules: {
         required: [(value) => !!value || 'This Field Is Required'],
+        banner: {
+          size: [(value) => this.checkFileSize(value, this.maxSizes.banner)],
+        },
+        thumbnail: {
+          size: [(value) => this.checkFileSize(value, this.maxSizes.thumbnail)],
+        },
       },
     }
   },
@@ -54,6 +64,12 @@ export default {
       if (this.$refs[stepForm].validate()) {
         this.step = nextStep
       }
+    },
+
+    checkFileSize(value, sizeLimit) {
+      return value && value.size < sizeLimit
+        ? true
+        : 'file size should be less\n than 140kb'
     },
 
     setImageBlob(formKey, file) {

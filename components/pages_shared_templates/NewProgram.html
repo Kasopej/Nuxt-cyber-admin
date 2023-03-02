@@ -85,24 +85,6 @@
 
             <v-form ref="stepFormTwo">
               <div class="d-flex mb-10">
-                <label class="mr-4 mr-sm-7">
-                  <v-img
-                    :src="form.image || '/images/dummy.jpg'"
-                    class="rounded border"
-                    width="125"
-                    contain
-                  />
-                  <small class="grey--text text-left pt-2">
-                    Click to choose Thumbnail
-                  </small>
-                  <v-file-input
-                    v-model="thumbnailTemp"
-                    class="d-none"
-                    accept="image/jpeg, image/png"
-                    @change="setImageBlob('image', 'thumbnailTemp')"
-                  />
-                </label>
-
                 <label>
                   <v-img
                     :src="form.image2 || '/images/dummy.jpg'"
@@ -113,12 +95,55 @@
                   <small class="grey--text text-left pt-2">
                     Click to choose Banner
                   </small>
-                  <v-file-input
-                    v-model="bannerTemp"
-                    class="d-none"
-                    accept="image/jpeg, image/png"
-                    @change="setImageBlob('image2', 'bannerTemp')"
-                  />
+                  <v-input
+                    class="max-w-min whitespace-pre-line"
+                    :hint="bannerTemp ? '' : 'Upload size under 140KB.\n (Image format only)'"
+                    :rules="[
+                    ...rules.banner.size,       
+                    ]"
+                    persistent-hint
+                  >
+                    <v-file-input
+                      v-model="bannerTemp"
+                      class="d-none"
+                      :hint="bannerTemp ? '' : 'Upload size under 140KB.\n (Image format only)'"
+                      accept="image/*"
+                      @change="setImageBlob('image2', 'bannerTemp')"
+                    />
+                    <template #message="{message}">
+                      <span style="white-space: pre-line">{{message}}</span>
+                    </template>
+                  </v-input>
+                </label>
+
+                <label class="mr-4 mr-sm-7">
+                  <v-avatar size="50">
+                    <v-img
+                      :src="form.image || '/images/dummy.jpg'"
+                      class="block rounded border"
+                      contain
+                    />
+                  </v-avatar>
+                  <small class="grey--text text-left pt-2">
+                    Click to choose Thumbnail
+                  </small>
+                  <v-input
+                    :hint="thumbnailTemp ? '' : 'Upload size under 140KB. \n (Image format only)'"
+                    :rules="[
+                            ...rules.thumbnail.size,      
+                    ]"
+                    persistent-hint
+                  >
+                    <v-file-input
+                      v-model="thumbnailTemp"
+                      class="d-none"
+                      accept="image/*"
+                      @change="setImageBlob('image', 'thumbnailTemp')"
+                    />
+                    <template #message="{message}">
+                      <span style="white-space: pre-line">{{message}}</span>
+                    </template>
+                  </v-input>
                 </label>
               </div>
 
@@ -166,7 +191,8 @@
                   <v-switch
                     v-model="form.allowCollaborations"
                     label="Enable Report Collaborations?"
-                  ></v-switch>
+                  >
+                  </v-switch>
                 </v-col>
               </v-row>
             </v-form>
