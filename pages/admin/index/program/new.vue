@@ -12,7 +12,7 @@ export default {
         rewardGrid: {},
         scope: [{}],
         outofscope: [{}],
-        tags: '',
+        tags: [],
         private: false,
         allowCollaborations: false,
         image: null,

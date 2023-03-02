@@ -97,10 +97,9 @@
                   </small>
                   <v-input
                     class="max-w-min whitespace-pre-line"
+                    :value="bannerTemp"
                     :hint="bannerTemp ? '' : 'Upload size under 140KB.\n (Image format only)'"
-                    :rules="[
-                    ...rules.banner.size,       
-                    ]"
+                    :rules="rules.banner.size"
                     persistent-hint
                   >
                     <v-file-input
@@ -128,10 +127,9 @@
                     Click to choose Thumbnail
                   </small>
                   <v-input
+                    :value="thumbnailTemp"
                     :hint="thumbnailTemp ? '' : 'Upload size under 140KB. \n (Image format only)'"
-                    :rules="[
-                            ...rules.thumbnail.size,      
-                    ]"
+                    :rules="rules.thumbnail.size"
                     persistent-hint
                   >
                     <v-file-input
@@ -171,12 +169,28 @@
                 <v-col cols="12" md="6">
                   <v-autocomplete
                     v-model.trim="form.tags"
+                    :search-input.sync="searchTagsString"
                     :rules="[...rules.required]"
                     multiple
                     outlined
                     label="Tags"
                     :items="tags"
                   >
+                    <template #append-item v-if="newTag">
+                      <v-list-item
+                        @click="addNewTag"
+                        class="hover:bg-purple-400 cursor"
+                      >
+                        <v-list-item-content>
+                          <v-list-item-title>{{newTag}}</v-list-item-title>
+                        </v-list-item-content>
+                        <v-list-item-action>
+                          <v-list-item-action-text
+                            v-text="'add custom tag'"
+                          ></v-list-item-action-text>
+                        </v-list-item-action>
+                      </v-list-item>
+                    </template>
                   </v-autocomplete>
                 </v-col>
                 <v-col cols="12" md="6">
