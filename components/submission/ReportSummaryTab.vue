@@ -77,9 +77,6 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary">Close Report</v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
 

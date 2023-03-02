@@ -3,7 +3,7 @@
     <template v-if="$fetchState.pending">
       <v-skeleton-loader v-for="i in 3" :key="i" type="article" />
     </template>
-    <template v-else-if="$fetchState.error">
+    <template v-else-if="$fetchState.error || !program">
       <partials-empty-data caption="An error occured" />
     </template>
     <template v-else>
