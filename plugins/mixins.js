@@ -43,3 +43,9 @@ export const needsProgramDataOnLoad = {
     }
   },
 }
+
+export const fileInputBindingsMixin = {
+  data() {
+    return {}
+  },
+}

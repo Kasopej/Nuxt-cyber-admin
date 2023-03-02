@@ -32,7 +32,7 @@
 
 <script>
 import { createNamespacedHelpers, mapState } from 'vuex'
-import { debounce } from '~/plugins/utils'
+import { debounce } from '~/utils/general'
 const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers('auth')
 const mapRootState = mapState
 

@@ -18,6 +18,8 @@ export default {
       thumbnailTemp: null,
       bannerTemp: null,
       tags: ['tag 1', 'sample tag', 'tag 3'],
+      newTag: '',
+      searchTagsString: null,
       rewards: [
         'Bounty',
         'Gifts',
@@ -37,17 +39,67 @@ export default {
           to: '/prrogram/add/',
         },
       ],
+      maxSizes: {
+        banner: 140000, // 140kb
+        thumbnail: 140000, // 140kb
+      },
       rules: {
-        required: [(value) => !!value || 'This Field Is Required'],
+        required: [
+          (value) =>
+            !!(
+              (Array.isArray(value) && value.length) ||
+              (!Array.isArray(value) && value)
+            ) || 'This Field Is Required',
+        ],
+        banner: {
+          size: [
+            (value) =>
+              !value || this.checkFileSize(value, this.maxSizes.banner),
+          ],
+        },
+        thumbnail: {
+          size: [
+            (value) =>
+              !value || this.checkFileSize(value, this.maxSizes.thumbnail),
+          ],
+        },
       },
     }
   },
   computed: {
     ...mapGetters({ programsCount: 'getProgramsCount' }),
   },
+  watch: {
+    searchTagsString(text) {
+      if (
+        text &&
+        !this.tags.some((tag) => tag.toLowerCase().includes(text.toLowerCase()))
+      )
+        this.newTag = text
+      else this.newTag = ''
+    },
+  },
   methods: {
     selectProgramType(type) {
       this.form.type = type
+    },
+
+    addNewTag() {
+      if (
+        !this.form.tags.some((tag) =>
+          tag.toLowerCase().includes(this.newTag.toLowerCase())
+        )
+      ) {
+        this.form.tags = [...this.form.tags, this.newTag]
+        if (
+          !this.tags.some((tag) =>
+            tag.toLowerCase().includes(this.newTag.toLowerCase())
+          )
+        ) {
+          this.tags.push(this.newTag)
+        }
+        this.searchTagsString = ''
+      }
     },
 
     validateStep(nextStep, stepForm) {
@@ -56,7 +108,14 @@ export default {
       }
     },
 
+    checkFileSize(value, sizeLimit) {
+      return value.size < sizeLimit
+        ? true
+        : `file size should be less\n than ${sizeLimit / 1000}kb`
+    },
+
     setImageBlob(formKey, file) {
+      if (!this[file]) return (this.form[formKey] = null)
       const reader = new FileReader()
       reader.readAsDataURL(this[file])
       reader.onload = () => (this.form[formKey] = reader.result)
