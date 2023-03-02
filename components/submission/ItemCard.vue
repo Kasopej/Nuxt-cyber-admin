@@ -16,7 +16,9 @@
             <!-- Should get program thumbnail from submission's program as this component should not know about programs, only submissions -->
             <v-avatar size="35" class="mr-2">
               <img
-                :src="submission.programId.thumbnail || '/images/dummy.jpg'"
+                :src="
+                  submission.hunterId.profile[0].image || '/images/dummy.jpg'
+                "
                 alt="alt"
               />
             </v-avatar>
