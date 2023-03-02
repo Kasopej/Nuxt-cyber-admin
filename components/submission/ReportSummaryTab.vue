@@ -95,7 +95,7 @@
 
 <script>
 import showdown from 'showdown'
-import { getCompoundField } from '~/plugins/utils'
+import { getCompoundField } from '~/utils/objectUtilities'
 
 const SubmissionSummaryFieldsObj = {
   action_state: { name: 'actionstate' },

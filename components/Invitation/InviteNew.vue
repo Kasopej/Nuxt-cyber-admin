@@ -30,7 +30,10 @@
 </template>
 
 <script>
-import { emailFieldValidator, requiredFieldValidator } from '~/plugins/utils'
+import {
+  emailFieldValidator,
+  requiredFieldValidator,
+} from '~/utils/inputValidators'
 export default {
   props: {
     inviteUrl: {
